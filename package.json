@@ -1,0 +1,19 @@
+{
+  "name": "phenixgames-trash",
+  "version": "1.0.0",
+  "description": "Just to programmed trash for fun",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhenixGames/phenixgames-trash.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PhenixGames/phenixgames-trash/issues"
+  },
+  "homepage": "https://github.com/PhenixGames/phenixgames-trash#readme"
+}
