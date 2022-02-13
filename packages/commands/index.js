@@ -1,2 +1,3 @@
 require('./healPlayer/');
-require('./vehicle');
+require('./vehicle/');
+require('./player/');
