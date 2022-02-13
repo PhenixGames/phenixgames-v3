@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "pm2 start ragemp-server && pm2 monit",
-    "restart": "pm2 stop ragemp-server && pm2 delete ragemp-server && pm2 start ragemp-server && pm2 monit",
-    "kill": "pm2 stop ragemp-server && pm2 delete ragemp-server"
+    "restart": "pm2 stop ragemp-server && pm2 start ragemp-server && pm2 monit",
+    "kill": "pm2 stop ragemp-server"
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/PhenixGames/phenixgames-trash/issues"
   },
-  "homepage": "https://github.com/PhenixGames/phenixgames-trash#readme"
+  "homepage": "https://github.com/PhenixGames/phenixgames-trash#readme",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
 }
