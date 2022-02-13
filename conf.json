@@ -1,0 +1,9 @@
+{
+	"maxplayers" : 2,
+	"name" : "PhenixGames FUUUUNNNN", 
+	"gamemode" : "freeroam", 
+	"stream-distance" : 500.0,
+	"announce" : false,
+	"csharp" : "disabled",
+	"port": 22005
+}
