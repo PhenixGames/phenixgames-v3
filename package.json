@@ -4,7 +4,7 @@
   "description": "Just to programmed trash for fun",
   "main": "index.js",
   "scripts": {
-    "start": "&& pm2 start ragemp-server && pm2 monit",
+    "start": "pm2 start ragemp-server && pm2 monit",
     "restart": "pm2 stop ragemp-server && pm2 delete ragemp-server && pm2 start ragemp-server && pm2 monit",
     "kill": "pm2 stop ragemp-server && pm2 delete ragemp-server"
   },
