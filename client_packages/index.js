@@ -1,1 +1,1 @@
-require('./godmode/')
+require('./non-gui/godmode')
