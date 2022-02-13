@@ -14,7 +14,7 @@ mp.events.add('render', () => {
     vehicle.setEngineTorqueMultiplier(modded_Speed);
     mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
 
-    mp.game.graphics.drawText(speed, [0.5, 0.005], {
+    mp.game.graphics.drawText(Math.round(speed), [0.5, 0.005], {
       font: 4,
       color: [255, 255, 255, 255],
       scale: [1.0, 1.0],
