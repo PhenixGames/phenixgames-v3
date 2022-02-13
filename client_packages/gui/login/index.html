@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <style>
+            * {
+                z-index: -1;
+            }
+            body {
+                
+                background: rgb(31, 31, 31);
+                color: white
+            }
+            label {
+                margin-top: -100px;
+            }
+            #login {
+                transform: translateY(190%) !important;
+            }
+            #password,
+            label,
+            #login {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+            }
+        </style>
+    </head>
+    <body>
+        <form >
+            <label for="password"> Password </label>
+            <input type="password" id="password"/>
+            <input type="button" id="login" value="Login"/>
+        </form>
+
+        <script>
+            document.getElementById('login').addEventListener('click', (evt) => {
+                evt.preventDefault();
+                mp.trigger('uiLogin_LoginButton', document.getElementById('password'));
+            })
+           
+        </script>
+    </body>
+</html>
