@@ -1,3 +1,5 @@
 mp.events.addCommand("heal", (player) => {
-    player.health = 100;
+    if(player.getVariable('isTeam')) {
+        player.health = 100;
+    }
 });
