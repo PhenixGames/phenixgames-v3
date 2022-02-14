@@ -7,11 +7,14 @@ mp.events.add('playerJoin', async (player) => {
     await database.query(`SELECT * FROM pg_users WHERE username = ?`, [player.name]).then(res => {
         if(res.length <= 0) {
             //! TO-DO übergeben an LoginScreen, dass User kein Account hat
+            mp.players.call("Login:NoAccount");
             return console.log(`[SERVER]: [Not-Registered] ${player.name} has joined the server!`);
         }
         player.setVariable('playerId', res[0].id);
         player.setVariable('isTeam', res[0].isTeam);
+        player.setVariable('isAdmin', res[0].isAdmin);
         player.setVariable('coins', res[0].coins);
+        
 
         return console.log(`[SERVER]: [Registered] ${player.name} has joined the server!`);
     }).catch(err => {
