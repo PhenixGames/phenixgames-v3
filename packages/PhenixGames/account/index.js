@@ -29,3 +29,15 @@ mp.events.add("LoginAccount", (player, password) => {
         return console.log(err);
     });
 });
+
+mp.events.add("RegisterAccount", (player, password) => {
+    database.query('SELECT id FROM pg_users WHERE username = ?', [player.socialClub]).then(async res => {
+        if(res.length <= 0) {
+            await database.query('INSERT INTO pg_users (username, password) VALUES (?, ?)', [player.socialClub, password]).catch(err => {
+                console.log(err)
+            });
+        }
+    }).catch(err => {
+        console.log(err)
+    })
+});

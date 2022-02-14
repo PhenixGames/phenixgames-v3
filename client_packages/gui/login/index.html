@@ -14,26 +14,49 @@
             }
             #password,
             label,
-            #login {
+            #login,
+            #register {
                 position: absolute;
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%,-50%);
+            }
+            #register {
+                visibility: hidden;
             }
         </style>
     </head>
     <body>
         <form id="login">
             <label for="password"> Password </label>
-            <input type="password" id="password"/>
-            <input type="button" value="Login"/>
+            <input type="password" id="password" placeholder="Password"/>
+        </form>
+
+        <form id="register" method="POST">
+            <label for="register_password"> New Password </label>
+            <input type="password" id="register_password" placeholder="Password"/>
+
+            <!-- <label for="repeat_register_password"> Password Repeat </label>
+            <input type="password" id="repeat_register_password" placeholder="Password Repeat"/> -->
         </form>
 
         <script>
+
+            function hasNoAccount() {
+                document.getElementById('login').style.display = "none";
+                document.getElementById('register').style.visibility = "visible";
+            }
+
+            document.getElementById('register').addEventListener('submit', (evt) => {
+                    evt.preventDefault();
+
+                    mp.trigger('uiRegister_RegisterButton', document.getElementById('register_password').value);
+                });
+
             document.getElementById('login').addEventListener('submit', (evt) => {
                 evt.preventDefault();
                 mp.trigger('uiLogin_LoginButton', document.getElementById('password').value);
-            })
+            });
            
         </script>
     </body>

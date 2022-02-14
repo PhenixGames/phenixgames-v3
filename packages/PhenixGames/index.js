@@ -1,2 +1,2 @@
-require('./login/')
+require('./account/')
 require('./init/');
