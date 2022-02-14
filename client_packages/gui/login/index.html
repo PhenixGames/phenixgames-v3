@@ -1,9 +1,6 @@
 <html>
     <head>
         <style>
-            * {
-                z-index: -1;
-            }
             body {
                 
                 background: rgb(31, 31, 31);
@@ -26,16 +23,16 @@
         </style>
     </head>
     <body>
-        <form >
+        <form id="login">
             <label for="password"> Password </label>
             <input type="password" id="password"/>
-            <input type="button" id="login" value="Login"/>
+            <input type="button" value="Login"/>
         </form>
 
         <script>
-            document.getElementById('login').addEventListener('click', (evt) => {
+            document.getElementById('login').addEventListener('submit', (evt) => {
                 evt.preventDefault();
-                mp.trigger('uiLogin_LoginButton', document.getElementById('password'));
+                mp.trigger('uiLogin_LoginButton', document.getElementById('password').value);
             })
            
         </script>
