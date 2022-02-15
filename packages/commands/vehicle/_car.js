@@ -1,3 +1,5 @@
+const vehicle = require('../../PhenixGames/vehicle/index');
+
 mp.events.addCommand("car", (player, args) => {
     if(player.getVariable('isTeam')) {
         args = args.split(' ');
@@ -13,9 +15,9 @@ mp.events.addCommand("car", (player, args) => {
             return player.vehicle.repair();
         }
 
-        if(player.getVariable('Player.Tmp.Admin.Veh')) {
-            player.getVariable('Player.Tmp.Admin.Veh').destroy();
-        }
+        // if(player.getVariable('Player.Tmp.Admin.Veh')) {
+        //     player.getVariable('Player.Tmp.Admin.Veh').destroy();
+        // }
 
         var setVeh = mp.vehicles.new(mp.joaat(veh), player.position,
         {
@@ -24,5 +26,17 @@ mp.events.addCommand("car", (player, args) => {
         });
         player.setVariable('Player.Tmp.Admin.Veh', setVeh);
         player.putIntoVehicle(setVeh, 0);
+
+        var saveVeh = vehicle.saveVehicleData({
+            veh_name: veh,
+            veh_owner: player.socialClub,
+            veh_keys: JSON.stringify([player.getVariable('playerId')]),
+            veh_state: '1',
+            veh_pos: JSON.stringify(setVeh.position)
+        });
+
+        if(!saveVeh) {
+            return console.log('Error by saving the car into Database');
+        }
     }
 });
