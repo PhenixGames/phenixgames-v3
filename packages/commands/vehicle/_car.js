@@ -19,7 +19,7 @@ mp.events.addCommand("car", (player, args) => {
 
         var setVeh = mp.vehicles.new(mp.joaat(veh), player.position,
         {
-            numberPlate: "ADMIN",
+            numberPlate: player.name,
             color: [prim,sec]
         });
         player.setVariable('Player.Tmp.Admin.Veh', setVeh);
