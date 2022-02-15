@@ -26,3 +26,15 @@ mp.events.add('playerJoin', async (player) => {
 
     mp.players.call("Set:Discord", [title, playing]);
 });
+
+database.query('SELECT * FROM pg_vehicles WHERE veh_state = 1').then(res => {
+    if(res.length > 0) {
+        for(let i in res) {
+            mp.vehicles.new(mp.joaat(res[i].veh_name), JSON.parse(res[i].veh_pos),
+            {
+                numberPlate: res[i].veh_owner,
+                //color: [prim,sec]
+            });
+        }
+    }
+})
