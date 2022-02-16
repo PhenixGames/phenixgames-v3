@@ -1,5 +1,7 @@
 const { Database } = require("../../_db/db");
+const vehicleapi = require("../vehicle/index.js")
 const database = new Database();
+
 
 mp.events.add('playerJoin', async (player) => {
     player.name = player.socialClub;
@@ -38,3 +40,13 @@ database.query('SELECT * FROM pg_vehicles WHERE veh_state = 1').then(res => {
         }
     }
 })
+
+function savevehiclepos(){
+    mp.vehicles.forEach(
+        async (veh) => {
+           vehicleapi.updateVehicleData(veh);
+        }
+    );
+}
+
+setInterval(savevehiclepos, 10000);//Alle 10 sekunden
