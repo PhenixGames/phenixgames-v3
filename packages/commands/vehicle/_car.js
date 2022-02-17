@@ -1,6 +1,6 @@
 const vehicle = require('../../PhenixGames/vehicle/index');
 
-mp.events.addCommand("car", (player, args) => {
+mp.events.addCommand("car", async (player, args) => {
     if(player.getVariable('isTeam')) {
         args = args.split(' ');
 
@@ -27,7 +27,18 @@ mp.events.addCommand("car", (player, args) => {
         player.setVariable('Player.Tmp.Admin.Veh', setVeh);
         player.putIntoVehicle(setVeh, 0);
 
-        var saveVeh = vehicle.saveVehicleData({
+        var saveVeh =  vehicle.saveVehicleData({
+            veh_name: veh,
+            veh_owner: player.socialClub,
+            veh_keys: JSON.stringify([player.getVariable('playerId')]),
+            veh_state: '1',
+            veh_pos: JSON.stringify(setVeh.position)
+        });
+
+        const latestCarIdInDatabase = await vehicle.getLatestCarInDatabase();
+        
+        vehicle.setLocalData(setVeh, {
+            veh_id: latestCarIdInDatabase,
             veh_name: veh,
             veh_owner: player.socialClub,
             veh_keys: JSON.stringify([player.getVariable('playerId')]),
