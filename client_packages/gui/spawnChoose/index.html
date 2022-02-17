@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <button id="house">House</button>
+        <button id="last">Last Postion</button>
+
+        <script>
+            document.getElementById('house').addEventListener('click', () => {
+                mp.trigger('Player:Spawn', 1)
+            });
+            document.getElementById('last').addEventListener('click', () => {
+                mp.trigger('Player:Spawn', 0)
+            });
+        </script>
+    </body>
+</html>

@@ -1,4 +1,8 @@
-require('./non-gui/godmode')
 require('./gui/speedometer')
 require('./gui/login');
-require('./non-gui/discord')
+require('./gui/spawnChoose');
+
+
+require('./non-gui/godmode')
+require('./non-gui/discord');
+require('./non-gui/vehicle');
