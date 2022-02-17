@@ -1,6 +1,9 @@
 const { Database } = require("../../_db/db");
 const database = new Database();
 
+const housesAPI = require('../houseAPI/index');
+const playerAPI = require('../playerAPI/');
+
 mp.events.add("LoginAccount", (player, password) => {
     database.query('SELECT * FROM pg_users WHERE username = ? LIMIT 1', [player.socialClub]).then(async users => {
         users = await users[0];
@@ -23,21 +26,43 @@ mp.events.add("LoginAccount", (player, password) => {
 
         if(users.password !== password) return;
 
-        mp.players.call("Login:Succes:close:Windows");
+        mp.players.call('Login:Succes:close:Windows');
+        mp.players.call('Player:Spawn:Options');
         
     }).catch(err => {
         return console.log(err);
     });
 });
 
-mp.events.add("RegisterAccount", (player, password) => {
-    database.query('SELECT id FROM pg_users WHERE username = ?', [player.socialClub]).then(async res => {
-        if(res.length <= 0) {
-            await database.query('INSERT INTO pg_users (username, password) VALUES (?, ?)', [player.socialClub, password]).catch(err => {
-                console.log(err)
-            });
-        }
-    }).catch(err => {
-        console.log(err)
-    })
+mp.events.add("RegisterAccount", async (player, password) => {
+    const playerId = await playerAPI.getPlayerId(player.socialClub)
+    if(!playerId) {
+        await playerAPI.saveNewPlayer(player.socialClub, password);
+    }
+
+    const newPlayerId = await playerAPI.getPlayerId(player.socialClub)
+    const housePos = await housesAPI.saveNewHouse(newPlayerId);
+
+    housesAPI.spawnPlayerIntoHouse(housePos, player)
+
+    mp.players.call("Login:Succes:close:Windows");
+    
 });
+
+mp.events.add('Player:Spawn:House', async (player) => {
+    const playerId = player.getVariable('playerId');
+    const housePos = await housesAPI.getHousePos(playerId);
+    if(!housePos) return player.notify('Du besitzt kein Haus!');
+
+    housesAPI.spawnPlayerIntoHouse(housePos, player)
+})
+
+mp.events.add('Player:Spawn:LastPos', async (player) => {
+    const playerId = player.getVariable('playerId');
+    const lastPos = await playerAPI.getLastPlayerPos(playerId);
+
+    if(player.getVariable('isInHouse')) {
+        player.dimension = playerId;
+    }
+    player.position = new mp.Vector3(lastPos.x, lastPos.y, lastPos.z)
+})
