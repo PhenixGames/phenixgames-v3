@@ -41,14 +41,43 @@ module.exports.saveVehicleData = async function (veh) {
  * @returns {boolean}
  */
 module.exports.updateVehicleData = async function (veh) {
-    const veh_id = veh.veh_id
-    const veh_name = veh.veh_name;
-    const veh_owner = veh.veh_owner;
-    const veh_keys = veh.veh_keys;
-    const veh_state = veh.veh_state;
+    const veh_id = veh.veh_id || veh.getVariable('veh_id');
+    const veh_name = veh.veh_name || veh.getVariable('veh_name');
+    const veh_owner = veh.veh_owner || veh.getVariable('veh_owner');
+    const veh_keys = veh.veh_keys || veh.getVariable('veh_keys');
+    const veh_state = veh.veh_state || veh.getVariable('veh_state');
+    const veh_pos = veh.veh_pos || JSON.stringify(veh.position);
 
-    return await database.query(`UPDATE pg_vehicles SET veh_name = ?, veh_owner = ?, veh_keys = ?, veh_state = ? WHERE veh_id = ?`, [veh_name, veh_owner, veh_keys, veh_state, veh_id])
+    return await database.query(`UPDATE pg_vehicles SET veh_name = ?, veh_owner = ?, veh_keys = ?, veh_state = ?, veh_pos = ? WHERE veh_id = ?`, [veh_name, veh_owner, veh_keys, veh_state, veh_id, veh_pos])
         .then(() => {return true})
+        .catch(err => {
+            console.log(err);
+            return false;
+        })
+}
+
+/**
+ * 
+ * @param {int} veh_id 
+ * @param {object} veh_pos 
+ * @returns {boolean}
+ */
+module.exports.updateVehiclePosition = async function (veh_id, veh_pos) {
+    return await database.query('UPDATE pg_vehicles SET veh_pos = ? WHERE veh_id = ?', [JSON.stringify(veh_pos), veh_id])
+        .then(() => {return true})
+        .catch(err => {
+            console.log(err);
+            return false;
+        })
+}
+
+module.exports.getLatestCarInDatabase = async function () {
+    return await database.query('SELECT veh_id FROM pg_vehicles')
+        .then(res => {
+            if(res.length > 0) {
+                return res[res.length - 1].veh_id;
+            }
+        })
         .catch(err => {
             console.log(err);
             return false;
@@ -114,16 +143,19 @@ module.exports.isPlayerKeyOwner = function (playerId, veh_keys) {
  * @param {object} veh_data 
  * @returns {boolean}
  */
-module.exports.setLocalData = function (veh, veh_data) {
+module.exports.setLocalData = async function (veh, veh_data) {
     try {
-        veh.setVariable('veh_id', veh_data.veh_id);
-        veh.setVariable('veh_name', veh_data.veh_name);
-        veh.setVariable('veh_owner', veh_data.veh_owner);
-        veh.setVariable('veh_keys', veh_data.veh_keys);
-        veh.setVariable('veh_state', veh_data.veh_state);
+        veh.setVariable('veh_id', veh_data.veh_id || veh.getVariable('veh_id'));
+        veh.setVariable('veh_name', veh_data.veh_name || veh.getVariable('veh_name'));
+        veh.setVariable('veh_owner', veh_data.veh_owner || veh.getVariable('veh_owner'));
+        veh.setVariable('veh_keys', veh_data.veh_keys || veh.getVariable('veh_keys'));
+        veh.setVariable('veh_state', veh_data.veh_state || veh.getVariable('veh_state'));
+        veh.setVariable('veh_pos', veh.position)
         return true;
     }catch(err) {
         console.log(err);
         return false;
     }
 }
+
+require('./vehicleInteraction');
