@@ -1,7 +1,8 @@
 const { Database } = require("../../_db/db");
-const vehicleapi = require("../vehicle/index.js")
 const database = new Database();
 
+const vehicleAPI = require("../vehicle/index.js")
+const playerAPI = require('../playerAPI/');
 
 mp.events.add('playerJoin', async (player) => {
     player.name = player.socialClub;
@@ -29,24 +30,32 @@ mp.events.add('playerJoin', async (player) => {
     mp.players.call("Set:Discord", [title, playing]);
 });
 
-database.query('SELECT * FROM pg_vehicles WHERE veh_state = 1').then(res => {
-    if(res.length > 0) {
-        for(let i in res) {
-            mp.vehicles.new(mp.joaat(res[i].veh_name), JSON.parse(res[i].veh_pos),
-            {
-                numberPlate: res[i].veh_owner,
-                //color: [prim,sec]
-            });
+async function handleAllVehicles() {
+    await database.query('SELECT * FROM pg_vehicles WHERE veh_state = 1').then(res => {
+        if(res.length > 0) {
+            for(let i in res) {
+                const newVeh = mp.vehicles.new(mp.joaat(res[i].veh_name), JSON.parse(res[i].veh_pos),
+                {
+                    numberPlate: res[i].veh_owner,
+                    //color: [prim,sec]
+                });
+                vehicleAPI.setLocalData(newVeh, res[i]);
+            }
         }
-    }
-})
+    });
+    setInterval(() => {
+        mp.vehicles.forEach((vehicle) => {
+                vehicleAPI.updateVehiclePosition(vehicle.getVariable('veh_id'), vehicle.position);
+            }
+        );
+        console.log('ALL VEHICLES SYNCED!')
 
-function savevehiclepos(){
-    mp.vehicles.forEach(
-        async (veh) => {
-           vehicleapi.updateVehicleData(veh);
-        }
-    );
+        mp.players.forEach((player) => {
+            if(!player.getVariable('isInEvent')) {
+                playerAPI.saveNewPlayerPos(player.getVariable('playerId'), JSON.stringify(player.position));
+            }
+        });
+        console.log('ALL PLAYERS SYNCED!')
+    }, 10000);
 }
-
-setInterval(savevehiclepos, 10000);//Alle 10 sekunden
+handleAllVehicles();
