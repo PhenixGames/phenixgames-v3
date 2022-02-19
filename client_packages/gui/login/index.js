@@ -1,7 +1,13 @@
+/**
+ * © PHENIXGAMES
+ * * FIRST COMMIT BY Mittelblut9
+ */
+
 var browser = mp.browsers.new("package://gui/login/index.html");
 
 mp.players.local.freezePosition(true);
-mp.gui.cursor.visible = true;
+//mp.gui.cursor.visible = true;
+mp.gui.cursor.show(true, true);
 mp.game.ui.displayRadar(false);
 mp.game.ui.displayHud(false);
 mp.gui.chat.show(false);
@@ -16,7 +22,6 @@ mp.events.add('uiLogin_LoginButton', (password) => {
 
 mp.events.add('uiRegister_RegisterButton', (password) => {
     mp.events.callRemote('RegisterAccount', password);
-    mp.trigger('Login:Succes:close:Windows');
 });
 
 mp.events.add('Login:Succes:close:Windows', () => {

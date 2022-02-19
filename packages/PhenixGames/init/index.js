@@ -39,23 +39,24 @@ async function handleAllVehicles() {
                     numberPlate: res[i].veh_owner,
                     //color: [prim,sec]
                 });
+                newVeh.rotation = JSON.parse(res[i].veh_rot);
                 vehicleAPI.setLocalData(newVeh, res[i]);
             }
         }
     });
     setInterval(() => {
         mp.vehicles.forEach((vehicle) => {
-                vehicleAPI.updateVehiclePosition(vehicle.getVariable('veh_id'), vehicle.position);
+                vehicleAPI.updateVehiclePosition(vehicle.getVariable('veh_id'), vehicle.position, vehicle.rotation);
             }
         );
-        console.log('ALL VEHICLES SYNCED!')
+       // console.log('ALL VEHICLES SYNCED! ' + mp.vehicles.length)
 
         mp.players.forEach((player) => {
             if(!player.getVariable('isInEvent')) {
                 playerAPI.saveNewPlayerPos(player.getVariable('playerId'), JSON.stringify(player.position));
             }
         });
-        console.log('ALL PLAYERS SYNCED!')
+        //console.log('ALL PLAYERS SYNCED!')
     }, 10000);
 }
 handleAllVehicles();

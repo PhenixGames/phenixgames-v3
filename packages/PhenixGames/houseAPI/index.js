@@ -38,4 +38,5 @@ module.exports.spawnPlayerIntoHouse = async function(housePos, player) {
     player.dimension = player.getVariable('playerId');
     
     player.setVariable('isInHouse', true);
+    mp.players.call('Set:Marker:InNormieHouse', [player.dimension]);
 }

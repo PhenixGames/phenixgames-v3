@@ -8,6 +8,7 @@ class Database {
       user: dbconfig.user,
       password: dbconfig.password,
       database: dbconfig.database,
+      acquireTimeout: 1000000
     });
   }
   query(sql, args) {

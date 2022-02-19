@@ -1,0 +1,8 @@
+Hairs: 2 4 0 0
+Torsors: 3 6 0 0
+Legs: 4 86 10 0
+Shoes: 6 31 2 0
+Undershirt: 8 15 0 0
+Tops: 11 251 8 0
+
+https://github.com/root-cause/v-besttorso

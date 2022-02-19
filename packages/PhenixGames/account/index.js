@@ -5,6 +5,7 @@ const housesAPI = require('../houseAPI/index');
 const playerAPI = require('../playerAPI/');
 
 mp.events.add("LoginAccount", (player, password) => {
+    console.log('login')
     database.query('SELECT * FROM pg_users WHERE username = ? LIMIT 1', [player.socialClub]).then(async users => {
         users = await users[0];
 
