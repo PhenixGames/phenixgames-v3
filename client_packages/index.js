@@ -9,4 +9,4 @@ require('./non-gui/discord/');
 require('./non-gui/vehicle/');
 require('./non-gui/marker/');
 require('./non-gui/noclip/');
-require('./non-gui/finterpoint/');
+require('./non-gui/fingerpoint/');
