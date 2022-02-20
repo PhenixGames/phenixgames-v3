@@ -30,7 +30,9 @@ mp.events.add("LoginAccount", (player, password) => {
 
         player.call('Login:Succes:close:Windows');
         player.call('Player:Spawn:Options');
-        
+        playerAPI.saveLocalPlayerVar(player, {
+            'isLoggedIn': true
+        });
     }).catch(err => {
         return console.log(err);
     });
@@ -50,6 +52,9 @@ mp.events.add("RegisterAccount", async (player, password) => {
         'isInHouse': false
     })
     player.call("Login:Succes:close:Windows");
+    playerAPI.saveLocalPlayerVar(player, {
+        'isLoggedIn': true
+    });
 });
 
 mp.events.add('Player:Spawn:LastPos', async (player) => {
