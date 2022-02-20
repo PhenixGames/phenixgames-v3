@@ -2,12 +2,16 @@
  * © PHENIXGAMES
  * * FIRST COMMIT BY Mittelblut9
  */
-
-var browser = mp.browsers.new("package://gui/login/index.html");
+var browser;
+mp.events.add('Open:Login:Browser', () => {
+    browser = mp.browsers.new("package://gui/login/index.html");
+    setTimeout(() => {
+        mp.gui.cursor.show(true, true);
+    }, 1000);
+});
 
 mp.players.local.freezePosition(true);
 //mp.gui.cursor.visible = true;
-mp.gui.cursor.show(true, true);
 mp.game.ui.displayRadar(false);
 mp.game.ui.displayHud(false);
 mp.gui.chat.show(false);
