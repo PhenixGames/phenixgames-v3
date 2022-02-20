@@ -3,6 +3,12 @@ mp.keys.bind(0x58, true, function() {
     mp.events.callRemote('keypress:X');
 });
 
+//f2
+mp.keys.bind(0x71, true, function() {
+    mp.events.callRemote('Player:pressed:f2');
+});
+
+
 // mp.events.add({
 //     'playerEnterVehicle': (vehicle, seat) => {
 //       if (mp.players.local.getSeatIsTryingToEnter() !== -1 || vehicle.getIsEngineRunning()) {
@@ -11,3 +17,7 @@ mp.keys.bind(0x58, true, function() {
 //       vehicle.setEngineOn(false, true, true);
 //     }
 //   });
+
+mp.events.add('Vehicle:Engin:state', (player, state) => {
+    player.vehicle.engine = state;
+});
