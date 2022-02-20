@@ -1,12 +1,14 @@
+const playerAPI = require("../../PhenixGames/playerAPI");
+
 mp.events.addCommand("god", (player) => {
 
     if(player.getVariable('isTeam')) {
         //? IF USER IS ALREADY IN GODMODE
         if(player.getVariable('god')) {
-            player.setVariable('god', false);
+            playerAPI.saveLocalPlayerVar(player, {'god': false})
             mp.players.call("Set:God", [false]);
         }else {
-            player.setVariable('god', true);
+            playerAPI.saveLocalPlayerVar(player, {'god': true})
             mp.players.call("Set:God", [true]);
         }
         player.setClothes(1, 130, 0, 2)
