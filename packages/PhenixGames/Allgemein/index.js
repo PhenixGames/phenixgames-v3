@@ -5,3 +5,5 @@ mp.events.add("entityDestroyed", entity => {
         console.log("kein Fahrzeug");
     }
   });
+
+  console.log("testtesttest");
