@@ -30,7 +30,7 @@ mp.events.addCommand("car", async (player, args) => {
             numberPlate: player.name,
             color: [prim,sec]
         });
-        setVeh.rotation = player.rotation;
+        setVeh.rotation = player.heading;
         player.setVariable('Player.Tmp.Admin.Veh', setVeh);
         player.putIntoVehicle(setVeh, 0);
         player.call("Vehicle:Engine:state" ,[false])
