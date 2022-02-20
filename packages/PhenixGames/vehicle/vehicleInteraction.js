@@ -3,6 +3,8 @@ mp.events.add('keypress:X', (player) => {
 });
 
 
-mp.events.add('Vehicle:Engin:state', (player, veh, state) => {
-    veh.engine = state;
+mp.events.add('Vehicle:Engin:state', (player, state) => {
+    setTimeout(() => {
+        player.vehicle.engine = state;
+    }, 1000)
 });
