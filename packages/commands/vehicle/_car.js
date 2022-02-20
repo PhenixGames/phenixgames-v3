@@ -33,7 +33,7 @@ mp.events.addCommand("car", async (player, args) => {
         setVeh.rotation = player.rotation;
         player.setVariable('Player.Tmp.Admin.Veh', setVeh);
         player.putIntoVehicle(setVeh, 0);
-        player.call("Vehicle:Engin:state" ,[false])
+        player.call("Vehicle:Engine:state" ,[false])
 
         var saveVeh =  vehicle.saveVehicleData({
             veh_name: veh,

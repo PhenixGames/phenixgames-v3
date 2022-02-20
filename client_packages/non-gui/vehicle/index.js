@@ -18,6 +18,9 @@ mp.keys.bind(0x71, true, function() {
 //     }
 //   });
 
-mp.events.add('Vehicle:Engin:state', (player, state) => {
-    player.vehicle.engine = state;
+mp.events.add('Vehicle:Engine:state', (player, [state]) => {
+    setTimeout(() => {
+        player.vehicle.engine = state[0];
+        
+    }, 1000)
 });
