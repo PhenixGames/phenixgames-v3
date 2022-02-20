@@ -1,7 +1,7 @@
 mp.events.add("entityDestroyed", entity => {
     if(entity.isAVehicle()){
-        setTimeout(() => {
-            entity.destroy();
-        }, 20000);
+        entity.destroy();
+    }else {
+        console.log("kein Fahrzeug");
     }
   });
