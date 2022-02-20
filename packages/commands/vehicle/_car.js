@@ -9,10 +9,14 @@ mp.events.addCommand("car", async (player, args) => {
         let prim = args[1] || 0;
         let sec = args[2] || 0;
 
-        if(veh === 'delete') {
-            return player.vehicle.destroy();
-        }else if(veh === 'repair') {
-            return player.vehicle.repair();
+        try { 
+            if(veh === 'delete') {
+                return player.vehicle.destroy()
+            }else if(veh === 'repair') {
+                return player.vehicle.repair()
+            }
+        }catch(err) {
+            return player.notify('~r~Du bist in keinem Auto!');
         }
 
         // if(player.getVariable('Player.Tmp.Admin.Veh')) {
