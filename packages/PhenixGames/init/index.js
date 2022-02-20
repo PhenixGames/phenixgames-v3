@@ -4,7 +4,7 @@ const database = new Database();
 const vehicleAPI = require("../vehicle/index.js")
 const playerAPI = require('../playerAPI/');
 
-mp.events.add('playerReady', async (player) => {
+mp.events.add('playerJoin', async (player) => {
     player.call('Open:Login:Browser');
     player.name = player.socialClub;
 
