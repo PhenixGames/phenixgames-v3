@@ -1,4 +1,4 @@
-let Debug = true;
+let debug = true;
 
 mp.events.add('Player:pressed:f2', (player) => {
     if(player.getVariable('isTeam')) {
