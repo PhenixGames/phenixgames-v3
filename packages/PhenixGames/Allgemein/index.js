@@ -1,5 +1,5 @@
 mp.events.add("entityDestroyed", entity => {
-    if(entity.isVehicle()){
+    if(entity.isAVehicle()){
         setTimeout(() => {
             entity.destroy();
         }, 20000);
