@@ -19,6 +19,11 @@ module.exports.saveNewHouse = async function(player_id) {
     })
 }
 
+/**
+ * 
+ * @param {int} player_id 
+ * @returns {Boolean}
+ */
 module.exports.getHousePos = async function(player_id) {
     return await database.query('SELECT house_pos FROM pg_houses WHERE player_id = ?', [player_id])
     .then(res => {
@@ -33,6 +38,11 @@ module.exports.getHousePos = async function(player_id) {
     })
 }
 
+/**
+ * 
+ * @param {string} housePos 
+ * @param {object} player 
+ */
 module.exports.spawnPlayerIntoHouse = async function(housePos, player) {
     player.position = new mp.Vector3(Number(housePos[0]), Number(housePos[1]), Number(housePos[2]));
     player.dimension = player.getVariable('playerId');
