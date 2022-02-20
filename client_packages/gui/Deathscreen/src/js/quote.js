@@ -15,7 +15,7 @@
     "“Imagine Your Life Is Perfect In Every Respect; What Would It Look Like?” – Brian Tracy",
     "“We Generate Fears While We Sit. We Overcome Them By Action.” – Dr. Henry Link",
     "“Whether You Think You Can Or Think You Can’t, You’re Right.” – Quote By Henry Ford",
-    "“Das Haus bezahlt sich nicht von alleine” - Marcel Eris aka Montanablack88 aka ich-habe-eine-Sprachstörung",
+    "“Das Haus bezahlt sich nicht von alleine” - Marcel Eris aka Montanablack88 aka ich-habe-eine-Sprachstörung aka Nazi NFT Verschenker",
     "“Schule ist besser als Schule” - Eligella",
     "“Du liest gerade was, was keinen Sinn hat.” - Random Dude in der Entwicklung",
     "“HTML ist <b>KEINE</b> Programmiersprache” - Absolut jeder Entwickler",
