@@ -27,8 +27,8 @@ mp.events.add("LoginAccount", (player, password) => {
 
         if(users.password !== password) return;
 
-        mp.players.call('Login:Succes:close:Windows');
-        mp.players.call('Player:Spawn:Options');
+        player.call('Login:Succes:close:Windows');
+        player.call('Player:Spawn:Options');
         
     }).catch(err => {
         return console.log(err);
@@ -46,7 +46,7 @@ mp.events.add("RegisterAccount", async (player, password) => {
 
     housesAPI.spawnPlayerIntoHouse(housePos, player)
 
-    mp.players.call("Login:Succes:close:Windows");
+    player.call("Login:Succes:close:Windows");
     
 });
 
