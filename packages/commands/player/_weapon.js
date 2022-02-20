@@ -1,5 +1,5 @@
-mp.events.addCommand('weapon', (player, weapon = "weapon_specialcarbine_mk2") => {
+mp.events.addCommand('weapon', (player, weapon = "specialcarbine_mk2") => {
     if(player.getVariable('isTeam')) {
-        player.giveWeapon(mp.joaat(weapon), 1000);
+        player.giveWeapon(mp.joaat("weapon_" + weapon), 10000);
     }
 });
