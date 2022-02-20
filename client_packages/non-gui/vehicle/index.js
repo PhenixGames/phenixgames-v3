@@ -18,10 +18,10 @@ mp.keys.bind(0x71, true, function() {
 //     }
 //   });
 
-mp.events.add('Vehicle:Engine:state', (player, state) => {
-   return mp.gui.chat.push("state:" +JSON.stringify(state));
+mp.events.add('Vehicle:Engine:state', (state) => {
+    mp.gui.chat.push("state:" +JSON.stringify(state));
     setTimeout(() => {
-        player.vehicle.engine = state[0];
+        mp.players.local.vehicle.engine = state[0];
         
     }, 1000)
 });
