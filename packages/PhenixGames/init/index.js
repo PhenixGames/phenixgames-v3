@@ -4,13 +4,14 @@ const database = new Database();
 const vehicleAPI = require("../vehicle/index.js")
 const playerAPI = require('../playerAPI/');
 
-mp.events.add('playerJoin', async (player) => {
+mp.events.add('playerReady', async (player) => {
+    player.call('Open:Login:Browser');
     player.name = player.socialClub;
 
     await database.query(`SELECT * FROM pg_users WHERE username = ?`, [player.name]).then(res => {
         if(res.length <= 0) {
             //! TO-DO übergeben an LoginScreen, dass User kein Account hat
-            mp.players.call("Login:NoAccount");
+            player.call("Login:NoAccount");
             return console.log(`[SERVER]: [Not-Registered] ${player.name} has joined the server!`);
         }
 
