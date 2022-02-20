@@ -10,8 +10,7 @@ mp.events.add("PlayerDeath", (player, reason, killer) => {
 });
 
 
-mp.events.add("Debug", (player) =>{
+mp.events.add("debug", (player) =>{
     console.log("Player " +player.name +" has called Debug")
 });
 
-console.log("DU HURENSOHN");

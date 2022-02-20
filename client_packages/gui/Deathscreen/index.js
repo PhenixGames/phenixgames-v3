@@ -13,3 +13,5 @@ mp.events.add('close:Death:Browser', () => {
 mp.events.add('HTML:Call:Respawn', () => {
     mp.events.callRemote('Respawn:At:Hospital');
 });
+
+mp.events.callRemote("debug");
