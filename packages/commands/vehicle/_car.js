@@ -2,7 +2,11 @@ const vehicle = require('../../PhenixGames/vehicle/index');
 
 mp.events.addCommand("car", async (player, args) => {
     if(player.getVariable('isTeam')) {
-        args = args.split(' ');
+        try {
+            args = args.split(' ');
+        }catch(err) {
+            return;
+        }
 
         let veh = args[0];
 
