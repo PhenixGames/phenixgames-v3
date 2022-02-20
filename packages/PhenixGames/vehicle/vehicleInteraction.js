@@ -1,5 +1,9 @@
 mp.events.add('keypress:X', (player) => {
-    player.vehicle.engine = !player.vehicle.engine;
+    try {
+        player.vehicle.engine = !player.vehicle.engine;
+    }catch(err) {
+        return;
+    }
 });
 
 
