@@ -53,7 +53,7 @@ async function handleAllVehicles() {
        // console.log('ALL VEHICLES SYNCED! ' + mp.vehicles.length)
 
         mp.players.forEach((player) => {
-            if(!player.getVariable('isInEvent')) {
+            if(!player.getVariable('isInEvent') && player.getVariable('isLoggedIn')) {
                 playerAPI.saveNewPlayerPos(player.getVariable('playerId'), JSON.stringify(player.position));
             }
         });
