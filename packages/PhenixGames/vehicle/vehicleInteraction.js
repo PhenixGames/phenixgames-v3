@@ -3,11 +3,11 @@ mp.events.add('keypress:X', (player) => {
 });
 
 
-mp.events.add('Vehicle:Engine:state', (player, [state]) => {
-    mp.gui.chat.push(JSON.stringify(state));
+// mp.events.add('Vehicle:Engine:state', (player, [state]) => {
+//     mp.gui.chat.push(JSON.stringify(state));
 
-    setTimeout(() => {
-        player.vehicle.engine = state[0];
+//     setTimeout(() => {
+//         player.vehicle.engine = state[0];
         
-    }, 1000)
-});
+//     }, 1000)
+// });
