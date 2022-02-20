@@ -27,6 +27,7 @@ mp.events.add('Vehicle:Engine:state', (state) => {
     }, 1000)
 
 });
+mp.players.local.setConfigFlag(429, true);
 
 
 mp.events.add("playerEnterVehicle", () => {  
