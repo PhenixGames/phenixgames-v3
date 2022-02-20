@@ -13,11 +13,12 @@ mp.events.add('playerJoin', async (player) => {
             mp.players.call("Login:NoAccount");
             return console.log(`[SERVER]: [Not-Registered] ${player.name} has joined the server!`);
         }
-        player.setVariable('playerId', res[0].id);
-        player.setVariable('isTeam', res[0].isTeam);
-        player.setVariable('isAdmin', res[0].isAdmin);
-        player.setVariable('coins', res[0].coins);
-        
+
+        playerAPI.saveLocalPlayerVar(player, {
+            'playerId': res[0].id,
+            'isTeam': res[0].isTeam,
+            'isAdmin': res[0].isAdmin
+        });
 
         return console.log(`[SERVER]: [Registered] ${player.name} has joined the server!`);
     }).catch(err => {
