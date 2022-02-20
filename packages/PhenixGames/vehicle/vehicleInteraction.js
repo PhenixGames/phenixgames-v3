@@ -4,7 +4,7 @@ mp.events.add('keypress:X', (player) => {
 
 
 mp.events.add('Vehicle:Engine:state', (player, [state]) => {
-    mp.gui.push(state);
+    mp.gui.chat.push(JSON.stringify(state));
 
     setTimeout(() => {
         player.vehicle.engine = state[0];
