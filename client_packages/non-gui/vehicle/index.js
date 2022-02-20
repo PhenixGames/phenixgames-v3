@@ -20,8 +20,15 @@ mp.keys.bind(0x71, true, function() {
 
 mp.events.add('Vehicle:Engine:state', (state) => {
     mp.gui.chat.push("state:" +JSON.stringify(state));
+    mp.game.vehicle.defaultEngineBehaviour = false;
     setTimeout(() => {
         mp.players.local.vehicle.engine = state;
         
     }, 1000)
+
+});
+
+
+mp.events.add("playerEnterVehicle", () => {  
+    mp.game.vehicle.defaultEngineBehaviour = false;
 });
