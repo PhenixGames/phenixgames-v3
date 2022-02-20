@@ -1,6 +1,6 @@
 const { Database } = require("../../_db/db");
 const database = new Database();
-
+let Debug = true;
 const config = {
     "normiehouse": "261.4586, -998.8196, -99.00863"
 }
@@ -36,6 +36,9 @@ module.exports.getHousePos = async function(player_id) {
 module.exports.spawnPlayerIntoHouse = async function(housePos, player) {
     player.position = new mp.Vector3(Number(housePos[0]), Number(housePos[1]), Number(housePos[2]));
     player.dimension = player.getVariable('playerId');
+    if(Debug){
+        player.notify("Du bist in der Dimension: " + player.dimension);
+    }
     
     player.setVariable('isInHouse', true);
     mp.players.call('Set:Marker:InNormieHouse', [player.dimension]);
