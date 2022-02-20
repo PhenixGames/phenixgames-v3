@@ -8,9 +8,3 @@ mp.events.add("playerDeath", (player, reason, killer) => {
     player.notify("~g~Du wurdest Respawnt")
     player.call('close:Death:Browser')
 });
-
-
-mp.events.add("debug", (player) =>{
-    console.log("Player " +player.name +" has called Debug")
-});
-
