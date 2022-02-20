@@ -61,8 +61,10 @@ mp.events.add('Player:Spawn:LastPos', async (player) => {
     const playerId = player.getVariable('playerId');
     const lastPos = await playerAPI.getLastPlayerPos(playerId);
 
-    if(player.getVariable('isInHouse')) {
-        player.dimension = playerId;
-    }
+    // if(player.getVariable('isInHouse')) {
+    //     player.dimension = playerId;
+    // }
+
+    console.log(JSON.stringify(lastPos) + ' last pos debug');
     player.position = new mp.Vector3(lastPos.x, lastPos.y, lastPos.z)
 })
