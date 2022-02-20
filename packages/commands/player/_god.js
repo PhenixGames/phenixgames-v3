@@ -6,11 +6,13 @@ mp.events.addCommand("god", (player) => {
         //? IF USER IS ALREADY IN GODMODE
         if(player.getVariable('god')) {
             playerAPI.saveLocalPlayerVar(player, {'god': false})
-            mp.players.call("Set:God", [false]);
+            player.call("Set:God", [false]);
         }else {
             playerAPI.saveLocalPlayerVar(player, {'god': true})
-            mp.players.call("Set:God", [true]);
+            player.call("Set:God", [true]);
+            
         }
+        player.call("Player:Admin:Duty:noclip");
         player.setClothes(1, 130, 0, 2)
         player.setClothes(4, 34, 0, 2)
         player.setClothes(6, 60, 0, 2)
