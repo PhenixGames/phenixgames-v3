@@ -1,8 +1,10 @@
 const { Database } = require("../../_db/db");
 const database = new Database();
 
-const housesAPI = require('../houseAPI/index');
+const config = require('../../../_assets/json/config.json');
+
 const playerAPI = require('../playerAPI/');
+
 
 mp.events.add("LoginAccount", (player, password) => {
     database.query('SELECT * FROM pg_users WHERE username = ? LIMIT 1', [player.socialClub]).then(async users => {
@@ -37,10 +39,17 @@ mp.events.add("LoginAccount", (player, password) => {
 mp.events.add("RegisterAccount", async (player, password) => {
     await playerAPI.saveNewPlayer(player.socialClub, password);
 
-    await playerAPI.getPlayerId(player.socialClub)
+    const playerId = await playerAPI.getPlayerId(player.socialClub);
 
+    await playerAPI.changePlayerPos(player, config.defaultSpawn.pos, config.defaultSpawn.rot)
+    await playerAPI.saveNewPlayerPos(playerId, JSON.stringify(player.position));
+    await playerAPI.saveLocalPlayerVar(player, {
+        'playerId': playerId,
+        'isTeam': 0,
+        'isAdmin': 0,
+        'isInHouse': false
+    })
     player.call("Login:Succes:close:Windows");
-    
 });
 
 mp.events.add('Player:Spawn:LastPos', async (player) => {
