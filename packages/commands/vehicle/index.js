@@ -13,6 +13,6 @@ mp.events.addCommand("speed", (player, speed = 1) => {
     if(player.getVariable('isTeam')) {
         if(speed === null) return player.notify('~r~Geb nh Speed an du Depp!');
 
-        mp.players.call("Set:ModdedSpeed", [speed]);
+        player.call("Set:ModdedSpeed", [speed]);
     }
 });
