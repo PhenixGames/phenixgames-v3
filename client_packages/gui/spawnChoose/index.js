@@ -10,11 +10,7 @@ mp.events.add('Player:Spawn:Options', (type) => {
 });
 
 mp.events.add('Player:Spawn', (type) => {
-    if(type) {
-        mp.events.callRemote('Player:Spawn:House')
-    }else {
-        mp.events.callRemote('Player:Spawn:LastPos');
-    }
+    mp.events.callRemote('Player:Spawn:LastPos');
     mp.events.call('Player:Spawn:Succes:close:Windows');
 });
 

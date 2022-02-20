@@ -5,7 +5,6 @@ const housesAPI = require('../houseAPI/index');
 const playerAPI = require('../playerAPI/');
 
 mp.events.add("LoginAccount", (player, password) => {
-    console.log('login')
     database.query('SELECT * FROM pg_users WHERE username = ? LIMIT 1', [player.socialClub]).then(async users => {
         users = await users[0];
 
@@ -36,27 +35,13 @@ mp.events.add("LoginAccount", (player, password) => {
 });
 
 mp.events.add("RegisterAccount", async (player, password) => {
-    const playerId = await playerAPI.getPlayerId(player.socialClub)
-    if(!playerId) {
-        await playerAPI.saveNewPlayer(player.socialClub, password);
-    }
+    await playerAPI.saveNewPlayer(player.socialClub, password);
 
-    const newPlayerId = await playerAPI.getPlayerId(player.socialClub)
-    const housePos = await housesAPI.saveNewHouse(newPlayerId);
-
-    housesAPI.spawnPlayerIntoHouse(housePos, player)
+    await playerAPI.getPlayerId(player.socialClub)
 
     player.call("Login:Succes:close:Windows");
     
 });
-
-mp.events.add('Player:Spawn:House', async (player) => {
-    const playerId = player.getVariable('playerId');
-    const housePos = await housesAPI.getHousePos(playerId);
-    if(!housePos) return player.notify('Du besitzt kein Haus!');
-
-    housesAPI.spawnPlayerIntoHouse(housePos, player)
-})
 
 mp.events.add('Player:Spawn:LastPos', async (player) => {
     const playerId = player.getVariable('playerId');
