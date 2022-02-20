@@ -18,7 +18,7 @@ mp.keys.bind(0x71, true, function() {
 //     }
 //   });
 
-mp.events.add('Vehicle:Engine:state', (player, [state]) => {
+mp.events.add('Vehicle:Engine:state', (player, state) => {
    return mp.gui.chat.push(JSON.stringify(state));
     setTimeout(() => {
         player.vehicle.engine = state[0];
