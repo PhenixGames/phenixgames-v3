@@ -1,8 +1,8 @@
+const playerAPI = require("../../PhenixGames/playerAPI");
+
 mp.events.addCommand('tp', (player, location) => {
-    if(player.getVariable('isTeam')) {
-        location = location.split(', ');
-        console.log(location)
-        player.position = new mp.Vector3(Number(location[0]), Number(location[1]), Number(location[2]));
+    if(player.getVariable('isTeam') && location.indexOf(',') !== -1) {
+        playerAPI.changePlayerPos(player, JSON.stringify(location));
     }
 });
 
@@ -11,8 +11,8 @@ mp.events.addCommand('tpto', (player, target) =>{
         mp.players.forEach(
             (tg) => {
                 if(tg.name == target){
-                    player.position = tg.position;
-                    player.dimension = tg.dimension;
+                    const pos = tg.position.x + ', ' + tg.position.y + ', ' + tg.position.z;
+                    playerAPI.changePlayerPos(player, pos, null, JSON.stringify(tg.dimension))
                 }
             }
         );
