@@ -1,4 +1,4 @@
-const { Database } = require("../../_db/db");
+const { Database } = require('../../_db/db');
 const database = new Database();
 
 const config = require('../../../_assets/json/config.json');
@@ -6,7 +6,7 @@ const config = require('../../../_assets/json/config.json');
 const playerAPI = require('../playerAPI/');
 
 
-mp.events.add("LoginAccount", (player, password) => {
+mp.events.add('LoginAccount', (player, password) => {
     database.query('SELECT * FROM pg_users WHERE username = ? LIMIT 1', [player.socialClub]).then(async users => {
         users = await users[0];
 
@@ -38,7 +38,7 @@ mp.events.add("LoginAccount", (player, password) => {
     });
 });
 
-mp.events.add("RegisterAccount", async (player, password) => {
+mp.events.add('RegisterAccount', async (player, password) => {
     await playerAPI.saveNewPlayer(player.socialClub, password);
 
     const playerId = await playerAPI.getPlayerId(player.socialClub);
@@ -51,7 +51,7 @@ mp.events.add("RegisterAccount", async (player, password) => {
         'isAdmin': 0,
         'isInHouse': false
     })
-    player.call("Login:Succes:close:Windows");
+    player.call('Login:Succes:close:Windows');
     playerAPI.saveLocalPlayerVar(player, {
         'isLoggedIn': true
     });
