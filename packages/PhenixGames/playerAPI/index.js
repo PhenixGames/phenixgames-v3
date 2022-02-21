@@ -3,7 +3,9 @@ const {
 } = require("../../_db/db");
 const database = new Database();
 
-const config = require('../../../_assets/json/config.json')
+const config = require('../../../_assets/json/config.json');
+
+const validator = require('validator');
 
 /**
  * 
@@ -76,17 +78,20 @@ module.exports.getLastPlayerPos = async function (player_id) {
 
 /**
  * 
- * @param {object} player 
- * @param {string} new_pos 
+ * @param {object} player @requires
+ * @param {string} new_pos @requires
  * @param {string} new_rot @optional
+ * @param {string} new_dim @optional
  * @returns /
  */
-module.exports.changePlayerPos = async function (player, new_pos, new_rot) {
+module.exports.changePlayerPos = async function (player, new_pos, new_rot, new_dim) {
     try {
         new_pos = new_pos.split(', ');
+        console.log(new_pos)
         player.position = new mp.Vector3(Number(new_pos[0]), Number(new_pos[1]), Number(new_pos[2]));
 
         if (new_rot) player.heading = Number(new_rot);
+        if (new_dim) player.dimension = Number(new_dim)
     } catch (err) {
         console.log(err);
     }
@@ -106,4 +111,24 @@ module.exports.saveLocalPlayerVar = async function (player, data) {
         player.setVariable(key, value);
     }
     return;
+}
+
+/**
+ * 
+ * @param {object} player 
+ * @param {array} name 
+ */
+module.exports.savePlayerInGameName = async function (player, name) {
+    const firstname = validator.trim(name[0]);
+    const lastname = validator.trim(name[1]);
+
+    const playerId = player.getVariable('playerId');
+    if(!playerId) return false;
+
+    return await database.query('UPDATE pg_users SET firstname = ?, lastname = ? WHERE id = ?', [firstname, lastname, playerId])
+        .then(() => {return true})
+        .catch(err => {
+            console.log(err);
+            return false;
+        });
 }
