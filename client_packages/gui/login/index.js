@@ -7,7 +7,7 @@ mp.events.add('Open:Login:Browser', () => {
     browser = mp.browsers.new("package://gui/login/index.html");
     setTimeout(() => {
         mp.gui.cursor.show(true, true);
-    }, 1000);
+    }, 500);
 });
 
 mp.players.local.freezePosition(true);
