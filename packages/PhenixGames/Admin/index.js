@@ -1,6 +1,6 @@
 const playerAPI = require("../../PhenixGames/playerAPI");
 
-const AdminUnsichtbar = 100;
+const AdminUnsichtbar = 150;
 
 mp.events.addCommand("Aduty", (player) => {
 
@@ -9,9 +9,13 @@ mp.events.addCommand("Aduty", (player) => {
         if(player.getVariable('Aduty')) {
             playerAPI.saveLocalPlayerVar(player, {'Aduty': false})
             player.call("Set:God", [false]);
+            player.name = "~r~" + playerAPI.getPlayerInGame(player);
+            player.alpha = 255;
         }else {
             playerAPI.saveLocalPlayerVar(player, {'Aduty': true})
             player.call("Set:God", [true]); 
+            player.alpha = AdminUnsichtbar;
+            player.name = "~r~" + player.name;
         }
         player.call("Player:Admin:Duty:noclip");
 
@@ -32,8 +36,8 @@ mp.events.addCommand("Aduty", (player) => {
         }
         //
 
-        player.alpha = AdminUnsichtbar;
-        player.name = "~r~" + player.name;
+        
+       
 
 
 
