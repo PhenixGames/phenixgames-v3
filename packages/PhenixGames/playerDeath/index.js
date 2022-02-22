@@ -1,4 +1,9 @@
 mp.events.add("playerDeath", (player, reason, killer) => {
+    if(player.getVariable('Aduty')){
+        player.spawn(new mp.Vector3(player.Position));
+        return player.notify("Du wurdest Wiederbelebt");
+        
+    }
     player.call("Open:Death:Browser");
 });
 
