@@ -1,7 +1,8 @@
 require('./gui/speedometer/')
 require('./gui/login/');
 require('./gui/spawnChoose/');
-require('./gui/deathscreen')
+require('./gui/deathscreen');
+require('./gui/register/namechooser/');
 
 
 require('./non-gui/godmode/')

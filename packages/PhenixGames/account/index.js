@@ -50,12 +50,21 @@ mp.events.add('RegisterAccount', async (player, password) => {
         'isTeam': 0,
         'isAdmin': 0,
         'isInHouse': false
-    })
+    });
     player.call('Login:Succes:close:Windows');
-    playerAPI.saveLocalPlayerVar(player, {
+    return player.call('Player:InGameName:Choose');
+});
+
+mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
+    const savePlayerInGameName = await playerAPI.savePlayerInGameName(player, [firstname, lastname])
+    if(!savePlayerInGameName) return;
+
+    player.call('Player:InGameName:Choose:Succes:close:Windows');
+    await playerAPI.saveLocalPlayerVar(player, {
         'isLoggedIn': true
     });
-});
+    return player.notify(`Erfolgreich registriert!`);
+})
 
 mp.events.add('Player:Spawn:LastPos', async (player) => {
     const playerId = player.getVariable('playerId');
@@ -66,5 +75,6 @@ mp.events.add('Player:Spawn:LastPos', async (player) => {
     // }
 
     console.log(JSON.stringify(lastPos) + ' last pos debug');
-    player.position = new mp.Vector3(lastPos.x, lastPos.y, lastPos.z)
+    player.position = new mp.Vector3(lastPos.x, lastPos.y, lastPos.z);
+    return;
 })

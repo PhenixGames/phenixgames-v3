@@ -1,0 +1,27 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <form id="setName">
+            <input type="text" id="firstname" placeholder="Vorname" />
+            <input type="text" id="lastname" placeholder="Nachname" />
+            <input type="submit" />
+        </form>
+
+        <script>
+            document.getElementById('setName').addEventListener('submit', () => {
+                if(document.getElementById('firstname').value === ' ' || document.getElementById('lastname').value === ' ') {
+                    return false;
+                }
+
+                if(document.getElementById('firstname').value.length < 4 || document.getElementById('lastname').value.length < 4) {
+                    return false;
+                }
+
+                mp.trigger('uiNameChooser_accept', document.getElementById('firstname').value, document.getElementById('lastname').value)
+                return;
+            })
+        </script>
+    </body>
+</html>
