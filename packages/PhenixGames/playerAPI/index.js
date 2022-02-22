@@ -139,7 +139,7 @@ module.exports.savePlayerInGameName = async function (player, name) {
  * @param {object} player 
  * @returns {object}
  */
-module.export.getPlayerInGame = async function (player) {
+module.exports.getPlayerInGame = async function (player) {
     const playerId = player.getVariable('playerId');
     if(!playerId) return false;
 
