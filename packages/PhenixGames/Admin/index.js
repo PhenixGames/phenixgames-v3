@@ -29,7 +29,7 @@ mp.events.addCommand("Aduty", (player) => {
         player.setClothes(3, 1, 0, 0)
 
         //
-        if(player.health  = 0){
+        if(player.health == 0){
             player.spawn(new mp.Vector3(player.Position))
             player.notify("Du wurdest Wiederbelebt");
             player.call('close:Death:Browser')
