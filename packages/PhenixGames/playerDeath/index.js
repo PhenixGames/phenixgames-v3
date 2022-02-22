@@ -1,5 +1,4 @@
 mp.events.add("playerDeath", (player, reason, killer) => {
-    console.log("Player Dead");
     player.call("Open:Death:Browser");
 });
 
