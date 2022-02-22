@@ -94,8 +94,9 @@ module.exports.changePlayerPos = async function (player, new_pos, new_rot, new_d
         if (new_dim) player.dimension = Number(new_dim)
     } catch (err) {
         console.log(err);
+        return false;
     }
-    return;
+    return true;
 }
 
 /**
