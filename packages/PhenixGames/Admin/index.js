@@ -39,3 +39,12 @@ mp.events.addCommand("aduty", async (player) => {
         player.notify((player.getVariable('Aduty')) ? '~g~Du hast den AdminDiesnt Angetreten': '~r~Du hast den AdminDienst verlassen');
     }
 });
+
+
+mp.events.add("playerExitVehicle", (player, vehicle) => {
+    if(player.getVariable('Aduty')){
+        setTimeout(() => {
+            player.alpha = AdminUnsichtbar;
+        }, 500);
+    }
+});
