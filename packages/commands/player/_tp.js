@@ -11,7 +11,7 @@ mp.events.addCommand('tpto', (player, target) =>{
     if(player.getVariable('isTeam')){
         mp.players.forEach(
             (tg) => {
-                if(tg.name == target){
+                if(tg.socialClub == target){
                     const pos = tg.position.x + ', ' + tg.position.y + ', ' + tg.position.z;
                     const changePos = playerAPI.changePlayerPos(player, pos, null, JSON.stringify(tg.dimension))
                     if(!changePos) player.notfiy('Etwas ist schief gelaufen!')
