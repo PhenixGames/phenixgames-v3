@@ -9,7 +9,8 @@ mp.events.addCommand("Aduty", (player) => {
         if(player.getVariable('Aduty')) {
             playerAPI.saveLocalPlayerVar(player, {'Aduty': false})
             player.call("Set:God", [false]);
-            player.name = "~r~" + playerAPI.getPlayerInGame(player);
+            var name = await playerAPI.getPlayerInGame(player);
+            player.name = "~r~" + name.firstname + " " + name.lastname;
             player.alpha = 255;
         }else {
             playerAPI.saveLocalPlayerVar(player, {'Aduty': true})
