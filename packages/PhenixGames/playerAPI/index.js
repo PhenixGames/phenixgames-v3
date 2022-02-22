@@ -133,3 +133,22 @@ module.exports.savePlayerInGameName = async function (player, name) {
             return false;
         });
 }
+
+/**
+ * 
+ * @param {object} player 
+ * @returns {object}
+ */
+module.export.getPlayerInGame = async function (player) {
+    const playerId = player.getVariable('playerId');
+    if(!playerId) return false;
+
+    return await database.query('SELECT firstname, lastname WHERE id = ?', [playerId])
+        .then(res => {
+            return res[0];
+        })
+        .catch(err => {
+            console.log(err);
+            return false;
+        })
+}
