@@ -1,8 +1,6 @@
 // -STRG-
 mp.keys.bind(0x11, true, function() {
     mp.events.callRemote('keypress:X');
-    mp.gui.chat.push(mp.players.local.vehicle.isSirenOn() + ' 123')
-    mp.gui.chat.push(typeof mp.players.local.vehicle.isSirenOn())
     if(mp.players.local.vehicle.isSirenOn()) {
         setTimeout(() => {
             mp.players.local.vehicle.setSiren(true);
