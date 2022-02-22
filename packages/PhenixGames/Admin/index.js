@@ -2,7 +2,7 @@ const playerAPI = require("../../PhenixGames/playerAPI");
 
 const AdminUnsichtbar = 150;
 
-mp.events.addCommand("Aduty", async (player) => {
+mp.events.addCommand("aduty", async (player) => {
 
     if(player.getVariable('isTeam')) {
         //? IF USER IS ALREADY IN GODMODE
