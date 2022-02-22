@@ -25,6 +25,12 @@ mp.events.addCommand("Aduty", (player) => {
         player.setClothes(3, 1, 0, 0)
 
         //
+        if(player.isDead){
+            player.spawn(new mp.Vector3(player.Position))
+            player.notify("Du wurdest Wiederbelebt");
+            player.call('close:Death:Browser')
+        }
+        //
 
         player.alpha = AdminUnsichtbar;
         player.name = "~r~" + player.name;
