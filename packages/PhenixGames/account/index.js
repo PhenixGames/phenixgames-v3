@@ -4,7 +4,7 @@ const database = new Database();
 const config = require('../../../_assets/json/config.json');
 
 const playerAPI = require('../playerAPI/');
-
+const permissionSystem = require('../playerAPI/permissionSystem')
 
 mp.events.add('LoginAccount', (player, password) => {
     database.query('SELECT * FROM pg_users WHERE username = ? LIMIT 1', [player.socialClub]).then(async users => {
@@ -27,6 +27,8 @@ mp.events.add('LoginAccount', (player, password) => {
         if(isPunish) return player.kick(reason);
 
         if(users.password !== password) return;
+
+        permissionSystem.setPlayerPermissionsLocal(player);
 
         player.call('Login:Succes:close:Windows');
         player.call('Player:Spawn:Options');

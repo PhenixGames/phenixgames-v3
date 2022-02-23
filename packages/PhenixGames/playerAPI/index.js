@@ -152,3 +152,6 @@ module.exports.getPlayerInGame = async function (player) {
             return false;
         })
 }
+
+
+require('./permissionSystem');
