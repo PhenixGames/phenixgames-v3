@@ -1,4 +1,4 @@
-const playerAPI = require("../../PhenixGames/playerAPI");
+const playerAPI = require("../playerAPI");
 
 const AdminUnsichtbar = 150;
 
