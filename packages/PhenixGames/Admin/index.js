@@ -28,7 +28,7 @@ mp.events.addCommand("aduty", async (player) => {
         player.setClothes(8, 122, 0, 0)
         player.setClothes(11, 171, 0, 2)
         player.setClothes(3, 1, 0, 0)
-        player.notify((player.getVariable('Aduty')) ? '~g~Du hast den AdminDiesnt Angetreten': '~r~Du hast den AdminDienst verlassen');
+        player.notify((player.getVariable('Aduty')) ? '~g~Du hast den Admindienst Angetreten': '~r~Du hast den AdminDienst verlassen');
     }
 });
 
