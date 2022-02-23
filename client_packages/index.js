@@ -3,6 +3,7 @@ require('./gui/login/');
 require('./gui/spawnChoose/');
 require('./gui/deathscreen');
 require('./gui/register/namechooser/');
+require('./gui/money/');
 
 
 require('./non-gui/godmode/')
