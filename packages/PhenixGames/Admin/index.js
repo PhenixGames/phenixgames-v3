@@ -23,6 +23,8 @@ mp.events.addCommand("aduty", async (player) => {
         if(Perms.hasPermissions(player, ["no_clip"])){
             player.call("Player:Admin:Duty:noclip");
         }
+
+        player.call("Change:Admin:Duty:Value:On:Client", player.getVariable('Aduty'))
         
         //!TODO Remove when own cloth system is implemented
         player.setClothes(1, 130, 0, 2)
