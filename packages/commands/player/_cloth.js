@@ -1,3 +1,5 @@
+//thats a debug cmd
+
 mp.events.addCommand("cloth", (player, id) => {
 
     if(player.getVariable('isTeam')) {
