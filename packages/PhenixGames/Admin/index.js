@@ -1,6 +1,6 @@
 const playerAPI = require("../playerAPI");
 const Perms = require('../playerAPI/permissionSystem.js')
-const AdminUnsichtbar = 150;
+const AdminUnsichtbar = 200;
 
 mp.events.addCommand("aduty", async (player) => {
 
