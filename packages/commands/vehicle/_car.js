@@ -1,7 +1,7 @@
 const vehicle = require('../../PhenixGames/vehicle/index');
-
+const Perms = require('../../PhenixGames/playerAPI/permissionSystem.js')
 mp.events.addCommand("car", async (player, args) => {
-    if(player.getVariable('isTeam')) {
+    if(Perms.hasPermissions(player, ["car_spawn"])) {
         try {
             args = args.split(' ');
         }catch(err) {
