@@ -6,7 +6,7 @@ mp.events.addCommand("aduty", async (player) => {
 
     if(Perms.hasPermissions(player, ["isTeam"])) {
         //? IF USER IS ALREADY IN GODMODE
-        if(player.hasPermissions(player, ["godmode"])){
+        if(Perms.hasPermissions(player, ["godmode"])){
             if(player.getVariable('Aduty')) {
                 playerAPI.saveLocalPlayerVar(player, {'Aduty': false})
                 player.call("Set:God", [false]);
@@ -20,7 +20,7 @@ mp.events.addCommand("aduty", async (player) => {
                 player.name = "~r~" + player.name;
             }
         }
-        if(player.hasPermissions(player, ["no_clip"])){
+        if(Perms.hasPermissions(player, ["no_clip"])){
             player.call("Player:Admin:Duty:noclip");
         }
         
