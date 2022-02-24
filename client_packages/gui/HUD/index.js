@@ -22,7 +22,7 @@ mp.events.add("render", () => {
                 }); 
                 var speed = vehicle.getSpeed();
                 speed = speed * 3.6;
-                mp.game.graphics.drawText(`\n\n\n~b~Heading: ~w~${vehicle.getHeading().toFixed(2)}\n~b~Health: ~w~${vehicle.getHealth()}\n~b~Speed: ~w~${Math.round(speed)}`, drawPosition, { 
+                mp.game.graphics.drawText(`\n\n\n~b~Heading: ~w~${vehicle.getHeading().toFixed(2)}\n~b~Health: ~w~${vehicle.getHealth()}\n~b~Speed: ~w~${Math.round(speed)}\n`, drawPosition, { 
                     font: 0, 
                     color: [255, 255, 255, 185], 
                     scale: [0.25, 0.25], 
