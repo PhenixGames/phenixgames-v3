@@ -1,14 +1,14 @@
 const playerAPI = require("../../PhenixGames/playerAPI");
 
 mp.events.addCommand('tp', (player, location) => {
-    if(player.getVariable('isTeam') && location.indexOf(',') !== -1) {
+    if(Perms.hasPermissions(player, ["tp"])  && location.indexOf(',') !== -1) {
         const changePos = playerAPI.changePlayerPos(player, JSON.stringify(location));
         if(!changePos) player.notify('Etwas ist schief gelaufen!')
     }
 });
 
 mp.events.addCommand('tpto', (player, target) =>{
-    if(player.getVariable('isTeam')){
+    if(Perms.hasPermissions(player, ["tp_to"])) {
         mp.players.forEach(
             (tg) => {
                 if(tg.socialClub == target){
