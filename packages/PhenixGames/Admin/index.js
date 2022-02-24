@@ -44,16 +44,14 @@ mp.events.add("playerExitVehicle", (player, vehicle) => {
     if(player.getVariable('Aduty')){
         setTimeout(() => {
             player.alpha = AdminUnsichtbar;
-            vehicle.alpha = 255;
         }, 500);
     }
 });
 
-mp.events.add("playerEnterVehicle", (player, vehicle) => {
+mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
     if(player.getVariable('Aduty')){
         setTimeout(() => {
             player.alpha = AdminUnsichtbar;
-            vehicle.alpha = AdminUnsichtbar;
         }, 500);
     }
 });
