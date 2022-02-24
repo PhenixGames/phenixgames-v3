@@ -1,5 +1,8 @@
 mp.events.add("vehicleDeath", (vehicle) => {
-    vehicle.destroy()
+    setTimeout(() => {
+        vehicle.destroy();
+    }, 10000);
+    
 });
 
 mp.events.add("debug", (player) =>{
