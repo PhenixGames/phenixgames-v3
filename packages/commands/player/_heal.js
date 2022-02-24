@@ -1,5 +1,6 @@
+const Perms = require('../../PhenixGames/playerAPI/permissionSystem.js')
 mp.events.addCommand("heal", (player) => {
-    if(player.getVariable('isTeam')) {
+    if(Perms.hasPermissions(player, ["heal"])) {
         player.health = 100;
     }
 });
