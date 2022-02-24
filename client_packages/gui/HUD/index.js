@@ -2,9 +2,11 @@ var Admin = false;
 
 mp.events.add("Change:Admin:Duty:Value:On:Client", (state) => {
    Admin = state;
+   mp.gui.chat.push("state: " + Admin);
 });
 //Render For Car
 mp.events.add("render", () => {
+
     if(Admin)
     {
         mp.vehicles.forEachInStreamRange((vehicle) => { 
