@@ -44,7 +44,7 @@ mp.events.add("playerExitVehicle", (player, vehicle) => {
     if(player.getVariable('Aduty')){
         setTimeout(() => {
             player.alpha = AdminUnsichtbar;
-        }, 750);
+        }, 750);//Falls Probleme sind, Zeit hoch Setzen.
     }
 });
 //
