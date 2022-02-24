@@ -13,3 +13,4 @@ require('./non-gui/vehicle/');
 require('./non-gui/marker/');
 require('./non-gui/noclip/');
 require('./non-gui/fingerpoint/');
+require('./non-gui/player/');
