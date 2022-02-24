@@ -10,12 +10,14 @@ mp.events.addCommand("aduty", async (player) => {
             if(player.getVariable('Aduty')) {
                 playerAPI.saveLocalPlayerVar(player, {'Aduty': false})
                 player.call("Set:God", [false]);
+                player.call("Change:Admin:Duty:Value:On:Client", [false]);
                 var name = await playerAPI.getPlayerInGame(player);
                 player.name = "~r~" + name.firstname + " " + name.lastname;
                 player.alpha = 255;
             }else {
                 playerAPI.saveLocalPlayerVar(player, {'Aduty': true})
                 player.call("Set:God", [true]); 
+                player.call("Change:Admin:Duty:Value:On:Client", [true]);
                 player.alpha = AdminUnsichtbar;
                 player.name = "~r~" + player.name;
             }
@@ -24,7 +26,7 @@ mp.events.addCommand("aduty", async (player) => {
             player.call("Player:Admin:Duty:noclip");
         }
 
-        player.call("Change:Admin:Duty:Value:On:Client", player.getVariable('Aduty'))
+        
         
         //!TODO Remove when own cloth system is implemented
         player.setClothes(1, 130, 0, 2)
