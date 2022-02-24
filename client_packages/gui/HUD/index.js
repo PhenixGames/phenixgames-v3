@@ -36,7 +36,7 @@ mp.events.add("render", () => {
             
                 if(mp.players.local.position.subtract(player.position).length() <10 && mp.players.local.position.subtract(player.position).length() !== 0){
                 const drawPosition = [player.position.x, player.position.y, player.position.z + 0.3];
-                mp.game.graphics.drawText(`~b~Id: ~w~${player.getVariable('playerId')}\n~b~Name: ~w~${"Need To be added"}\n~b~Position: ~w~${player.position.x.toFixed(2)}, ${player.position.y.toFixed(2)}, ${player.position.z.toFixed(2)}\n`, drawPosition, { 
+                mp.game.graphics.drawText(`~b~Id: ~w~${player.getVariable('playerId')}\n~b~Name: ~w~${player.name}\n~b~Position: ~w~${player.position.x.toFixed(2)}, ${player.position.y.toFixed(2)}, ${player.position.z.toFixed(2)}\n`, drawPosition, { 
                     font: 0, 
                     color: [255, 255, 255, 185], 
                     scale: [0.25, 0.25], 

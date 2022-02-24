@@ -145,6 +145,7 @@ module.exports.getPlayerInGame = async function (player) {
 
     return await database.query('SELECT firstname, lastname FROM pg_users WHERE id = ?', [playerId])
         .then(res => {
+            
             return res[0];
         })
         .catch(err => {

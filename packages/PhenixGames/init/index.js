@@ -6,13 +6,13 @@ const playerAPI = require('../playerAPI/');
 
 mp.events.add('playerJoin', async (player) => {
     player.call('Open:Login:Browser');
-    player.name = player.socialClub;
+    
 
-    await database.query(`SELECT * FROM pg_users WHERE username = ?`, [player.name]).then(res => {
+    await database.query(`SELECT * FROM pg_users WHERE username = ?`, [player.socialClub]).then(res => {
         if(res.length <= 0) {
             //! TO-DO übergeben an LoginScreen, dass User kein Account hat
             player.call("Login:NoAccount");
-            return console.log(`[SERVER]: [Not-Registered] ${player.name} has joined the server!`);
+            return console.log(`[SERVER]: [Not-Registered] ${player.socialClub} has joined the server!`);
         }
 
         playerAPI.saveLocalPlayerVar(player, {
@@ -21,15 +21,17 @@ mp.events.add('playerJoin', async (player) => {
             'isAdmin': res[0].isAdmin
         });
 
-        return console.log(`[SERVER]: [Registered] ${player.name} has joined the server!`);
+        return console.log(`[SERVER]: [Registered] ${player.socialClub} has joined the server!`);
     }).catch(err => {
         console.log(err)
     });
-
+    var name = await playerAPI.getPlayerInGame(player);
+    player.name = name.firstname + " " + name.lastname;
     var title = 'Spielt auf PhenixGames V3';
     var playing = `Spielt als ${player.name}`;
 
     mp.players.call("Set:Discord", [title, playing]);
+    
 });
 
 async function handleAllVehicles() {
