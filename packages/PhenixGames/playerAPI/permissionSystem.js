@@ -14,13 +14,16 @@ const playerAPI = require('./index');
  */
 module.exports.hasPermissions = async function (player, permission) {
     const playerPermissions = JSON.parse(player.getVariable('user_permissions'));
-    
+
     let hasPerms = [];
-    
-    for(let i in permission) {
-        if(playerPermissions[permission[i]] === 1) {
+
+    for (let i in permission) {
+        if (playerPermissions[permission[i]] === 'root') {
+            return hasPerms.push(true);
+        }
+        if (playerPermissions[permission[i]] === 1) {
             hasPerms.push(true)
-        }else {
+        } else {
             hasPerms.push(false);
         }
     }
@@ -31,7 +34,7 @@ module.exports.hasPermissions = async function (player, permission) {
 
 module.exports.setPlayerPermissionsLocal = async function (player) {
     const roleId = await this.getRoleIdFromUser(player.getVariable('playerId'));
-    if(!roleId) {
+    if (!roleId) {
         return false;
     }
     const playerPermissions = await this.getPermsFromUser(roleId);
@@ -48,16 +51,16 @@ module.exports.setPlayerPermissionsLocal = async function (player) {
  */
 module.exports.getPermsFromUser = async function (roleid) {
     return await database.query('SELECT * FROM pg_permission_list WHERE roleid = ? LIMIT 1', [roleid])
-    .then(res => {
-        if(res.length <= 0) {
+        .then(res => {
+            if (res.length <= 0) {
+                return false;
+            }
+            return res[0];
+        })
+        .catch(err => {
+            console.log(err);
             return false;
-        }
-        return res[0];
-    })
-    .catch(err => {
-        console.log(err);
-        return false;
-    });
+        });
 }
 
 /**
@@ -68,12 +71,33 @@ module.exports.getPermsFromUser = async function (roleid) {
 module.exports.getRoleIdFromUser = async function (playerId) {
     return await database.query('SELECT roleId FROM pg_users WHERE id = ? LIMIT 1', [playerId])
         .then(res => {
-            if(res.length <= 0) {
+            if (res.length <= 0) {
                 return false;
             }
             return res[0].roleId;
         })
         .catch(err => {
             console.log(err);
+        });
+}
+
+/**
+ * 
+ * @param {object} player 
+ * @returns {object | boolean}
+ */
+module.exports.getRoleInfo = async function (player) {
+    var roleId = JSON.parse(player.getVariable('user_permissions'));
+    roleId = roleId.roleid;
+    return await database.query('SELECT * FROM pg_permission_roles WHERE roleid = ? LIMIT 1', [roleId])
+        .then(res => {
+            if (res.length <= 0) {
+                return false;
+            }
+            return res[0];
+        })
+        .catch(err => {
+            console.log(err);
+            return false;
         });
 }
