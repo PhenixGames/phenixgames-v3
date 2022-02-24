@@ -65,7 +65,7 @@ mp.events.add("render", () => {
             mp.game.graphics.drawText(`${player.name}`, drawPosition, { 
                 font: 0, 
                 color: [255, 255, 255, 185], 
-                scale: [1, 1], 
+                scale: [0.5, 0.5], 
                 outline: false,
                 centre: true
         });
