@@ -47,11 +47,3 @@ mp.events.add("playerExitVehicle", (player, vehicle) => {
         }, 500);
     }
 });
-
-mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
-    if(player.getVariable('Aduty')){
-        setTimeout(() => {
-            player.alpha = AdminUnsichtbar;
-        }, 500);
-    }
-});
