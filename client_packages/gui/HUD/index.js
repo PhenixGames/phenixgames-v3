@@ -60,7 +60,9 @@ mp.events.add("render", () => {
                         scale: [0.5, 0.5], 
                         outline: false,
                         centre: true
-            }
+                    });
+                }
+        }
             
             
         });
