@@ -1,4 +1,5 @@
 const playerAPI = require("../../PhenixGames/playerAPI");
+const Perms = require('../../PhenixGames/playerAPI/permissionSystem.js')
 
 mp.events.addCommand('tp', (player, location) => {
     if(Perms.hasPermissions(player, ["tp"])  && location.indexOf(',') !== -1) {
