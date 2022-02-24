@@ -47,3 +47,4 @@ mp.events.add("playerExitVehicle", (player, vehicle) => {
         }, 500);
     }
 });
+//
