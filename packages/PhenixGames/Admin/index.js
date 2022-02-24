@@ -12,7 +12,7 @@ mp.events.addCommand("aduty", async (player) => {
                 player.call("Set:God", [false]);
                 player.call("Change:Admin:Duty:Value:On:Client", [false]);
                 var name = await playerAPI.getPlayerInGame(player);
-                player.name = "~r~" + name.firstname + " " + name.lastname;
+                player.name = name.firstname + " " + name.lastname;
                 player.alpha = 255;
             }else {
                 playerAPI.saveLocalPlayerVar(player, {'Aduty': true})
