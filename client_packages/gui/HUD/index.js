@@ -33,7 +33,8 @@ mp.events.add("render", () => {
         }); 
 
         mp.players.forEachInStreamRange((player) => {
-            if(mp.players.local.position.subtract(player.position).length() <10){
+            if(!player == mp.players.local){
+                if(mp.players.local.position.subtract(player.position).length() <10){
                 const drawPosition = [player.position.x, player.position.y, player.position.z + 0.3];
                 mp.game.graphics.drawText(`~b~Id: ~w~${"Need To be added"}\n~b~Name: ~w~${"Need To be added"}\n~b~Position: ~w~${player.position.x.toFixed(2)}, ${player.position.y.toFixed(2)}, ${player.position.z.toFixed(2)}\n`, drawPosition, { 
                     font: 0, 
@@ -51,6 +52,8 @@ mp.events.add("render", () => {
                     centre: false
                 });
             }
+            }
+            
         });
     }
 });
