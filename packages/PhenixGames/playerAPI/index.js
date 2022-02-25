@@ -130,7 +130,9 @@ module.exports.savePlayerInGameName = async function (playerId, name) {
     const lastname = validator.trim(name[1]);
 
     return await database.query('UPDATE pg_users SET firstname = ?, lastname = ? WHERE id = ?', [firstname, lastname, playerId])
-        .then(() => {return true})
+        .then(() => {
+            return true
+        })
         .catch(err => {
             console.log(err);
             return false;
@@ -139,13 +141,12 @@ module.exports.savePlayerInGameName = async function (playerId, name) {
 
 /**
  * 
- * @param {object} player 
+ * @param {int} playerId 
  * @returns {object}
  */
 module.exports.getPlayerInGame = async function (playerId) {
     return await database.query('SELECT firstname, lastname FROM pg_users WHERE id = ?', [playerId])
         .then(res => {
-            
             return res[0];
         })
         .catch(err => {
