@@ -7,7 +7,7 @@ const database = new Database();
 //! ******* GET ALL INFO OF PLAYER - MONEY *******
 
 /**
- * Get all Money data in Database of specific player
+ * Get all Money data in Database of specific player.
  * @param {object} player 
  * @returns {boolean | object}
  */
@@ -27,7 +27,7 @@ module.exports.getPlayerMoneyInfo = async function (player) {
 
 //! ******* UPDATE MONEY *******
 /**
- * Update Hand or Bank Money from player
+ * Update Hand or Bank Money from player.
  * @param {object} player 
  * @param {int} newMoney 
  * @param {boolean} isBank 
@@ -45,32 +45,16 @@ module.exports.updateMoney = async function (player, newMoney, isBank) {
 //! ******* TRANSFER MONEY *******
 
 /**
- * ? Transfer Hand-Money between two Players
+ * ? Transfer Hand-Money between two Players.
  * @param {object} player 
  * @param {int} targetId 
  * @param {int} newPlayerMoney 
  * @param {int} newTargetMoney 
+ * @param {boolean} isBank 
  * @returns 
  */
-module.exports.transferHandMoneyToPlayer = async function(player, targetId, newPlayerMoney, newTargetMoney) {
-    return await database.query('UPDATE pg_money SET hand_money = ? WHERE playerid = ?; UPDATE pg_money SET hand_money = ? WHERE playerid = ?', [newPlayerMoney, player.getVariable('playerId'), newTargetMoney, targetId])
-        .then(() => {return true})
-        .catch(err => {
-            console.log(err);
-            return false;
-        })
-}
-
-/**
- * ? Transfer Bank-Money between two Player Bank
- * @param {object} player 
- * @param {int} targetId 
- * @param {int} newPlayerMoney 
- * @param {int} newTargetMoney 
- * @returns 
- */
- module.exports.transferBankMoneyToPlayer = async function(player, targetId, newPlayerMoney, newTargetMoney) {
-    return await database.query('UPDATE pg_money SET bank_money = ? WHERE playerid = ?; UPDATE pg_money SET bank_money = ? WHERE playerid = ?', [newPlayerMoney, player.getVariable('playerId'), newTargetMoney, targetId])
+module.exports.transferMoneyToPlayer = async function(player, targetId, newPlayerMoney, newTargetMoney, isBank) {
+    return await database.query(`UPDATE pg_money SET ${(isBank) ? 'bank' : 'hand'}_money = ? WHERE playerid = ?; UPDATE pg_money SET ${(isBank) ? 'bank' : 'hand'}_money = ? WHERE playerid = ?`, [newPlayerMoney, player.getVariable('playerId'), newTargetMoney, targetId])
         .then(() => {return true})
         .catch(err => {
             console.log(err);
