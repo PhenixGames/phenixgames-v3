@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/PhenixGames/phenixgames-trash#readme",
   "dependencies": {
+    "better-console": "^1.0.1",
     "mysql": "^2.18.1",
     "validator": "^13.7.0"
   }
