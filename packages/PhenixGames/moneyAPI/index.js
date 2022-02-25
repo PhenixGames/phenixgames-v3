@@ -12,7 +12,7 @@ const database = new Database();
  * @returns {boolean | object}
  */
 module.exports.getPlayerMoneyInfo = async function (player) {
-    return await database.query('SELECT * FROM pg_money WHERE roleid = ?', [player.getVariable('playerId')])
+    return await database.query('SELECT * FROM pg_money WHERE playerid = ?', [player.getVariable('playerId')])
         .then(res => {
             if(res.length <= 0) {
                 return false;
@@ -34,7 +34,7 @@ module.exports.getPlayerMoneyInfo = async function (player) {
  * @returns {boolean}
  */
 module.exports.updateHandMoney = async function (player, newMoney) {
-    return await database.query('UPDATE pg_money SET hand_money = ? WHERE roleid = ?', [newMoney, player.getVariable('playerId')])
+    return await database.query('UPDATE pg_money SET hand_money = ? WHERE playerid = ?', [newMoney, player.getVariable('playerId')])
         .then(() => {return true})
         .catch(err => {
             console.log(err);
@@ -49,7 +49,7 @@ module.exports.updateHandMoney = async function (player, newMoney) {
  * @returns {boolean}
  */
 module.exports.updateBankMoney = async function (player, newMoney) {
-    return await database.query('UPDATE pg_money SET bank_money = ? WHERE roleid = ?', [newMoney, player.getVariable('playerId')])
+    return await database.query('UPDATE pg_money SET bank_money = ? WHERE playerid = ?', [newMoney, player.getVariable('playerId')])
         .then(() => {return true})
         .catch(err => {
             console.log(err);
