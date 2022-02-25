@@ -2,7 +2,7 @@ const {
     Database
 } = require("../../_db/db");
 const database = new Database();
-
+const console = require('better-console');
 
 //! ******* GET ALL INFO OF PLAYER - MONEY *******
 
@@ -20,7 +20,7 @@ module.exports.getPlayerMoneyInfo = async function (playerId) {
             return res[0];
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         })
 }
@@ -37,7 +37,7 @@ module.exports.updateMoney = async function (playerId, newMoney, isBank) {
     return await database.query(`UPDATE pg_money SET ${(isBank) ? 'bank' : 'hand'}_money = ? WHERE playerid = ?`, [newMoney, playerId])
         .then(() => {return true})
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         })
 }
@@ -57,7 +57,7 @@ module.exports.transferMoneyToPlayer = async function(playerId, targetId, newPla
     return await database.query(`UPDATE pg_money SET ${(isBank) ? 'bank' : 'hand'}_money = ? WHERE playerid = ?; UPDATE pg_money SET ${(isBank) ? 'bank' : 'hand'}_money = ? WHERE playerid = ?`, [newPlayerMoney, playerId, newTargetMoney, targetId])
         .then(() => {return true})
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         })
 }

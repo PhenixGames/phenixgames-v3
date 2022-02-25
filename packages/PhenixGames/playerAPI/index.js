@@ -6,6 +6,7 @@ const database = new Database();
 const config = require('../../../_assets/json/config.json');
 
 const validator = require('validator');
+const console = require('better-console');
 
 /**
  * 
@@ -20,7 +21,7 @@ module.exports.getPlayerId = async function (username) {
             }
             return false;
         }).catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         })
 }
@@ -38,7 +39,7 @@ module.exports.saveNewPlayer = async function (username, password) {
             return true
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         });
 }
@@ -55,7 +56,7 @@ module.exports.saveNewPlayerPos = async function (player_id, player_pos) {
             return true
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         })
 }
@@ -78,7 +79,7 @@ module.exports.getLastPlayerPos = async function (player_id) {
             }
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         })
 }
@@ -99,7 +100,7 @@ module.exports.changePlayerPos = async function (player, new_pos, new_rot, new_d
         if (new_rot) player.heading = Number(new_rot);
         if (new_dim) player.dimension = Number(new_dim)
     } catch (err) {
-        console.log(err);
+        console.error(err);
         return false;
     }
     return true;
@@ -134,7 +135,7 @@ module.exports.savePlayerInGameName = async function (playerId, name) {
             return true
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         });
 }
@@ -150,7 +151,7 @@ module.exports.getPlayerInGame = async function (playerId) {
             return res[0];
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         })
 }

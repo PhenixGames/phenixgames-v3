@@ -1,6 +1,6 @@
 const { Database } = require("../../_db/db");
-
 const database = new Database();
+const console = require('better-console');
 
 /**
  * Get Vehicle Data from specified Vehicle
@@ -11,7 +11,7 @@ module.exports.getVehicleData = async function (veh_id) {
     return await database.query('SELECT * FROM pg_vehicles WHERE veh_id = ? LIMIT 1', [veh_id]).then(res => {
         return res[0];
     }).catch(err => {
-        console.log(err);
+        console.error(err);
         return false;
     })
 }
@@ -31,7 +31,7 @@ module.exports.saveVehicleData = async function (veh) {
     return await database.query(`INSERT INTO pg_vehicles (veh_name, veh_owner, veh_keys, veh_state, veh_pos) VALUES (?, ?, ?, ?, ?)`, [veh_name, veh_owner, veh_keys, veh_state, veh_pos])
         .then(() => {return true})
         .catch(err => {
-            console.log(err);
+            console.error(err);
         });
 }
 
@@ -51,7 +51,7 @@ module.exports.updateVehicleData = async function (veh) {
     return await database.query(`UPDATE pg_vehicles SET veh_name = ?, veh_owner = ?, veh_keys = ?, veh_state = ?, veh_pos = ? WHERE veh_id = ?`, [veh_name, veh_owner, veh_keys, veh_state, veh_id, veh_pos])
         .then(() => {return true})
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         })
 }
@@ -66,7 +66,7 @@ module.exports.updateVehiclePosition = async function (veh_id, veh_pos, veh_rot)
     return await database.query('UPDATE pg_vehicles SET veh_pos = ?, veh_rot = ? WHERE veh_id = ?', [JSON.stringify(veh_pos), JSON.stringify(veh_rot), veh_id])
         .then(() => {return true})
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         })
 }
@@ -79,7 +79,7 @@ module.exports.getLatestCarInDatabase = async function () {
             }
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         })
 }
@@ -93,7 +93,7 @@ module.exports.deleteVehicleData = async function (veh_id) {
     return await database.query('DELETE * FROM pg_vehicles WHERE veh_id = ?', [veh_id])
         .then(() => {return true})
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         })
 }
@@ -153,7 +153,7 @@ module.exports.setLocalData = async function (veh, veh_data) {
         veh.setVariable('veh_pos', veh.position)
         return true;
     }catch(err) {
-        console.log(err);
+        console.error(err);
         return false;
     }
 }

@@ -1,3 +1,5 @@
+const console = require('better-console');
+
 const { Database } = require("../../_db/db");
 const database = new Database();
 
@@ -12,7 +14,7 @@ mp.events.add('playerJoin', async (player) => {
         if(res.length <= 0) {
             //! TO-DO übergeben an LoginScreen, dass User kein Account hat
             player.call("Login:NoAccount");
-            return console.log(`[SERVER]: [Not-Registered] ${player.socialClub} has joined the server!`);
+            return console.info(`[SERVER]: [Not-Registered] ${player.socialClub} has joined the server!`);
         }
 
         playerAPI.saveLocalPlayerVar(player, {
@@ -21,9 +23,9 @@ mp.events.add('playerJoin', async (player) => {
             'isAdmin': res[0].isAdmin
         });
 
-        return console.log(`[SERVER]: [Registered] ${player.socialClub} has joined the server!`);
+        return console.info(`[SERVER]: [Registered] ${player.socialClub} has joined the server!`);
     }).catch(err => {
-        console.log(err)
+        console.error(err)
     });
     var name = await playerAPI.getPlayerInGame(player.getVariable('playerId'));
     player.name = name.firstname + " " + name.lastname;

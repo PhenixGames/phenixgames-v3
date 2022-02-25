@@ -3,6 +3,7 @@ const {
 } = require("../../_db/db");
 const database = new Database();
 const playerAPI = require('./index');
+const console = require('better-console');
 
 
 // EXAMPLE permissionSystem.hasPermissions(player, ["ban_member"]);
@@ -58,7 +59,7 @@ module.exports.getPermsFromUser = async function (roleid) {
             return res[0];
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         });
 }
@@ -77,7 +78,7 @@ module.exports.getRoleIdFromUser = async function (playerId) {
             return res[0].roleId;
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
         });
 }
 
@@ -97,7 +98,7 @@ module.exports.getRoleInfo = async function (player) {
             return res[0];
         })
         .catch(err => {
-            console.log(err);
+            console.error(err);
             return false;
         });
 }

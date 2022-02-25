@@ -1,3 +1,5 @@
+const console = require('better-console');
+
 const { Database } = require('../../_db/db');
 const database = new Database();
 
@@ -22,7 +24,7 @@ mp.events.add('LoginAccount', (player, password) => {
             }
 
         }).catch(err => {
-            return console.log(err);
+            return console.error(err);
         })
         if(isPunish) return player.kick(reason);
 
@@ -36,7 +38,7 @@ mp.events.add('LoginAccount', (player, password) => {
             'isLoggedIn': true
         });
     }).catch(err => {
-        return console.log(err);
+        return console.error(err);
     });
 });
 

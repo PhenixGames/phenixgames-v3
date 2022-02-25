@@ -1,3 +1,4 @@
+const console = require('better-console');
 mp.events.add("vehicleDeath", (vehicle) => {
     setTimeout(() => {
         vehicle.destroy();
@@ -6,6 +7,6 @@ mp.events.add("vehicleDeath", (vehicle) => {
 });
 
 mp.events.add("debug", (player) =>{
-    console.log("Player " +player.name +" has called Debug")
+    console.info("Player " +player.name +" has called Debug")
 });
 

@@ -1,3 +1,5 @@
+const console = require('better-console');
+
 const { Database } = require("../../_db/db");
 const database = new Database();
 let Debug = true;
@@ -14,7 +16,7 @@ module.exports.saveNewHouse = async function(player_id) {
     return await database.query('INSERT INTO pg_houses (player_id, house_pos) VALUES (?, ?)', [player_id, config.normiehouse])
     .then(() => {return config.normiehouse.split(', ')})
     .catch(err => {
-        console.log(err);
+        console.error(err);
         return false;
     })
 }
@@ -33,7 +35,7 @@ module.exports.getHousePos = async function(player_id) {
         return false;
     })
     .catch(err => {
-        console.log(err);
+        console.error(err);
         return false;
     })
 }
