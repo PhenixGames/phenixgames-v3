@@ -18,7 +18,7 @@ mp.events.add('playerJoin', async (player) => {
             return console.info(`[SERVER]: [Not-Registered] ${player.socialClub} has joined the server!`);
         }
 
-        generellAPI.saveLocalPlayerVar(player, {
+        generellAPI.saveLocalVar(player, {
             'playerId': res[0].id,
             'isTeam': res[0].isTeam,
             'isAdmin': res[0].isAdmin

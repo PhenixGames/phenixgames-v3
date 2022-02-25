@@ -35,7 +35,7 @@ mp.events.add('LoginAccount', (player, password) => {
 
         player.call('Login:Succes:close:Windows');
         player.call('Player:Spawn:Options');
-        generellAPI.saveLocalPlayerVar(player, {
+        generellAPI.saveLocalVar(player, {
             'isLoggedIn': true
         });
     }).catch(err => {
@@ -50,7 +50,7 @@ mp.events.add('RegisterAccount', async (player, password) => {
 
     await playerAPI.changePlayerPos(player, config.defaultSpawn.pos, config.defaultSpawn.rot)
     await playerAPI.saveNewPlayerPos(playerId, JSON.stringify(player.position));
-    await generellAPI.saveLocalPlayerVar(player, {
+    await generellAPI.saveLocalVar(player, {
         'playerId': playerId,
         'isTeam': 0,
         'isAdmin': 0,
@@ -65,7 +65,7 @@ mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
     if(!savePlayerInGameName) return;
 
     player.call('Player:InGameName:Choose:Succes:close:Windows');
-    await generellAPI.saveLocalPlayerVar(player, {
+    await generellAPI.saveLocalVar(player, {
         'isLoggedIn': true
     });
     return player.notify(`Erfolgreich registriert!`);

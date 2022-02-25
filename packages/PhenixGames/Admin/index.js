@@ -10,14 +10,17 @@ mp.events.addCommand("aduty", async (player) => {
         //? IF USER IS ALREADY IN GODMODE
         if(Perms.hasPermissions(player, ["godmode"])){
             if(player.getVariable('Aduty')) {
-                generellAPI.saveLocalPlayerVar(player, {'Aduty': false})
+                generellAPI.saveLocalVar(player, {'Aduty': false})
+
                 player.call("Set:God", [false]);
                 player.call("Change:Admin:Duty:Value:On:Client", [false]);
+
                 var name = await playerAPI.getPlayerInGame(player.getVariable('playerId'));
                 player.name = name.firstname + " " + name.lastname;
+
                 player.alpha = 255;
             }else {
-                generellAPI.saveLocalPlayerVar(player, {'Aduty': true})
+                generellAPI.saveLocalVar(player, {'Aduty': true})
                 player.call("Set:God", [true]); 
                 player.call("Change:Admin:Duty:Value:On:Client", [true]);
                 player.alpha = AdminUnsichtbar;

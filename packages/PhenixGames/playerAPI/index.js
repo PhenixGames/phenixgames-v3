@@ -112,7 +112,7 @@ module.exports.changePlayerPos = async function (player, new_pos, new_rot, new_d
  * @param {object} data 
  * @returns /
  */
-module.exports.saveLocalPlayerVar = async function (player, data) {
+module.exports.saveLocalVar = async function (player, data) {
 
     for (const [index, [key, value]] of Object.entries(Object.entries(data))) {
         //console.log(`${index}: ${key} = ${value}`);
