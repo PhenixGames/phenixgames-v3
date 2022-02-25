@@ -1,5 +1,7 @@
 const vehicle = require('../../PhenixGames/vehicle/index');
-const Perms = require('../../PhenixGames/playerAPI/permissionSystem.js')
+const Perms = require('../../PhenixGames/playerAPI/permissionSystem');
+const generellAPI = require('../allgemein/');
+
 mp.events.addCommand("car", async (player, args) => {
     if(Perms.hasPermissions(player, ["car_spawn"])) {
         try {
@@ -38,8 +40,12 @@ mp.events.addCommand("car", async (player, args) => {
             
         });
         //setVeh.rotation = player.heading;
-        player.setVariable('Player.Tmp.Admin.Veh', setVeh);
+        generellAPI.saveLocalVar(player, {
+            'Player.Tmp.Admin.Veh': setVeh
+        });
+
         player.putIntoVehicle(setVeh, 0);
+        
         player.call("Vehicle:Engine:state" , [false])
 
         var saveVeh =  vehicle.saveVehicleData({

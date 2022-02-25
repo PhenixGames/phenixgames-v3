@@ -6,6 +6,7 @@ const database = new Database();
 const config = require('../../../_assets/json/config.json');
 
 const playerAPI = require('../playerAPI/');
+const generellAPI = require('../allgemein/');
 const permissionSystem = require('../playerAPI/permissionSystem')
 
 mp.events.add('LoginAccount', (player, password) => {
@@ -34,7 +35,7 @@ mp.events.add('LoginAccount', (player, password) => {
 
         player.call('Login:Succes:close:Windows');
         player.call('Player:Spawn:Options');
-        playerAPI.saveLocalPlayerVar(player, {
+        generellAPI.saveLocalPlayerVar(player, {
             'isLoggedIn': true
         });
     }).catch(err => {
@@ -49,7 +50,7 @@ mp.events.add('RegisterAccount', async (player, password) => {
 
     await playerAPI.changePlayerPos(player, config.defaultSpawn.pos, config.defaultSpawn.rot)
     await playerAPI.saveNewPlayerPos(playerId, JSON.stringify(player.position));
-    await playerAPI.saveLocalPlayerVar(player, {
+    await generellAPI.saveLocalPlayerVar(player, {
         'playerId': playerId,
         'isTeam': 0,
         'isAdmin': 0,
@@ -64,7 +65,7 @@ mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
     if(!savePlayerInGameName) return;
 
     player.call('Player:InGameName:Choose:Succes:close:Windows');
-    await playerAPI.saveLocalPlayerVar(player, {
+    await generellAPI.saveLocalPlayerVar(player, {
         'isLoggedIn': true
     });
     return player.notify(`Erfolgreich registriert!`);

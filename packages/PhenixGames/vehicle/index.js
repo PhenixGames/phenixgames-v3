@@ -2,6 +2,8 @@ const { Database } = require("../../_db/db");
 const database = new Database();
 const console = require('better-console');
 
+const generellAPI = require('../allgemein/index');
+
 /**
  * Get Vehicle Data from specified Vehicle
  * @param {int} veh_id 
@@ -145,12 +147,14 @@ module.exports.isPlayerKeyOwner = function (playerId, veh_keys) {
  */
 module.exports.setLocalData = async function (veh, veh_data) {
     try {
-        veh.setVariable('veh_id', veh_data.veh_id || veh.getVariable('veh_id'));
-        veh.setVariable('veh_name', veh_data.veh_name || veh.getVariable('veh_name'));
-        veh.setVariable('veh_owner', veh_data.veh_owner || veh.getVariable('veh_owner'));
-        veh.setVariable('veh_keys', veh_data.veh_keys || veh.getVariable('veh_keys'));
-        veh.setVariable('veh_state', veh_data.veh_state || veh.getVariable('veh_state'));
-        veh.setVariable('veh_pos', veh.position)
+        generellAPI.saveLocalVar(veh, {
+            'veh_id': veh_data.veh_id || veh.getVariable('veh_id'),
+            'veh_name': veh_data.veh_name || veh.getVariable('veh_name'),
+            'veh_owner': veh_data.veh_owner || veh.getVariable('veh_owner'),
+            'veh_keys': veh_data.veh_keys || veh.getVariable('veh_keys'),
+            'veh_state': veh_data.veh_state || veh.getVariable('veh_state'),
+            'veh_pos': veh.position
+        });
         return true;
     }catch(err) {
         console.error(err);

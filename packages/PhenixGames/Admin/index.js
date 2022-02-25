@@ -1,5 +1,7 @@
 const playerAPI = require("../playerAPI");
-const Perms = require('../playerAPI/permissionSystem.js')
+const Perms = require('../playerAPI/permissionSystem')
+const generellAPI = require('../allgemein/');
+
 const AdminUnsichtbar = 200;
 
 mp.events.addCommand("aduty", async (player) => {
@@ -8,14 +10,14 @@ mp.events.addCommand("aduty", async (player) => {
         //? IF USER IS ALREADY IN GODMODE
         if(Perms.hasPermissions(player, ["godmode"])){
             if(player.getVariable('Aduty')) {
-                playerAPI.saveLocalPlayerVar(player, {'Aduty': false})
+                generellAPI.saveLocalPlayerVar(player, {'Aduty': false})
                 player.call("Set:God", [false]);
                 player.call("Change:Admin:Duty:Value:On:Client", [false]);
                 var name = await playerAPI.getPlayerInGame(player.getVariable('playerId'));
                 player.name = name.firstname + " " + name.lastname;
                 player.alpha = 255;
             }else {
-                playerAPI.saveLocalPlayerVar(player, {'Aduty': true})
+                generellAPI.saveLocalPlayerVar(player, {'Aduty': true})
                 player.call("Set:God", [true]); 
                 player.call("Change:Admin:Duty:Value:On:Client", [true]);
                 player.alpha = AdminUnsichtbar;

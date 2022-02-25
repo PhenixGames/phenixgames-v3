@@ -5,6 +5,7 @@ const database = new Database();
 
 const vehicleAPI = require("../vehicle/index.js")
 const playerAPI = require('../playerAPI/');
+const generellAPI = require('../allgemein/');
 
 mp.events.add('playerJoin', async (player) => {
     player.call('Open:Login:Browser');
@@ -17,7 +18,7 @@ mp.events.add('playerJoin', async (player) => {
             return console.info(`[SERVER]: [Not-Registered] ${player.socialClub} has joined the server!`);
         }
 
-        playerAPI.saveLocalPlayerVar(player, {
+        generellAPI.saveLocalPlayerVar(player, {
             'playerId': res[0].id,
             'isTeam': res[0].isTeam,
             'isAdmin': res[0].isAdmin

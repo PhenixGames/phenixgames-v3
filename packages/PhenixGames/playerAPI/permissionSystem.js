@@ -2,7 +2,9 @@ const {
     Database
 } = require("../../_db/db");
 const database = new Database();
+
 const playerAPI = require('./index');
+const generellAPI = require('../allgemein/');
 const console = require('better-console');
 
 
@@ -40,7 +42,7 @@ module.exports.setPlayerPermissionsLocal = async function (player) {
     }
     const playerPermissions = await this.getPermsFromUser(roleId);
 
-    playerAPI.saveLocalPlayerVar(player, {
+    generellAPI.saveLocalPlayerVar(player, {
         'user_permissions': JSON.stringify(playerPermissions)
     });
 }
