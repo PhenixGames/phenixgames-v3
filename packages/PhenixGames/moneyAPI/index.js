@@ -26,30 +26,15 @@ module.exports.getPlayerMoneyInfo = async function (player) {
 }
 
 //! ******* UPDATE MONEY *******
-
 /**
- * 
+ * Update Hand or Bank Money from player
  * @param {object} player 
  * @param {int} newMoney 
+ * @param {boolean} isBank 
  * @returns {boolean}
  */
-module.exports.updateHandMoney = async function (player, newMoney) {
-    return await database.query('UPDATE pg_money SET hand_money = ? WHERE playerid = ?', [newMoney, player.getVariable('playerId')])
-        .then(() => {return true})
-        .catch(err => {
-            console.log(err);
-            return false;
-        })
-}
-
-/**
- * 
- * @param {object} player 
- * @param {int} newMoney 
- * @returns {boolean}
- */
-module.exports.updateBankMoney = async function (player, newMoney) {
-    return await database.query('UPDATE pg_money SET bank_money = ? WHERE playerid = ?', [newMoney, player.getVariable('playerId')])
+module.exports.updateMoney = async function (player, newMoney, isBank) {
+    return await database.query(`UPDATE pg_money SET ${(isBank) ? 'bank' : 'hand'}_money = ? WHERE playerid = ?`, [newMoney, player.getVariable('playerId')])
         .then(() => {return true})
         .catch(err => {
             console.log(err);
