@@ -3,8 +3,11 @@ const {
 } = require("../../_db/db");
 const database = new Database();
 
+
+//! ******* GET ALL INFO OF PLAYER - MONEY *******
+
 /**
- * 
+ * Get all Money data in Database of specific player
  * @param {object} player 
  * @returns {boolean | object}
  */
@@ -22,7 +25,7 @@ module.exports.getPlayerMoneyInfo = async function (player) {
         })
 }
 
-//! ******* HAND MONEY *******
+//! ******* UPDATE MONEY *******
 
 /**
  * 
@@ -42,6 +45,23 @@ module.exports.updateHandMoney = async function (player, newMoney) {
 /**
  * 
  * @param {object} player 
+ * @param {int} newMoney 
+ * @returns {boolean}
+ */
+module.exports.updateBankMoney = async function (player, newMoney) {
+    return await database.query('UPDATE pg_money SET bank_money = ? WHERE roleid = ?', [newMoney, player.getVariable('playerId')])
+        .then(() => {return true})
+        .catch(err => {
+            console.log(err);
+            return false;
+        })
+}
+
+//! ******* TRANSFER MONEY *******
+
+/**
+ * ? Transfer Hand-Money between two Players
+ * @param {object} player 
  * @param {int} targetId 
  * @param {int} newPlayerMoney 
  * @param {int} newTargetMoney 
@@ -56,26 +76,8 @@ module.exports.transferHandMoneyToPlayer = async function(player, targetId, newP
         })
 }
 
-
-//! ******* BANK MONEY *******
-
 /**
- * 
- * @param {object} player 
- * @param {int} newMoney 
- * @returns {boolean}
- */
- module.exports.updateBankMoney = async function (player, newMoney) {
-    return await database.query('UPDATE pg_money SET bank_money = ? WHERE roleid = ?', [newMoney, player.getVariable('playerId')])
-        .then(() => {return true})
-        .catch(err => {
-            console.log(err);
-            return false;
-        })
-}
-
-/**
- * 
+ * ? Transfer Bank-Money between two Player Bank
  * @param {object} player 
  * @param {int} targetId 
  * @param {int} newPlayerMoney 
