@@ -58,7 +58,7 @@ mp.events.add('RegisterAccount', async (player, password) => {
 });
 
 mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
-    const savePlayerInGameName = await playerAPI.savePlayerInGameName(player, [firstname, lastname])
+    const savePlayerInGameName = await playerAPI.savePlayerInGameName(player.getVariable('playerId'), [firstname, lastname])
     if(!savePlayerInGameName) return;
 
     player.call('Player:InGameName:Choose:Succes:close:Windows');

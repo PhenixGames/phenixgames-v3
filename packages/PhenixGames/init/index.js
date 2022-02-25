@@ -25,7 +25,7 @@ mp.events.add('playerJoin', async (player) => {
     }).catch(err => {
         console.log(err)
     });
-    var name = await playerAPI.getPlayerInGame(player);
+    var name = await playerAPI.getPlayerInGame(player.getVariable('playerId'));
     player.name = name.firstname + " " + name.lastname;
     var title = 'Spielt auf PhenixGames V3';
     var playing = `Spielt als ${player.name}`;

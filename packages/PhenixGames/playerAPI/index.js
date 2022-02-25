@@ -68,12 +68,19 @@ module.exports.saveNewPlayerPos = async function (player_id, player_pos) {
 module.exports.getLastPlayerPos = async function (player_id) {
     return await database.query('SELECT last_pos FROM pg_users WHERE id = ?', [player_id])
         .then(res => {
-            if (res.length > 0 && res[0].pos != '{"x":"0","y":"0","z":"0"}') {
+            if (res.length > 0 && res[0].pos != '{"x":"0","y":"0"}') {
                 return JSON.parse(res[0].last_pos)
             } else {
-                return this.changePlayerPos(player, config.defaultSpawn.pos, config.defaultSpawn.rot)
+                this.changePlayerPos(player, config.defaultSpawn.pos, config.defaultSpawn.rot)
+
+                let newPos = config.defaultSpawn.pos.split(', ');
+                return JSON.parse(`{"x": "${newPos[0]}", "y": "${newPos[1]}", "z": "${newPos[2]}"}`)
             }
-        });
+        })
+        .catch(err => {
+            console.log(err);
+            return false;
+        })
 }
 
 /**
@@ -87,7 +94,6 @@ module.exports.getLastPlayerPos = async function (player_id) {
 module.exports.changePlayerPos = async function (player, new_pos, new_rot, new_dim) {
     try {
         new_pos = new_pos.split(', ');
-        console.log(new_pos)
         player.position = new mp.Vector3(Number(new_pos[0]), Number(new_pos[1]), Number(new_pos[2]));
 
         if (new_rot) player.heading = Number(new_rot);
@@ -116,15 +122,12 @@ module.exports.saveLocalPlayerVar = async function (player, data) {
 
 /**
  * 
- * @param {object} player 
+ * @param {int} playerId 
  * @param {array} name 
  */
-module.exports.savePlayerInGameName = async function (player, name) {
+module.exports.savePlayerInGameName = async function (playerId, name) {
     const firstname = validator.trim(name[0]);
     const lastname = validator.trim(name[1]);
-
-    const playerId = player.getVariable('playerId');
-    if(!playerId) return false;
 
     return await database.query('UPDATE pg_users SET firstname = ?, lastname = ? WHERE id = ?', [firstname, lastname, playerId])
         .then(() => {return true})
@@ -139,10 +142,7 @@ module.exports.savePlayerInGameName = async function (player, name) {
  * @param {object} player 
  * @returns {object}
  */
-module.exports.getPlayerInGame = async function (player) {
-    const playerId = player.getVariable('playerId');
-    if(!playerId) return false;
-
+module.exports.getPlayerInGame = async function (playerId) {
     return await database.query('SELECT firstname, lastname FROM pg_users WHERE id = ?', [playerId])
         .then(res => {
             
