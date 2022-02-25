@@ -162,4 +162,28 @@ module.exports.setLocalData = async function (veh, veh_data) {
     }
 }
 
+module.exports.spawnAllVehicles = async function () {
+    await database.query('SELECT * FROM pg_vehicles WHERE veh_state = 1').then(res => {
+        if(res.length > 0) {
+            for(let i in res) {
+                const newVeh = mp.vehicles.new(mp.joaat(res[i].veh_name), JSON.parse(res[i].veh_pos),
+                {
+                    numberPlate: res[i].veh_owner,
+                    //color: [prim,sec]
+                });
+                newVeh.rotation = JSON.parse(res[i].veh_rot);
+                this.setLocalData(newVeh, res[i]);
+            }
+        }
+    });
+}
+
+module.exports.syncAllVehciles = async function () {
+    mp.vehicles.forEach((vehicle) => {
+            this.updateVehiclePosition(vehicle.getVariable('veh_id'), vehicle.position, vehicle.rotation);
+        }
+    );
+    // console.log('ALL VEHICLES SYNCED! ' + mp.vehicles.length)
+}
+
 require('./vehicleInteraction');

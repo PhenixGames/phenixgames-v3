@@ -156,5 +156,17 @@ module.exports.getPlayerInGame = async function (playerId) {
         })
 }
 
+/**
+ * Sync All Players
+ */
+module.exports.syncAllPlayers = async function () {
+    mp.players.forEach((player) => {
+        if(!player.getVariable('isInEvent') && player.getVariable('isLoggedIn')) {
+            this.saveNewPlayerPos(player.getVariable('playerId'), JSON.stringify(player.position));
+        }
+    });
+    //console.log('ALL PLAYERS SYNCED!')
+}
+
 
 require('./permissionSystem');
