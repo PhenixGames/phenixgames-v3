@@ -61,3 +61,30 @@ module.exports.transferMoneyToPlayer = async function(playerId, targetId, newPla
             return false;
         })
 }
+
+/**
+ * 
+ * @param {int} playerId 
+ * @param {int} needMoney 
+ * @param {boolean} isBank 
+ * @returns {boolean}
+ */
+module.exports.hasEnoughMoney = async function (playerId, needMoney, isBank) {
+    return await database.query(`SELECT ${(isBank) ? 'bank' : 'hand'}_money FROM pg_money WHERE playerid = ?`, [playerId])
+        .then(res => {
+            if(res.length > 0) {
+                const dbMoney = (isBank) ? res[0].bank_money : res[0].hand_money;
+                if(dbMoney >= needMoney) {
+                    return true;
+                }else {
+                    return false;
+                }
+            }else {
+                return false;
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            return false;
+        })
+}
