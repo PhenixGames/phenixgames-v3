@@ -3,8 +3,9 @@ let Ipls = [
     'vw_casino_penthouse'
 ]
 
-mp.events.add("World:load:IPL", ( ) => {
+mp.events.add("World:load:IPL", (player) => {
    Ipls.forEach(content => {
-        mp.world.requestIpl(Ipls[content]);
+        mp.world.requestIpl(content);
    });
+   
 });
