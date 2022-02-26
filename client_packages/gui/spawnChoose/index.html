@@ -1,14 +1,60 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <link rel="stylesheet" href="https://blackdayz.github.io/BlackCSS/lib/BlackCSS.css">
+        <link rel="stylesheet" href="./src/css/style.css">
     </head>
     <body>
-        <button id="last">Last Postion</button>
+        <header>
+            <img src="../_assets/img/logo/web/PhenixGames_Logo_no_text.svg" />
+        </header>
+        <main>
+            <div class="spawnchooser cursor-pointer" id="my_house">
+                <div class="spawnchooser_icon">
+                    <img src="./src/img/house_icon.png" />
+                </div>
+                <div class="spawnchooser_txt">
+                    <span>Dein Haus</span>
+                </div>
+                <div class="spawnchooser_bg">
+                    <img src="./src/img/red_stripe.png" />
+                </div>
+            </div>
+
+            <div class="spawnchooser cursor-pointer" id="last_pos">
+                <div class="spawnchooser_icon">
+                    <img src="./src/img/house_icon.png" />
+                </div>
+                <div class="spawnchooser_txt">
+                    <span>Letzte Position</span>
+                </div>
+                <div class="spawnchooser_bg">
+                    <img src="./src/img/red_stripe.png" />
+                </div>
+            </div>
+
+            <div class="spawnchooser cursor-pointer" id="airport">
+                <div class="spawnchooser_icon">
+                    <img src="./src/img/house_icon.png" />
+                </div>
+                <div class="spawnchooser_txt">
+                    <span>Flughafen</span>
+                </div>
+                <div class="spawnchooser_bg">
+                    <img src="./src/img/red_stripe.png" />
+                </div>
+            </div>
+        </main>
 
         <script>
-            document.getElementById('last').addEventListener('click', () => {
+            document.getElementById('my_house').addEventListener('click', () => {
                 mp.trigger('Player:Spawn', 0)
+            });
+            document.getElementById('last_pos').addEventListener('click', () => {
+                mp.trigger('Player:Spawn', 1)
+            });
+            document.getElementById('airport').addEventListener('click', () => {
+                mp.trigger('Player:Spawn', 2)
             });
         </script>
     </body>

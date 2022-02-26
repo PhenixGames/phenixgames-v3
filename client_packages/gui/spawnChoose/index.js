@@ -10,8 +10,22 @@ mp.events.add('Player:Spawn:Options', (type) => {
 });
 
 mp.events.add('Player:Spawn', (type) => {
-    mp.events.callRemote('Player:Spawn:LastPos');
-    mp.events.call('Player:Spawn:Succes:close:Windows');
+    /**
+     * 0 = House
+     * 1 = Last Pos
+     * 2 = airport
+     */
+    if(type === 0) {
+        mp.events.callRemote('Player:Spawn:house');
+        mp.events.call('Player:Spawn:Succes:close:Windows');
+    }else if(type === 1) {
+        mp.events.callRemote('Player:Spawn:LastPos');
+        mp.events.call('Player:Spawn:Succes:close:Windows');
+    }else {
+        mp.events.callRemote('Player:Spawn:airport');
+        mp.events.call('Player:Spawn:Succes:close:Windows');
+    }
+
 });
 
 mp.events.add('Player:Spawn:Succes:close:Windows', () => {
