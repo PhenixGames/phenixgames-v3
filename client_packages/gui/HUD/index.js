@@ -51,17 +51,31 @@ mp.events.add("render", () => {
                     outline: true,
                     centre: false
                 });
+                if(player.getVariable("isMedia")){
+                    if(mp.players.local.position.subtract(player.position).length() <10 && mp.players.local.position.subtract(player.position).length() !== 0){
+                        const drawPosition = [player.position.x, player.position.y, player.position.z + 1.2];
+                        mp.game.graphics.drawText(`~p~${player.name}`, drawPosition, { 
+                            font: 0, 
+                            color: [255, 255, 255, 185], 
+                            scale: [0.5, 0.5], 
+                            outline: false,
+                            centre: true
+                        });
+                    }
 
-                if(mp.players.local.position.subtract(player.position).length() <10 && mp.players.local.position.subtract(player.position).length() !== 0){
-                    const drawPosition = [player.position.x, player.position.y, player.position.z + 1.2];
-                    mp.game.graphics.drawText(`${player.name}`, drawPosition, { 
-                        font: 0, 
-                        color: [255, 255, 255, 185], 
-                        scale: [0.5, 0.5], 
-                        outline: false,
-                        centre: true
-                    });
+                }else {
+                    if(mp.players.local.position.subtract(player.position).length() <10 && mp.players.local.position.subtract(player.position).length() !== 0){
+                        const drawPosition = [player.position.x, player.position.y, player.position.z + 1.2];
+                        mp.game.graphics.drawText(`${player.name}`, drawPosition, { 
+                            font: 0, 
+                            color: [255, 255, 255, 185], 
+                            scale: [0.5, 0.5], 
+                            outline: false,
+                            centre: true
+                        });
+                    }
                 }
+                
         }
             
             
@@ -90,4 +104,34 @@ mp.events.add("render", () => {
 });
 
 
+});
+
+
+var modded_Speed = 1;
+//!Todo Remove render function of SPeed and Create a HTML file for it.
+mp.events.add('render', () => {
+    var player = mp.players.local;
+    var vehicle = player.vehicle;
+
+    if(vehicle === undefined || vehicle === null) return;
+
+    var speed = vehicle.getSpeed();
+    speed = speed * 3.6;
+
+    if(speed === 0) speed = '0';
+
+    vehicle.setEngineTorqueMultiplier(modded_Speed);
+    mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
+
+    mp.game.graphics.drawText(Math.round(speed), [0.5, 0.005], {
+      font: 4,
+      color: [255, 255, 255, 255],
+      scale: [1.0, 1.0],
+      outline: true
+    });
+});
+
+mp.events.add("Set:ModdedSpeed", (Speed) => {
+    mp.gui.chat.push(Speed + ' speed')
+    modded_Speed = Number(Speed);
 });
