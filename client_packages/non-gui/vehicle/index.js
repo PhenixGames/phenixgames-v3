@@ -22,7 +22,7 @@ mp.keys.bind(0x71, true, function() {
 //f10
 
 mp.keys.bind(0x79, true, function() {
-    mp.players.local.setToRagdoll(5000, 10000, 0, false, false, false);
+    mp.players.local.setToRagdoll(3000, 6000, 0, false, false, false);
 });
 
 mp.events.add('Vehicle:Engine:state', (state) => {
