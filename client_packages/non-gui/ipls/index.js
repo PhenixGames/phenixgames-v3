@@ -8,5 +8,5 @@ mp.events.add("World:load:IPL", (player) => {
         mp.world.requestIpl(content);
         mp.console.logInfo(content, true, true);
    });
-   
+   mp.console.logInfo("FINISHED", true, true);
 });
