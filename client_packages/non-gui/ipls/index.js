@@ -6,6 +6,7 @@ let Ipls = [
 mp.events.add("World:load:IPL", (player) => {
    Ipls.forEach(content => {
         mp.world.requestIpl(content);
+        mp.console.logInfo(content, true, true);
    });
    
 });
