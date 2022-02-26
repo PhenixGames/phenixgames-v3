@@ -157,22 +157,6 @@ module.exports.getPlayerInGame = async function (playerId) {
 }
 
 /**
- * Check if Player is Media or not.
- * @param {int} player_id 
- * @returns {boolean}
- */
-module.exports.isMedia = async function (player_id) {
-    return await database.query('SELECT isMedia FROM pg_users WHERE id = ?', [player_id])
-        .then(res => {
-            if(res[0].isMedia === 1) {
-                return true;
-            }else {
-                return false;
-            }
-        })
-}
-
-/**
  * Sync All Players
  */
 module.exports.syncAllPlayers = async function () {
