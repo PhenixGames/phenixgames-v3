@@ -10,3 +10,5 @@ mp.events.add("World:load:IPL", (player) => {
    });
    mp.console.logInfo("FINISHED", true, true);
 });
+
+mp.console.logInfo("loaded", true, true);
