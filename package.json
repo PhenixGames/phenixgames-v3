@@ -1,7 +1,7 @@
 {
-  "name": "phenixgames-trash",
-  "version": "1.0.0",
-  "description": "Just to programmed trash for fun",
+  "name": "phenixgames-v3",
+  "version": "0.0.1",
+  "description": "Another PhenixGames Server",
   "main": "index.js",
   "scripts": {
     "start": "pm2 start ragemp-server && pm2 monit",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PhenixGames/phenixgames-trash.git"
+    "url": "git+https://github.com/PhenixGames/phenixgames-v3.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/PhenixGames/phenixgames-trash/issues"
+    "url": "https://github.com/PhenixGames/phenixgames-v3/issues"
   },
-  "homepage": "https://github.com/PhenixGames/phenixgames-trash#readme",
+  "homepage": "https://github.com/PhenixGames/phenixgames-v3#readme",
   "dependencies": {
     "better-console": "^1.0.1",
     "mysql": "^2.18.1",
