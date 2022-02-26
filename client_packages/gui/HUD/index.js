@@ -12,8 +12,9 @@ mp.events.add("render", () => {
         mp.vehicles.forEachInStreamRange((vehicle) => { 
             if(mp.players.local.position.subtract(vehicle.position).length() < 10)
             {
+                //Dont touch IT - Works only if it exists XD
                 if(mp.players.local.vehicle == vehicle) {
-                    mp.players.local.notify("debug XDDDD");
+                    //mp.players.local.notify("debug XDDDD");
                 }
                 const drawPosition = [vehicle.position.x, vehicle.position.y, vehicle.position.z + 0.3];
                 mp.game.graphics.drawText(`~b~Id: ~w~${vehicle.getVariable('veh_id')}\n~b~Model: ~w~${mp.game.ui.getLabelText(mp.game.vehicle.getDisplayNameFromVehicleModel(vehicle.model))}\n~b~Position: ~w~${vehicle.position.x.toFixed(2)}, ${vehicle.position.y.toFixed(2)}, ${vehicle.position.z.toFixed(2)}\n`, drawPosition, { 
