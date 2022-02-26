@@ -34,11 +34,11 @@ mp.events.add('LoginAccount', (player, password) => {
         permissionSystem.setPlayerPermissionsLocal(player);
 
         player.call('Login:Succes:close:Windows');
-        
+        player.call('Player:Spawn:Options');
         generellAPI.saveLocalVar(player, {
             'isLoggedIn': true
         });
-        player.call("World:load:IPL");
+        
     }).catch(err => {
         return console.error(err);
     });
