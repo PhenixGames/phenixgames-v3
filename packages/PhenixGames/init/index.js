@@ -35,7 +35,7 @@ mp.events.add('playerJoin', async (player) => {
     
 });
 
-await vehicleAPI.spawnAllVehicles();
+vehicleAPI.spawnAllVehicles();
 
 setInterval(() => {
     vehicleAPI.syncAllVehciles();
