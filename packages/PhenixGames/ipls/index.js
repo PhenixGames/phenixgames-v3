@@ -1,8 +1,6 @@
 let Ipls = [
-    'vw_casino_main',
-    'vw_casino_penthouse',
-    'vw_casino_carpark',
-    'vw_casino_garage'
+    'bkr_biker_interior_placement_interior_3_biker_dlc_int_ware02_milo',
+    
 ]
 
 mp.events.add('packagesLoaded', () =>
