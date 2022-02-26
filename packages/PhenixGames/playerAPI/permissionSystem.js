@@ -42,7 +42,7 @@ module.exports.setPlayerPermissionsLocal = async function (player) {
     }
     const playerPermissions = await this.getPermsFromUser(roleId);
 
-    generellAPI.saveLocalPlayerVar(player, {
+    generellAPI.saveLocalVar(player, {
         'user_permissions': JSON.stringify(playerPermissions)
     });
 }
