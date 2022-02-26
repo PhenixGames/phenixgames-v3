@@ -19,6 +19,12 @@ mp.keys.bind(0x71, true, function() {
     mp.events.callRemote('Player:pressed:f2');
 });
 
+//f10
+
+mp.keys.bind(0x79, true, function() {
+    mp.players.local.setToRagdoll(5000, 10000, 0, false, false, false);
+});
+
 mp.events.add('Vehicle:Engine:state', (state) => {
     mp.game.vehicle.defaultEngineBehaviour = false;
     setTimeout(() => {
