@@ -38,6 +38,7 @@ mp.events.add('LoginAccount', (player, password) => {
         generellAPI.saveLocalVar(player, {
             'isLoggedIn': true
         });
+        player.call("World:load:IPL");
     }).catch(err => {
         return console.error(err);
     });
@@ -68,7 +69,7 @@ mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
     await generellAPI.saveLocalVar(player, {
         'isLoggedIn': true
     });
-    player.call("World:load:IPL");
+    
     return player.notify(`Erfolgreich registriert!`);
 })
 
