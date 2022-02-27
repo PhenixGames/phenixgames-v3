@@ -72,9 +72,7 @@ mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
     await generellAPI.saveLocalVar(player, {
         'isLoggedIn': true
     });
-
-    var name = await playerAPI.getPlayerInGame(player.getVariable('playerId'));
-    player.name = name.firstname + " " + name.lastname;
+    player.name = firstname + " " + lastname;
     
     return player.notify(`Erfolgreich registriert!`);
 })
