@@ -23,3 +23,19 @@ mp.events.addCommand('tpto', (player, target) =>{
         );
     }
 });
+
+mp.events.addCommand('tptovehid', (player, target) =>{
+    if(Perms.hasPermissions(player, ["tp_to"])) {
+        mp.vehicles.forEach(
+            (tg) => {
+                if(tg.getVariable("veh_id") == target){
+                    const pos = tg.position.x + ', ' + tg.position.y + ', ' + tg.position.z;
+                    const changePos = playerAPI.changePlayerPos(player, pos, null, JSON.stringify(tg.dimension))
+                    if(!changePos) player.notify('Etwas ist schief gelaufen!')
+                }else {
+                    return player.notify("Das Fahrzeug wurde nicht gefunden");
+                }
+            }
+        );
+    }
+});
