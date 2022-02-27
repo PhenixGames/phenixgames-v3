@@ -1,5 +1,5 @@
 var browser;
-
+var modded_Speed = 1;
 var Admin = false;
 mp.events.add("Change:Admin:Duty:Value:On:Client", (state) => {
     Admin = state;
@@ -20,7 +20,8 @@ mp.events.add("playerLeaveVehicle", (player, vehicle) => {
 //Render For Car
 mp.events.add("render", () => {
 
-    if (Admin) {
+    if (Admin) {//Ist Er im Admin Dienst
+        //Daten Vom Fahrzeug Rendern
         mp.vehicles.forEachInStreamRange((vehicle) => {
             if (mp.players.local.position.subtract(vehicle.position).length() < 10) {
                 //Dont touch IT - Works only if it exists XD
@@ -46,7 +47,7 @@ mp.events.add("render", () => {
                 });
             }
         });
-
+        //Player Daten Rendern
         mp.players.forEachInStreamRange((player) => {
 
             if (mp.players.local.position.subtract(player.position).length() < 10 && mp.players.local.position.subtract(player.position).length() !== 0) {
@@ -96,6 +97,25 @@ mp.events.add("render", () => {
 
         });
     }
+    //Hier wird Das Speedomeeter Geupdated.
+    if(mp.players.local.vehicle){
+        if(mp.players.local.seat == 0 ||mp.players.local.seat == 1){//Fahrer Oder Beifahrer
+            var player = mp.players.local;
+            var vehicle = player.vehicle;
+
+            var speed = vehicle.getSpeed();
+            speed = speed * 3.6;
+
+            vehicle.setEngineTorqueMultiplier(modded_Speed);
+            mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
+
+            browser.execute(`setSpeedometer("${0}", "${Math.round(speed)}");`)
+        } 
+        
+
+    }
+
+    //Hier wird der Name Des Admins Gerendert für die Spieler die in 10 Meter reichweite sind (Er selber ausgeschlossen)
     mp.players.forEachInStreamRange((player) => {
         if (player.getVariable("Aduty")) {
             if (mp.players.local.position.subtract(player.position).length() < 10 && mp.players.local.position.subtract(player.position).length() !== 0) {
@@ -112,34 +132,8 @@ mp.events.add("render", () => {
     });
 });
 
-
-var modded_Speed = 1;
-//!Todo Remove render function of SPeed and Create a HTML file for it.
-mp.events.add('render', () => {
-    var player = mp.players.local;
-    var vehicle = player.vehicle;
-
-    if (vehicle === undefined || vehicle === null) return;
-
-    var speed = vehicle.getSpeed();
-    speed = speed * 3.6;
-
-    if (speed === 0) speed = '0';
-
-    vehicle.setEngineTorqueMultiplier(modded_Speed);
-    mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
-
-    browser.execute(`setSpeedometer("${0}", "${Math.round(speed)}");`)
-
-    // mp.game.graphics.drawText(Math.round(speed), [0.5, 0.005], {
-    //   font: 4,
-    //   color: [255, 255, 255, 255],
-    //   scale: [1.0, 1.0],
-    //   outline: true
-    // });
-});
-
+//Dieses Event ändert die Variable auf den Passenden wert der vom server übergeben wurde
 mp.events.add("Set:ModdedSpeed", (Speed) => {
-    mp.gui.chat.push(Speed + ' speed')
+    mp.players.local.notify(`Dein Speed wurde auf ${speed} gesetzt`);
     modded_Speed = Number(Speed);
 });
