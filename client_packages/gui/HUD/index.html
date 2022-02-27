@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./src/css/style.css" />
+        <link rel="stylesheet" href="https://blackdayz.github.io/BlackCSS/lib/BlackCSS.css">
+    </head>
+    <body>
+
+
+        <section class="top_right">
+            <img src="../_assets/img/logo/web/PhenixGames_Logo_no_text.svg" />
+            <div class="id">
+                <span></span>
+                <span id="player_id"></span>
+            </div>
+            <span id="time"></span>
+        </section>
+
+
+
+        <section class="speedometer white display-none">
+            <div class="veh_tank">
+                <span id="tank"></span>
+                <span>Liter</span>
+                <img src="./src/img/tank.svg" />
+            </div>
+            <div class="veh_state">
+                <div class="car_info">
+                    <img src="./src/img/car.svg" class="car"/>
+                    <img src="./src/img/lock.svg" class="car_lock" />
+                </div>
+                <div class="car_heal">
+                    <img src="./src/img/warning.svg" />
+                    <img src="./src/img/error.svg" />
+                </div>
+                <div class="engine_state">
+                    <img src="./src/img/lamp.svg" />
+                    <img src="./src/img/engine.svg" />
+                </div>
+            </div>
+            <div class="veh_speed">
+                <img src="./src/img/speed.svg" />
+                <span id="speed"></span>
+                <span>km/h</span>
+            </div>
+        </section>
+
+        <script>
+
+            function showSpeedometer() {
+                document.querySelector('.speedometer').classList.remove('display-none');
+            }
+
+            //veh_state = Object
+            function setSpeedometer(tank, speed, veh_state) {
+                document.getElementById('tank').innerHTML = tank;
+                document.getElementById('speed').innerHTML = speed;
+
+                //? TO-DO
+                //Implement veh_state (locked, engine broken, etc)
+            }
+
+            function setPlayerId(player_id) {
+                document.getElementById('player_id').innerHTML = player_id
+            }
+
+
+
+            function setTime() {
+                let currentDate = new Date();
+                let hr = currentDate.getHours();
+                let min = currentDate.getMinutes();
+                if(hr <= 9) {
+                    hr = '0'+hr;
+                }
+                if(min <= 9) {
+                    min = '0'+min
+                }
+                document.getElementById('time').innerHTML = hr + ':' + min
+            }
+            setTime();
+            setInterval(() => {
+                setTime();
+            }, 1000);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+.top_right {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.top_right img {
+    width: 100px;
+}
+
+.top_right span {
+    position: absolute;
+    font-weight: 900;
+    padding: 15px 30px;
+}
+
+.top_right .id {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top_right .id span:first-child {
+    width: max-content;
+    height: max-content;
+    background: rgba(255, 255, 255, 0.158);
+
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+}
+
+.top_right .id span:first-child,
+.top_right .id span:last-child {
+    transform: translate(0, -60px);
+    -webkit-transform: translate(0, -60px);
+    -moz-transform: translate(0, -60px);
+    -ms-transform: translate(0, -60px);
+    -o-transform: translate(0, -60px);
+}
