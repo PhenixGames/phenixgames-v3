@@ -7,6 +7,7 @@ mp.events.add("Change:Admin:Duty:Value:On:Client", (state) => {
 
 mp.events.add('Player:ActivateHUD', () => {
     browser = mp.browsers.new("package://gui/HUD/index.html");
+    browser.execute(`setPlayerId("${mp.players.local.getVariable('playerId')}");`);
 });
 
 mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
@@ -19,7 +20,6 @@ mp.events.add("playerLeaveVehicle", (player, vehicle) => {
 
 //Render For Car
 mp.events.add("render", () => {
-
     if (Admin) {//Ist Er im Admin Dienst
         //Daten Vom Fahrzeug Rendern
         mp.vehicles.forEachInStreamRange((vehicle) => {
@@ -97,22 +97,19 @@ mp.events.add("render", () => {
 
         });
     }
-    //Hier wird Das Speedomeeter Geupdated.
+    //Hier wird Das Speedometer Geupdated.
     if(mp.players.local.vehicle){
-        if(mp.players.local.seat == 0 ||mp.players.local.seat == 1){//Fahrer Oder Beifahrer
-            var player = mp.players.local;
-            var vehicle = player.vehicle;
+        mp.console.logInfo('test2', true, true)
+        var player = mp.players.local;
+        var vehicle = player.vehicle;
 
-            var speed = vehicle.getSpeed();
-            speed = speed * 3.6;
+        var speed = vehicle.getSpeed();
+        speed = speed * 3.6;
 
-            vehicle.setEngineTorqueMultiplier(modded_Speed);
-            mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
+        vehicle.setEngineTorqueMultiplier(modded_Speed);
+        mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
 
-            browser.execute(`setSpeedometer("${0}", "${Math.round(speed)}");`)
-        } 
-        
-
+        browser.execute(`setSpeedometer("${0}", "${Math.round(speed)}");`)
     }
 
     //Hier wird der Name Des Admins Gerendert für die Spieler die in 10 Meter reichweite sind (Er selber ausgeschlossen)
