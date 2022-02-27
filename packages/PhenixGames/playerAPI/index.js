@@ -52,9 +52,6 @@ module.exports.saveNewPlayer = async function (username, password) {
  */
 module.exports.saveNewPlayerPos = async function (player_id, player_pos) {
     return await database.query('UPDATE pg_users SET last_pos = ? WHERE id = ?', [player_pos, player_id])
-        .then(() => {
-            return true
-        })
         .catch(err => {
             console.error(err);
             return false;
@@ -167,6 +164,8 @@ module.exports.syncAllPlayers = async function () {
     });
     //console.log('ALL PLAYERS SYNCED!')
 }
+
+module.exports.playerOnline = 0;
 
 
 require('./permissionSystem');
