@@ -29,7 +29,7 @@ mp.events.add('LoginAccount', (player, password) => {
         })
         if(isPunish) return player.kick(reason);
 
-        if(users.password !== password) return;
+        if(!playerAPI.checkPassword(users.password, password)) return;
 
         permissionSystem.setPlayerPermissionsLocal(player);
 
@@ -57,6 +57,9 @@ mp.events.add('RegisterAccount', async (player, password) => {
         'isAdmin': 0,
         'isInHouse': false
     });
+    
+    permissionSystem.setPlayerPermissionsLocal(player);
+
     player.call('Login:Succes:close:Windows');
     return player.call('Player:InGameName:Choose');
 });

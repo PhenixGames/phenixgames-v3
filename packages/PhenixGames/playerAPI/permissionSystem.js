@@ -17,7 +17,7 @@ const console = require('better-console');
  */
 module.exports.hasPermissions = async function (player, permission) {
     const playerPermissions = JSON.parse(player.getVariable('user_permissions'));
-
+    
     let hasPerms = [];
 
     for (let i in permission) {

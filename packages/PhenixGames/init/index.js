@@ -48,6 +48,9 @@ mp.events.add('packagesLoaded', async() =>
 {
     await vehicleAPI.spawnAllVehicles();
 
+
+    console.log(playerAPI.hashPassword('123'))
+
     weatherAPI.setWeather();
 
     setInterval(() => {

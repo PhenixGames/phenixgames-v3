@@ -7,6 +7,7 @@ const config = require('../../../_assets/json/config.json');
 
 const validator = require('validator');
 const console = require('better-console');
+const bcryptjs = require('bcryptjs');
 
 /**
  * 
@@ -34,6 +35,7 @@ module.exports.getPlayerId = async function (username) {
  * @returns 
  */
 module.exports.saveNewPlayer = async function (username, password) {
+    password = await this.hashPassword(password);
     return await database.query('INSERT INTO pg_users (username, password) VALUES (?, ?)', [username, password])
         .then(() => {
             return true
@@ -42,6 +44,15 @@ module.exports.saveNewPlayer = async function (username, password) {
             console.error(err);
             return false;
         });
+}
+
+module.exports.hashPassword = async function (password) {
+    const salt = 12;
+    return bcryptjs.hashSync(password, salt);
+}
+
+module.exports.checkPassword = async function (dbpwd, pwd) {
+    return bcryptjs.compareSync(dbpwd, pwd);
 }
 
 /**
