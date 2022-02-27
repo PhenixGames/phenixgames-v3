@@ -6,6 +6,7 @@ const database = new Database();
 const vehicleAPI = require("../vehicle/")
 const playerAPI = require('../playerAPI/');
 const generellAPI = require('../allgemein/');
+const weatherAPI = require('../weatherAPI');
 
 mp.events.add('playerJoin', async (player) => {
     player.call('Open:Login:Browser');
@@ -40,9 +41,10 @@ mp.events.add('packagesLoaded', async() =>
 {
     await vehicleAPI.spawnAllVehicles();
 
+    weatherAPI.setWeather();
+
     setInterval(() => {
         vehicleAPI.syncAllVehciles();
         playerAPI.syncAllPlayers();
     }, 10000);
 });
-
