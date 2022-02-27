@@ -66,7 +66,6 @@ module.exports.updateVehicleData = async function (veh) {
  */
 module.exports.updateVehiclePosition = async function (veh_id, veh_pos, veh_rot) {
     return await database.query('UPDATE pg_vehicles SET veh_pos = ?, veh_rot = ? WHERE veh_id = ?', [JSON.stringify(veh_pos), JSON.stringify(veh_rot), veh_id])
-        .then(() => {return true})
         .catch(err => {
             console.error(err);
             return false;
