@@ -130,7 +130,7 @@ mp.events.add("render", () => {
 });
 
 //Dieses Event ändert die Variable auf den Passenden wert der vom server übergeben wurde
-mp.events.add("Set:ModdedSpeed", (Speed) => {
+mp.events.add("Set:ModdedSpeed", (speed) => {
     mp.game.graphics.notify(`Dein Speed wurde auf ${speed} gesetzt`);
-    modded_Speed = Number(Speed);
+    modded_Speed = Number(speed);
 });
