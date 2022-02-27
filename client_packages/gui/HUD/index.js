@@ -13,7 +13,7 @@ mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
     browser.execute(`showSpeedometer();`)
 });
 
-mp.events.add("playerExitVehicle", (player, vehicle) => {
+mp.events.add("playerLeaveVehicle", (player, vehicle) => {
     browser.execute(`removeSpeedometer();`)
 });
 
