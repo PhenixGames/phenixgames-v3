@@ -80,9 +80,9 @@ module.exports.getLastPlayerPos = async function (player_id) {
             if (res.length > 0 && res[0].pos != '{"x":"0","y":"0"}') {
                 return JSON.parse(res[0].last_pos)
             } else {
-                this.changePlayerPos(player, config.defaultSpawn.pos, config.defaultSpawn.rot)
+                this.changePlayerPos(player, config.airport.pos, config.airport.rot)
 
-                let newPos = config.defaultSpawn.pos.split(', ');
+                let newPos = config.airport.pos.split(', ');
                 return JSON.parse(`{"x": "${newPos[0]}", "y": "${newPos[1]}", "z": "${newPos[2]}"}`)
             }
         })

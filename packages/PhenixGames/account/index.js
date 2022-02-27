@@ -49,7 +49,7 @@ mp.events.add('RegisterAccount', async (player, password) => {
 
     const playerId = await playerAPI.getPlayerId(player.socialClub);
 
-    await playerAPI.changePlayerPos(player, config.defaultSpawn.pos, config.defaultSpawn.rot)
+    await playerAPI.changePlayerPos(player, config.airport.pos, config.airport.rot)
     await playerAPI.saveNewPlayerPos(playerId, JSON.stringify(player.position));
     await generellAPI.saveLocalVar(player, {
         'playerId': playerId,
