@@ -24,6 +24,9 @@ mp.events.add('playerJoin', async (player) => {
             'isMedia': res[0].isMedia
         });
 
+
+        playerAPI.playerOnline = playerAPI.playerOnline + 1;
+
         return console.info(`[SERVER]: [Registered] ${player.socialClub} has joined the server!`);
     }).catch(err => {
         console.error(err)
@@ -37,6 +40,10 @@ mp.events.add('playerJoin', async (player) => {
     
 });
 
+mp.events.add("playerQuit", (player) => {
+    playerAPI.playerOnline = playerAPI.playerOnline - 1;
+});
+
 mp.events.add('packagesLoaded', async() =>
 {
     await vehicleAPI.spawnAllVehicles();
@@ -44,7 +51,9 @@ mp.events.add('packagesLoaded', async() =>
     weatherAPI.setWeather();
 
     setInterval(() => {
+        console.time('Server wurde gesynct in: ');
         vehicleAPI.syncAllVehciles();
         playerAPI.syncAllPlayers();
-    }, 10000);
+        console.timeEnd('Server wurde gesynct in: ');
+    }, 5000);
 });
