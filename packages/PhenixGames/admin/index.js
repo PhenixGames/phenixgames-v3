@@ -24,7 +24,7 @@ mp.events.addCommand("aduty", async (player) => {
                 player.call("Set:God", [true]); 
                 player.call("Change:Admin:Duty:Value:On:Client", [true]);
                 player.alpha = AdminUnsichtbar;
-                player.name = "~r~" + player.name;
+                player.name = player.name;
             }
         }
         if(Perms.hasPermissions(player, ["no_clip"])){

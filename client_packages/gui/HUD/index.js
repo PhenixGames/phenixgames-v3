@@ -117,7 +117,7 @@ mp.events.add("render", () => {
         if (player.getVariable("Aduty")) {
             if (mp.players.local.position.subtract(player.position).length() < 10 && mp.players.local.position.subtract(player.position).length() !== 0) {
                 const drawPosition = [player.position.x, player.position.y, player.position.z + 1.2];
-                mp.game.graphics.drawText(`${player.name}`, drawPosition, {
+                mp.game.graphics.drawText(`~r~${player.name}`, drawPosition, {
                     font: 0,
                     color: [255, 255, 255, 185],
                     scale: [0.5, 0.5],
