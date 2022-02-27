@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/PhenixGames/phenixgames-v3#readme",
   "dependencies": {
+    "axios": "^0.26.0",
     "better-console": "^1.0.1",
     "mysql": "^2.18.1",
     "validator": "^13.7.0"
