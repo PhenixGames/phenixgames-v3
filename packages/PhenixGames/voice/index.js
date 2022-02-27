@@ -1,9 +1,15 @@
-mp.events.addCommand('voice', (player) => {
-    
-    mp.players.forEach((_player) => {
-        if(player == _player) return false;
-        
-        player.enableVoiceTo(_player);
-        _player.enableVoiceTo(player)
-    });
+mp.events.add("add_voice_listener", (player, target) =>
+{
+	if(target)
+	{
+		player.enableVoiceTo(target);
+	}
+});
+
+mp.events.add("remove_voice_listener", (player, target) =>
+{
+	if(target)
+	{
+		player.disableVoiceTo(target);
+	}
 });
