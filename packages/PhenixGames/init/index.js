@@ -32,12 +32,12 @@ mp.events.add('playerJoin', async (player) => {
         console.error(err)
     });
     var name = await playerAPI.getPlayerInGame(player.getVariable('playerId'));
-    player.name = name.firstname + " " + name.lastname;
-    var title = 'Spielt auf PhenixGames V3';
-    var playing = `Spielt als ${player.name}`;
-
-    mp.players.call("Set:Discord", [title, playing]);
-    
+    if(name) {
+        player.name = name.firstname + " " + name.lastname;
+        var title = 'Spielt auf PhenixGames V3';
+        var playing = `Spielt als ${player.name}`;
+        mp.players.call("Set:Discord", [title, playing]);
+    }
 });
 
 mp.events.add("playerQuit", (player) => {
@@ -47,9 +47,6 @@ mp.events.add("playerQuit", (player) => {
 mp.events.add('packagesLoaded', async() =>
 {
     await vehicleAPI.spawnAllVehicles();
-
-
-    console.log(playerAPI.hashPassword('123'))
 
     weatherAPI.setWeather();
 
