@@ -3,10 +3,8 @@ const UseAutoVolume = false;
 
 const MaxRange = 50.0;
 
-mp.keys.bind(0x73, true, function() {//F4
-    mp.voiceChat.muted = !mp.voiceChat.muted;
-    mp.game.graphics.notify("Voice Chat: " + ((!mp.voiceChat.muted) ? "~g~enabled" : "~r~disabled"));
-});
+
+
 
 let g_voiceMgr =
 {
