@@ -17,6 +17,7 @@ const console = require('better-console');
  */
 module.exports.hasPermissions = async function (player, permission) {
     const playerPermissions = JSON.parse(player.getVariable('user_permissions'));
+    if(!playerPermissions) return false;
     
     let hasPerms = [];
 
@@ -91,6 +92,7 @@ module.exports.getRoleIdFromUser = async function (playerId) {
  */
 module.exports.getRoleInfo = async function (player) {
     var roleId = JSON.parse(player.getVariable('user_permissions'));
+    if(!roleId) return false;
     roleId = roleId.roleid;
     return await database.query('SELECT * FROM pg_permission_roles WHERE roleid = ? LIMIT 1', [roleId])
         .then(res => {

@@ -60,9 +60,13 @@
                 document.getElementById('welcome_msg').innerHTML = "Welcome Newbie"
             }
       
-
+            var already = false;
             document.getElementById('pg_login').addEventListener('submit', (evt) => {
                 evt.preventDefault();
+                
+                if(already) return;
+                else already = true;
+                
                 if(isLogin) {
                     mp.trigger('uiLogin_LoginButton', document.getElementById('login').value);
                 }else {
