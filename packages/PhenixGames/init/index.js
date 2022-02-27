@@ -56,4 +56,8 @@ mp.events.add('packagesLoaded', async() =>
         playerAPI.syncAllPlayers();
         console.timeEnd('Server wurde gesynct in: ');
     }, 5000);
+
+    setInterval(() => {
+        weatherAPI.setWeather();
+    }, 1080000);
 });
