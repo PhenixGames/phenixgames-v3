@@ -29,7 +29,7 @@ mp.events.add('LoginAccount', (player, password) => {
         })
         if(isPunish) return player.kick(reason);
 
-        if(!playerAPI.checkPassword(users.password, password)) return;
+        if(await playerAPI.checkPassword(users.password, password) === false) return;
 
         permissionSystem.setPlayerPermissionsLocal(player);
 

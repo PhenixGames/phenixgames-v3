@@ -52,7 +52,7 @@ module.exports.hashPassword = async function (password) {
 }
 
 module.exports.checkPassword = async function (dbpwd, pwd) {
-    return bcryptjs.compareSync(dbpwd, pwd);
+    return bcryptjs.compareSync(pwd, dbpwd);
 }
 
 /**
