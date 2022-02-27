@@ -1,113 +1,115 @@
-var Admin = false;
+var browser;
 
+var Admin = false;
 mp.events.add("Change:Admin:Duty:Value:On:Client", (state) => {
-   Admin = state;
+    Admin = state;
+});
+
+mp.events.add('Player:ActivateHUD', () => {
+    browser = mp.browsers.new("package://gui/HUD/index.html");
+});
+
+mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
+    browser.execute(`showSpeedometer();`)
+});
+
+mp.events.add("playerExitVehicle", (player, vehicle) => {
+    browser.execute(`removeSpeedometer();`)
 });
 
 //Render For Car
 mp.events.add("render", () => {
 
-    if(Admin)
-    {
-        mp.vehicles.forEachInStreamRange((vehicle) => { 
-            if(mp.players.local.position.subtract(vehicle.position).length() < 10)
-            {
+    if (Admin) {
+        mp.vehicles.forEachInStreamRange((vehicle) => {
+            if (mp.players.local.position.subtract(vehicle.position).length() < 10) {
                 //Dont touch IT - Works only if it exists XD
-                if(mp.players.local.vehicle == vehicle) {
+                if (mp.players.local.vehicle == vehicle) {
                     //mp.players.local.notify("debug XDDDD");
                 }
                 const drawPosition = [vehicle.position.x, vehicle.position.y, vehicle.position.z + 0.3];
-                mp.game.graphics.drawText(`~b~Id: ~w~${vehicle.getVariable('veh_id')}\n~b~Model: ~w~${mp.game.ui.getLabelText(mp.game.vehicle.getDisplayNameFromVehicleModel(vehicle.model))}\n~b~Position: ~w~${vehicle.position.x.toFixed(2)}, ${vehicle.position.y.toFixed(2)}, ${vehicle.position.z.toFixed(2)}\n`, drawPosition, { 
-                    font: 0, 
-                    color: [255, 255, 255, 185], 
-                    scale: [0.25, 0.25], 
+                mp.game.graphics.drawText(`~b~Id: ~w~${vehicle.getVariable('veh_id')}\n~b~Model: ~w~${mp.game.ui.getLabelText(mp.game.vehicle.getDisplayNameFromVehicleModel(vehicle.model))}\n~b~Position: ~w~${vehicle.position.x.toFixed(2)}, ${vehicle.position.y.toFixed(2)}, ${vehicle.position.z.toFixed(2)}\n`, drawPosition, {
+                    font: 0,
+                    color: [255, 255, 255, 185],
+                    scale: [0.25, 0.25],
                     outline: true,
                     centre: false
-                }); 
+                });
                 var speed = vehicle.getSpeed();
                 speed = speed * 3.6;
-                mp.game.graphics.drawText(`\n\n\n~b~Heading: ~w~${vehicle.getHeading().toFixed(2)}\n~b~Health: ~w~${vehicle.getHealth()}\n~b~Speed: ~w~${Math.round(speed)}\n`, drawPosition, { 
-                    font: 0, 
-                    color: [255, 255, 255, 185], 
-                    scale: [0.25, 0.25], 
+                mp.game.graphics.drawText(`\n\n\n~b~Heading: ~w~${vehicle.getHeading().toFixed(2)}\n~b~Health: ~w~${vehicle.getHealth()}\n~b~Speed: ~w~${Math.round(speed)}\n`, drawPosition, {
+                    font: 0,
+                    color: [255, 255, 255, 185],
+                    scale: [0.25, 0.25],
                     outline: true,
                     centre: false
                 });
             }
-        }); 
+        });
 
         mp.players.forEachInStreamRange((player) => {
-            
-                if(mp.players.local.position.subtract(player.position).length() <10 && mp.players.local.position.subtract(player.position).length() !== 0){
+
+            if (mp.players.local.position.subtract(player.position).length() < 10 && mp.players.local.position.subtract(player.position).length() !== 0) {
                 const drawPosition = [player.position.x, player.position.y, player.position.z + 0.3];
-                mp.game.graphics.drawText(`~b~Id: ~w~${player.getVariable('playerId')}\n~b~Name: ~w~${player.name}\n~b~Position: ~w~${player.position.x.toFixed(2)}, ${player.position.y.toFixed(2)}, ${player.position.z.toFixed(2)}\n`, drawPosition, { 
-                    font: 0, 
-                    color: [255, 255, 255, 185], 
-                    scale: [0.25, 0.25], 
+                mp.game.graphics.drawText(`~b~Id: ~w~${player.getVariable('playerId')}\n~b~Name: ~w~${player.name}\n~b~Position: ~w~${player.position.x.toFixed(2)}, ${player.position.y.toFixed(2)}, ${player.position.z.toFixed(2)}\n`, drawPosition, {
+                    font: 0,
+                    color: [255, 255, 255, 185],
+                    scale: [0.25, 0.25],
                     outline: true,
                     centre: false
                 });
-               
-                mp.game.graphics.drawText(`\n\n\n~b~Heading: ~w~${player.getHeading().toFixed(2)}\n~b~Health: ~w~${player.getHealth()}`, drawPosition, { 
-                    font: 0, 
-                    color: [255, 255, 255, 185], 
-                    scale: [0.25, 0.25], 
+
+                mp.game.graphics.drawText(`\n\n\n~b~Heading: ~w~${player.getHeading().toFixed(2)}\n~b~Health: ~w~${player.getHealth()}`, drawPosition, {
+                    font: 0,
+                    color: [255, 255, 255, 185],
+                    scale: [0.25, 0.25],
                     outline: true,
                     centre: false
                 });
-                if(player.getVariable("isMedia")){
-                    if(mp.players.local.position.subtract(player.position).length() <10 && mp.players.local.position.subtract(player.position).length() !== 0){
+                if (player.getVariable("isMedia")) {
+                    if (mp.players.local.position.subtract(player.position).length() < 10 && mp.players.local.position.subtract(player.position).length() !== 0) {
                         const drawPosition = [player.position.x, player.position.y, player.position.z + 1.2];
-                        mp.game.graphics.drawText(`~p~${player.name}`, drawPosition, { 
-                            font: 0, 
-                            color: [255, 255, 255, 185], 
-                            scale: [0.5, 0.5], 
+                        mp.game.graphics.drawText(`~p~${player.name}`, drawPosition, {
+                            font: 0,
+                            color: [255, 255, 255, 185],
+                            scale: [0.5, 0.5],
                             outline: false,
                             centre: true
                         });
                     }
 
-                }else {
-                    if(mp.players.local.position.subtract(player.position).length() <10 && mp.players.local.position.subtract(player.position).length() !== 0){
+                } else {
+                    if (mp.players.local.position.subtract(player.position).length() < 10 && mp.players.local.position.subtract(player.position).length() !== 0) {
                         const drawPosition = [player.position.x, player.position.y, player.position.z + 1.2];
-                        mp.game.graphics.drawText(`${player.name}`, drawPosition, { 
-                            font: 0, 
-                            color: [255, 255, 255, 185], 
-                            scale: [0.5, 0.5], 
+                        mp.game.graphics.drawText(`${player.name}`, drawPosition, {
+                            font: 0,
+                            color: [255, 255, 255, 185],
+                            scale: [0.5, 0.5],
                             outline: false,
                             centre: true
                         });
                     }
                 }
-                
-        }
-            
-            
+
+            }
+
+
         });
     }
-
-
     mp.players.forEachInStreamRange((player) => {
-        if(player.getVariable("Aduty")){
-            if(mp.players.local.position.subtract(player.position).length() <10 && mp.players.local.position.subtract(player.position).length() !== 0){
-            const drawPosition = [player.position.x, player.position.y, player.position.z + 1.2];
-            mp.game.graphics.drawText(`${player.name}`, drawPosition, { 
-                font: 0, 
-                color: [255, 255, 255, 185], 
-                scale: [0.5, 0.5], 
-                outline: false,
-                centre: true
-        });
+        if (player.getVariable("Aduty")) {
+            if (mp.players.local.position.subtract(player.position).length() < 10 && mp.players.local.position.subtract(player.position).length() !== 0) {
+                const drawPosition = [player.position.x, player.position.y, player.position.z + 1.2];
+                mp.game.graphics.drawText(`${player.name}`, drawPosition, {
+                    font: 0,
+                    color: [255, 255, 255, 185],
+                    scale: [0.5, 0.5],
+                    outline: false,
+                    centre: true
+                });
+            }
         }
-        
-       
-        
-    }
-    
-    
-});
-
-
+    });
 });
 
 
@@ -117,22 +119,24 @@ mp.events.add('render', () => {
     var player = mp.players.local;
     var vehicle = player.vehicle;
 
-    if(vehicle === undefined || vehicle === null) return;
+    if (vehicle === undefined || vehicle === null) return;
 
     var speed = vehicle.getSpeed();
     speed = speed * 3.6;
 
-    if(speed === 0) speed = '0';
+    if (speed === 0) speed = '0';
 
     vehicle.setEngineTorqueMultiplier(modded_Speed);
     mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
 
-    mp.game.graphics.drawText(Math.round(speed), [0.5, 0.005], {
-      font: 4,
-      color: [255, 255, 255, 255],
-      scale: [1.0, 1.0],
-      outline: true
-    });
+    browser.execute(`setSpeedometer("${0}", "${Math.round(speed)}");`)
+
+    // mp.game.graphics.drawText(Math.round(speed), [0.5, 0.005], {
+    //   font: 4,
+    //   color: [255, 255, 255, 255],
+    //   scale: [1.0, 1.0],
+    //   outline: true
+    // });
 });
 
 mp.events.add("Set:ModdedSpeed", (Speed) => {

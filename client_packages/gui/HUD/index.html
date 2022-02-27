@@ -51,6 +51,10 @@
                 document.querySelector('.speedometer').classList.remove('display-none');
             }
 
+            function removeSpeedometer() {
+                document.querySelector('.speedometer').classList.add('display-none');
+            }
+
             //veh_state = Object
             function setSpeedometer(tank, speed, veh_state) {
                 document.getElementById('tank').innerHTML = tank;

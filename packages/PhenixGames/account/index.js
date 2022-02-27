@@ -76,7 +76,7 @@ mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
 mp.events.add('Player:Spawn:house', async (player) => {
     const playerId = player.getVariable('playerId');
 
-    return;
+    return setHUD(player);
 });
 
 mp.events.add('Player:Spawn:LastPos', async (player) => {
@@ -89,11 +89,17 @@ mp.events.add('Player:Spawn:LastPos', async (player) => {
 
     console.log(JSON.stringify(lastPos) + ' last pos debug');
     player.position = new mp.Vector3(lastPos.x, lastPos.y, lastPos.z);
-    return;
+    
+    return setHUD(player);
 });
 
 mp.events.add('Player:Spawn:airport', async (player) => {
     const playerId = player.getVariable('playerId');
 
-    return;
+    return setHUD(player);
 });
+
+
+function setHUD(player) {
+    player.call('Player:ActivateHUD');
+}
