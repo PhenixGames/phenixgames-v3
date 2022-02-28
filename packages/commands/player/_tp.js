@@ -2,14 +2,14 @@ const playerAPI = require("../../PhenixGames/playerAPI");
 const Perms = require('../../PhenixGames/playerAPI/permissionSystem.js')
 
 mp.events.addCommand('tp', (player, location) => {
-    if(Perms.hasPermissions(player, ["tp"])  && location.indexOf(',') !== -1) {
+    if(await Perms.hasPermissions(player, ["tp"])  && location.indexOf(',') !== -1) {
         const changePos = playerAPI.changePlayerPos(player, JSON.stringify(location));
         if(!changePos) player.notify('Etwas ist schief gelaufen!')
     }
 });
 
 mp.events.addCommand('tpto', (player, target) =>{
-    if(Perms.hasPermissions(player, ["tp_to"])) {
+    if(await Perms.hasPermissions(player, ["tp_to"])) {
         mp.players.forEach(
             (tg) => {
                 if(tg.socialClub == target){
@@ -25,7 +25,7 @@ mp.events.addCommand('tpto', (player, target) =>{
 });
 
 mp.events.addCommand('tptovehid', (player, target) =>{
-    if(Perms.hasPermissions(player, ["tp_to"])) {
+    if(await Perms.hasPermissions(player, ["tp_to"])) {
         mp.vehicles.forEach(
             (tg) => {
                 if(tg.getVariable("veh_id") == target){
