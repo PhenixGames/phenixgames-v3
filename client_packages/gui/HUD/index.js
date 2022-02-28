@@ -1,4 +1,4 @@
-var browser;
+var hudBrowser;
 var modded_Speed = 1;
 var Admin = false;
 mp.events.add("Change:Admin:Duty:Value:On:Client", (state) => {
@@ -6,16 +6,16 @@ mp.events.add("Change:Admin:Duty:Value:On:Client", (state) => {
 });
 
 mp.events.add('Player:ActivateHUD', () => {
-    browser = mp.browsers.new("package://gui/HUD/index.html");
-    browser.execute(`setPlayerId("${mp.players.local.getVariable('playerId')}");`);
+    hudBrowser = mp.browsers.new("package://gui/HUD/index.html");
+    hudBrowser.execute(`setPlayerId("${mp.players.local.getVariable('playerId')}");`);
 });
 
 mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
-    browser.execute(`showSpeedometer();`)
+    hudBrowser.execute(`showSpeedometer();`)
 });
 
 mp.events.add("playerLeaveVehicle", (player, vehicle) => {
-    browser.execute(`removeSpeedometer();`)
+    hudBrowser.execute(`removeSpeedometer();`)
 });
 
 //Render For Car
@@ -109,7 +109,7 @@ mp.events.add("render", () => {
         vehicle.setEngineTorqueMultiplier(modded_Speed);
         mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
 
-        browser.execute(`setSpeedometer("${0}", "${Math.round(speed)}");`)
+        hudBrowser.execute(`setSpeedometer("${0}", "${Math.round(speed)}");`)
     }
 
     //Hier wird der Name Des Admins Gerendert für die Spieler die in 10 Meter reichweite sind (Er selber ausgeschlossen)
@@ -137,6 +137,6 @@ mp.events.add("Set:ModdedSpeed", (speed) => {
 
 mp.keys.bind(0x73, true, function() {//F4
     mp.voiceChat.muted = !mp.voiceChat.muted;
-    if(!mp.voiceChat.muted) browser.execute(`manageVoice("${0}");`);
-    else browser.execute(`manageVoice("${1}");`);
+    if(!mp.voiceChat.muted) hudBrowser.execute(`manageVoice("${0}");`);
+    else hudBrowser.execute(`manageVoice("${1}");`);
 });
