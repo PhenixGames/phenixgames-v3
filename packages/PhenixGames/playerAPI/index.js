@@ -169,7 +169,7 @@ module.exports.getPlayerInGame = async function (playerId) {
  */
 module.exports.syncAllPlayers = async function () {
     mp.players.forEach((player) => {
-        if(!player.getVariable('isInEvent') && player.getVariable('isLoggedIn')) {
+        if(!player.getVariable('isInEvent') && player.getVariable('syncPlayer')) {
             this.saveNewPlayerPos(player.getVariable('playerId'), JSON.stringify(player.position));
         }
     });

@@ -1,3 +1,3 @@
-mp.events.add('perms', ( player, permission, value ) => {
-console.log(permission, value);
+mp.events.add('perms', ( player, args ) => {
+console.log(JSON.stringify(args));
 });

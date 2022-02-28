@@ -38,7 +38,8 @@ mp.events.add('LoginAccount', (player, password) => {
         player.call('Login:Succes:close:Windows');
         player.call('Player:Spawn:Options');
         generellAPI.saveLocalVar(player, {
-            'isLoggedIn': true
+            'isLoggedIn': true,
+            'syncPlayer': true
         });
         
     }).catch(err => {
@@ -57,7 +58,9 @@ mp.events.add('RegisterAccount', async (player, password) => {
         'playerId': playerId,
         'isTeam': 0,
         'isAdmin': 0,
-        'isInHouse': false
+        'isInHouse': false,
+        'isLoggedIn': true,
+        'syncPlayer': true
     });
     
     permissionSystem.setPlayerPermissionsLocal(player);
