@@ -140,5 +140,5 @@ mp.keys.bind(0x73, true, function() {//F4
     if(!mp.voiceChat.muted) browser.execute(`manageVoice("${1}");`);
     else browser.execute(`manageVoice("${0}");`);
     
-   // mp.game.graphics.notify("Voice Chat: " + ((!mp.voiceChat.muted) ? "~g~enabled" : "~r~disabled"));
+    mp.game.graphics.notify("Voice Chat: " + ((!mp.voiceChat.muted) ? "~g~enabled" : "~r~disabled"));
 });
