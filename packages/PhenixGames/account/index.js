@@ -95,7 +95,7 @@ mp.events.add('Player:Spawn:LastPos', async (player) => {
 
     console.log(JSON.stringify(lastPos) + ' last pos debug');
     player.position = new mp.Vector3(lastPos.x, lastPos.y, lastPos.z);
-    
+    destroycam(player);
     return setHUD(player);
 });
 
@@ -109,3 +109,10 @@ mp.events.add('Player:Spawn:airport', async (player) => {
 function setHUD(player) {
     player.call('Player:ActivateHUD');
 }
+function destroycam(player){
+    player.call("Destroy:Login:Cam");
+}
+mp.events.add('playerJoin', (player) => {
+    player.call("Create:Login:Cam");
+    player.position = new mp.Vector3(0,0,-20);
+});
