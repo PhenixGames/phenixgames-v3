@@ -6,9 +6,9 @@ const AdminUnsichtbar = 200;
 
 mp.events.addCommand("aduty", async (player) => {
 
-    if(Perms.hasPermissions(player, ["isTeam"])) {
+    if(await Perms.hasPermissions(player, ["isTeam"])) {
         //? IF USER IS ALREADY IN GODMODE
-        if(Perms.hasPermissions(player, ["godmode"])){
+        if(await Perms.hasPermissions(player, ["godmode"])){
             if(player.getVariable('Aduty')) {
                 generellAPI.saveLocalVar(player, {'Aduty': false})
 
@@ -27,7 +27,7 @@ mp.events.addCommand("aduty", async (player) => {
                 player.name = player.name;
             }
         }
-        if(Perms.hasPermissions(player, ["no_clip"])){
+        if(await Perms.hasPermissions(player, ["no_clip"])){
             player.call("Player:Admin:Duty:noclip");
         }
 

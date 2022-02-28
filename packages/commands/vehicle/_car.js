@@ -3,7 +3,7 @@ const Perms = require('../../PhenixGames/playerAPI/permissionSystem');
 const generellAPI = require('../../PhenixGames/allgemein/');
 
 mp.events.addCommand("car", async (player, args) => {
-    if(Perms.hasPermissions(player, ["car_spawn"])) {
+    if(await Perms.hasPermissions(player, ["car_spawn"])) {
         try {
             args = args.split(' ');
         }catch(err) {
