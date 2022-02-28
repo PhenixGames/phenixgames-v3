@@ -8,7 +8,7 @@ mp.events.add('Open:Login:Browser', () => {
 });
 
 mp.events.add('Create:Login:Cam', ( ) => {
-    let LoginCam = mp.cameras.new('default', new mp.Vector3(-100, -966, 296), new mp.Vector3(0,0,-159), 40);
+    LoginCam = mp.cameras.new('default', new mp.Vector3(-100, -966, 296), new mp.Vector3(0,0,-159), 40);
 
     LoginCam.pointAtCoord(292, -2031, 22); // PointAtCoord can't use Vector3 position in version 1.1. Use position.x, position.y, position.z instead.
     LoginCam.setActive(true);
