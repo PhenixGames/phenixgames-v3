@@ -44,7 +44,7 @@ mp.events.addCommand("aduty", async (player) => {
 
         var rolename = await Perms.getRoleInfo(player);
 
-        player.notify((player.getVariable('Aduty')) ? '~g~Du hast den Admindienst als '+ rolename.rolename + ' Angetreten': '~r~Du hast den AdminDienst verlassen');
+        player.notify((player.getVariable('Aduty')) ? '~g~Du hast den Admindienst als ~r~'+ rolename.rolename + '~g~ angetreten': '~r~Du hast den AdminDienst verlassen');
     }
 });
 
