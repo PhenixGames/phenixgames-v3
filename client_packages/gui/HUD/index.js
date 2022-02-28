@@ -143,5 +143,5 @@ mp.events.add("Set:ModdedSpeed", (speed) => {
 
 mp.keys.bind(0x73, true, function() {//F4
     mp.voiceChat.muted = !mp.voiceChat.muted;
-    mp.game.graphics.notify("Voice Chat: " + ((!mp.voiceChat.muted) ? "~g~enabled" : "~r~disabled"));
+   // mp.game.graphics.notify("Voice Chat: " + ((!mp.voiceChat.muted) ? "~g~enabled" : "~r~disabled"));
 });
