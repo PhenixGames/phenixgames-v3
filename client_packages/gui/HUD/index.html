@@ -6,7 +6,6 @@
     </head>
     <body>
 
-
         <section class="top_right">
             <img src="../_assets/img/logo/web/PhenixGames_Logo_no_text.svg" />
             <div class="id">
@@ -19,7 +18,10 @@
             </div>
         </section>
 
-
+        <section class="voice">
+            <img src="src/img/muted.png" id="voice_muted" class="display-none"/>
+            <img src="src/img/speak.png" id="voice_speak" class="display-none"/>
+        </section>
 
         <section class="speedometer white display-none">
             <div class="veh_tank">
@@ -49,6 +51,21 @@
         </section>
 
         <script>
+
+            /**
+             * type 1 = speak
+             * type 0 = mute
+             * 
+             * */
+            function manageVoice(type) {
+                if(manageVoice) {
+                    document.getElementById('voice_muted').classList.add('display-none');
+                    document.getElementById('voice_speak').classList.remove('display-none');
+                }else {
+                    document.getElementById('voice_muted').classList.remove('display-none');
+                    document.getElementById('voice_speak').classList.add('display-none');
+                }
+            }
 
             function showSpeedometer() {
                 document.querySelector('.speedometer').classList.remove('display-none');

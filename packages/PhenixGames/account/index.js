@@ -37,10 +37,6 @@ mp.events.add('LoginAccount', (player, password) => {
 
         player.call('Login:Succes:close:Windows');
         player.call('Player:Spawn:Options');
-        generellAPI.saveLocalVar(player, {
-            'isLoggedIn': true,
-            'syncPlayer': true
-        });
         
     }).catch(err => {
         return console.error(err);
@@ -60,7 +56,6 @@ mp.events.add('RegisterAccount', async (player, password) => {
         'isAdmin': 0,
         'isInHouse': false,
         'isLoggedIn': true,
-        'syncPlayer': true
     });
     
     permissionSystem.setPlayerPermissionsLocal(player);
@@ -111,6 +106,10 @@ mp.events.add('Player:Spawn:airport', async (player) => {
 
 function setHUD(player) {
     player.call('Player:ActivateHUD');
+
+    generellAPI.saveLocalVar(player, {
+        'syncPlayer': true
+    });
 }
 function destroycam(player){
     player.call("Destroy:Login:Cam");
