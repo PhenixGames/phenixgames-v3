@@ -5,5 +5,5 @@ mp.events.addCommand("pos", (player) => {
 });
 
 mp.events.addCommand('callfunc', ( player, arg, name ) => {
-   mp.events.callRemote(name);
+   mp.events.call(name);
 });
