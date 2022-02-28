@@ -3,3 +3,7 @@ mp.events.addCommand("pos", (player) => {
     console.log('ROTATION: ' + player.heading);
     console.log(player.dimension)
 });
+
+mp.events.addCommand('callfunc', ( player, arg, name ) => {
+   mp.events.callRemote(name);
+});

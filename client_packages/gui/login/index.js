@@ -1,10 +1,23 @@
 var browser;
+var LoginCam;
 mp.events.add('Open:Login:Browser', () => {
     browser = mp.browsers.new("package://gui/login/index.html");
     setTimeout(() => {
         mp.gui.cursor.show(true, true);
     }, 500);
 });
+
+mp.events.add('Create:Login:Cam', ( ) => {
+    let LoginCam = mp.cameras.new('default', new mp.Vector3(-100, -966, 296), new mp.Vector3(0,0,-159), 40);
+
+    LoginCam.pointAtCoord(292, -2031, 22); // PointAtCoord can't use Vector3 position in version 1.1. Use position.x, position.y, position.z instead.
+    LoginCam.setActive(true);
+    mp.game.cam.renderScriptCams(true, false, 0, true, false);
+});
+mp.events.add('Destroy:Login:Cam', ( ) => {
+    LoginCam.destroy
+});
+
 
 mp.players.local.freezePosition(true);
 mp.game.ui.displayRadar(false);
