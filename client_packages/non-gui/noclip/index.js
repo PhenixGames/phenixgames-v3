@@ -46,7 +46,6 @@ var getNormalizedVector = function (vector) {
   
   });
   function startNoClip() {
-    mp.game.graphics.notify('NoClip ~g~activated');
     var camPos = new mp.Vector3(
       localPlayer.position.x,
       localPlayer.position.y,
@@ -62,7 +61,6 @@ var getNormalizedVector = function (vector) {
     localPlayer.setCollision(false, false);
   }
   function stopNoClip() {
-    mp.game.graphics.notify('NoClip ~r~disabled');
     if (noClipCamera) {
       localPlayer.position = noClipCamera.getCoord();
       localPlayer.setHeading(noClipCamera.getRot(2).z);
