@@ -15,7 +15,7 @@ mp.events.add('Create:Login:Cam', ( ) => {
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 });
 mp.events.add('Destroy:Login:Cam', ( ) => {
-    LoginCam.destroy
+    LoginCam.destroy();
 });
 
 
