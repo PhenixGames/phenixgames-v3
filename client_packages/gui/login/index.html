@@ -50,6 +50,12 @@
         </div>
         <script>
             var isLogin = true;
+            var already = false;
+
+            function wrongPassword() {
+                document.getElementById('error_msg').innerHTML = "Du hast das Passwort falsch eingegeben."
+                already = false;
+            }
 
             function hasNoAccount() {
                 isLogin = false;
@@ -60,7 +66,7 @@
                 document.getElementById('welcome_msg').innerHTML = "Welcome Newbie"
             }
       
-            var already = false;
+            
             document.getElementById('pg_login').addEventListener('submit', (evt) => {
                 evt.preventDefault();
                 

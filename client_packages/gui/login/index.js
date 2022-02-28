@@ -28,6 +28,10 @@ mp.events.add('Login:NoAccount', () => {
     browser.execute('hasNoAccount()');
 });
 
+mp.events.add('Wrong:Password', () => {
+    browser.execute('wrongPassword();')
+})
+
 mp.events.add('uiLogin_LoginButton', (password) => {
     mp.events.callRemote('LoginAccount', password);
 });
