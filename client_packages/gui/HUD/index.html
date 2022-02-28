@@ -58,12 +58,12 @@
              * 
              * */
             function manageVoice(type) {
-                if(manageVoice) {
-                    document.getElementById('voice_muted').classList.add('display-none');
-                    document.getElementById('voice_speak').classList.remove('display-none');
-                }else {
+                if(type == 1) {
                     document.getElementById('voice_muted').classList.remove('display-none');
                     document.getElementById('voice_speak').classList.add('display-none');
+                }else {
+                    document.getElementById('voice_muted').classList.add('display-none');
+                    document.getElementById('voice_speak').classList.remove('display-none');
                 }
             }
 
