@@ -180,3 +180,4 @@ module.exports.playerOnline = 0;
 
 
 require('./permissionSystem');
+require('./_events');
