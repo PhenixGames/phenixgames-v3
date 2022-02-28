@@ -127,6 +127,12 @@ mp.events.add("render", () => {
             }
         }
     });
+
+    if(mp.voiceChat.muted){
+        browser.execute(`manageVoice("${0}");`);
+    }else {
+        browser.execute(`manageVoice("${1}");`);
+    }
 });
 
 //Dieses Event ändert die Variable auf den Passenden wert der vom server übergeben wurde
