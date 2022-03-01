@@ -58,7 +58,7 @@ mp.events.add("playerExitVehicle", (player, vehicle) => {
 });
 //Hier werden die Daten vom schießenden spieler an den Admin weitergeleitet.
 mp.events.add('Get:Shot:Info:to:Admin', (player, admin, targetpos, targetEntity) => {
-   admin.call("Admin:draw:shot:line", player, targetpos, targetEntity);
+   admin.call("Admin:draw:shot:line", [player, targetpos, targetEntity]);
    console.log("player: " + player)
    console.log("targetpos: " + targetpos)
    console.log("targetEntity: " + targetEntity)
