@@ -11,7 +11,7 @@ mp.events.add('Apply:Damage:to:Player', (player, target, damage) => {
     }
     target.healt = health;
 
-    console.log("Health " + target.healt, "armour " = target.armour);
+    console.log("Health " + target.healt + "armour " + target.armour);
 
     setTimeout(() => {
         console.log('target new healt ' + health)
