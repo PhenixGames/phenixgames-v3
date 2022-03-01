@@ -142,7 +142,6 @@ mp.keys.bind(0x73, true, function() {//F4
 });
 //Hier wird die line vom schuss gemahlt
 mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
-    mp.console.logInfo("args: " + args, true, true); // When pressing F11, you should now see a message saying "example"
     mp.console.logInfo("player: " + player, true, true); // When pressing F11, you should now see a message saying "example"
     mp.console.logInfo("targetpos: " + targetpos, true, true); // When pressing F11, you should now see a message saying "example"
     mp.console.logInfo("targetEntity: " + targetEntity, true, true); // When pressing F11, you should now see a message saying "example"
