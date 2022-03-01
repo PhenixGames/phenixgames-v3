@@ -149,7 +149,7 @@ mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
     let g = 0;
     let b = 0;
     let a = 255
-    if(targetEntity == undefined){
+    if(targetEntity == null){
         b == 255;
     }else {
         r == 255;
