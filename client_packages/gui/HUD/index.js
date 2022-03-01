@@ -158,6 +158,6 @@ mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
 
     mp.console.logInfo("Color R:" + r + " G:" + g + " B:"+ b , true, true); // When pressing F11, you should now see a message saying "example"
     var item = [Number(player.position.x), Number(player.position.y), Number(player.position.z), Number(targetpos.x), Number(targetpos.y), Number(targetpos.z), r, g, b, a];
-    mp.game.graphics.drawLine(item[0]);
+    mp.game.graphics.drawLine(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8], item[9], item[10]);
     linearray.push(item);
 });
