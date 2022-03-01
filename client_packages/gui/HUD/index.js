@@ -71,7 +71,7 @@ mp.events.add("render", () => {
                 if (player.isDead()){
                     if (mp.players.local.position.subtract(player.position).length() < 10 && mp.players.local.position.subtract(player.position).length() !== 0) {
                         const drawPosition = [player.position.x, player.position.y, player.position.z + 1.5];
-                        mp.game.graphics.drawText(`~R~${"Der Spieler ist Tot"}`, drawPosition, {
+                        mp.game.graphics.drawText(`~r~${"Der Spieler ist Tot"}`, drawPosition, {
                             font: 0,
                             color: [255, 255, 255, 185],
                             scale: [0.5, 0.5],
