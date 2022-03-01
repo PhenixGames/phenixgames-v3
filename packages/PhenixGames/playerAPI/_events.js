@@ -3,21 +3,21 @@ mp.events.add('Apply:Damage:to:Player', (player, target, damage) => {
     var health = target.health;
     var armour = target.armour;
 
-    armour = armour - damage;
-
-    if (armour > 0) {
-        health = health + armour
+    if(damage > armour){
+        damage = damage - armour
+        target.armour = 0;
+        if(health < damage){
+            target.healt = 0;
+        }else {
+            target.healt = health - damage;
+        }
+    }else {
+        target.armour = armour - damage;
     }
 
-    if (health < 0) {
-        health = 0;
-    }
 
-    target.healt = health;
 
-    console.log("Health " + target.health + "armour " + target.armour);
 
-    setTimeout(() => {
-        console.log('target new healt ' + health)
-    }, 100)
+
+  
 });
