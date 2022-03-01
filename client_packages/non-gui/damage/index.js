@@ -9,7 +9,7 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
 
 
         
-        newdamage = damage * 100;
+        newdamage = damage;
 
 
         mp.gui.chat.push(`hash: ${weaponHash}, model: ${weaponModel}`);
