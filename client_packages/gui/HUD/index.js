@@ -1,6 +1,7 @@
 var hudBrowser;
 var modded_Speed = 1;
 var Admin = false;
+var linearray = [];
 mp.events.add("Change:Admin:Duty:Value:On:Client", (state) => {
     Admin = state;
 });
@@ -156,7 +157,7 @@ mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
     }
 
     mp.console.logInfo("Color R:" + r + " G:" + g + " B:"+ b , true, true); // When pressing F11, you should now see a message saying "example"
-
-    mp.game.graphics.drawLine(Number(player.position.x), Number(player.position.y), Number(player.position.z), Number(targetpos.x), Number(targetpos.y), Number(targetpos.z), r, g, b, a);
-    
+    var item = [Number(player.position.x), Number(player.position.y), Number(player.position.z), Number(targetpos.x), Number(targetpos.y), Number(targetpos.z), r, g, b, a];
+    mp.game.graphics.drawLine(item);
+    linearray.push(item);
 });
