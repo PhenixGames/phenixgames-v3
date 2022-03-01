@@ -150,9 +150,9 @@ mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
     let b = 0;
     let a = 255
     if(targetEntity == null){
-        b == 255;
+        b = 255;
     }else {
-        r == 255;
+        r = 255;
     }
 
     mp.console.logInfo("Color R:" + r + " G:" + g + " B:"+ b , true, true); // When pressing F11, you should now see a message saying "example"
