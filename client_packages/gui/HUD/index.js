@@ -157,6 +157,6 @@ mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
 
     mp.console.logInfo("Color R:" + r + " G:" + g + " B:"+ b , true, true); // When pressing F11, you should now see a message saying "example"
 
-    mp.game.graphics.drawLine(Number(player.position.X), Number(player.position.Y), Number(player.position.Z), Number(targetpos.X), Number(targetpos.Y), Number(targetpos.Z), r, g, b, a);
+    mp.game.graphics.drawLine(Number(player.position.x), Number(player.position.y), Number(player.position.z), Number(targetpos.x), Number(targetpos.y), Number(targetpos.z), r, g, b, a);
     
 });
