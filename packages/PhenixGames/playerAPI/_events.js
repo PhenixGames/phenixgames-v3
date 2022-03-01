@@ -14,10 +14,4 @@ mp.events.add('Apply:Damage:to:Player', (player, target, damage) => {
     }else {
         target.armour = armour - damage;
     }
-
-
-
-
-
-  
 });
