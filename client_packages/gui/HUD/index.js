@@ -140,7 +140,7 @@ mp.keys.bind(0x73, true, function() {//F4
     if(!mp.voiceChat.muted) hudBrowser.execute(`manageVoice("${0}");`);
     else hudBrowser.execute(`manageVoice("${1}");`);
 });
-
+//Hier wird die line vom schuss gemahlt
 mp.events.add("Admin:draw:shot:line", (args, player, targetpos, targetEntity) => {
     mp.console.logInfo("args: " + args, true, true); // When pressing F11, you should now see a message saying "example"
     mp.console.logInfo("player: " + player, true, true); // When pressing F11, you should now see a message saying "example"
