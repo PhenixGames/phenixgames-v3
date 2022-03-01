@@ -97,6 +97,11 @@ mp.events.add("render", () => {
 
 
         });
+
+        linearray.map(item => {
+            mp.game.graphics.drawLine(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8], item[9], item[10]);
+        });
+
     }
     //Hier wird Das Speedometer Geupdated.
     if(mp.players.local.vehicle){
@@ -128,6 +133,9 @@ mp.events.add("render", () => {
             }
         }
     });
+
+
+
 });
 
 //Dieses Event ändert die Variable auf den Passenden wert der vom server übergeben wurde
@@ -143,9 +151,9 @@ mp.keys.bind(0x73, true, function() {//F4
 });
 //Hier wird die line vom schuss gemahlt
 mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
-    mp.console.logInfo("player: " + player, true, true); // When pressing F11, you should now see a message saying "example"
-    mp.console.logInfo("targetpos: " + targetpos, true, true); // When pressing F11, you should now see a message saying "example"
-    mp.console.logInfo("targetEntity: " + targetEntity, true, true); // When pressing F11, you should now see a message saying "example"
+    // mp.console.logInfo("player: " + player, true, true); // When pressing F11, you should now see a message saying "example"
+    // mp.console.logInfo("targetpos: " + targetpos, true, true); // When pressing F11, you should now see a message saying "example"
+    // mp.console.logInfo("targetEntity: " + targetEntity, true, true); // When pressing F11, you should now see a message saying "example"
     let r = 0;
     let g = 0;
     let b = 0;
@@ -156,14 +164,14 @@ mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
         r = 255;
     }
 
-    mp.console.logInfo("Color R:" + r + " G:" + g + " B:"+ b , true, true); // When pressing F11, you should now see a message saying "example"
+    //mp.console.logInfo("Color R:" + r + " G:" + g + " B:"+ b , true, true); // When pressing F11, you should now see a message saying "example"
     
     var item = [Number(player.position.x), Number(player.position.y), Number(player.position.z), Number(targetpos.x), Number(targetpos.y), Number(targetpos.z), r, g, b, a];
-    mp.game.graphics.drawLine(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8], item[9], item[10]);
+    //mp.game.graphics.drawLine(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8], item[9], item[10]);
     linearray.push(item);
     setTimeout(() => {
-        mp.console.logInfo("Linearray before: "+ linearray , true, true); // When pressing F11, you should now see a message saying "example"
+        //mp.console.logInfo("Linearray before: "+ linearray , true, true); // When pressing F11, you should now see a message saying "example"
         linearray = linearray.filter(i => i !== item);
-        mp.console.logInfo("Linearray after: "+ linearray , true, true);
+        //mp.console.logInfo("Linearray after: "+ linearray , true, true);
     }, 10000);
 });
