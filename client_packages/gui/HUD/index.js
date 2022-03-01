@@ -68,6 +68,18 @@ mp.events.add("render", () => {
                     outline: true,
                     centre: false
                 });
+                if (player.isDead()){
+                    if (mp.players.local.position.subtract(player.position).length() < 10 && mp.players.local.position.subtract(player.position).length() !== 0) {
+                        const drawPosition = [player.position.x, player.position.y, player.position.z + 1.5];
+                        mp.game.graphics.drawText(`~R~${"Der Spieler ist Tot"}`, drawPosition, {
+                            font: 0,
+                            color: [255, 255, 255, 185],
+                            scale: [0.5, 0.5],
+                            outline: false,
+                            centre: true
+                        });
+                    }
+                }
                 if (player.getVariable("isMedia")) {
                     if (mp.players.local.position.subtract(player.position).length() < 10 && mp.players.local.position.subtract(player.position).length() !== 0) {
                         const drawPosition = [player.position.x, player.position.y, player.position.z + 1.2];
