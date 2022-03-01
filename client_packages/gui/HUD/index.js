@@ -140,3 +140,24 @@ mp.keys.bind(0x73, true, function() {//F4
     if(!mp.voiceChat.muted) hudBrowser.execute(`manageVoice("${0}");`);
     else hudBrowser.execute(`manageVoice("${1}");`);
 });
+
+mp.events.add("Admin:draw:shot:line", (args, player, targetpos, targetEntity) => {
+    mp.console.logInfo("args: " + args, true, true); // When pressing F11, you should now see a message saying "example"
+    mp.console.logInfo("player: " + player, true, true); // When pressing F11, you should now see a message saying "example"
+    mp.console.logInfo("targetpos: " + targetpos, true, true); // When pressing F11, you should now see a message saying "example"
+    mp.console.logInfo("targetEntity: " + targetEntity, true, true); // When pressing F11, you should now see a message saying "example"
+    let r = 0;
+    let g = 0;
+    let b = 0;
+    let a = 255
+    if(targetEntity == undefined){
+        b == 255;
+    }else {
+        r == 255;
+    }
+
+    mp.console.logInfo("Color R:" + r + " G:" + g + " B:"+ b , true, true); // When pressing F11, you should now see a message saying "example"
+
+    mp.game.graphics.drawLine(player.position.X, player.position.Y, player.position.Z, targetpos.X, targetpos.Y, targetpos.Z, r, g, b, a);
+    
+});

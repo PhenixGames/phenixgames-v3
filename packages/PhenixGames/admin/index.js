@@ -56,4 +56,8 @@ mp.events.add("playerExitVehicle", (player, vehicle) => {
         }, 1000);//Falls Probleme sind, Zeit hoch Setzen.
     }
 });
+
+mp.events.add('Get:Shot:Info:to:Admin', (player, args, admin, targetpos, targetEntity) => {
+   admin.call("Admin:draw:shot:line", player, targetpos, targetEntity);
+});
 //

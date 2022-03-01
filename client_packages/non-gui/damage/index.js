@@ -30,3 +30,15 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
         return false;
     }
 });
+
+
+mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
+    mp.players.forEachInStreamRange((player) => {
+
+        if (player.getVariable("Aduty")) {
+            mp.events.callRemote("Get:Shot:Info:to:Admin", player, targetPosition, targetEntity);
+        }
+
+
+    });
+});
