@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html lang="de">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="copyright" content="BlackDayz &copy; 2020" />
+    <meta name="author" content="BlackDayz &copy;" />
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="src/css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://blackdayz.github.io/BlackCSS/lib/BlackCSS.css" />
+
+    <script>
+        /**
+         * @author Blackdayz
+         * @copyright PhenixGames
+         * @version 0.0.1
+         * @lastupdate 21.12.2020
+         */
+
+        window.addEventListener('load', function () {
+            setInterval(() => {
+                var ele = document.querySelector('.loading');
+                var style = window.getComputedStyle(ele, ':before').width;
+                var revivebutton = document.getElementById('revive');
+                if (style == "1523.19px") {
+                    ele.style.opacity = "0";
+                    revivebutton.style.display = "block";
+                    setTimeout(() => {
+                        revivebutton.style.opacity = "1";
+                    }, 100);
+                }
+                //DEBUG -- DELETE ON PROD
+                ele.style.opacity = "0";
+                revivebutton.style.display = "block";
+                revivebutton.style.opacity = "1";
+            }, 500);
+
+
+
+        })
+    </script>
+</head>
+
+<body>
+
+    <div class="wrapper white">
+        <div class="logo left">
+            <img src="../_assets/img/logo/web/PhenixGames_Logo_no_text.svg" />
+        </div>
+        <div class="header">
+            <h1>Pass das nÃ¤chste mal besser auf!</h1>
+        </div>
+        <div class="quotes center">
+            <span id="quotes"></span>
+        </div>
+        <hr>
+        <div class="loading"></div>
+        <div class="revivebutton"><button id="revive">Lasse dich vom Notartzt abholen</button></div>
+    </div>
+
+    <script src="src/js/quote.js"></script>
+
+    <script>
+        $('#revive').click(() => {
+            $('.alert').remove();
+            mp.trigger('HTML:Call:Respawn');
+        });
+
+    </script>
+</body>
+
+</html>
