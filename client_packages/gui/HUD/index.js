@@ -175,10 +175,11 @@ mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
     if(targetEntity == null){
         b = 255;
     }else {
-        if(targetEntity.getVariable("isMedia")){
+        if(targetEntity.getVariable("isMedia") || player.getVariable("isMedia")){
             r = 255;
             b = 255;
         }else {
+            
             r = 255;
         }
         
