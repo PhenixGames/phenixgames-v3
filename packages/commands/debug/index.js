@@ -7,3 +7,9 @@ mp.events.addCommand("pos", (player) => {
 mp.events.addCommand('callfunc', ( player, arg, name ) => {
    player.call(name);
 });
+
+
+mp.events.addCommand('spawnped', ( player, arg, ped ) => {
+    let dynamicPed = mp.peds.new(mp.joaat(ped), mp.players.at(0).position, {dynamic:true});
+dynamicPed.controller = mp.players.at(0);
+ });
