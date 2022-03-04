@@ -12,7 +12,7 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
 
         newdamage = damage * 0.5;
 
-
+console.log(boneIndex)
         
 
         //Headshotmp ist am ende auf den dmg wert anzuwenden falls ein Headschot gemacht wurde!
