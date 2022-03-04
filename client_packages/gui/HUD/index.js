@@ -7,24 +7,16 @@ mp.events.add("Change:Admin:Duty:Value:On:Client", (state) => {
 });
 
 mp.events.add('Player:ActivateHUD', () => {
-    if(hudBrowser){
-        hudBrowser = mp.browsers.new("package://gui/HUD/index.html");
-        hudBrowser.execute(`setPlayerId("${mp.players.local.getVariable('playerId')}");`);
-    }
-    
+    hudBrowser = mp.browsers.new("package://gui/HUD/index.html");
+    hudBrowser.execute(`setPlayerId("${mp.players.local.getVariable('playerId')}");`);
 });
 
 mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
-    if(hudBrowser){
-        hudBrowser.execute(`showSpeedometer();`)
-    }
-    
+    hudBrowser.execute(`showSpeedometer();`)
 });
 
 mp.events.add("playerLeaveVehicle", (player, vehicle) => {
-    if(hudBrowser){
-        hudBrowser.execute(`removeSpeedometer();`)
-    }
+    hudBrowser.execute(`removeSpeedometer();`)
 });
 
 //Render For Car
@@ -134,9 +126,8 @@ mp.events.add("render", () => {
 
         vehicle.setEngineTorqueMultiplier(modded_Speed);
         mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
-        if(hudBrowser){
-            hudBrowser.execute(`setSpeedometer("${0}", "${Math.round(speed)}");`)
-        }
+
+        hudBrowser.execute(`setSpeedometer("${0}", "${Math.round(speed)}");`)
     }
 
     //Hier wird der Name Des Admins Gerendert für die Spieler die in 10 Meter reichweite sind (Er selber ausgeschlossen)
