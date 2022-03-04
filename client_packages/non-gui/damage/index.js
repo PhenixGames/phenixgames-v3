@@ -22,7 +22,7 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
         ]
 
         damageConfig.map(damageC => {
-            mp.gui.chat.puhs(damageC)
+            mp.gui.chat.push(damageC)
             if(boneIndex === damageC.index) {
                 newdamage = damage * Number(damageC.damageM)
             }
