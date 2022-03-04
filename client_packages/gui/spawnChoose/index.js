@@ -1,4 +1,4 @@
-var browser;
+var spawnChooseBrowser;
 
 mp.events.add('Player:Spawn:Options', (type) => {
     mp.players.local.freezePosition(true);
@@ -6,7 +6,7 @@ mp.events.add('Player:Spawn:Options', (type) => {
     mp.game.ui.displayRadar(false);
     mp.game.ui.displayHud(false);
     mp.gui.chat.show(false);
-    browser = mp.browsers.new("package://gui/spawnChoose/index.html");
+    spawnChooseBrowser = mp.browsers.new("package://gui/spawnChoose/index.html");
 });
 
 mp.events.add('Player:Spawn', (type) => {
@@ -30,7 +30,7 @@ mp.events.add('Player:Spawn', (type) => {
 
 mp.events.add('Player:Spawn:Succes:close:Windows', () => {
     mp.events.remove(["Player:Spawn", "Player:Spawn:Options", "Player:Spawn:Succes:close:Windows"]);
-    browser.destroy();
+    spawnChooseBrowser.destroy();
     mp.gui.cursor.visible = false;
     mp.players.local.freezePosition(false);
     mp.gui.chat.show(true);
