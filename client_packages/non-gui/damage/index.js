@@ -22,6 +22,7 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
         ]
 
         damageConfig.map(damageC => {
+            mp.gui.chat.puhs(damageC)
             if(boneIndex === damageC.index) {
                 newdamage = damage * Number(damageC.damageM)
             }
@@ -34,8 +35,8 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
         }
 
 
-        mp.gui.chat.push(`hash: ${weaponHash}, model: ${weaponModel}, bone: ${boneIndex}`);
-        mp.gui.chat.push(`olddmg: ${damage}, newdmg: ${newdamage}`);
+        //mp.gui.chat.push(`hash: ${weaponHash}, model: ${weaponModel}, bone: ${boneIndex}`);
+        //mp.gui.chat.push(`olddmg: ${damage}, newdmg: ${newdamage}`);
         //mp.events.callRemote("Apply:Damage:to:Player", targetEntity, newdamage);
         return true;
     }else {
