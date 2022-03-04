@@ -1,5 +1,3 @@
-const damageConfig = require('./non-gui/damage/damage.json');
-
 mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapon, boneIndex, damage) => {
     if (targetEntity.type === 'player') {
         var newdamage;
@@ -12,7 +10,19 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
             damage = 100;
         }
 
+        var damageConfig = [
+            {
+                'index': '3',
+                'damageM': '1'
+            },
+            {
+                'index': '5',
+                'damageM': '1.1'
+            }
+        ]
+
         damageConfig.map(damageC => {
+            mp.gui.chat.push(JSON.stringify(damageC))
             if(boneIndex === damageC.index) {
                 newdamage = damage * Number(damageC.damageM)
             }
@@ -25,8 +35,8 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
         }
 
 
-        mp.gui.chat.push(`hash: ${weaponHash}, model: ${weaponModel}, bone: ${boneIndex}`);
-        mp.gui.chat.push(`olddmg: ${damage}, newdmg: ${newdamage}`);
+        //mp.gui.chat.push(`hash: ${weaponHash}, model: ${weaponModel}, bone: ${boneIndex}`);
+        //mp.gui.chat.push(`olddmg: ${damage}, newdmg: ${newdamage}`);
         //mp.events.callRemote("Apply:Damage:to:Player", targetEntity, newdamage);
         return true;
     }else {
