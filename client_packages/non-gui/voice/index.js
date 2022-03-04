@@ -56,6 +56,10 @@ mp.events.add("playerQuit", (player) =>
 	}
 });
 
+mp.events.add('Player:set:Rage:Voice', (player, range) => {
+   MaxRange = range;
+});
+
 setInterval(() =>
 {
 	let localPlayer = mp.players.local;
