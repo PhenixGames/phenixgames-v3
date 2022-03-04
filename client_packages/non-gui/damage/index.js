@@ -12,8 +12,6 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
 
         newdamage = damage * 0.5;
 
-console.log(boneIndex)
-        
 
         //Headshotmp ist am ende auf den dmg wert anzuwenden falls ein Headschot gemacht wurde!
         if(Headshot){
@@ -21,7 +19,7 @@ console.log(boneIndex)
         }
 
 
-        mp.gui.chat.push(`hash: ${weaponHash}, model: ${weaponModel}`);
+        mp.gui.chat.push(`hash: ${weaponHash}, model: ${weaponModel}, bone: ${boneIndex}`);
         mp.gui.chat.push(`olddmg: ${damage}, newdmg: ${newdamage}`);
         mp.events.callRemote("Apply:Damage:to:Player", targetEntity, newdamage);
         return true;
