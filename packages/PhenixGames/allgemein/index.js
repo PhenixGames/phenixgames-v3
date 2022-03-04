@@ -2,7 +2,12 @@ const console = require('better-console');
 mp.events.add("vehicleDeath", (vehicle) => {
     setTimeout(() => {
         console.info(JSON.stringify(vehicle));
-        if(vehicle) return vehicle.destroy();
+        try {
+            if(vehicle) return vehicle.destroy(); 
+        }catch(err){
+            console.info("Ein Fehler ist aufgetreten.");
+        }
+        
     }, 10000);
     
 });
