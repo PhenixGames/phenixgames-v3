@@ -8,6 +8,7 @@
 	"csharp" : "disabled",
 	"voice-chat" : true,
 	"voice-chat-sample-rate" : 48000,
+	"sync-rate" : 10,
 	"port": 22005
 	
 }
