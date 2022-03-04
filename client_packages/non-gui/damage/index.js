@@ -1,5 +1,3 @@
-const damageConfig = require('./non-gui/damage/damage.json');
-
 mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapon, boneIndex, damage) => {
     if (targetEntity.type === 'player') {
         var newdamage;
@@ -11,6 +9,17 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
             Headshot = true;
             damage = 100;
         }
+
+        var damageConfig = [
+            {
+                'index': '3',
+                'damageM': '1'
+            },
+            {
+                'index': '5',
+                'damageM': '1.1'
+            }
+        ]
 
         damageConfig.map(damageC => {
             if(boneIndex === damageC.index) {
