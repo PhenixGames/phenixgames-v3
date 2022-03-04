@@ -5,7 +5,7 @@ mp.events.add("vehicleDeath", (vehicle) => {
         try {
             if(vehicle) return vehicle.destroy(); 
         }catch(err){
-            console.info("Ein Fehler ist aufgetreten.");
+            //console.info("Ein Fehler ist aufgetreten.");
         }
         
     }, 10000);
