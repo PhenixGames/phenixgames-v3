@@ -417,7 +417,7 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
 
         //mp.gui.chat.push(`hash: ${weaponHash}, model: ${weaponModel}, bone: ${boneIndex}`);
         //mp.gui.chat.push(`olddmg: ${damage}, newdmg: ${newdamage}`);
-        //mp.events.callRemote("Apply:Damage:to:Player", targetEntity, newdamage);
+        mp.events.callRemote("Apply:Damage:to:Player", targetEntity, newdamage);
         return true;
     }else {
         return false;
