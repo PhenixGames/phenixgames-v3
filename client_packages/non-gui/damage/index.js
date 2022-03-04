@@ -1,4 +1,4 @@
-const damageConfig = require('package://non-gui/damage/damage.json');
+const damageConfig = require('package://[...]/damage.json');
 
 mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapon, boneIndex, damage) => {
     if (targetEntity.type === 'player') {
