@@ -41,3 +41,6 @@ mp.players.local.setConfigFlag(429, true);
 mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {    
     mp.game.vehicle.defaultEngineBehaviour = false;
 });
+
+
+hier habe ich einen Fehler im code gemacht.
