@@ -5,18 +5,8 @@ mp.events.add('Open:Death:Browser', () => {
     mp.gui.cursor.visible = true;
 });
 mp.events.add('close:Death:Browser', () => {
-    if(Deathbrowser){
-        Deathbrowser.destroy();
-        mp.gui.cursor.visible = false;
-    }else {
-        setTimeout(() => {
-            if(Deathbrowser){
-                Deathbrowser.destroy();
-                mp.gui.cursor.visible = false;
-            } 
-            else {return};
-        }, 1000);
-    }
+    Deathbrowser.destroy();
+    mp.gui.cursor.visible = false;
 });
 
 mp.events.add('HTML:Call:Respawn', () => {
