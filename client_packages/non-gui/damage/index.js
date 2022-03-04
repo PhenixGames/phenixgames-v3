@@ -1,3 +1,5 @@
+const damageConfig = require('./damage.json');
+
 mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapon, boneIndex, damage) => {
     if (targetEntity.type === 'player') {
         var newdamage;
@@ -10,7 +12,11 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
             damage = 100;
         }
 
-        newdamage = damage * 0.5;
+        damageConfig.map(damageC => {
+            if(boneIndex === damageC.index) {
+                newdamage = damage * Number(damageC.damageM)
+            }
+        });
 
 
         //Headshotmp ist am ende auf den dmg wert anzuwenden falls ein Headschot gemacht wurde!
@@ -21,7 +27,7 @@ mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapo
 
         mp.gui.chat.push(`hash: ${weaponHash}, model: ${weaponModel}, bone: ${boneIndex}`);
         mp.gui.chat.push(`olddmg: ${damage}, newdmg: ${newdamage}`);
-        mp.events.callRemote("Apply:Damage:to:Player", targetEntity, newdamage);
+        //mp.events.callRemote("Apply:Damage:to:Player", targetEntity, newdamage);
         return true;
     }else {
         return false;
