@@ -1,6 +1,7 @@
 const console = require('better-console');
 mp.events.add("vehicleDeath", (vehicle) => {
     setTimeout(() => {
+        console.info(vehicle);
         if(vehicle) return vehicle.destroy();
     }, 10000);
     
