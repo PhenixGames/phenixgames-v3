@@ -61,7 +61,9 @@ mp.events.add('RegisterAccount', async (player, password) => {
     permissionSystem.setPlayerPermissionsLocal(player);
 
     player.call('Login:Succes:close:Windows');
-    return player.call('Player:InGameName:Choose');
+    player.call('Player:InGameName:Choose');
+    player.call('Destroy:Login:Cam');
+    return;
 });
 
 mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
