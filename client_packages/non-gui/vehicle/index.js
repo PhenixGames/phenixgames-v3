@@ -26,11 +26,13 @@ mp.keys.bind(0x79, true, function() {
 });
 
 mp.events.add('Vehicle:Engine:state', (state) => {
-    mp.game.vehicle.defaultEngineBehaviour = false;
-    setTimeout(() => {
-        mp.players.local.vehicle.engine = state;
-        
-    }, 1000)
+    if(mp.players.local.vehicle){
+        mp.game.vehicle.defaultEngineBehaviour = false;
+        setTimeout(() => {
+            mp.players.local.vehicle.engine = state;
+            
+        }, 1000)
+    }
 
 });
 mp.players.local.setConfigFlag(429, true);
