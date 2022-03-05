@@ -1,5 +1,5 @@
 
-mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, boneIndex, damage) => {
+mp.events.add('Server:Handle:Damage', (Shootingplayer, args, targetplayer, weapon, boneIndex, damage) => {
     let newdamage;
     if (boneIndex === 20) {
         newdamage = 60;
