@@ -18,9 +18,10 @@ mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
     });
 });
 mp.events.add('render', () => {
+    let weaponHash = mp.game.invoke(`0x0A6DB4965674D243`, mp.players.local.handle); //GET_SELECTED_PED_WEAPON
     let weaponModel = mp.game.weapon.getWeapontypeModel(weaponHash);
     mp.game.controls.disableControlAction(0, 140, true);
-    if(!weapon == 0){
+    if(!weaponModel == 0){
         mp.game.controls.disableControlAction(0, 142, true);
     }
 });
