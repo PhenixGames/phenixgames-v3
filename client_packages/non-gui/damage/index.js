@@ -1,4 +1,5 @@
 mp.events.add('outgoingDamage', (sourceEntity, targetEntity, sourcePlayer, weapon, boneIndex, damage) => {
+    return false;
     if (targetEntity.type === 'player') {
         var newdamage;
         const Headshotmp = 1.1;
