@@ -17,6 +17,6 @@ mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
         }
     });
 });
-
-
-mp.game.controls.disableControlAction(0, 140, true);
+mp.events.add('render', () => {
+    mp.game.controls.disableControlAction(0, 140, true);
+});
