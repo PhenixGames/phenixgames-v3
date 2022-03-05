@@ -1,5 +1,5 @@
 
-mp.events.add('Server:Handle:Damage', (Shootingplayer, args, targetplayer, weapon, boneIndex, damage) => {
+mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, boneIndex, damage) => {
     let newdamage;
     if (boneIndex === 20) {
         newdamage = 60;
@@ -14,7 +14,7 @@ mp.events.add('Server:Handle:Damage', (Shootingplayer, args, targetplayer, weapo
 
 function ApplyDamageToPlayer(Shootingplayer, target, damage){
     //Shootingplayer need a Hud to show if he Hitted
-    player.outputChatBox(`Du hast an dem Spieler ${damage} Schaden gemacht`);
+    Shootingplayer.outputChatBox(`Du hast an dem Spieler ${damage} Schaden gemacht`);
     var health = target.health;
     var armour = target.armour;
 
