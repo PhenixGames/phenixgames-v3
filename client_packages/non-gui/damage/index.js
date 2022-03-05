@@ -19,7 +19,5 @@ mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
 });
 mp.events.add('render', () => {
     mp.game.controls.disableControlAction(0, 140, true);
-    mp.game.controls.disableControlAction(0, 223, true);
-    mp.game.controls.disableControlAction(0, 24, true);
-
+    mp.game.controls.disableControlAction(0, 142, true);
 });
