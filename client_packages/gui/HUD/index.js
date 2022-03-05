@@ -1,4 +1,5 @@
 var hudBrowser;
+let active = false;
 var modded_Speed = 1;
 var Admin = false;
 var linearray = [];
@@ -9,6 +10,7 @@ mp.events.add("Change:Admin:Duty:Value:On:Client", (state) => {
 mp.events.add('Player:ActivateHUD', () => {
     hudBrowser = mp.browsers.new("package://gui/HUD/index.html");
     hudBrowser.execute(`setPlayerId("${mp.players.local.getVariable('playerId')}");`);
+    active = true;
 });
 
 mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
@@ -16,7 +18,10 @@ mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
 });
 
 mp.events.add("playerLeaveVehicle", (player, vehicle) => {
-    hudBrowser.execute(`removeSpeedometer();`)
+    if(active){
+        hudBrowser.execute(`removeSpeedometer();`)
+    }
+    
 });
 
 //Render For Car
