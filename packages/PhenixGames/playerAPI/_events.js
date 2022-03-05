@@ -7,8 +7,10 @@ mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, bon
         newdamage = damage * 0.3
     }
     
+    if(!targetplayer.getVariable('Aduty')){
+        ApplyDamageToPlayer(Shootingplayer, targetplayer, newdamage);
+    }
     
-    ApplyDamageToPlayer(Shootingplayer, targetplayer, newdamage);
 
 });
 

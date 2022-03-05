@@ -53,3 +53,5 @@ mp.events.add('Get:Shot:Info:to:Admin', (player, admin, targetpos, targetEntity)
    admin.call("Admin:draw:shot:line", [player, targetpos, targetEntity]);
 });
 //
+mp.game.controls.disableControlAction(0, 140, true);
+
