@@ -18,7 +18,11 @@ mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
     });
 });
 mp.events.add('render', () => {
+    let weaponModel = mp.game.weapon.getWeapontypeModel(weaponHash);
     mp.game.controls.disableControlAction(0, 140, true);
+    if(!weapon == 0){
+        mp.game.controls.disableControlAction(0, 142, true);
+    }
 });
 
 
