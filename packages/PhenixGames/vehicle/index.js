@@ -30,8 +30,8 @@ module.exports.saveVehicleData = async function (veh) {
     const veh_state = veh.veh_state;
     const veh_pos = veh.veh_pos;
     //ToDO Need to add insert color for saveVehicleData
-    const veh_primaryColor = veh.getColor(0);
-    const veh_secondaryColor = veh.getColor(1);
+    const veh_prim = veh.getColor(0);
+    const veh_sec = veh.getColor(1);
 
     return await database.query(`INSERT INTO pg_vehicles (veh_name, veh_owner, veh_keys, veh_state, veh_pos) VALUES (?, ?, ?, ?, ?)`, [veh_name, veh_owner, veh_keys, veh_state, veh_pos])
         .then(() => {return true})
