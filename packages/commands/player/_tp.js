@@ -9,23 +9,42 @@ mp.events.addCommand('tp', async (player, location) => {
 });
 
 mp.events.addCommand('tpto', async (player, target) =>{
+    if(!player.getVariable("Aduty"))return
+
     if(await Perms.hasPermissions(player, ["tp_to"])) {
-        mp.players.forEach(
-            (tg) => {
-                if(tg.socialClub == target){
-                    const pos = tg.position.x + ', ' + tg.position.y + ', ' + tg.position.z;
-                    const changePos = playerAPI.changePlayerPos(player, pos, null, JSON.stringify(tg.dimension))
-                    if(!changePos) player.notify('Etwas ist schief gelaufen!')
-                }else {
-                    return player.notify("Der Spieler wurde nicht gefunden");
+        if(typeof target == 'number'){
+            mp.players.forEach(
+                (tg) => {
+                    if(tg.getVariable("playerId") == target){
+                        const pos = tg.position.x + ', ' + tg.position.y + ', ' + tg.position.z;
+                        const changePos = playerAPI.changePlayerPos(player, pos, null, JSON.stringify(tg.dimension))
+                        if(!changePos) player.notify('Etwas ist schief gelaufen!')
+                    }else {
+                        return player.notify(`Der Spieler mit der ID ${target} wurde nicht gefunden`);
+                    }
                 }
-            }
-        );
+            );
+        }else {
+            mp.players.forEach(
+                (tg) => {
+                    if(tg.socialClub == target){
+                        const pos = tg.position.x + ', ' + tg.position.y + ', ' + tg.position.z;
+                        const changePos = playerAPI.changePlayerPos(player, pos, null, JSON.stringify(tg.dimension))
+                        if(!changePos) player.notify('Etwas ist schief gelaufen!')
+                    }else {
+                        return player.notify("Der Spieler wurde nicht gefunden");
+                    }
+                }
+            );
+        }
+        
     }
 });
 
-mp.events.addCommand('tptovehid', async (player, target) =>{
+mp.events.addCommand('tptoveh', async (player, target) =>{
+    if(!player.getVariable("Aduty"))return
     if(await Perms.hasPermissions(player, ["tp_to"])) {
+        if(!typeof target == 'number') return player.notify(`Das Fahrzeug ${target} ist keine ID`);
         mp.vehicles.forEach(
             (tg) => {
                 if(tg.getVariable("veh_id") == target){
@@ -33,7 +52,7 @@ mp.events.addCommand('tptovehid', async (player, target) =>{
                     const changePos = playerAPI.changePlayerPos(player, pos, null, JSON.stringify(tg.dimension))
                     if(!changePos) player.notify('Etwas ist schief gelaufen!')
                 }else {
-                    return player.notify("Das Fahrzeug wurde nicht gefunden");
+                    return player.notify(`Das Fahrzeug mit der ID ${target} wurde nicht gefunden`);
                 }
             }
         );
