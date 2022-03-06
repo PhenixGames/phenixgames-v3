@@ -173,7 +173,7 @@ module.exports.spawnAllVehicles = async function () {
                 const newVeh = mp.vehicles.new(mp.joaat(res[i].veh_name), JSON.parse(res[i].veh_pos),
                 {
                     numberPlate: res[i].veh_owner,
-                    //color: [prim,sec]
+                    color: [res[i].veh_prim,res[i].veh_sec]
                 });
                 newVeh.rotation = JSON.parse(res[i].veh_rot);
                 this.setLocalData(newVeh, res[i]);
