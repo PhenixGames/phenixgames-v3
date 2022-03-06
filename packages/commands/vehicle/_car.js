@@ -26,11 +26,6 @@ mp.events.addCommand("car", async (player, args) => {
         }
             
         
-
-        // if(player.getVariable('Player.Tmp.Admin.Veh')) {
-        //     player.getVariable('Player.Tmp.Admin.Veh').destroy();
-        // }
-
         var setVeh = mp.vehicles.new(mp.joaat(veh), player.position,
         {
             numberPlate: player.name,
@@ -39,7 +34,6 @@ mp.events.addCommand("car", async (player, args) => {
             engine: false
             
         });
-        //setVeh.rotation = player.heading;
         generellAPI.saveLocalVar(player, {
             'Player.Tmp.Admin.Veh': setVeh
         });
