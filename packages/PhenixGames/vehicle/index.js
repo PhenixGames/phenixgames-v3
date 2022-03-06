@@ -29,6 +29,9 @@ module.exports.saveVehicleData = async function (veh) {
     const veh_keys = veh.veh_keys;
     const veh_state = veh.veh_state;
     const veh_pos = veh.veh_pos;
+    //ToDO Need to add insert color for saveVehicleData
+    const veh_prim = veh.getColor(0);
+    const veh_sec = veh.getColor(1);
 
     return await database.query(`INSERT INTO pg_vehicles (veh_name, veh_owner, veh_keys, veh_state, veh_pos) VALUES (?, ?, ?, ?, ?)`, [veh_name, veh_owner, veh_keys, veh_state, veh_pos])
         .then(() => {return true})
@@ -49,8 +52,10 @@ module.exports.updateVehicleData = async function (veh) {
     const veh_keys = veh.veh_keys || veh.getVariable('veh_keys');
     const veh_state = veh.veh_state || veh.getVariable('veh_state');
     const veh_pos = veh.veh_pos || JSON.stringify(veh.position);
+    const veh_prim = veh.getColor(0);
+    const veh_sec = veh.getColor(1);
 
-    return await database.query(`UPDATE pg_vehicles SET veh_name = ?, veh_owner = ?, veh_keys = ?, veh_state = ?, veh_pos = ? WHERE veh_id = ?`, [veh_name, veh_owner, veh_keys, veh_state, veh_id, veh_pos])
+    return await database.query(`UPDATE pg_vehicles SET veh_name = ?, veh_owner = ?, veh_keys = ?, veh_state = ?, veh_pos = ? , veh_prim = ? , veh_sec = ?WHERE veh_id = ?`, [veh_name, veh_owner, veh_keys, veh_state, veh_id, veh_pos, veh_prim, veh_sec])
         .then(() => {return true})
         .catch(err => {
             console.error(err);
@@ -152,7 +157,7 @@ module.exports.setLocalData = async function (veh, veh_data) {
             'veh_owner': veh_data.veh_owner || veh.getVariable('veh_owner'),
             'veh_keys': veh_data.veh_keys || veh.getVariable('veh_keys'),
             'veh_state': veh_data.veh_state || veh.getVariable('veh_state'),
-            'veh_pos': veh.position
+            'veh_pos': veh.position 
         });
         return true;
     }catch(err) {
@@ -168,7 +173,7 @@ module.exports.spawnAllVehicles = async function () {
                 const newVeh = mp.vehicles.new(mp.joaat(res[i].veh_name), JSON.parse(res[i].veh_pos),
                 {
                     numberPlate: res[i].veh_owner,
-                    //color: [prim,sec]
+                    color: [res[i].veh_prim,res[i].veh_sec]
                 });
                 newVeh.rotation = JSON.parse(res[i].veh_rot);
                 this.setLocalData(newVeh, res[i]);
