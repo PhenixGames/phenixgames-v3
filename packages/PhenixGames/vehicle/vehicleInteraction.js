@@ -19,7 +19,7 @@ mp.events.add("playerExitVehicle", (player, vehicle) => {
 });
 
 setInterval(() => {
-    mp.vehicles.forEachInStreamRange((veh) => {
+    mp.vehicles.forEach((veh) => {
         var speed = veh.getVariable("veh_speed");
         var engine = veh.getVariable("veh_engine");
         let fuel = veh.getVariable("veh_fuel");
@@ -31,7 +31,8 @@ setInterval(() => {
             amount = 0.05
         }
         RemovefuelfromVehicle(veh, amount, fuel);
-    });
+        }
+    );
 }, 1000);
 function RemovefuelfromVehicle(veh, amount, fuel){
     fuel = fuel - amount;
