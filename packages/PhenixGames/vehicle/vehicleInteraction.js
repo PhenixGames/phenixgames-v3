@@ -31,7 +31,7 @@ setInterval(() => {
         let amount = 0;
         if(!engine) return;
         if(!speed== 0){
-            amount = (speed / 1000) + 0.1 
+            amount = (speed / 1500) 
         }else {
             amount = 0.05
         }
