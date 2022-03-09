@@ -16,3 +16,11 @@ mp.events.addCommand("speed", (player, speed = 1) => {
         player.call("Set:ModdedSpeed", [speed]);
     }
 });
+
+mp.events.addCommand("fuel", (player) => {
+    var fuel = 150;//150 ist aktuell der Maximale Tankstand
+    if(player.getVariable('isTeam')) {
+        
+        player.vehicle.setVariable("veh_fuel", fuel);
+    }
+});
