@@ -3,6 +3,14 @@ const Perms = require('../../PhenixGames/playerAPI/permissionSystem');
 const generellAPI = require('../../PhenixGames/allgemein/');
 
 mp.events.addCommand("car", async (player, args) => {
+    spawncar(player, args);
+});
+
+mp.events.addCommand("veh", async (player, args) => {
+    spawncar(player, args);
+});
+
+function spawncar(player, args){
     if(await Perms.hasPermissions(player, ["car_spawn"])) {
         try {
             args = args.split(' ');
@@ -67,4 +75,4 @@ mp.events.addCommand("car", async (player, args) => {
             return console.log('Error by saving the car into Database');
         }
     }
-});
+}

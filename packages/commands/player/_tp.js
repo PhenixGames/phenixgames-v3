@@ -9,6 +9,15 @@ mp.events.addCommand('tp', async (player, location) => {
 });
 
 mp.events.addCommand('tpto', async (player, target) =>{
+    tpto(player, target);
+});
+mp.events.addCommand('goto', async (player, target) =>{
+    tpto(player, target);
+});
+mp.events.addCommand('bring', async (player, target) =>{
+    bring(player, target);
+});
+function tpto(player, target){
     if(!player.getVariable("Aduty"))return
 
     if(await Perms.hasPermissions(player, ["tp_to"])) {
@@ -39,7 +48,37 @@ mp.events.addCommand('tpto', async (player, target) =>{
         }
         
     }
-});
+}
+function bring(player, target){
+    if(await Perms.hasPermissions(player, ["tp_to"])) {
+        if(typeof target == 'number'){
+            mp.players.forEach(
+                (tg) => {
+                    if(tg.getVariable("playerId") == target){
+                        const pos = player.position.x + ', ' + player.position.y + ', ' + player.position.z;
+                        const changePos = playerAPI.changePlayerPos(target, pos, null, JSON.stringify(tg.dimension))
+                        if(!changePos) player.notify('Etwas ist schief gelaufen!')
+                    }else {
+                        return player.notify(`Der Spieler mit der ID ${target} wurde nicht gefunden`);
+                    }
+                }
+            );
+        }else {
+            mp.players.forEach(
+                (tg) => {
+                    if(tg.socialClub == target){
+                        const pos = player.position.x + ', ' + player.position.y + ', ' + player.position.z;
+                        const changePos = playerAPI.changePlayerPos(target, pos, null, JSON.stringify(tg.dimension))
+                        if(!changePos) player.notify('Etwas ist schief gelaufen!')
+                    }else {
+                        return player.notify("Der Spieler wurde nicht gefunden");
+                    }
+                }
+            );
+        }
+        
+    }
+}
 
 mp.events.addCommand('tptoveh', async (player, target) =>{
     if(!player.getVariable("Aduty"))return
