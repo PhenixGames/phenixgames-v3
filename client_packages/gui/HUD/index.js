@@ -198,7 +198,6 @@ setInterval(() => {
 
         var speed = vehicle.getSpeed();
         speed = speed * 3.6;
-        mp.events.callRemote('Set:Variable:Of:ent' [vehicle, "veh_speed",speed]);
-        
+        vehicle.setVariable("veh_speed", speed);
     }
 }, 1000);

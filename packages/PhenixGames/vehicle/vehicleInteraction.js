@@ -40,7 +40,7 @@ setInterval(() => {
     );
 }, 1000);
 function RemovefuelfromVehicle(veh, amount, fuel){
-    if(fuel > amount){
+    if(fuel <= amount){
         veh.engine = false;
         veh.setVariable("veh_engine", veh.engine);
         fuel = 0;
