@@ -192,9 +192,9 @@ mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
 });
 
 setInterval(() => {
-    var player = mp.players.local;
-    if(player.vehicle){
-        var vehicle = player.vehicle;
+
+    if(mp.players.local.vehicle){
+        var vehicle = mp.players.local.vehicle;
 
         var speed = vehicle.getSpeed();
         speed = speed * 3.6;
