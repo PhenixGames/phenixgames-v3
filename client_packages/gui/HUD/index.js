@@ -132,7 +132,7 @@ mp.events.add("render", () => {
         vehicle.setEngineTorqueMultiplier(modded_Speed);
         mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
 
-        hudBrowser.execute(`setSpeedometer("${Math.round(fuel)}", "${Math.round(speed)}");`)
+        hudBrowser.execute(`setSpeedometer("${fuel.toFixed(2)}", "${Math.round(speed)}");`)
     }
 
     //Hier wird der Name Des Admins Gerendert für die Spieler die in 10 Meter reichweite sind (Er selber ausgeschlossen)
