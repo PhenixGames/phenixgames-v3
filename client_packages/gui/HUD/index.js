@@ -42,7 +42,7 @@ mp.events.add("render", () => {
                     });
                     var speed = vehicle.getSpeed();
                     speed = speed * 3.6;
-                    mp.game.graphics.drawText(`\n\n\n~b~Heading: ~w~${vehicle.getHeading().toFixed(2)}\n~b~Health: ~w~${vehicle.getHealth()}\n~b~Speed: ~w~${Math.round(speed)}\n`, drawPosition, {
+                    mp.game.graphics.drawText(`\n\n\n~b~Heading: ~w~${vehicle.getHeading().toFixed(2)}\n~b~Health: ~w~${vehicle.getHealth()}\n~b~Fuel: ~w~${vehicle.getVariable('veh_fuel')}\n~b~Speed: ~w~${Math.round(speed)}\n`, drawPosition, {
                         font: 0,
                         color: [255, 255, 255, 185],
                         scale: [0.25, 0.25],
@@ -125,14 +125,14 @@ mp.events.add("render", () => {
         mp.console.logInfo('test2', true, true)
         var player = mp.players.local;
         var vehicle = player.vehicle;
-
+        var fuel = vehicle.getVariable("veh_fuel");
         var speed = vehicle.getSpeed();
         speed = speed * 3.6;
 
         vehicle.setEngineTorqueMultiplier(modded_Speed);
         mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
 
-        hudBrowser.execute(`setSpeedometer("${0}", "${Math.round(speed)}");`)
+        hudBrowser.execute(`setSpeedometer("${fuel}", "${Math.round(speed)}");`)
     }
 
     //Hier wird der Name Des Admins Gerendert für die Spieler die in 10 Meter reichweite sind (Er selber ausgeschlossen)
@@ -189,3 +189,15 @@ mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
         linearray = linearray.filter(i => i !== item);
     }, 10000);
 });
+
+setInterval(() => {
+    var player = mp.players.local;
+    if(player.vehicle){
+        var vehicle = player.vehicle;
+
+        var speed = vehicle.getSpeed();
+        speed = speed * 3.6;
+        mp.events.callRemote('Set:Variable:Of:ent' [vehicle, "veh_speed",speed]);
+        
+    }
+}, 1000);

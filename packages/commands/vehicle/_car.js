@@ -58,7 +58,9 @@ mp.events.addCommand("car", async (player, args) => {
             veh_owner: player.socialClub,
             veh_keys: JSON.stringify([player.getVariable('playerId')]),
             veh_state: '1',
-            veh_pos: JSON.stringify(setVeh.position)
+            veh_pos: JSON.stringify(setVeh.position),
+            veh_fuel: 100
+            
         });
 
         if(!saveVeh) {

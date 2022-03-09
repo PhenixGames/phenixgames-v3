@@ -66,7 +66,7 @@ module.exports.updateVehicleData = async function (veh) {
  * @returns {boolean}
  */
 module.exports.updateVehiclePosition = async function (veh_id, veh_pos, veh_rot, veh) {
-    return await database.query('UPDATE pg_vehicles SET veh_pos = ?, veh_rot = ?, veh_prim = ?, veh_sec = ? WHERE veh_id = ?', [JSON.stringify(veh_pos), JSON.stringify(veh_rot),veh.getColor(0), veh.getColor(1) ,veh_id])
+    return await database.query('UPDATE pg_vehicles SET veh_pos = ?, veh_rot = ?, veh_prim = ?, veh_sec = ?, veh_fuel WHERE veh_id = ?', [JSON.stringify(veh_pos), JSON.stringify(veh_rot),veh.getColor(0), veh.getColor(1) , veh.getVariable("veh_fuel") ,veh_id])
         .catch(err => {
             console.error(err);
             return false;
@@ -153,7 +153,8 @@ module.exports.setLocalData = async function (veh, veh_data) {
             'veh_owner': veh_data.veh_owner || veh.getVariable('veh_owner'),
             'veh_keys': veh_data.veh_keys || veh.getVariable('veh_keys'),
             'veh_state': veh_data.veh_state || veh.getVariable('veh_state'),
-            'veh_pos': veh.position 
+            'veh_pos': veh.position, 
+            'veh_fuel': veh_data.veh_fuel
         });
         return true;
     }catch(err) {
@@ -183,7 +184,6 @@ module.exports.syncAllVehciles = async function () {
             this.updateVehiclePosition(vehicle.getVariable('veh_id'), vehicle.position, vehicle.rotation, vehicle);
         }
     );
-    // console.log('ALL VEHICLES SYNCED! ' + mp.vehicles.length)
 }
 
 require('./vehicleInteraction');
