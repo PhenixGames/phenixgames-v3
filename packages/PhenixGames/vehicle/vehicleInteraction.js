@@ -1,8 +1,13 @@
 mp.events.add('keypress:X', (player) => {
     try {
         var veh = player.vehicle;
-        veh.engine = !veh.engine;
-        veh.setVariable("veh_engine", veh.engine);
+        let fuel = veh.getVariable("veh_fuel");
+        if(!fuel == 0){
+            veh.engine = !veh.engine;
+            veh.setVariable("veh_engine", veh.engine);
+        }else {
+           return player.notify("Der Tank des Fahzeuges ist leer");
+        }
     }catch(err) {
         return;
     }
@@ -35,11 +40,18 @@ setInterval(() => {
     );
 }, 1000);
 function RemovefuelfromVehicle(veh, amount, fuel){
-    fuel = fuel - amount;
+    if(fuel > amount){
+        veh.engine = false;
+        veh.setVariable("veh_engine", veh.engine);
+        fuel = 0;
+    }else {
+        fuel = fuel - amount;
+    }
     veh.setVariable("veh_fuel", fuel);
 }
 mp.events.add('Set:Variable:Of:ent', (player, ent, data_name, data) => {
     try{
+        console.info(data_name, data);
         ent.setVariable(data_name, data);
     }catch (err){
         player.notify("Error: Datasetter of ent");
