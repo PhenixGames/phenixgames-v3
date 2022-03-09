@@ -50,11 +50,5 @@ function RemovefuelfromVehicle(veh, amount, fuel){
     veh.setVariable("veh_fuel", fuel);
 }
 mp.events.add('Set:Variable:Of:ent', (player, ent, data_name, data) => {
-    try{
-        console.info("_ "+data_name, "- " +data);
-        ent.setVariable(data_name, data);
-    }catch (err){
-        player.notify("Error: Datasetter of ent");
-    }
-    
+   console.info("EVENT CALLED -- Set:Variable:Of:ent")
 });
