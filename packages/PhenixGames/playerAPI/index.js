@@ -1,6 +1,4 @@
-const {
-    Database
-} = require("../../_db/db");
+const database = require("../../_db/db");
 
 
 const config = require('../../../_assets/json/config.json');
