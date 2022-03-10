@@ -12,5 +12,4 @@ require('./non-gui/noclip/');
 require('./non-gui/fingerpoint/');
 require('./non-gui/player/');
 require('./non-gui/voice/');
-require('./non-gui/damage/');
 require('./non-gui/keypresser/');
