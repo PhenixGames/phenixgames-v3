@@ -15,3 +15,7 @@ mp.nametags.enabled = false;
 mp.events.add("Set:God", (isGod) => {
   mp.players.local.setInvincible(isGod)
 });
+//Discord Rich Preset
+mp.events.add("Set:Discord", (title, playing) => {
+  mp.discord.update(title, playing);
+});

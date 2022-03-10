@@ -6,7 +6,7 @@ require('./gui/money/');
 require('./gui/HUD/')
 require('./gui/inventory/')
 
-require('./non-gui/discord/');
+
 require('./non-gui/vehicle/');
 require('./non-gui/noclip/');
 require('./non-gui/fingerpoint/');
