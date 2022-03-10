@@ -4,8 +4,7 @@ mp.keys.bind(0x11, true, function() {
     if(mp.players.local.vehicle.isSirenOn()) {
         setTimeout(() => {
             mp.players.local.vehicle.setSiren(true);
-        }, 1);
-        
+        }, 100);
     }
 });
 
@@ -20,7 +19,6 @@ mp.keys.bind(0x71, true, function() {
 });
 
 //f10
-
 mp.keys.bind(0x79, true, function() {
     mp.players.local.setToRagdoll(3000, 6000, 0, false, false, false);
 });
