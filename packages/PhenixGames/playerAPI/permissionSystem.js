@@ -1,7 +1,4 @@
-const {
-    Database
-} = require("../../_db/db");
-const database = new Database();
+const database = require("../../_db/db");
 
 const playerAPI = require('./index');
 const generellAPI = require('../allgemein/');
