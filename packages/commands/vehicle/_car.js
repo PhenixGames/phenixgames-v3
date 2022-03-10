@@ -10,7 +10,7 @@ mp.events.addCommand("veh", async (player, args) => {
     spawncar(player, args);
 });
 
-function spawncar(player, args){
+async function spawncar(player, args){
     if(await Perms.hasPermissions(player, ["car_spawn"])) {
         try {
             args = args.split(' ');
