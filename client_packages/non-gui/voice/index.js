@@ -56,7 +56,7 @@ mp.events.add("playerQuit", (player) =>
 	}
 });
 
-mp.events.add('Player:set:Rage:Voice', (player, range) => {
+mp.events.add('Player:set:Rage:Voice', (range) => {
    MaxRange = range;
 });
 
