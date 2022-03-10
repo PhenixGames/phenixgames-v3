@@ -1,14 +1,22 @@
-const { createConnection } = require('mysql');
+const mysql = require('mysql');
 const dbconfig = require('./db_config.json');
 
 class Database {
   constructor() {
-    this.connection = createConnection({
+    this.connection = mysql.createPool({
+      connectionLimit: 100,
       host: dbconfig.host,
       user: dbconfig.user,
       password: dbconfig.password,
       database: dbconfig.database,
-      acquireTimeout: 1000000
+      acquireTimeout: 1000000,
+      debug: false
+    });
+
+    this.connection.getConnection((err, connection) => {
+      if (err) throw err;
+      console.log('-------Database connected successfully------');
+      connection.release();
     });
   }
   query(sql, args) {
@@ -29,4 +37,6 @@ class Database {
   }
 }
 
-module.exports = { Database };
+
+const database = new Database();
+module.exports = database;

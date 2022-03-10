@@ -1,7 +1,7 @@
 const console = require('better-console');
 
-const { Database } = require("../../_db/db");
-const database = new Database();
+const database = require("../../_db/db");
+
 let Debug = true;
 const config = {
     "normiehouse": "261.4586, -998.8196, -99.00863"

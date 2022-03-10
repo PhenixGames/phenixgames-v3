@@ -1,7 +1,7 @@
 const {
     Database
 } = require("../../_db/db");
-const database = new Database();
+
 
 const config = require('../../../_assets/json/config.json');
 

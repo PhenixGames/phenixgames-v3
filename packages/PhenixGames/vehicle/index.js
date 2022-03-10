@@ -1,5 +1,5 @@
-const { Database } = require("../../_db/db");
-const database = new Database();
+const database = require("../../_db/db");
+
 const console = require('better-console');
 
 const generellAPI = require('../allgemein/index');

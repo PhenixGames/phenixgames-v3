@@ -1,7 +1,7 @@
 const {
     Database
 } = require("../../_db/db");
-const database = new Database();
+
 const console = require('better-console');
 
 //! ******* GET ALL INFO OF PLAYER - MONEY *******
