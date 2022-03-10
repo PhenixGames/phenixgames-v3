@@ -1,6 +1,4 @@
 const database = require("../../_db/db");
-
-
 const config = require('../../../_assets/json/config.json');
 
 const validator = require('validator');
