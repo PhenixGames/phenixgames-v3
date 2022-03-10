@@ -49,7 +49,7 @@ async function tpto(player, target){
         
     }
 }
-function bring(player, target){
+async function bring(player, target){
     if(await Perms.hasPermissions(player, ["tp_to"])) {
         if(typeof target == 'number'){
             mp.players.forEach(
