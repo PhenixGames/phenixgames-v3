@@ -17,7 +17,7 @@ mp.events.addCommand('goto', async (player, target) =>{
 mp.events.addCommand('bring', async (player, target) =>{
     bring(player, target);
 });
-function tpto(player, target){
+async function tpto(player, target){
     if(!player.getVariable("Aduty"))return
 
     if(await Perms.hasPermissions(player, ["tp_to"])) {
