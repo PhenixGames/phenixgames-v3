@@ -1,6 +1,8 @@
 const permissionSystem = require('../../PhenixGames/playerAPI/permissionSystem')
 
-mp.events.add('perms', ( player, args ) => {
+mp.events.addCommand('perms', (player, args) => {
+    console.log('1')
+    player.call('Player:ActivateInventory')
     console.log(JSON.stringify(args));
 });
 

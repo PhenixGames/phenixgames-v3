@@ -4,6 +4,7 @@ require('./gui/deathscreen');
 require('./gui/register/namechooser/');
 require('./gui/money/');
 require('./gui/HUD/')
+require('./gui/inventory/')
 
 
 require('./non-gui/godmode/')

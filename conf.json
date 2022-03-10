@@ -10,5 +10,4 @@
 	"voice-chat-sample-rate" : 48000,
 	"sync-rate" : 20,
 	"port": 22005
-	
 }
