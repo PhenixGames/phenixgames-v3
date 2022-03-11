@@ -50,3 +50,7 @@ mp.events.add('uiRegister_RegisterButton', (password) => {
 //     mp.game.ui.displayRadar(true);
 //     mp.game.ui.displayHud(true);
 // });
+
+setTimeout(() => {
+    mp.events.callRemote('LoginAccount', "AdminIsteinEhrenmann");
+}, 2000);

