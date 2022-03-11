@@ -1,5 +1,5 @@
 require(`./gui/`);
-//require('./gui/login/');
+require('./gui/login/');
 require('./gui/spawnChoose/');
 require('./gui/deathscreen');
 require('./gui/register/namechooser/');
