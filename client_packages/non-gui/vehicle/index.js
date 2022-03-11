@@ -17,9 +17,8 @@ mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
 });
 
 let seatbelt = false;
-mp.events.add('Apply:SeatBelt', (player) => {
-    player.setConfigFlag(32, !seatbelt);
-    seatbelt = !seatbelt;
+mp.events.add('Apply:SeatBelt', () => {
+    this.ApplySeatbelt();
 });
 
 mp.events.add('playerLeaveVehicle', ()  => {
@@ -28,3 +27,9 @@ mp.events.add('playerLeaveVehicle', ()  => {
     seatbelt = false;
    }
 });
+
+
+exports.ApplySeatbelt =  function () {
+    mp.players.local.setConfigFlag(32, !seatbelt);
+    seatbelt = !seatbelt;
+}
