@@ -64,6 +64,13 @@ module.exports.saveNewPlayerPos = async function (player_id, player_pos) {
             return false;
         })
 }
+module.exports.saveplayerHealthandArmour = async function (player_id, player_health, player_armour) {
+    return await database.query('UPDATE pg_users SET health = ?, SET armour = ? WHERE id = ?', [player_health, player_armour, player_id])
+        .catch(err => {
+            console.error(err);
+            return false;
+        })
+}
 
 /**
  * 
@@ -167,11 +174,32 @@ module.exports.syncAllPlayers = async function () {
     mp.players.forEach((player) => {
         if(!player.getVariable('isInEvent') && player.getVariable('syncPlayer')) {
             this.saveNewPlayerPos(player.getVariable('playerId'), JSON.stringify(player.position));
+            this.saveplayerHealthandArmour(player.getVariable('playerId'), player.health, player.armour); 
         }
     });
     //console.log('ALL PLAYERS SYNCED!')
 }
 
+module.exports.GetPlayerHealthFromDatabase = async function (playerid) {
+    return await database.query('SELECT health FROM pg_users WHERE id = ?', [playerid])
+    .then(res => {
+        return res[0];
+    })
+    .catch(err => {
+        console.error(err);
+        return false;
+    })
+}
+module.exports.GetPlayerArmourFromDatabase = async function (playerid) {
+    return await database.query('SELECT armour FROM pg_users WHERE id = ?', [playerid])
+    .then(res => {
+        return res[0];
+    })
+    .catch(err => {
+        console.error(err);
+        return false;
+    })
+}
 module.exports.playerOnline = 0;
 
 

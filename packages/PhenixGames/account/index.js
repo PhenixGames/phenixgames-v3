@@ -81,13 +81,14 @@ mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
 
 mp.events.add('Player:Spawn:house', async (player) => {
     const playerId = player.getVariable('playerId');
-
+    ApplyHealthAndArmour(player, playerId);
     return setHUD(player);
 });
 
 mp.events.add('Player:Spawn:LastPos', async (player) => {
     const playerId = player.getVariable('playerId');
     const lastPos = await playerAPI.getLastPlayerPos(playerId);
+    ApplyHealthAndArmour(player, playerId);
 
     // if(player.getVariable('isInHouse')) {
     //     player.dimension = playerId;
@@ -101,7 +102,7 @@ mp.events.add('Player:Spawn:LastPos', async (player) => {
 
 mp.events.add('Player:Spawn:airport', async (player) => {
     const playerId = player.getVariable('playerId');
-
+    ApplyHealthAndArmour(player, playerId);
     return setHUD(player);
 });
 
@@ -112,6 +113,10 @@ function setHUD(player) {
     generellAPI.saveLocalVar(player, {
         'syncPlayer': true
     });
+}
+async function ApplyHealthAndArmour(player, playerId){
+    player.health = await playerAPI.GetPlayerHealthFromDatabase(playerId);
+    player.armour = await playerAPI.GetPlayerArmourFromDatabase(playerId);
 }
 function destroycam(player){
     player.call("Destroy:Login:Cam");
