@@ -186,7 +186,6 @@ module.exports.syncAllPlayers = async function () {
 module.exports.GetPlayerHealthFromDatabase = async function (playerid) {
     return await database.query('SELECT health FROM pg_users WHERE id = ?', [playerid])
     .then(res => {
-        console.info("" + res);
         return res[0].health;
     })
     .catch(err => {

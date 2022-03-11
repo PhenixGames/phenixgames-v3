@@ -128,8 +128,6 @@ async function ApplyHealthAndArmour(player, playerId){
     let armour = await playerAPI.GetPlayerArmourFromDatabase(playerId);
     player.health = healt;
     player.armour = armour;
-    console.info("healt: " + healt);
-    console.info("armor: " + armour);
 }
 function destroycam(player){
     player.call("Destroy:Login:Cam");
