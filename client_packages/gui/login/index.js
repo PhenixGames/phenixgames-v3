@@ -5,7 +5,8 @@ mp.events.add('Open:Login:Browser', () => {
     mp.gui.chat.push(JSON.stringify(mainBrowser))
     //mainBrowser.execute(`gui.Login.show()`)
 });
-
+//For Benedikt
+//Du musst alles was browser beinhaltet auskommentiert lassen, da es sonst fehler gibt. browser exestiert nicht mehr und müsste später durch mainbrowser ersetzt werden.
 
 var LoginCam;
 mp.events.add('Create:Login:Cam', ( ) => {
@@ -25,7 +26,7 @@ mp.events.add('Destroy:Login:Cam', ( ) => {
 mp.players.local.freezePosition(true);
 mp.game.ui.displayRadar(false);
 mp.game.ui.displayHud(false);
-mp.gui.chat.show(false);
+//mp.gui.chat.show(false); // If you want to see the message of line 5 XD
 
 // mp.events.add('Login:NoAccount', () => {
 //     browser.execute('hasNoAccount()');
