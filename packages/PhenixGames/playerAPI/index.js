@@ -65,7 +65,7 @@ module.exports.saveNewPlayerPos = async function (player_id, player_pos) {
         })
 }
 module.exports.saveplayerHealthandArmour = async function (player_id, player_health, player_armour) {
-    return await database.query('UPDATE pg_users SET health = ?, SET armour = ? WHERE id = ?', [player_health, player_armour, player_id])
+    return await database.query('UPDATE pg_users SET health = ?, armour = ? WHERE id = ?', [player_health, player_armour, player_id])
         .catch(err => {
             console.error(err);
             return false;
