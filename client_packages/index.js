@@ -1,4 +1,4 @@
-require(`./gui`);
+require(`./gui/`);
 require('./gui/login/');
 require('./gui/spawnChoose/');
 require('./gui/deathscreen');
