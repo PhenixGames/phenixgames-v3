@@ -12,7 +12,7 @@ mp.events.addCommand("revive", async (player, target) => {
     if(!player.getVariable("Aduty"))return
 
     if(await Perms.hasPermissions(player, ["tp_to"])) {
-        if(isNumeric(target)){
+        if(!isNaN(target)){
             mp.players.forEach(
                 (tg) => {
                     if(tg.getVariable("playerId") == target){
