@@ -196,7 +196,7 @@ module.exports.GetPlayerHealthFromDatabase = async function (playerid) {
 module.exports.GetPlayerArmourFromDatabase = async function (playerid) {
     return await database.query('SELECT armour FROM pg_users WHERE id = ?', [playerid])
     .then(res => {
-        console.info(res);
+        console.info("" + res[0]);
         return res[0];
     })
     .catch(err => {
