@@ -176,8 +176,8 @@ module.exports.getPlayerInGame = async function (playerId) {
 module.exports.syncAllPlayers = async function () {
     mp.players.forEach((player) => {
         if(!player.getVariable('isInEvent') && player.getVariable('syncPlayer')) {
-            this.saveNewPlayerPos(player.getVariable('playerId'), JSON.stringify(player.position));
-            this.saveplayerHealthandArmour(player.getVariable('playerId'), player.health, player.armour); 
+            await this.saveNewPlayerPos(player.getVariable('playerId'), JSON.stringify(player.position));
+            await this.saveplayerHealthandArmour(player.getVariable('playerId'), player.health, player.armour); 
         }
     });
     //console.log('ALL PLAYERS SYNCED!')
