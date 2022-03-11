@@ -1,10 +1,10 @@
  const mainBrowser = require('./gui/index.js');
 
 
-// mp.events.add('Open:Login:Browser', () => {
-//     mp.gui.chat.push(JSON.stringify(mainBrowser))
-//     //mainBrowser.execute(`gui.Login.show()`)
-// });
+mp.events.add('Open:Login:Browser', () => {
+    mp.gui.chat.push(JSON.stringify(mainBrowser))
+    //mainBrowser.execute(`gui.Login.show()`)
+});
 
 
 var LoginCam;
@@ -35,13 +35,13 @@ mp.gui.chat.show(false);
 //     browser.execute('wrongPassword();')
 // })
 
-// mp.events.add('uiLogin_LoginButton', (password) => {
-//     mp.events.callRemote('LoginAccount', password);
-// });
+mp.events.add('uiLogin_LoginButton', (password) => {
+    mp.events.callRemote('LoginAccount', password);
+});
 
-// mp.events.add('uiRegister_RegisterButton', (password) => {
-//     mp.events.callRemote('RegisterAccount', password);
-// });
+mp.events.add('uiRegister_RegisterButton', (password) => {
+    mp.events.callRemote('RegisterAccount', password);
+});
 
 // mp.events.add('Login:Succes:close:Windows', () => {
 //     mp.events.remove(["Login:Succes:close:Windows", "uiLogin_LoginButton", "uiRegister_RegisterButton"]);
