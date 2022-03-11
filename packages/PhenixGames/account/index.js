@@ -2,7 +2,6 @@ const console = require('better-console');
 
 const database = require('../../_db/db');
 
-
 const config = require('../../../_assets/json/config.json');
 
 const playerAPI = require('../playerAPI/');
@@ -32,6 +31,9 @@ mp.events.add('LoginAccount', (player, password) => {
         if(await playerAPI.checkPassword(users.password, password) === false) {
             return player.call('Wrong:Password')
         }
+
+        const playerInGame = await playerAPI.getPlayerInGame(users.id);
+        if(!playerInGame) return player.call('Player:InGameName:Choose');
 
         permissionSystem.setPlayerPermissionsLocal(player);
 
