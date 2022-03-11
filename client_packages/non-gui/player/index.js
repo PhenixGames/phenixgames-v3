@@ -1,4 +1,4 @@
-require('./keypresser')
+require('./client_packages/non-gui/player/keypresser.js')
 //Var
 const colour = { r: 255, g: 0, b: 0 }; // set this to the colour you want
 const serverName = 'PhenixGames'; // set this to the pause menu title you want
