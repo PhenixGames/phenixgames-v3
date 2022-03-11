@@ -16,6 +16,7 @@ mp.events.addCommand("revive", async (player, target) => {
             mp.players.forEach(
                 (tg) => {
                     if(tg.getVariable("playerId") == target){
+                        if(tg.health == 0) return player.notify("Der spieler muss nicht wiederbelebt werden");
                         tg.cal("close:Death:Browser");
                         tg.spawn(new mp.Vector3(tg.position.x, tg.position.y, tg.position.z + 1));
                         tg.health = 100;
@@ -30,6 +31,7 @@ mp.events.addCommand("revive", async (player, target) => {
             mp.players.forEach(
                 (tg) => {
                     if(tg.socialClub == target){
+                        if(tg.health == 0) return player.notify("Der spieler muss nicht wiederbelebt werden");
                         tg.cal("close:Death:Browser");
                         tg.spawn(new mp.Vector3(tg.position.x, tg.position.y, tg.position.z + 1));
                         tg.health = 100;
