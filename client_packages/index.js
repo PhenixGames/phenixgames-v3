@@ -7,9 +7,9 @@ require('./gui/HUD/')
 require('./gui/inventory/')
 
 
-require('./non-gui/vehicle/');
-require('./non-gui/noclip/');
-require('./non-gui/fingerpoint/');
-require('./non-gui/player/');
-require('./non-gui/voice/');
-require('./non-gui/keypresser/');
+// require('./non-gui/vehicle/');
+// require('./non-gui/noclip/');
+// require('./non-gui/fingerpoint/');
+// require('./non-gui/player/');
+// require('./non-gui/voice/');
+// require('./non-gui/keypresser/');
