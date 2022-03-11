@@ -22,10 +22,10 @@ mp.events.add('Destroy:Login:Cam', ( ) => {
 });
 
 
-// mp.players.local.freezePosition(true);
-// mp.game.ui.displayRadar(false);
-// mp.game.ui.displayHud(false);
-// mp.gui.chat.show(false);
+mp.players.local.freezePosition(true);
+mp.game.ui.displayRadar(false);
+mp.game.ui.displayHud(false);
+mp.gui.chat.show(false);
 
 // mp.events.add('Login:NoAccount', () => {
 //     browser.execute('hasNoAccount()');
