@@ -4,9 +4,9 @@
   "description": "Another PhenixGames Server",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start ragemp-server && pm2 monit",
-    "restart": "pm2 stop ragemp-server && pm2 start ragemp-server && pm2 monit",
-    "kill": "pm2 stop ragemp-server"
+    "start": "pm2 start ragemp-server --name rage_server && cd ./client_packages/vue_comp && pm2 start \"npm run serve\" --name rage_vue && pm2 monit",
+    "restart": "pm2 stop rage_server && pm2 stop rage_vue && pm2 start ragemp-server --name rage_server && cd ./client_packages/vue_comp && pm2 start \"npm run serve\" --name rage_vue && pm2 monit",
+    "kill": "pm2 stop rage_server && pm2 stop rage_vue && pm2 delete rage_server && pm2 delete rage_vue"
   },
   "repository": {
     "type": "git",
