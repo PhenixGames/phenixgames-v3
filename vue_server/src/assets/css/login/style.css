@@ -1,4 +1,4 @@
-@import url('../../../_assets/css/root.css');
+@import url('../root.css');
 
 body {
     background: var(--background);
@@ -42,7 +42,7 @@ body {
     color: #FFFFFF;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url("../img/login_bg.jpg");
+    background-image: url("../../img/login/login_bg.jpg");
     overflow: hidden;
 }
 

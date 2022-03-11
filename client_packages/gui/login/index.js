@@ -1,10 +1,9 @@
-var browser;
+const mainBrowser = require('index');
+
 var LoginCam;
 mp.events.add('Open:Login:Browser', () => {
-    browser = mp.browsers.new("package://gui/login/index.html");
-    setTimeout(() => {
-        mp.gui.cursor.show(true, true);
-    }, 500);
+    mp.gui.chat.push(JSON.stringify(mainBrowser))
+    //mainBrowser.execute(`gui.Login.show()`)
 });
 
 mp.events.add('Create:Login:Cam', ( ) => {

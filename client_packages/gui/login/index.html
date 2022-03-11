@@ -49,39 +49,6 @@
 
         </div>
         <script>
-            var isLogin = true;
-            var already = false;
-
-            function wrongPassword() {
-                document.getElementById('error_msg').innerHTML = "Du hast das Passwort falsch eingegeben."
-                already = false;
-            }
-
-            function hasNoAccount() {
-                isLogin = false;
-                document.getElementById('login').classList.add("display-none");
-                document.getElementById('register').classList.remove("display-none");
-                document.getElementById('register_repeat').classList.remove("display-none");
-
-                document.getElementById('welcome_msg').innerHTML = "Welcome Newbie"
-            }
-      
-            
-            document.getElementById('pg_login').addEventListener('submit', (evt) => {
-                evt.preventDefault();
-                
-                if(already) return;
-                else already = true;
-                
-                if(isLogin) {
-                    mp.trigger('uiLogin_LoginButton', document.getElementById('login').value);
-                }else {
-                    if(document.getElementById('register').value !== document.getElementById('register_repeat').value) {
-                        return document.getElementById('error_msg').innerHTML = "Passwörter stimmen nicht überein!";
-                    }
-                    mp.trigger('uiRegister_RegisterButton', document.getElementById('register').value);
-                }
-            });
         </script>
 
     </body>
