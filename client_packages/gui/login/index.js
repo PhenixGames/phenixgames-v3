@@ -1,4 +1,4 @@
-//  const mainBrowser = require('index');
+ const mainBrowser = require('./gui/index.js');
 
 
 // mp.events.add('Open:Login:Browser', () => {
