@@ -1,10 +1,10 @@
-// const mainBrowser = require('index');
+ const mainBrowser = require('index');
 
 var LoginCam;
-// mp.events.add('Open:Login:Browser', () => {
-//     mp.gui.chat.push(JSON.stringify(mainBrowser))
-//     //mainBrowser.execute(`gui.Login.show()`)
-// });
+mp.events.add('Open:Login:Browser', () => {
+    mp.gui.chat.push(JSON.stringify(mainBrowser))
+    //mainBrowser.execute(`gui.Login.show()`)
+});
 
 mp.events.add('Create:Login:Cam', ( ) => {
     LoginCam = mp.cameras.new('default', new mp.Vector3(-100, -966, 296), new mp.Vector3(0,0,-159), 40);
