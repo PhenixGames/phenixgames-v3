@@ -123,8 +123,13 @@ function setHUD(player) {
     });
 }
 async function ApplyHealthAndArmour(player, playerId){
-    player.health = await playerAPI.GetPlayerHealthFromDatabase(playerId);
-    player.armour = await playerAPI.GetPlayerArmourFromDatabase(playerId);
+    
+    let healt = await playerAPI.GetPlayerHealthFromDatabase(playerId);
+    let armour = await playerAPI.GetPlayerArmourFromDatabase(playerId);
+    player.health = healt;
+    player.armour = armour;
+    console.info("healt: " + healt);
+    console.info("armor: " + armour);
 }
 function destroycam(player){
     player.call("Destroy:Login:Cam");
