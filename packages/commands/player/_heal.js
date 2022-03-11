@@ -9,13 +9,18 @@ mp.events.addCommand("heal", async (player) => {
 });
 
 mp.events.addCommand("revive", async (player, target) => {
-    if(await Perms.hasPermissions(player, ["revive"])) {
-        if(typeof target == 'number'){
+    if(!player.getVariable("Aduty"))return
+
+    if(await Perms.hasPermissions(player, ["tp_to"])) {
+        if(isNumeric(target)){
             mp.players.forEach(
                 (tg) => {
                     if(tg.getVariable("playerId") == target){
                         tg.cal("close:Death:Browser");
                         tg.spawn(new mp.Vector3(tg.position.x, tg.position.y, tg.position.z + 1));
+                        tg.health = 100;
+                        tg.notify("Du wurdest von einem Administrator Wiederbelebt");
+                        player.notify("Du hast einen Spieler wiederbelebt");
                     }else {
                         return player.notify(`Der Spieler mit der ID ${target} wurde nicht gefunden`);
                     }
@@ -27,12 +32,17 @@ mp.events.addCommand("revive", async (player, target) => {
                     if(tg.socialClub == target){
                         tg.cal("close:Death:Browser");
                         tg.spawn(new mp.Vector3(tg.position.x, tg.position.y, tg.position.z + 1));
+                        tg.health = 100;
+                        tg.notify("Du wurdest von einem Administrator Wiederbelebt");
+                        player.notify("Du hast einen Spieler wiederbelebt");
+                        
                     }else {
                         return player.notify("Der Spieler wurde nicht gefunden");
                     }
                 }
             );
         }
+        
     }
 
 });
