@@ -1,8 +1,6 @@
 const console = require('better-console');
 
 const database = require("../../_db/db");
-
-
 const vehicleAPI = require("../vehicle/")
 const playerAPI = require('../playerAPI/');
 const generellAPI = require('../allgemein/');
