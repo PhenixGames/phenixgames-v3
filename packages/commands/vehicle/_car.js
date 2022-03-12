@@ -85,7 +85,7 @@ mp.events.addCommand("clean", async (player) => {
 async function clean(player){
     mp.players.forEach(
         (tg) => {
-            tg.call('Vehicle:Remove:Dirt:Level', player.vehicle, '0');
+            tg.call('Vehicle:Remove:Dirt:Level', player.vehicle);
         }
     );
 }

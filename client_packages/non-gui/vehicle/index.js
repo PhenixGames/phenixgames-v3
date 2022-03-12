@@ -27,11 +27,9 @@ mp.events.add('playerLeaveVehicle', ()  => {
     seatbelt = false;
    }
 });
-mp.events.add("Vehicle:Remove:Dirt:Level", (veh, value) =>{
-    if (veh.type !== 'vehicle') {
-        return;
-    }
-    veh.setDirtLevel(parseFloat(value));
+mp.events.add("Vehicle:Remove:Dirt:Level", (veh) =>{
+    if (veh.type !== 'vehicle') return;
+    veh.setDirtLevel(0);
 
 });
 
