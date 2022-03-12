@@ -30,7 +30,7 @@ mp.events.add('playerLeaveVehicle', ()  => {
 mp.events.add("Vehicle:Remove:Dirt:Level", (args) =>{
     mp.console.logError("" + JSON.stringify(args), true, true);
     if (args[0].type !== 'vehicle') return;
-    veh.setDirtLevel(0);
+    args.setDirtLevel(0);
 
 });
 
