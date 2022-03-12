@@ -122,7 +122,6 @@ mp.events.add("render", () => {
     }
     //Hier wird Das Speedometer Geupdated.
     if(mp.players.local.vehicle){
-        mp.console.logInfo('test2', true, true)
         var player = mp.players.local;
         var vehicle = player.vehicle;
         var fuel = vehicle.getVariable("veh_fuel");
