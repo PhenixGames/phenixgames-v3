@@ -76,3 +76,16 @@ async function spawncar(player, args){
         }
     }
 }
+
+mp.events.addCommand("clean", async (player) => {
+    if(!player.vehicle) return;
+    clean(player);
+});
+
+async function clean(player){
+    mp.players.forEach(
+        (tg) => {
+            tg.call('Vehicle:Remove:Dirt:Level', player.vehicle, '0');
+        }
+    );
+}

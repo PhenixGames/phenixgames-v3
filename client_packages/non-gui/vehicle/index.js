@@ -27,9 +27,22 @@ mp.events.add('playerLeaveVehicle', ()  => {
     seatbelt = false;
    }
 });
+mp.events.add("Vehicle:Remove:Dirt:Level", (veh, value) =>{
+    if (veh.type !== 'vehicle') {
+        return;
+    }
+    veh.setDirtLevel(parseFloat(value));
+
+});
 
 
 exports.ApplySeatbelt =  function () {
     mp.players.local.setConfigFlag(32, !seatbelt);
     seatbelt = !seatbelt;
 }
+
+setInterval(() => {
+    if(mp.players.local.vehicle){
+        mp.game.audio.setRadioToStationName("OFF");
+    }
+}, 1000);
