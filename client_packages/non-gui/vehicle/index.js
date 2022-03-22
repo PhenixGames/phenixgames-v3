@@ -44,4 +44,3 @@ setInterval(() => {
         mp.game.audio.setRadioToStationName("OFF");
     }
 }, 1000);
-//This is my Daily Change

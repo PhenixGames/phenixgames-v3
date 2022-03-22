@@ -1,9 +1,10 @@
- const mainBrowser = require('./gui/index.js');
-
+// const {mainBrowser} = require('./gui/index.js');
 
 mp.events.add('Open:Login:Browser', () => {
-    mp.gui.chat.push(JSON.stringify(mainBrowser))
-    //mainBrowser.execute(`gui.Login.show()`)
+    const config = require('_config/config').config;
+
+    mainBrowser = mp.browsers.new(`http://${config.domain}:8080/`);
+    //mainBrowser.execute(`mp.gui.Login.showLogin();`);
 });
 var LoginCam;
 mp.events.add('Create:Login:Cam', ( ) => {
