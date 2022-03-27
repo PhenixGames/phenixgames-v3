@@ -12,6 +12,11 @@ mp.events.add("vehicleDeath", (vehicle) => {
     
 });
 
+mp.events.add('playerJoin', (player) => {
+    player.call("Create:Login:Cam");
+    player.position = new mp.Vector3(0,0,-20);
+});
+
 mp.events.add("debug", (player) =>{
     console.info("Player " +player.name +" has called Debug")
 });

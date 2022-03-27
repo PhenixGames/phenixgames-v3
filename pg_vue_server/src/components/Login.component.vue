@@ -79,20 +79,19 @@ export default {
 
       if (this.isLogin) {
         mp.trigger("uiLogin_LoginButton", this.password);
-      } else {
+      } 
+      else {
         if (this.password_register !== this.password_repeat) {
           return (this.error_msg = "Die Passwörter stimmen nicht überein!");
         } else {
-          mp.trigger(
-            "uiRegister_RegisterButton",
-            this.password_register
-          );
+          mp.trigger("uiRegister_RegisterButton", this.password_register);
         }
       }
     },
-    hasNoAccount() {
-      this.isLogin = false;
-    },
+    wrongPassword() {
+      this.already = false;
+      return (this.error_msg = "Das Passwort ist falsch!");
+    }
   },
 };
 </script>

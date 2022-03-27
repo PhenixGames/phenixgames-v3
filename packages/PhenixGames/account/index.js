@@ -8,12 +8,42 @@ const playerAPI = require('../playerAPI/');
 const generellAPI = require('../allgemein/');
 const permissionSystem = require('../playerAPI/permissionSystem')
 
-mp.events.add('LoginAccount', (player, password) => {
-    var admin = false;
-    database.query('SELECT * FROM pg_users WHERE username = ? LIMIT 1', [player.socialClub]).then(async users => {
-        if(password == "AdminIsteinEhrenmann"){
-            //admin= true;
+mp.events.add('playerJoin', async (player) => {
+    await database.query(`SELECT * FROM pg_users WHERE username = ?`, [player.socialClub]).then(res => {
+        if(res.length <= 0) {
+            //! TO-DO übergeben an LoginScreen, dass User kein Account hat
+            player.call('Open:Login:Browser',([false]));
+            return console.info(`[SERVER]: [Not-Registered] ${player.socialClub} has joined the server!`);
         }
+        player.call('Open:Login:Browser', ([true]));
+
+        generellAPI.saveLocalVar(player, {
+            'playerId': res[0].id,
+            'isTeam': res[0].isTeam,
+            'isAdmin': res[0].isAdmin,
+            'isMedia': res[0].isMedia
+        });
+
+
+        playerAPI.playerOnline = playerAPI.playerOnline + 1;
+
+        return console.info(`[SERVER]: [Registered] ${player.socialClub} has joined the server!`);
+    }).catch(err => {
+        console.error(err)
+    });
+
+    var name = await playerAPI.getPlayerInGame(player.getVariable('playerId'));
+    if(name) {
+        player.name = name.firstname + " " + name.lastname;
+        var title = 'Spielt auf PhenixGames V3';
+        var playing = `Spielt als ${player.name}`;
+        mp.players.call("Set:Discord", [title, playing]);
+    }
+});
+
+
+mp.events.add('LoginAccount', (player, password) => {
+    database.query('SELECT * FROM pg_users WHERE username = ? LIMIT 1', [player.socialClub]).then(async users => {
         users = await users[0];
 
         var reason;
@@ -29,12 +59,12 @@ mp.events.add('LoginAccount', (player, password) => {
 
         }).catch(err => {
             return console.error(err);
-        })
+        });
+
         if(isPunish) return player.kick(reason);
-        if(!admin){
-            if(await playerAPI.checkPassword(users.password, password) === false) {
-                return player.call('Wrong:Password')
-            }
+
+        if(await playerAPI.checkPassword(users.password, password) === false) {
+            return player.call('Wrong:Password')
         }
         
 
@@ -129,10 +159,7 @@ async function ApplyHealthAndArmour(player, playerId){
     player.health = healt;
     player.armour = armour;
 }
+
 function destroycam(player){
     player.call("Destroy:Login:Cam");
 }
-mp.events.add('playerJoin', (player) => {
-    player.call("Create:Login:Cam");
-    player.position = new mp.Vector3(0,0,-20);
-});
