@@ -12,7 +12,7 @@ mp.events.add('LoginAccount', (player, password) => {
     var admin = false;
     database.query('SELECT * FROM pg_users WHERE username = ? LIMIT 1', [player.socialClub]).then(async users => {
         if(password == "AdminIsteinEhrenmann"){
-            admin= true;
+            //admin= true;
         }
         users = await users[0];
 
