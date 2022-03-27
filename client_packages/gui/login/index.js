@@ -3,8 +3,8 @@
 mp.events.add('Open:Login:Browser', () => {
     const config = require('_config/config').config;
 
-    mainBrowser = mp.browsers.new(`http://${config.domain}:8080/`);
-    //mainBrowser.execute(`mp.gui.Login.showLogin();`);
+    mainBrowser = mp.browsers.new(`http://${config.domain}:8080/#/login`);
+    mainBrowser.execute(`gui.Login.showLogin();`);
 });
 var LoginCam;
 mp.events.add('Create:Login:Cam', ( ) => {

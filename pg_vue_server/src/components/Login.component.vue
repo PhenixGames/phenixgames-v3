@@ -78,12 +78,12 @@ export default {
       else this.already = true;
 
       if (this.isLogin) {
-        global.mp.trigger("uiLogin_LoginButton", this.password);
+        mp.trigger("uiLogin_LoginButton", this.password);
       } else {
         if (this.password_register !== this.password_repeat) {
           return (this.error_msg = "Die Passwörter stimmen nicht überein!");
         } else {
-          global.mp.trigger(
+          mp.trigger(
             "uiRegister_RegisterButton",
             this.password_register
           );
