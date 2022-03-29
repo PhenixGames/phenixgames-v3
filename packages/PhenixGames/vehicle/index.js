@@ -181,9 +181,7 @@ module.exports.spawnAllVehicles = async function () {
 
 module.exports.syncAllVehciles = async function () {
     mp.vehicles.forEach((vehicle) => {
-            console.time('veh solo sync :');
             this.updateVehiclePosition(vehicle.getVariable('veh_id'), vehicle.position, vehicle.rotation, vehicle);
-            console.timeEnd('veh solo sync :');
         }
     );
 }
