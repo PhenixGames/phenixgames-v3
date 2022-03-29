@@ -10,7 +10,7 @@ mp.events.add('Player:ActivateHUD', () => {
     
     hudBrowser = mp.browsers.new(`http://${config.domain}:8080/#/hud`);
 
-    hudBrowser.execute(`gui.hud.methods.setPlayerId("${mp.players.local.getVariable('playerId')}");`);
+    hudBrowser.execute(`gui.hud.setPlayerId("${mp.players.local.getVariable('playerId')}");`);
     active = true;
 });
 
@@ -20,12 +20,12 @@ mp.events.add("Change:Admin:Duty:Value:On:Client", (state) => {
 });
 
 mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
-    hudBrowser.execute(`gui.hud.methods.showSpeedometer();`)
+    hudBrowser.execute(`gui.hud.showSpeedometer();`)
 });
 
 mp.events.add("playerLeaveVehicle", (player, vehicle) => {
     if(active){
-        hudBrowser.execute(`gui.hud.methods.removeSpeedometer();`)
+        hudBrowser.execute(`gui.hud.removeSpeedometer();`)
     }
     
 });
@@ -137,7 +137,7 @@ mp.events.add("render", () => {
         vehicle.setEngineTorqueMultiplier(modded_Speed);
         mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
 
-        hudBrowser.execute(`gui.hud.methods.setSpeedometer("${Math.round(fuel)}", "${Math.round(speed)}");`)
+        hudBrowser.execute(`gui.hud.setSpeedometer("${Math.round(fuel)}", "${Math.round(speed)}");`)
         
     }
 
@@ -169,8 +169,8 @@ mp.events.add("Set:ModdedSpeed", (speed) => {
 
 mp.keys.bind(0x73, true, function() {//F4
     mp.voiceChat.muted = !mp.voiceChat.muted;
-    if(!mp.voiceChat.muted) hudBrowser.execute(`gui.hud.methods.manageVoice("${0}");`);
-    else hudBrowser.execute(`gui.hud.methods.manageVoice("${1}");`);
+    if(!mp.voiceChat.muted) hudBrowser.execute(`gui.hud.manageVoice("${0}");`);
+    else hudBrowser.execute(`gui.hud.manageVoice("${1}");`);
 });
 //Hier wird die line vom schuss gemahlt
 mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
