@@ -13,7 +13,7 @@
     </div>
 
     <div class="right">
-      <img src="../assets/img/_logo/web/PhenixGames_Logo_no_text.svg" />
+      <img src="../../assets/img/_logo/web/PhenixGames_Logo_no_text.svg" />
       <span id="error_msg" class="red">
         <!--ERROR MESSAGES-->
         {{ error_msg }}

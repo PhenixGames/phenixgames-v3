@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Namechooser from '../../components/Namechooser.component.vue';
+import Namechooser from '../../components/login/Namechooser.component.vue';
 export default {
     name: 'pg_namechooser',
         components: {

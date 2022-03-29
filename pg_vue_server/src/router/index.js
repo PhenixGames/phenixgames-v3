@@ -23,8 +23,13 @@ const routes = [
   },
   {
     path: '/namechooser',
-    name: 'Deathscreen',
+    name: 'Namechooser',
     component: () => import('../views/login/Namechooser.vue')
+  },
+  {
+    path: '/spawnchooser',
+    name: 'Spawnchooser',
+    component: () => import('../views/login/Spawnchooser.vue')
   }
 ]
 
