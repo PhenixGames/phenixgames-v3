@@ -1,16 +1,4 @@
 const console = require('better-console');
-mp.events.add("vehicleDeath", (vehicle) => {
-    setTimeout(() => {
-        console.info(JSON.stringify(vehicle));
-        try {
-            if(vehicle) return vehicle.destroy(); 
-        }catch(err){
-            //console.info("Ein Fehler ist aufgetreten.");
-        }
-        
-    }, 10000);
-    
-});
 
 mp.events.add('playerJoin', (player) => {
     player.call("Create:Login:Cam");
