@@ -4,7 +4,7 @@
 
 //Test
 //POSITION: -2096.231689453125, -320.1805114746094, 12.16186809539795
-var pos = new vector3(-2096.231689453125, -320.1805114746094, 12.16186809539795);
+var pos = new mp.Vector3(-2096.231689453125, -320.1805114746094, 12.16186809539795);
 var col = mp.colshapes.newCircle(pos.x , pos.y, 20);
 col.setVariable("debuggggg", 1);
 
