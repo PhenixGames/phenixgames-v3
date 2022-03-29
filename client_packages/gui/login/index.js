@@ -38,7 +38,7 @@ mp.events.add('uiRegister_RegisterButton', (password) => {
 });
 
 mp.events.add('Login:Succes:close:Windows', () => {
-    mp.events.remove(["Login:Succes:close:Windows", "uiLogin_LoginButton", "uiRegister_RegisterButton", "Wrong:Password", "Create:Login:Cam", "Destroy:Login:Cam", "Open:Login:Browser"]);
+    mp.events.remove(["Login:Succes:close:Windows", "uiLogin_LoginButton", "uiRegister_RegisterButton", "Wrong:Password", "Create:Login:Cam", "Open:Login:Browser"]);
     mainBrowser.destroy();
     mp.gui.cursor.show(false, false);
     mp.players.local.freezePosition(false);

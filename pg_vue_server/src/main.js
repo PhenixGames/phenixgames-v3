@@ -4,5 +4,10 @@ import router from './router'
 
 const app = createApp(App).use(router).mount('#app')
 
-global.gui = {chat: null, login: null}
+global.gui = {
+    chat: null, 
+    login: null,
+    hud: null,
+    deathscreen: null
+}
 global.app = app;

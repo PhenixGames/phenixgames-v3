@@ -1,25 +1,31 @@
+const config = require('_config/config').config;
+
 var hudBrowser;
 let active = false;
 var modded_Speed = 1;
 var Admin = false;
 var linearray = [];
+
+mp.events.add('Player:ActivateHUD', () => {
+    
+    hudBrowser = mp.browsers.new(`http://${config.domain}:8080/#/hud`);
+
+    hudBrowser.execute(`gui.hud.methods.setPlayerId("${mp.players.local.getVariable('playerId')}");`);
+    active = true;
+});
+
+
 mp.events.add("Change:Admin:Duty:Value:On:Client", (state) => {
     Admin = state;
 });
 
-mp.events.add('Player:ActivateHUD', () => {
-    hudBrowser = mp.browsers.new("package://gui/HUD/index.html");
-    hudBrowser.execute(`setPlayerId("${mp.players.local.getVariable('playerId')}");`);
-    active = true;
-});
-
 mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
-    hudBrowser.execute(`showSpeedometer();`)
+    hudBrowser.execute(`gui.hud.methods.showSpeedometer();`)
 });
 
 mp.events.add("playerLeaveVehicle", (player, vehicle) => {
     if(active){
-        hudBrowser.execute(`removeSpeedometer();`)
+        hudBrowser.execute(`gui.hud.methods.removeSpeedometer();`)
     }
     
 });
@@ -131,7 +137,7 @@ mp.events.add("render", () => {
         vehicle.setEngineTorqueMultiplier(modded_Speed);
         mp.players.local.vehicle.setEnginePowerMultiplier(modded_Speed)
 
-        hudBrowser.execute(`setSpeedometer("${Math.round(fuel)}", "${Math.round(speed)}");`)
+        hudBrowser.execute(`gui.hud.methods.setSpeedometer("${Math.round(fuel)}", "${Math.round(speed)}");`)
         
     }
 
@@ -163,8 +169,8 @@ mp.events.add("Set:ModdedSpeed", (speed) => {
 
 mp.keys.bind(0x73, true, function() {//F4
     mp.voiceChat.muted = !mp.voiceChat.muted;
-    if(!mp.voiceChat.muted) hudBrowser.execute(`manageVoice("${0}");`);
-    else hudBrowser.execute(`manageVoice("${1}");`);
+    if(!mp.voiceChat.muted) hudBrowser.execute(`gui.hud.methods.manageVoice("${0}");`);
+    else hudBrowser.execute(`gui.hud.methods.manageVoice("${1}");`);
 });
 //Hier wird die line vom schuss gemahlt
 mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
