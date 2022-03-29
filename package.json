@@ -1,6 +1,6 @@
 {
   "name": "phenixgames-v3",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Another PhenixGames Server",
   "main": "index.js",
   "scripts": {
