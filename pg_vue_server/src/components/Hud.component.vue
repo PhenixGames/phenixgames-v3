@@ -16,7 +16,7 @@
     <img src="../assets/img/hud/muted.png" v-if="!voiceType"/>
   </section>
   
-  <section class="speedometer white" :v-if="showSpeedo !== false">
+  <section class="speedometer white" v-if="showSpeedo">
     <div class="veh_tank">
       <span id="tank">{{ tank }}</span>
       <span>Liter</span>
