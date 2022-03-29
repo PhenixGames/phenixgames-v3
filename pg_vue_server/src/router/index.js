@@ -30,6 +30,11 @@ const routes = [
     path: '/spawnchooser',
     name: 'Spawnchooser',
     component: () => import('../views/login/Spawnchooser.vue')
+  },
+  {
+    path: '/inventory',
+    name: 'Inventory',
+    component: () => import('../views/Inventory.vue')
   }
 ]
 
