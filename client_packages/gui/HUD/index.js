@@ -33,8 +33,8 @@ mp.events.add("playerLeaveVehicle", (player, vehicle) => {
 //Render For Car
 mp.events.add("render", () => {
 //testing
-var pos = new mp.Vector3(-2096.231689453125, -320.1805114746094, 12.16186809539795);
-mp.game.graphics.drawDebugSphere(pos.x , pos.y, 20, 255, 0, 0, Number(100));
+//var pos = new mp.Vector3(-2096.231689453125, -320.1805114746094, 12.16186809539795);
+//mp.game.graphics.drawDebugSphere(pos.x , pos.y, 20, 255, 0, 0, 255);
 //
 
 
