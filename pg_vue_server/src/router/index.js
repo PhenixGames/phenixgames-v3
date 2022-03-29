@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue')
+    component: () => import('../views/login/Login.vue')
   },
   {
     path: '/hud',
@@ -20,6 +20,11 @@ const routes = [
     path: '/deathscreen',
     name: 'Deathscreen',
     component: () => import('../views/Deathscreen.vue')
+  },
+  {
+    path: '/namechooser',
+    name: 'Deathscreen',
+    component: () => import('../views/login/Namechooser.vue')
   }
 ]
 
