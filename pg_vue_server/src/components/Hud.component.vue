@@ -64,7 +64,7 @@ export default {
            * type 1 = speak
            * type 0 = mute
            */
-          this.voiceType = (type) ? true : false;
+          this.voiceType = type;
       },
       showSpeedometer() {
           this.showSpeedo = true
