@@ -1,6 +1,9 @@
-var browser;
+const config = require('_config/config').config;
+
+var browser = null;
+
 mp.events.add('Player:InGameName:Choose', () => {
-    browser = mp.browsers.new("package://gui/register/namechooser/index.html");
+    browser = mp.browsers.new(`http://${config.domain}:8080/#/namechooser`);
     setTimeout(() => {
         mp.gui.cursor.show(true, true);
     }, 500);
