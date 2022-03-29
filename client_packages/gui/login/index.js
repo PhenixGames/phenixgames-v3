@@ -9,7 +9,7 @@ mp.events.add('Open:Login:Browser', (isLogin) => {
     mainBrowser = mp.browsers.new(`http://${config.domain}:8080/#/login?isLogin=${isLogin}`);
     setTimeout(() => {
         mp.gui.cursor.show(true, true);
-    }, 500);
+    }, 1000);
 });
 
 
