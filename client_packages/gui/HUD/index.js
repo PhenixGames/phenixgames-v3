@@ -170,9 +170,9 @@ mp.events.add("Set:ModdedSpeed", (speed) => {
 mp.keys.bind(0x73, true, function() {//F4
     mp.voiceChat.muted = !mp.voiceChat.muted;
     if(!mp.voiceChat.muted){
-        hudBrowser.execute(`gui.hud.manageVoice("${"0"}");`);//inaktiv
+        hudBrowser.execute(`gui.hud.manageVoice("${false}");`);//inaktiv
     } else {
-        hudBrowser.execute(`gui.hud.manageVoice("${1}");`);//Aktiv
+        hudBrowser.execute(`gui.hud.manageVoice("${true}");`);//Aktiv
     } 
 });
 //Hier wird die line vom schuss gemahlt
