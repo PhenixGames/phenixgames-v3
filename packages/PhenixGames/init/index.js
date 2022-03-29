@@ -26,10 +26,13 @@ mp.events.add('packagesLoaded', async() =>
     await delay(15000);
 
     setInterval(() => {
-        console.time('Server wurde gesynct in: ');
+        console.time('Vehicle Server wurde gesynct in: ');
         vehicleAPI.syncAllVehciles();
+        console.timeEnd('Vehicle Server wurde gesynct in: ');
+        console.time('Player Server wurde gesynct in: ');
         playerAPI.syncAllPlayers();
-        console.timeEnd('Server wurde gesynct in: ');
+        console.timeEnd('Player Server wurde gesynct in: ');
+        
     }, 5000);
 
     setInterval(() => {
