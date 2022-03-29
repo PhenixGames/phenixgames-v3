@@ -7,6 +7,9 @@ var mainBrowser;
 mp.events.add('Open:Login:Browser', (isLogin) => {
     const config = require('_config/config').config;
     mainBrowser = mp.browsers.new(`http://${config.domain}:8080/#/login?isLogin=${isLogin}`);
+    setTimeout(() => {
+        mp.gui.cursor.show(true, true);
+    }, 500);
 });
 
 
