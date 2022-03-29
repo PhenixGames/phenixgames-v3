@@ -169,8 +169,11 @@ mp.events.add("Set:ModdedSpeed", (speed) => {
 
 mp.keys.bind(0x73, true, function() {//F4
     mp.voiceChat.muted = !mp.voiceChat.muted;
-    if(!mp.voiceChat.muted) hudBrowser.execute(`gui.hud.methods.manageVoice("${0}");`);
-    else hudBrowser.execute(`gui.hud.methods.manageVoice("${1}");`);
+    if(!mp.voiceChat.muted){
+        hudBrowser.execute(`gui.hud.methods.manageVoice("${"0"}");`);//inaktiv
+    } else {
+        hudBrowser.execute(`gui.hud.methods.manageVoice("${1}");`);//Aktiv
+    } 
 });
 //Hier wird die line vom schuss gemahlt
 mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
