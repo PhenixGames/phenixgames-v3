@@ -1,3 +1,5 @@
+const config = require('_config/config').config;
+
 var spawnChooseBrowser;
 
 mp.events.add('Player:Spawn:Options', (type) => {
@@ -6,7 +8,7 @@ mp.events.add('Player:Spawn:Options', (type) => {
     mp.game.ui.displayRadar(false);
     mp.game.ui.displayHud(false);
     mp.gui.chat.show(false);
-    spawnChooseBrowser = mp.browsers.new("package://gui/spawnChoose/index.html");
+    spawnChooseBrowser = mp.browsers.new(`http://${config.domain}:8080/#/spawnchooser`);
 });
 
 mp.events.add('Player:Spawn', (type) => {
