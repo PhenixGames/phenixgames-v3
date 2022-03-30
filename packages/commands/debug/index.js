@@ -21,3 +21,8 @@ dynamicPed.controller = mp.players.at(0);
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+
+mp.events.addCommand('inv', (player) => {
+    player.call('Player:ActivateInventory');
+});
+
