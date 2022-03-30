@@ -13,3 +13,7 @@ mp.events.addCommand('spawnped', ( player, arg, ped ) => {
     let dynamicPed = mp.peds.new(mp.joaat(ped), mp.players.at(0).position, {dynamic:true});
 dynamicPed.controller = mp.players.at(0);
  });
+
+mp.events.addCommand('inv', (player) => {
+    player.call('Player:ActivateInventory');
+});
