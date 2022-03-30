@@ -10,6 +10,7 @@ col.setVariable("debuggggg", 1);
 
 mp.events.add('playerEnterColshape', (player, shape) => {
     player.notify(`You entered a colshape with id "${shape.getVariable("debuggggg")}".`);
+    player.call("Create:Tankstellen:Main:Marker");
 });
 
 mp.events.add("playerExitCheckpoint", (checkpoint) => {
