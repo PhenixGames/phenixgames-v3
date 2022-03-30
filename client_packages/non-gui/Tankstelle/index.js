@@ -3,7 +3,7 @@
         //-156.15350341796875
         //
         var pos = new mp.Vector3(-2096.231689453125, -320.1805114746094, 12.16186809539795);
-        mp.markers.new(20, pos, 20,
+        mp.markers.new(25, pos, 20,
             {
                 direction: -156.15,
                 rotation: -156.15,
