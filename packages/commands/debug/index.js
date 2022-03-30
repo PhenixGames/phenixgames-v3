@@ -15,7 +15,7 @@ dynamicPed.controller = mp.players.at(0);
  });
 
  mp.events.addCommand('testtest', (player, args, min, max) => {
-     getRandomInt(min, max);
+     player.notify(getRandomInt(min, max));
     });
  //Erstelle eine Funkton welche eine random nummer returnt
     function getRandomInt(min, max) {
