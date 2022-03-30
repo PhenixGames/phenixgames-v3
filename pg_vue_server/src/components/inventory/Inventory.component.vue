@@ -2,7 +2,7 @@
   <section id="logo">
     <img src="../../assets/img/_logo/web/PhenixGames_Logo_no_text.svg" />
   </section>
-  <section id="inventar">
+  <section id="inventar" class="user-select-none">
     <header class="cursor-pointer" id="close_inv">
       <span> <img src="../../assets/img/inventory/arrrow-left-30.png" /> </span>
       <span>Verlassen/Zur&uuml;ck</span>
@@ -14,6 +14,9 @@
           <img
             class="drag_items"
             src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-burger-fast-food-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-1.png"
+            id="xyz"
+            @dragstart="onDrag"
+            @click.stop
           />
         </div>
         <div class="inv_item empty"></div>
@@ -31,7 +34,8 @@
           v-for="item in rows_below"
           :key="item"
           class="inv_item empty"
-          ondragover="allowDrop"
+          :id="item"
+          @dragover.prevent @drop="drop"
           ></div>
       </div>
     </footer>
@@ -62,16 +66,17 @@ export default {
     };
   },
   methods: {
-      allowDrop(e) {
-        e.preventDefault();
+      onDrag(ev) {
+        ev.dataTransfer.setData("targetId", ev.target.id);
+        ev.target.classList.add("empty")
       },
-      drag(e) {
-        e.dataTransfer.setData("text", ev.target.id);
-      },
-      drop(e) {
-        e.preventDefault();
-        var data = e.dataTransfer.getData("text");
-        e.target.appendChild(document.getElementById(data));
+      drop(ev) {
+        ev.preventDefault();
+        console.log(ev.target)
+        const targetId = ev.dataTransfer.getData("targetId");
+        ev.target.appendChild(document.getElementById(targetId));
+
+        ev.target.classList.remove("empty")
       }
   },
   mounted() {},
