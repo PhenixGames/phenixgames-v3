@@ -15,6 +15,12 @@
     <img src="../assets/img/hud/speak.png" v-if="voiceType"/>
     <img src="../assets/img/hud/muted.png" v-if="!voiceType"/>
   </section>
+
+
+  <section class="money absolute display-flex align-items-center">
+    <img src="../assets/img/hud/money.png" />
+    <span>{{money}}</span>
+  </section>
   
   <section class="speedometer white" v-if="showSpeedo">
     <div class="veh_tank">
@@ -55,7 +61,8 @@ export default {
           speed: 0,
           veh_state: {},
           player_id: '0',
-          time: ''
+          time: '',
+          money: '0'
       }
   },
   methods: {
@@ -81,6 +88,15 @@ export default {
       },
       setPlayerId(player_id) {
           this.player_id = player_id
+      },
+      /**
+      * @param {Number} money
+      */
+      setMoney(money) {
+        //Convert money from 10000 to 10.000
+        this.money = Number(parseFloat(parseInt(money)).toFixed(2)).toLocaleString('de', {
+            minimumFractionDigits: 0
+        });
       }
   },
   mounted() {

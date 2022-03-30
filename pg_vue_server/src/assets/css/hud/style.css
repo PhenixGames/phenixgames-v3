@@ -2,6 +2,7 @@
 @import url('./speedometer.css');
 @import url('./top_right.css');
 @import url('./voice.css');
+@import url('./money.css');
 
 body {
     margin: 0;
