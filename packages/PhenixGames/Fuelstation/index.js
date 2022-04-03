@@ -27,7 +27,9 @@ mp.events.add("playerExitCheckpoint", (col) => {
 
 
 
-module.exports.isentfuelstation = async function (shape) {
+
+
+module.exports.isENTfulestation = async function (shape) {
     for (var i = 0; i < Fuelstations.length; i++) {
         if(Fuelstations[i] == shape.getVariable("Type")){
             return await true
