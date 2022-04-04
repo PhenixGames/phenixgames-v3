@@ -3,4 +3,6 @@ packages/_db/db_config.json
 node_modules/
 
 client_packages/.listcache
+client_packages/_config/config.js
+
 core
