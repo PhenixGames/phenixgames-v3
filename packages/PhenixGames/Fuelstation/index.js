@@ -14,7 +14,7 @@ var col = mp.colshapes.newCircle(pos.x , pos.y, 20);
 col.setVariable("Type", 1);
 
 mp.events.add('playerEnterColshape', (player, shape) => {
-  if(isentfuelstation(shape)){
+  if(this.is_entity_fuelstation(shape)){
       player.call("Du betrittst das gelände einer Tankstelle");
       player.call("fuelstation.open", [shape.getVariable("Type")]);
   }
@@ -25,15 +25,11 @@ mp.events.add("playerExitCheckpoint", (col) => {
     player.notify("Testttt");
    });
 
-
-
-
-
-module.exports.isENTfulestation = async function (shape) {
+module.exports.is_entity_fuelstation = async function (shape) {
     for (var i = 0; i < Fuelstations.length; i++) {
         if(Fuelstations[i] == shape.getVariable("Type")){
-            return await true
+            return true
         }
      }
-     return await false
+     return false
 }
