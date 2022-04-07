@@ -1,8 +1,11 @@
 packages/_db/db_config.json
-
 node_modules/
-
+bin/*
+dotnet/*
 client_packages/.listcache
 client_packages/_config/config.js
-
+ragemp-server
+ragemp-server.exe
+BugTrap-x64.dll
 core
+ragemp-server
