@@ -1,6 +1,4 @@
 @import url('../root.css');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
 * {
     outline: none;
 }
@@ -8,7 +6,6 @@
 body {
     background: var(--background);
     background-image: var(--background_gradient);
-    font-family: 'Roboto', sans-serif;
     overflow: hidden;
 }
 

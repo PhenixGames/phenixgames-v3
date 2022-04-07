@@ -3,7 +3,7 @@ require('./gui/login/');
 require('./gui/spawnChoose/');
 require('./gui/deathscreen');
 require('./gui/register/namechooser/');
-//require('./gui/inventory/') - missing index
+require('./gui/inventory/')
 require('./gui/money/');
 require('./gui/HUD/');
 
