@@ -1,6 +1,6 @@
 const database = require("../../_db/db");
 const console = require('better-console');
-require('events.js');
+require('../Fuelstation/events.js');
 //TODO: Make code more readable
 var Fuelstations = [
         1,//Kleine Tankstelle
@@ -8,7 +8,7 @@ var Fuelstations = [
         3,//Große Tankstelle
         4,//Tankstelle Boot/Helikopter
 ]
-module.exports.debug = true;
+debug = false;
 /**
  * 
  * @param {Colspahe} shape 
@@ -58,7 +58,7 @@ async function GetDataFromDatabase(type){
  */
 async function Create_All_fuel_stations_colshapes(){
  var res = await GetDataFromDatabase("all");
- if(this.debug){
+ if(debug){
     console.log("-- Create Fuelstations -- " + res.length + " --");
     console.log(res);
  }
@@ -73,7 +73,7 @@ async function Create_All_fuel_stations_colshapes(){
 }
 
 /**
- * Finaly Spawns the colshape
+ * Finaly Spawns the colshape and Creates the blip on the map
  * @param {int} type 
  * @param {Vector3} pos 
  * @param {int} id 
@@ -83,5 +83,13 @@ async function SpawnCol(type, pos, id){
     var col = mp.colshapes.newCircle(Number(pos.x), Number(pos.y), 20);
     col.setVariable("Type", type);//Fuelstations 
     col.setVariable("id",id);//Tankstellen id
+
+    mp.blips.new(361, new mp.Vector3(Number(pos.x), Number(pos.y), Number(pos.z)),
+        {
+            name: "Tankstelle",
+            color: 25,
+            shortRange: true,
+            
+        });
     return true
 }

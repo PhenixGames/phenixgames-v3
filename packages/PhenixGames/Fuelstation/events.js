@@ -1,7 +1,7 @@
 const database = require("../../_db/db");
 const console = require('better-console');
 const Fuelstations = require('../Fuelstation/');
-const debug = Fuelstations.debug;
+const debug = false;
 
 mp.events.add('playerEnterColshape', (player, shape) => {
     if(Fuelstations.is_entity_fuelstation(shape)){
