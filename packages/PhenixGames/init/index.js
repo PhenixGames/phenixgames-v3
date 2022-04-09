@@ -1,16 +1,23 @@
 const console = require('better-console');
-
+const LocalTestServer = true;//UPDATE THIS FOR Production
 const database = require("../../_db/db");
 const vehicleAPI = require("../vehicle/")
 const playerAPI = require('../playerAPI/');
 const generellAPI = require('../allgemein/');
 const weatherAPI = require('../weatherAPI');
+const Fuelstations = require('../Fuelstation/');
 const { delay } = require('../../../_assets/functions/delay');
 
 
 mp.events.delayInitialization = true;
 (async () => {
-    await delay(15000);
+    if(LocalTestServer){
+        await delay(1);
+    }
+    else {
+        await delay(15000);
+    }
+    
     mp.events.delayInitialization = false;
 })();
 
@@ -22,6 +29,7 @@ mp.events.add('packagesLoaded', async() =>
 {
     await vehicleAPI.spawnAllVehicles();
     weatherAPI.setWeather();
+    await Fuelstations.Load_Fuel_stations();
 
     await delay(15000);
 
