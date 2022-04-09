@@ -214,5 +214,5 @@ setInterval(() => {
         speed = speed * 3.6;
         mp.events.callRemote('Set:Variable:Of:ent', speed);
     }
-}, 5000);
+}, 500);
 

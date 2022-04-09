@@ -3,8 +3,15 @@ mp.events.add('keypress:X', (player) => {
         var veh = player.vehicle;
         let fuel = veh.getVariable("veh_fuel");
         if(!fuel == 0){
-            veh.engine = !veh.engine;
-            veh.setVariable("veh_engine", veh.engine);
+            var speed = veh.getVariable("veh_speed");
+            if(speed >= 5){
+               player.notify("1");
+            }else {
+                player.notify("2");
+                veh.engine = !veh.engine;
+                veh.setVariable("veh_engine", veh.engine);
+            }
+            
         }else {
            return player.notify("Der Tank des Fahzeuges ist leer");
         }
