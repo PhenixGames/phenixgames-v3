@@ -47,9 +47,6 @@ async function GetDataFromDatabase(type){
         return false;
     })
  }
- if(type = "markers"){
-
- }
  return false;
 }
 /**
