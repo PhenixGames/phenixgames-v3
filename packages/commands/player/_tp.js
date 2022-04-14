@@ -97,3 +97,20 @@ mp.events.addCommand('tptoveh', async (player, target) =>{
         );
     }
 });
+mp.events.addCommand('bringveh', async (player, target) =>{
+    if(!player.getVariable("Aduty"))return
+    if(await Perms.hasPermissions(player, ["tp_to"])) {
+        if(!typeof target == 'number') return player.notify(`Das Fahrzeug ${target} ist keine ID`);
+        mp.vehicles.forEach(
+            (tg) => {
+                if(tg.getVariable("veh_id") == target){
+                    tg.position = player.position;
+                    tg.heading = player.heading;
+                    tg.dimension = player.dimension;
+                }else {
+                    return player.notify(`Das Fahrzeug mit der ID ${target} wurde nicht gefunden`);
+                }
+            }
+        );
+    }
+});
