@@ -21,7 +21,7 @@ async function tpto(player, target){
     if(!player.getVariable("Aduty"))return
 
     if(await Perms.hasPermissions(player, ["tp_to"])) {
-        if(typeof target == 'number'){
+        if(typeof target !== Number){
             mp.players.forEach(
                 (tg) => {
                     if(tg.getVariable("playerId") == target){
@@ -51,7 +51,7 @@ async function tpto(player, target){
 }
 async function bring(player, target){
     if(await Perms.hasPermissions(player, ["tp_to"])) {
-        if(typeof target == 'number'){
+        if(typeof target !== Number){
             mp.players.forEach(
                 (tg) => {
                     if(tg.getVariable("playerId") == target){
@@ -83,7 +83,7 @@ async function bring(player, target){
 mp.events.addCommand('tptoveh', async (player, target) =>{
     if(!player.getVariable("Aduty"))return
     if(await Perms.hasPermissions(player, ["tp_to"])) {
-        if(!typeof target == 'number') return player.notify(`Das Fahrzeug ${target} ist keine ID`);
+        if(!typeof target !== Number) return player.notify(`Das Fahrzeug ${target} ist keine ID`);
         mp.vehicles.forEach(
             (tg) => {
                 if(tg.getVariable("veh_id") == target){
@@ -100,7 +100,7 @@ mp.events.addCommand('tptoveh', async (player, target) =>{
 mp.events.addCommand('bringveh', async (player, target) =>{
     if(!player.getVariable("Aduty"))return
     if(await Perms.hasPermissions(player, ["tp_to"])) {
-        if(!typeof target == 'number') return player.notify(`Das Fahrzeug ${target} ist keine ID`);
+        if(typeof target !== Number) return player.notify(`Das Fahrzeug ${target} ist keine ID`);
         mp.vehicles.forEach(
             (tg) => {
                 if(tg.getVariable("veh_id") == target){
