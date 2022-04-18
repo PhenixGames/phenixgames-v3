@@ -6,7 +6,7 @@
 body {
     background: var(--background);
     background-image: var(--background_gradient);
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 #logo {

@@ -1,8 +1,8 @@
-const console = require('better-console');
+const debug = require('../../../_assets/json/debug/debug.json').houseapi;
 
+const console = require('better-console');
 const database = require("../../_db/db");
 
-let Debug = true;
 const config = {
     "normiehouse": "261.4586, -998.8196, -99.00863"
 }

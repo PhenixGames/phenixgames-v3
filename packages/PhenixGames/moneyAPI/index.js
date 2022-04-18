@@ -1,6 +1,4 @@
-const {
-    Database
-} = require("../../_db/db");
+const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
 
 const console = require('better-console');
 

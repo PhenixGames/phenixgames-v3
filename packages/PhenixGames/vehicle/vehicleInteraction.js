@@ -1,3 +1,5 @@
+const debug = require('../../../_assets/json/debug/debug.json').vehicle;
+
 mp.events.add('keypress:X', (player) => {
     try {
         var veh = player.vehicle;

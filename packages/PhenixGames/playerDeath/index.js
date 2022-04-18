@@ -1,3 +1,5 @@
+const debug = require('../../../_assets/json/debug/debug.json').playerdeath;
+
 mp.events.add("playerDeath", (player, reason, killer) => {
     player.call("Open:Death:Browser");
 });

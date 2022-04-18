@@ -1,3 +1,5 @@
+const debug = require('../../../_assets/json/debug/debug.json').ipls;
+
 let Ipls = [
     'vw_dlc_casino_door',
     'hei_dlc_casino_door',

@@ -1,7 +1,7 @@
+const debug = require('../../../_assets/json/debug/debug.json').vehicle;
+
 const database = require("../../_db/db");
-
 const console = require('better-console');
-
 const generellAPI = require('../allgemein/index');
 
 /**

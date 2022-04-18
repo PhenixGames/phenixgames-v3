@@ -1,3 +1,5 @@
+const debug = require('../../../_assets/json/debug/debug.json').playerapi;
+
 
 mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, boneIndex, damage) => {
     let newdamage;

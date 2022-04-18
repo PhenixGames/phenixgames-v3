@@ -1,3 +1,5 @@
+const debug = require('../../../_assets/json/debug/debug.json').fuelstation;
+
 const database = require("../../_db/db");
 const console = require('better-console');
 require('../Fuelstation/events.js');
@@ -7,8 +9,7 @@ var Fuelstations = [
         2,//Mittlere Tankstelle
         3,//Große Tankstelle
         4,//Tankstelle Boot/Helikopter
-]
-debug = false;
+];
 /**
  * 
  * @param {Colspahe} shape 

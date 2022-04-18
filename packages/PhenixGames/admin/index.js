@@ -1,3 +1,5 @@
+const debug = require('../../../_assets/json/debug/debug.json').admin;
+
 const playerAPI = require("../playerAPI");
 const Perms = require('../playerAPI/permissionSystem')
 const generellAPI = require('../allgemein/');

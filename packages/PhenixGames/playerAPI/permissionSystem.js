@@ -1,3 +1,5 @@
+const debug = require('../../../_assets/json/debug/debug.json').playerapi;
+
 const database = require("../../_db/db");
 
 const playerAPI = require('./index');

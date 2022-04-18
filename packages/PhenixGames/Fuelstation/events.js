@@ -1,7 +1,7 @@
 const database = require("../../_db/db");
 const console = require('better-console');
 const Fuelstations = require('../Fuelstation/');
-const debug = false;
+const debug = require('../../../_assets/json/debug/debug.json').fuelstation;
 
 
 mp.events.add('playerEnterColshape', (player, shape) => {

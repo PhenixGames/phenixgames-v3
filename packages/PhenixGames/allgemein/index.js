@@ -1,4 +1,5 @@
 const console = require('better-console');
+const debug = require('../../../_assets/json/debug/debug.json').allgemein;
 
 mp.events.add('playerJoin', (player) => {
     player.call("Create:Login:Cam");

@@ -1,5 +1,6 @@
+const debug = require('../../../_assets/json/debug/debug.json').init;
+
 const console = require('better-console');
-const LocalTestServer = false;//UPDATE THIS FOR Production
 const database = require("../../_db/db");
 const vehicleAPI = require("../vehicle/")
 const playerAPI = require('../playerAPI/');
@@ -11,7 +12,7 @@ const { delay } = require('../../../_assets/functions/delay');
 
 mp.events.delayInitialization = true;
 (async () => {
-    if(LocalTestServer){
+    if(debug){
         await delay(1);
     }
     else {

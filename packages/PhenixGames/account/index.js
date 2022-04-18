@@ -3,6 +3,7 @@ const console = require('better-console');
 const database = require('../../_db/db');
 
 const config = require('../../../_assets/json/config.json');
+const debug = require('../../../_assets/json/debug/debug.json').account;
 
 const playerAPI = require('../playerAPI/');
 const generellAPI = require('../allgemein/');

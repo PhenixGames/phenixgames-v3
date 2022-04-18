@@ -1,3 +1,5 @@
+const debug = require('../../../_assets/json/debug/debug.json').voice;
+
 mp.events.add("add_voice_listener", (player, target) =>
 {
 	if(target)
