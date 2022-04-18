@@ -1,17 +1,15 @@
 {
-    "debug": {
-        "account": false,
-        "admin": false,
-        "allgemein": false,
-        "fuelstation": false,
-        "houseapi": false,
-        "init": false,
-        "ipls": false,
-        "markerapi": false,
-        "moneyapi": false,
-        "playerdeath": false,
-        "vehicle": false,
-        "voice": false,
-        "weatherapi": false
-    }
+    "account": false,
+    "admin": false,
+    "allgemein": false,
+    "fuelstation": false,
+    "houseapi": false,
+    "init": false,
+    "ipls": false,
+    "markerapi": false,
+    "moneyapi": false,
+    "playerdeath": false,
+    "vehicle": false,
+    "voice": false,
+    "weatherapi": false
 }
