@@ -28,6 +28,7 @@ mp.events.add('playerEnterColshape', (player, shape) => {
           }
       }
       Remove_all_marker_of_fuelstation(player);
+      player.setVariable('isnearFuelstation', false);
      });
 async function Get_Marker_out_of_Database(shape){
     return await database.query('SELECT * FROM pg_fuelstations_marker WHERE fuelstation_id = ?', [shape.getVariable('id')])
@@ -52,6 +53,7 @@ async function Player_entered_fuelstation(player, shape){
                console.log("Fehler beim erstellen des Markers: " + error);
            }
        }
+       player.setVariable('isnearFuelstation', true);
 }
 
 async function Spawn_Marker_Of_Fuelstation(player, pos, size, id){
