@@ -7,9 +7,7 @@ mp.events.add('keypress:X', (player) => {
         if(!fuel == 0){
             var speed = veh.getVariable("veh_speed");
             if(speed >= 5){
-               player.notify("1");
             }else {
-                player.notify("2");
                 veh.engine = !veh.engine;
                 veh.setVariable("veh_engine", veh.engine);
             }
@@ -70,5 +68,8 @@ function RemovefuelfromVehicle(veh, amount, fuel){
 }
 mp.events.add('Set:Variable:Of:ent', (player, speed) => {
     var veh = player.vehicle;
-    veh.setVariable('veh_speed', speed);
+    if(veh){
+        veh.setVariable('veh_speed', speed);
+    }
+    
 });

@@ -2,7 +2,7 @@
 var Loadedmarker = [];
 function Spawn_Marker_Of_Fuelstation(pos, size, id){
     var marker = mp.markers.new(23, pos, size, {
-        color: [255, 0, 0, 100],
+        color: [255, 0, 0, 50],
         visible: true,
         dimension: 0
     });

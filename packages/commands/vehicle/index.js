@@ -19,8 +19,21 @@ mp.events.addCommand("speed", (player, speed = 1) => {
 
 mp.events.addCommand("fuel", (player) => {
     var fuel = 150;//150 ist aktuell der Maximale Tankstand
+    let closest = mp.vehicles.getClosest([player.position.x, player.position.y, player.position.z], 1)[0]
+    player.outputChatBox(`The closest vehicle: ${JSON.stringify(closest)}`)
+    
     if(player.getVariable('isTeam')) {
-        
-        player.vehicle.setVariable("veh_fuel", fuel);
+        console.log("bla");
+        closest.setVariable("veh_fuel", fuel);
+    }else{
+        console.log("bla bla");
+        if(player.getVariable("isnearFuelstation") == true){
+            closest.setVariable("veh_fuel", fuel);
+            player.notify("~g~Du hast dein Fahrzeug erfolgreich aufgefüllt!");
+        }else {
+            player.notify("~r~Du bist nicht bei einer Tankstelle");
+        }
     }
 });
+
+
