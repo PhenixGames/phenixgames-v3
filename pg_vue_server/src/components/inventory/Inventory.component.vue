@@ -1,5 +1,5 @@
 <template class="user-select-none">
-  <!-- <section id="logo">
+  <section id="logo">
     <img src="../../assets/img/_logo/web/PhenixGames_Logo_no_text.svg" />
   </section>
   <section id="inventar" class="user-select-none">
@@ -10,44 +10,23 @@
     <main>
       <p>Ausgerüstetes Equipment</p>
       <div class="inv_container">
-        <div class="inv_item">
-          <img
-            class="drag_items"
-            src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-burger-fast-food-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-1.png"
-            id="xyz"
-            @dragstart="onDrag"
-            @click.stop
-          />
-        </div>
-        <div class="inv_item empty"></div>
-        <div class="inv_item empty"></div>
-        <div class="inv_item empty"></div>
-        <div class="inv_item empty"></div>
-        <div class="inv_item empty"></div>
-        <div class="inv_item empty"></div>
-      </div> -->
-
-<draggable class="dragArea list-group w-full" :list="list" @change="log">
-  <div
-    class="list-styles"
-    v-for="element in list"
-    :key="element.name"
-  >
-    {{ element.name }}
-  </div>
-</draggable>
-
-    <!-- </main>
+        <div
+          v-for="item in rows_top"
+          :key="item"
+          class="inv_item empty"
+          :id="'top_pos_' + item"
+        ></div>
+      </div>
+    </main>
     <footer>
       <p>Inventar</p>
       <div class="inv_container">
-          <div 
+        <div
           v-for="item in rows_below"
           :key="item"
           class="inv_item empty"
-          :id="item"
-          @dragover.prevent @drop="drop"
-          ></div>
+          :id="'bottom_pos_' + item"
+        ></div>
       </div>
     </footer>
   </section>
@@ -61,83 +40,68 @@
       <img src="../../assets/img/inventory/inv_char.svg" />
     </div>
     <div class="inv_char_items"></div>
-  </section> -->
+  </section>
 </template>
 
 <script>
 import script from "@/assets/js/inventory/index.js";
-import DragDrop from 'vue-drag-n-drop'
-import test from "./test.vue";
 
 export default {
   name: "pg_inventory",
   data() {
     return {
-      drag: false,
       rows_top: 7,
       rows_below: 28,
-
-      stories: [
-        {
-          title: 'Strategy 101',
-          description: 'Create a draft of business plan',
-          time: '3 days',
-          done: false
-        },
-        {
-          title: 'Strategy 102',
-          description: 'Finalize the plan',
-          time: '4 days',
-          done: false
-        },
-        {
-          title: 'Tech diagram',
-          description: 'Draw the tech data',
-          time: '4 days',
-          done: false
-        },
-        {
-          title: 'Place Holder',
-          description: 'Data Science Team',
-          time: '5 days',
-          done: false
-        }
-      ],
-      dropGroups: [
-        {
-          name: 'Business Team',
-          children: []
-        },
-        {
-          name: 'Tech Dept',
-          children: []
-        },
-        {
-          name: 'Marketing Dept',
-          children: []
-        }
-      ]
     };
   },
-  components: {
-    test,
-    DragDrop
-  },
   methods: {
-      onDrag(ev) {
-        ev.dataTransfer.setData("targetId", ev.target.id);
-        ev.target.classList.add("empty")
-      },
-      drop(ev) {
-        ev.preventDefault();
-        console.log(ev.target)
-        const targetId = ev.dataTransfer.getData("targetId");
-        ev.target.appendChild(document.getElementById(targetId));
+    //invPos, img, count, isStackable
+    insertItemsIntoInv({item}) {
+      for(let i in item) {
+        let invPost = item[i].invPos;
+        let img = item[i].img;
+        let count = item[i].count;
+        let isTop = item[i].isTop;
+        let isStackable = item[i].isStackable;
 
-        ev.target.classList.remove("empty")
+        let itemDiv;
+
+        (isTop) ? itemDiv = document.getElementById('top_pos_' + invPost) : itemDiv = document.getElementById('bottom_pos_' + invPost);
+
+        if(itemDiv.classList.contains('empty')) {
+          itemDiv.classList.remove('empty');
+          itemDiv.classList.add('full');
+          itemDiv.dataset.isstackable = isStackable;
+          itemDiv.innerHTML = `<img src="${img}" />`;
+          if(isStackable) {
+            itemDiv.innerHTML += `<span>${count}</span>`;
+          }
+        } else {
+          if(isStackable) {
+            let span = itemDiv.querySelector('span');
+            span.innerHTML = parseInt(span.innerHTML) + count;
+          }
+        }
       }
+    }
   },
-  mounted() {},
+  mounted() {
+    this.insertItemsIntoInv({
+      item: [{
+        invPos: 1,
+        img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
+        count: 1,
+        isTop: true,
+        isStackable: true
+      },{
+        invPos: 1,
+        img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
+        count: 1,
+        isTop: false,
+        isStackable: false
+      }]
+    })
+  },
 };
 </script>
 
