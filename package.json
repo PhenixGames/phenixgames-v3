@@ -1,6 +1,6 @@
 {
   "name": "phenixgames-v3",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Another PhenixGames Server",
   "scripts": {
     "start": "pm2 start ragemp-server --name rage_server && cd ./pg_vue_server && pm2 start \"npm run serve\" --name rage_vue && pm2 monit",
