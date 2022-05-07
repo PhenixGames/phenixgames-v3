@@ -3,7 +3,7 @@ const config = require('_config/config').config;
 var invBrowser;
 var isInvOpen = false;
 
-module.exports.interacteInventory = () => {
+exports.interacteInventory = () => {
     if(isInvOpen) {
         invBrowser.destroy();
         mp.gui.cursor.show(false, false);
