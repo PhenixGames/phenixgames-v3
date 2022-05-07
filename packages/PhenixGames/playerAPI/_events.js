@@ -16,7 +16,7 @@ mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, bon
 
 
 mp.events.add('Server:Player:interacteBrowser', (player, hasOpen) => {
-    player.setVaraible('hasBrowserOpen', hasOpen);
+    player.setVariable('hasBrowserOpen', hasOpen);
 });
 
 
