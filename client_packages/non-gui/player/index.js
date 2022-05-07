@@ -51,3 +51,4 @@ mp.events.add('render', () => {
       mp.game.controls.disableControlAction(0, 142, true);//Disable hitting with weapon part2
   }
 });
+

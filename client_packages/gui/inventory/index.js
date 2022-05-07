@@ -4,11 +4,13 @@ var invBrowser;
 var isInvOpen = false;
 
 exports.interacteInventory = () => {
-    if(mp.players.local.getVariable('hasBrowserOpen')) return;
+    if(mp.players.local.getVariable('hasBrowserOpen') && mp.players.local.isTypingInTextChat) return;
 
     if(isInvOpen) {
         invBrowser.destroy();
-        mp.gui.cursor.show(false, false);
+        setTimeout(() => {
+            mp.gui.cursor.show(false, false);    
+        }, 200);
         isInvOpen = false;
     }else {
         isInvOpen = true;
