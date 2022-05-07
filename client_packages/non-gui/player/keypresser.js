@@ -1,4 +1,4 @@
-const { interacteInventory } = require("../../gui/inventory/index.js");
+const { interacteInventory } = require("./gui/inventory/index.js");
 const vehiclemoduele = require("./non-gui/vehicle/index.js");
 
 // -STRG-
