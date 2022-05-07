@@ -36,3 +36,8 @@ mp.keys.bind(0x49, true, function() {
     interacteInventory();
 });
 
+//f6
+mp.keys.bind(	0x75, true, function() {
+    mp.events.callRemote("Player:pressed:f6");
+});
+

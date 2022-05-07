@@ -19,6 +19,10 @@ mp.events.add('Server:Player:interacteBrowser', (player, hasOpen) => {
     player.setVariable('hasBrowserOpen', hasOpen);
 });
 
+mp.events.add("Player:pressed:f6", ( player ) => {
+    if(player.getVariable('hasBrowserOpen')) return;
+    player.call("chat:activate");
+});
 
 function ApplyDamageToPlayer(Shootingplayer, target, damage){
     //Shootingplayer need a Hud to show if he Hitted
