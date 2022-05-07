@@ -5,7 +5,7 @@ let chat =
 	container: null,
 	input: null,
 	enabled: false,
-	active: true,
+	active: fasle,
 	historyMsgs: [],
 	currentIndex: 0
 };
