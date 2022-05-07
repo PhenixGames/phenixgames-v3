@@ -12,9 +12,13 @@ mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, bon
     if(!targetplayer.getVariable('Aduty')){
         ApplyDamageToPlayer(Shootingplayer, targetplayer, newdamage);
     }
-    
-
 });
+
+
+mp.events.add('Server:Player:interacteBrowser', (player, hasOpen) => {
+    player.setVariable('hasBrowserOpen', hasOpen);
+});
+
 
 function ApplyDamageToPlayer(Shootingplayer, target, damage){
     //Shootingplayer need a Hud to show if he Hitted

@@ -3,6 +3,7 @@ const config = require('_config/config').config;
 var spawnChooseBrowser;
 
 mp.events.add('Player:Spawn:Options', (type) => {
+    mp.events.callRemote('Server:Player:interacteBrowser', true)
     mp.players.local.freezePosition(true);
     mp.game.ui.displayRadar(false);
     mp.game.ui.displayHud(false);
@@ -33,6 +34,7 @@ mp.events.add('Player:Spawn', (type) => {
 });
 
 mp.events.add('Player:Spawn:Succes:close:Windows', () => {
+    mp.events.callRemote('Server:Player:interacteBrowser', false)
     mp.events.remove(["Player:Spawn", "Player:Spawn:Options", "Player:Spawn:Succes:close:Windows"]);
     spawnChooseBrowser.destroy();
     mp.gui.cursor.show(false, false);
