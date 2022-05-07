@@ -21,7 +21,15 @@ mp.events.add('Server:Player:interacteBrowser', (player, hasOpen) => {
 
 mp.events.add("Player:pressed:f6", ( player ) => {
     if(player.getVariable('hasBrowserOpen')) return;
-    player.call("chat:activate");
+    var state = false;
+    //If abfrage weil sonst vlt ein fehler auftreten kann wenn die Variable nicht richtig gesetzt wurde
+    if(player.getVariable('chat:activated') == true){
+        state = true;
+    }else {
+        state = false;
+    }
+    player.call("chat:activate", state);
+    player.setVariable("chat:activated", state);
 });
 
 function ApplyDamageToPlayer(Shootingplayer, target, damage){
