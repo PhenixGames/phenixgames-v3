@@ -13,3 +13,5 @@ require('./non-gui/fingerpoint/');
 require('./non-gui/player/');
 require('./non-gui/voice/');
 require('./non-gui/Tankstelle/');
+
+require("/chat/index.js");
