@@ -51,4 +51,5 @@ mp.events.add('Login:Succes:close:Windows', () => {
     mp.gui.chat.show(true);
     mp.game.ui.displayRadar(true);
     mp.game.ui.displayHud(true);
+    mp.trigger("chat:activate", true);
 });
