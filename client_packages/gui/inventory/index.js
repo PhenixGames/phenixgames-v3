@@ -4,7 +4,7 @@ var invBrowser;
 var isInvOpen = false;
 
 exports.interacteInventory = () => {
-    if(mp.players.local.getVariable('hasBrowserOpen') || mp.players.local.isTypingInTextChat()) return;
+    if(mp.players.local.getVariable('hasBrowserOpen') || mp.players.local.isTypingInTextChat) return;
 
     if(isInvOpen) {
         invBrowser.destroy();
