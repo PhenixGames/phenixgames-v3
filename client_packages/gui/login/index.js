@@ -5,6 +5,7 @@ mp.gui.chat.show(false);
 
 var mainBrowser;
 mp.events.add('Open:Login:Browser', (isLogin) => {
+    player.callRemote('Server:Player:interacteBrowser', true);
     const config = require('_config/config').config;
     mainBrowser = mp.browsers.new(`http://${config.domain}:8080/#/login?isLogin=${isLogin}`);
     setTimeout(() => {
@@ -41,6 +42,8 @@ mp.events.add('uiRegister_RegisterButton', (password) => {
 });
 
 mp.events.add('Login:Succes:close:Windows', () => {
+    player.callRemote('Server:Player:interacteBrowser', false);
+    
     mp.events.remove(["Login:Succes:close:Windows", "uiLogin_LoginButton", "uiRegister_RegisterButton", "Wrong:Password", "Create:Login:Cam", "Open:Login:Browser"]);
     mainBrowser.destroy();
     mp.gui.cursor.show(false, false);

@@ -4,6 +4,8 @@ var invBrowser;
 var isInvOpen = false;
 
 exports.interacteInventory = () => {
+    if(mp.players.local.getVariable('hasBrowserOpen')) return;
+
     if(isInvOpen) {
         invBrowser.destroy();
         mp.gui.cursor.show(false, false);
