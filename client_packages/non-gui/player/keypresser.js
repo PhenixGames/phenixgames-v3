@@ -1,3 +1,4 @@
+const { interacteInventory } = require("../../gui/inventory/index.js");
 const vehiclemoduele = require("./non-gui/vehicle/index.js");
 
 // -STRG-
@@ -29,3 +30,9 @@ mp.keys.bind(0x79, true, function() {
 mp.keys.bind(0x75, true, function() {
     vehiclemoduele.ApplySeatbelt();
 });
+
+//i
+mp.keys.bind(0x49, true, function() {
+    interacteInventory();
+});
+
