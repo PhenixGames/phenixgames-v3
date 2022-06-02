@@ -22,7 +22,7 @@
   ],
   "homepage": "https://github.com/PhenixGames/phenixgames-v3#readme",
   "dependencies": {
-    "axios": "^0.26.0",
+    "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "better-console": "^1.0.1",
     "mysql": "^2.18.1",
