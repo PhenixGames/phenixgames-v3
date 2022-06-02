@@ -28,6 +28,6 @@
     "mysql": "^2.18.1",
     "sloc": "^0.2.1",
     "validator": "^13.7.0",
-    "vue-router": "^4.0.14"
+    "vue-router": "^4.0.15"
   }
 }
