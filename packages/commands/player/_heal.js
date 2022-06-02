@@ -13,7 +13,7 @@ mp.events.addCommand("revive", async (player, target) => {
 
     if(await Perms.hasPermissions(player, ["tp_to"])) {
         var playerFound = false;
-        if(isNaN(target)) {
+        if(!isNaN(target)) {
             mp.players.forEach(
                 (tg) => {
                     if(tg.getVariable("playerId") == target){

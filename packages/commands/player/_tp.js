@@ -33,7 +33,7 @@ async function tpto(player, target){
     
     if(await Perms.hasPermissions(player, ["tp_to"])) {
         var found = false;
-        if(isNaN(Number)){
+        if(!isNaN(target)){
             mp.players.forEach(
                 (tg) => {
                     if(tg.getVariable("playerId") == target){
@@ -54,7 +54,7 @@ async function tpto(player, target){
 async function bring(player, target){
     if(await Perms.hasPermissions(player, ["tp_to"])) {
         var found = false;
-        if(isNaN(Number)){
+        if(!isNaN(target)){
             mp.players.forEach(
                 (tg) => {
                     if(tg.getVariable("playerId") == target){
@@ -78,7 +78,7 @@ async function tptoveh(player, target){
     
     if(await Perms.hasPermissions(player, ["tp_to"])) {
         var found = false;
-        if(isNaN(Number)){
+        if(!isNaN(target)){
             mp.vehicles.forEach(
                 (tg) => {
                     if(tg.getVariable("veh_id") == target){
@@ -100,7 +100,7 @@ async function tptoveh(player, target){
 async function bringveh(player, target){
     if(await Perms.hasPermissions(player, ["tp_to"])) {
         var found = false;
-        if(isNaN(Number)){
+        if(!isNaN(target)){
             mp.vehicles.forEach(
                 (tg) => {
                     if(tg.getVariable("veh_id") == target){
