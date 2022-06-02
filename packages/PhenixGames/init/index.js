@@ -46,5 +46,5 @@ mp.events.add('packagesLoaded', async() =>
 
     setInterval(() => {
         weatherAPI.setWeather();
-    }, 1080000);
+    }, 10800000); // 3h
 });
