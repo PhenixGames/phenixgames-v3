@@ -8,11 +8,9 @@ mp.events.add('Open:Death:Browser', () => {
     mp.gui.cursor.visible = true;
 });
 mp.events.add('close:Death:Browser', () => {
-    try {
-        mp.events.callRemote('Server:Player:interacteBrowser', false)
-        Deathbrowser.destroy();
-        mp.gui.cursor.visible = false;
-    }catch(err) {}
+    mp.events.callRemote('Server:Player:interacteBrowser', false);
+    Deathbrowser.destroy();
+    mp.gui.cursor.visible = false;
 });
 
 mp.events.add('HTML:Call:Respawn', () => {
