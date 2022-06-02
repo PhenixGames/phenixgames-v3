@@ -1,6 +1,5 @@
 const debug = require('../../../_assets/json/debug/debug.json').playerapi;
 
-
 mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, boneIndex, damage) => {
     let newdamage;
     if (boneIndex === 20) {
@@ -14,6 +13,14 @@ mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, bon
     }
 });
 
+
+mp.events.add('Server:Activate:Medikit', (player) => {
+    player.health = 100;
+});
+
+mp.events.add('Server:Activate:Weste', (player) => {
+    player.armour = 100;
+});
 
 mp.events.add('Server:Player:interacteBrowser', (player, hasOpen) => {
     player.setVariable('hasBrowserOpen', hasOpen);

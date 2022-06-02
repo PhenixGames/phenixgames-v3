@@ -1,3 +1,5 @@
+//https://docs.microsoft.com/de-de/windows/win32/inputdev/virtual-key-codes
+
 const { interacteInventory } = require("./gui/inventory/index.js");
 const vehiclemoduele = require("./non-gui/vehicle/index.js");
 
@@ -41,3 +43,28 @@ mp.keys.bind(	0x75, true, function() {
     mp.events.callRemote("Player:pressed:f6");
 });
 
+var isPlayerHealing = false;
+
+//, Medikit
+mp.keys.bind(0xBC, true, function() {
+    if(isPlayerHealing) return;
+    else {
+        isPlayerHealing = true;
+        setTimeout(() => {
+            mp.events.callRemote("Server:Activate:Medikit");
+            isPlayerHealing = false;
+        }, 2000);
+    } 
+});
+
+//. Weste
+mp.keys.bind(0xBE, true, function() {
+    if(isPlayerHealing) return;
+    else {
+        isPlayerHealing = true;
+        setTimeout(() => {
+            mp.events.callRemote("Server:Activate:Weste");
+            isPlayerHealing = false;
+        }, 2000);
+    } 
+});
