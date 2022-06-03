@@ -2,6 +2,7 @@ const debug = require('../../../_assets/json/debug/debug.json').fuelstation;
 
 const database = require("../../_db/db");
 const console = require('better-console');
+const { log } = require('../../../_assets/functions/log/logs');
 require('../Fuelstation/events.js');
 //TODO: Make code more readable
 var Fuelstations = [
@@ -44,7 +45,10 @@ async function GetDataFromDatabase(type){
         return res;
     })
     .catch(err => {
-        console.error(err);
+        log({
+            message: err,
+            isFatal: true
+        });
         return false;
     })
  }
@@ -64,7 +68,10 @@ async function Create_All_fuel_stations_colshapes(){
         try {
             await SpawnCol(res[i].type, new mp.Vector3(res[i].pos.split(', ')), res[i].id);
         } catch (error) {
-            console.log("Fehler beim erstellen der Fuelstation: " + error);
+            log({
+                message: "Fehler beim erstellen der Fuelstation: " + error,
+                isFatal: false
+            });
         }
     }
  return true;

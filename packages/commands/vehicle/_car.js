@@ -1,6 +1,7 @@
 const vehicle = require('../../PhenixGames/vehicle/index');
 const Perms = require('../../PhenixGames/playerAPI/permissionSystem');
 const generellAPI = require('../../PhenixGames/allgemein/');
+const { log } = require('../../../_assets/functions/log/logs');
 
 mp.events.addCommand("car", async (player, args) => {
     spawncar(player, args);
@@ -72,7 +73,10 @@ async function spawncar(player, args){
         });
 
         if(!saveVeh) {
-            return console.log('Error by saving the car into Database');
+            return log({
+                message: 'Error: Vehicle could not be saved in database!',
+                isFatal: true
+            });
         }
     }
 }

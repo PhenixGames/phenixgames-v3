@@ -1,6 +1,7 @@
 const debug = require('../../../_assets/json/debug/debug.json').houseapi;
 
 const console = require('better-console');
+const { log } = require('../../../_assets/functions/log/logs');
 const database = require("../../_db/db");
 
 const config = {
@@ -16,7 +17,10 @@ module.exports.saveNewHouse = async function(player_id) {
     return await database.query('INSERT INTO pg_houses (player_id, house_pos) VALUES (?, ?)', [player_id, config.normiehouse])
     .then(() => {return config.normiehouse.split(', ')})
     .catch(err => {
-        console.error(err);
+        log({
+            message: err,
+            isFatal: true
+        });
         return false;
     })
 }
@@ -35,7 +39,10 @@ module.exports.getHousePos = async function(player_id) {
         return false;
     })
     .catch(err => {
-        console.error(err);
+        log({
+            message: err,
+            isFatal: true
+        });
         return false;
     })
 }

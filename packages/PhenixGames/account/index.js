@@ -7,14 +7,18 @@ const debug = require('../../../_assets/json/debug/debug.json').account;
 
 const playerAPI = require('../playerAPI/');
 const generellAPI = require('../allgemein/');
-const permissionSystem = require('../playerAPI/permissionSystem')
+const permissionSystem = require('../playerAPI/permissionSystem');
+const { log } = require('../../../_assets/functions/log/logs');
 
 mp.events.add('playerJoin', async (player) => {
     await database.query(`SELECT * FROM pg_users WHERE username = ?`, [player.socialClub]).then(res => {
         if(res.length <= 0) {
             //! TO-DO übergeben an LoginScreen, dass User kein Account hat
             player.call('Open:Login:Browser',([false]));
-            return console.info(`[SERVER]: [Not-Registered] ${player.socialClub} has joined the server!`);
+            return log({
+                message: `[SERVER]: [Not-Registered] ${player.socialClub} has joined the server!`,
+                isFatal: false
+            });
         }
         player.call('Open:Login:Browser', ([true]));
 
@@ -28,9 +32,15 @@ mp.events.add('playerJoin', async (player) => {
 
         playerAPI.playerOnline = playerAPI.playerOnline + 1;
 
-        return console.info(`[SERVER]: [Registered] ${player.socialClub} has joined the server!`);
+        return log({
+            message: `[SERVER]: [Registered] ${player.socialClub} has joined the server!`,
+            isFatal: false
+        });
     }).catch(err => {
-        console.error(err)
+        log({
+            message: err,
+            isFatal: true
+        });
     });
 
     var name = await playerAPI.getPlayerInGame(player.getVariable('playerId'));
@@ -59,7 +69,11 @@ mp.events.add('LoginAccount', (player, password) => {
             }
 
         }).catch(err => {
-            return console.error(err);
+            log({
+                message: err,
+                isFatal: true
+            });
+            return true;
         });
 
         if(isPunish) return player.kick(reason);
@@ -78,7 +92,10 @@ mp.events.add('LoginAccount', (player, password) => {
         player.call('Player:Spawn:Options');
         
     }).catch(err => {
-        return console.error(err);
+        log({
+            message: err,
+            isFatal: true
+        });
     });
 });
 
