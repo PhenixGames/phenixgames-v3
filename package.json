@@ -26,6 +26,7 @@
     "bcryptjs": "^2.4.3",
     "better-console": "^1.0.1",
     "mysql": "^2.18.1",
+    "simple-node-logger": "^21.8.12",
     "sloc": "^0.2.1",
     "validator": "^13.7.0",
     "vue-router": "^4.0.15"
