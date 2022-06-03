@@ -91,8 +91,6 @@ export default {
     }
   },
   mounted() {
-
-    this.getPlayerInventory();
     
     this.insertItemsIntoInv({
       item: [{
