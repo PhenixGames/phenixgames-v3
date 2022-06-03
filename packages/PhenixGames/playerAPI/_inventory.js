@@ -6,10 +6,10 @@ const database = require("../../_db/db")
  * @param {Int} player_id 
  * @returns {Boolean || Object}
  */
-module.exports.getPlayerInventory = ({
+module.exports.getPlayerInventory = async ({
     player_id
 }) => {
-    return database.query(`SELECT * FROM pg_user_inventory WHERE user_id = ? LIMIT 1`, [player_id])
+    return await database.query(`SELECT * FROM pg_user_inventory WHERE user_id = ? LIMIT 1`, [player_id])
         .then(res => {
             console.log('1')
             if(res.length > 0) {
