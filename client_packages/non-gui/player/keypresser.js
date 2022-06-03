@@ -42,7 +42,7 @@ mp.keys.bind(0x49, true, function() {
 });
 
 //f6 - Chat
-mp.keys.bind(0x75, true, function() {
+mp.keys.bind(0x7B, true, function() {
     mp.gui.chat.activate(!Chatbool);
     mp.gui.chat.show(!Chatbool);
 });
