@@ -13,7 +13,7 @@ mp.players.local.setConfigFlag(429, true);
 
 mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {    
     mp.game.vehicle.defaultEngineBehaviour = false;//enginBehabior, dass der Motor ausbleibt beim einsteigen.
-    mp.players.notify(JSON.stringify(mp.players.local.vehicle.isSirenOn()))
+    //mp.gui.chat.push(JSON.stringify(mp.players.local.vehicle.isSirenOn()))
     // mp.players.local.vehicle.setSiren(mp.players.local.vehicle.isSirenOn())
     // mp.players.local.vehicle.setSirenSound(mp.players.local.vehicle.isSirenSoundOn())
 });
