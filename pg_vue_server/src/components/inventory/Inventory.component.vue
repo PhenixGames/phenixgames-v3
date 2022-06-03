@@ -91,6 +91,8 @@ export default {
     }
   },
   mounted() {
+
+   mp.trigger('uiInitInventory')
     
     this.insertItemsIntoInv({
       item: [{

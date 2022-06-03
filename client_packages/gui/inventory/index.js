@@ -20,6 +20,10 @@ exports.interacteInventory = () => {
     }
 }
 
+mp.events.add('uiInitInventory', () => {
+    mp.events.callRemote('Server:Init:Inventory');
+})
+
 
 mp.events.add('Player:Init:Inventory', (items) => {
     invBrowser.execute(`gui.inventory.getPlayerInventory(${JSON.stringify(items)});`);

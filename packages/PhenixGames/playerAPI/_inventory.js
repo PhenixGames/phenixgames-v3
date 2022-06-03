@@ -6,7 +6,7 @@ const database = require("../../_db/db")
  * @param {Int} player_id 
  * @returns {Boolean || Object}
  */
-module.exports.getPlayerInventory = async ({
+module.exports.getPlayerInventory = ({
     player_id
 }) => {
     return database.query(`SELECT * FROM pg_user_inventory WHERE user_id = ? LIMIT 1`, [player_id])

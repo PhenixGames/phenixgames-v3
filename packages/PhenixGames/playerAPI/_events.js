@@ -17,7 +17,9 @@ mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, bon
 
 //? Get the player inventory
 mp.events.add('Server:Init:Inventory', (player) => {
-    player.call('Player:Init:Inventory', [getPlayerInventory(player)]);
+    const items = getPlayerInventory(player.getVariable('playerId'));
+    console.log(items, ' dwdadawd')
+    player.call('Player:Init:Inventory', [items]);
 });
 
 //? Heal the player with a medikit
