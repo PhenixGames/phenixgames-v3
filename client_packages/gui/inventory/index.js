@@ -21,8 +21,6 @@ exports.interacteInventory = () => {
 }
 
 
-mp.events.add('Player:Init:Inventory', () => {
-    const items = mp.players.local.callRemote('Server:Init:Inventory');
-
+mp.events.add('Player:Init:Inventory', (items) => {
     invBrowser.execute(`gui.inventory.getPlayerInventory(${JSON.stringify(items)});`);
 });

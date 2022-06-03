@@ -17,9 +17,7 @@ mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, bon
 
 //? Get the player inventory
 mp.events.add('Server:Init:Inventory', (player) => {
-    return getPlayerInventory({
-        player_id: player.getVariable('player_id')
-    });
+    player.call('Player:Init:Inventory', [getPlayerInventory(player)]);
 });
 
 //? Heal the player with a medikit
@@ -35,6 +33,7 @@ mp.events.add('Server:Activate:Weste', (player) => {
 mp.events.add('Server:Player:interacteBrowser', (player, hasOpen) => {
     player.setVariable('hasBrowserOpen', hasOpen);
 });
+
 function ApplyDamageToPlayer(Shootingplayer, target, damage){
     //Shootingplayer need a Hud to show if he Hitted
     Shootingplayer.outputChatBox(`Du hast an dem Spieler ${damage} Schaden gemacht`);
