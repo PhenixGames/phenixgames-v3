@@ -37,14 +37,9 @@ mp.events.add('Server:Player:interacteBrowser', (player, hasOpen) => {
 });
 
 mp.events.add("Player:pressed:f6", ( player ) => {
+    console.log("F6 pressed");
     if(player.getVariable('hasBrowserOpen')) return;
-    var state = false;
-    //If abfrage weil sonst vlt ein fehler auftreten kann wenn die Variable nicht richtig gesetzt wurde
-    if(player.getVariable('chat:activated') == true){
-        state = true;
-    }else {
-        state = false;
-    }
+    var state = player.getVariable('chat:activated');// weil ich keine lust habe mit dem Hurensohn zu diskutieren
     player.call("chat:activate", state);
     player.setVariable("chat:activated", state);
 });

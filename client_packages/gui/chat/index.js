@@ -5,4 +5,9 @@ mp.gui.chat.show(false);
 const chatbox = mp.browsers.new('package://gui/chat/chat-ui/index.html');
 chatbox.markAsChat();
 
+
+mp.events.add("chat:push", chatbox.push)
+mp.events.add("chat:clear", chatbox.clear)
+mp.events.add("chat:activate", chatbox.activate)
+mp.events.add("chat:show", chatbox.show)
 mp.gui.chat.colors = true;

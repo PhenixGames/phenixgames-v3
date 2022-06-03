@@ -5,7 +5,7 @@ let chat =
 	container: null,
 	input: null,
 	enabled: false,
-	active: fasle,
+	active: false,
 	historyMsgs: [],
 	currentIndex: 0
 };
@@ -87,11 +87,13 @@ var chatAPI =
 	
 	activate: (toggle) =>
 	{
+		mp.console.logInfo("Ist angekommen mit dem wert " + toggle, true, true);
 		if (toggle == false
 			&& (chat.input != null))
 			enableChatInput(false);
 			
 		chat.active = toggle;
+		
 	},
 	
 	show: (toggle) =>
@@ -105,10 +107,8 @@ var chatAPI =
 	}
 	
 };
-mp.events.add("chat:push", chatAPI.push)
-mp.events.add("chat:clear", chatAPI.clear)
-mp.events.add("chat:activate", chatAPI.activate)
-mp.events.add("chat:show", chatAPI.show)
+
+
 $(document).ready(function()
 {
 	chat.container = $("#chat ul#chat_messages");
