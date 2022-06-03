@@ -41,10 +41,11 @@ mp.keys.bind(0x49, true, function() {
     interacteInventory();
 });
 
-//f6 - Chat
+//f12 - Chat
 mp.keys.bind(0x7B, true, function() {
     mp.gui.chat.activate(!Chatbool);
     mp.gui.chat.show(!Chatbool);
+    chatbool = !Chatbool;
 });
 
 var isPlayerHealing = false;
