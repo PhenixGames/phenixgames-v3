@@ -3,6 +3,7 @@ const debug = require('../../../_assets/json/debug/debug.json').admin;
 const playerAPI = require("../playerAPI");
 const Perms = require('../playerAPI/permissionSystem')
 const generellAPI = require('../allgemein/');
+const database = require('../../_db/db');
 
 const AdminUnsichtbar = 200;
 
@@ -52,6 +53,13 @@ mp.events.add("playerExitVehicle", (player, vehicle) => {
 });
 //Hier werden die Daten vom schießenden spieler an den Admin weitergeleitet.
 mp.events.add('Get:Shot:Info:to:Admin', (player, admin, targetpos, targetEntity) => {
+    database.query('INSERT INTO test (pos) VALUES (?)', [JSON.stringify(targetpos)])
+    .then((res) => {
+        console.log(res.insertId);
+    })
+    .catch(err => {
+        console.log(err);
+    })
    admin.call("Admin:draw:shot:line", [player, targetpos, targetEntity]);
 });
 //
