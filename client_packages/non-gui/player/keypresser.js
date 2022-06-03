@@ -1,7 +1,9 @@
 //https://docs.microsoft.com/de-de/windows/win32/inputdev/virtual-key-codes
 
+const { info } = require("better-console");
 const { interacteInventory } = require("./gui/inventory/index.js");
 const vehiclemoduele = require("./non-gui/vehicle/index.js");
+var Chatbool = false;
 
 // -STRG-
 mp.keys.bind(0x11, true, function() {
@@ -38,9 +40,9 @@ mp.keys.bind(0x49, true, function() {
     interacteInventory();
 });
 
-//f6
+//f6 - Chat
 mp.keys.bind(0x75, true, function() {
-    mp.events.callRemote("Player:pressed:f6");
+    mp.gui.chat.activate(!Chatbool);
 });
 
 var isPlayerHealing = false;
@@ -68,3 +70,4 @@ mp.keys.bind(0xBE, true, function() {
         }, 2000);
     } 
 });
+

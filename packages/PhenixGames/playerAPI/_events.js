@@ -35,15 +35,6 @@ mp.events.add('Server:Activate:Weste', (player) => {
 mp.events.add('Server:Player:interacteBrowser', (player, hasOpen) => {
     player.setVariable('hasBrowserOpen', hasOpen);
 });
-
-mp.events.add("Player:pressed:f6", ( player ) => {
-    console.log("F6 pressed");
-    if(player.getVariable('hasBrowserOpen')) return;
-    var state = player.getVariable('chat:activated');// weil ich keine lust habe mit dem Hurensohn zu diskutieren
-    player.call("chat:activate", state);
-    player.setVariable("chat:activated", state);
-});
-
 function ApplyDamageToPlayer(Shootingplayer, target, damage){
     //Shootingplayer need a Hud to show if he Hitted
     Shootingplayer.outputChatBox(`Du hast an dem Spieler ${damage} Schaden gemacht`);
