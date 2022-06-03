@@ -28,18 +28,18 @@ mp.keys.bind(0x79, true, function() {
     mp.players.local.setToRagdoll(3000, 6000, 0, false, false, false);
 });
 
-//f6
+//f6 //SEATBELT
 mp.keys.bind(0x75, true, function() {
     vehiclemoduele.ApplySeatbelt();
 });
 
-//i
+//i //INVENTORY
 mp.keys.bind(0x49, true, function() {
     interacteInventory();
 });
 
 //f6
-mp.keys.bind(	0x75, true, function() {
+mp.keys.bind(0x75, true, function() {
     mp.events.callRemote("Player:pressed:f6");
 });
 

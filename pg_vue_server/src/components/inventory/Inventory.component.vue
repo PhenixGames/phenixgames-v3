@@ -50,6 +50,7 @@ export default {
   name: "pg_inventory",
   data() {
     return {
+      inv_items: {},
       rows_top: 7,
       rows_below: 28,
     };
@@ -83,9 +84,16 @@ export default {
           }
         }
       }
+    },
+    getPlayerInventory(items) {
+      this.inv_items = items;
+      mp.console.logError(JSON.stringify(this.inv_items), true, true);
     }
   },
   mounted() {
+
+    this.getPlayerInventory();
+    
     this.insertItemsIntoInv({
       item: [{
         invPos: 1,
@@ -101,6 +109,8 @@ export default {
         isStackable: false
       }]
     })
+
+    gui.inventory = this;
   },
 };
 </script>

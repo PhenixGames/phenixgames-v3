@@ -8,6 +8,7 @@ global.gui = {
     chat: null, 
     login: null,
     hud: null,
-    deathscreen: null
+    deathscreen: null,
+    inventory: null,
 }
 global.app = app;
