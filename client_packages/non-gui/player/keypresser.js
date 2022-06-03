@@ -43,9 +43,10 @@ mp.keys.bind(0x49, true, function() {
 
 //f12 - Chat
 mp.keys.bind(0x7B, true, function() {
-    mp.gui.chat.activate(!Chatbool);
-    mp.gui.chat.show(!Chatbool);
-    chatbool = !Chatbool;
+    Chatbool = !Chatbool;
+    mp.gui.chat.activate(Chatbool);
+    mp.gui.chat.show(Chatbool);
+    
 });
 
 var isPlayerHealing = false;
