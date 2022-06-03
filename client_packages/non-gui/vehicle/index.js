@@ -15,8 +15,10 @@ mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
     mp.game.vehicle.defaultEngineBehaviour = false;//enginBehabior, dass der Motor ausbleibt beim einsteigen.
 
     try {
-        mp.players.local.vehicle.setSiren(mp.players.local.vehicle.isSirenOn())
-        mp.players.local.vehicle.setSirenSound(mp.players.local.vehicle.isSirenSoundOn())
+        setTimeout(() => {
+            mp.players.local.vehicle.setSiren(mp.players.local.vehicle.isSirenOn())
+            mp.players.local.vehicle.setSirenSound(mp.players.local.vehicle.isSirenSoundOn())
+        }, 1000);
     }catch(err) {}
 });
 
@@ -28,8 +30,10 @@ mp.events.add('Apply:SeatBelt', () => {
 mp.events.add('playerLeaveVehicle', ()  => {
 
     try {
-        mp.players.local.vehicle.setSiren(mp.players.local.vehicle.isSirenOn())
-        mp.players.local.vehicle.setSirenSound(mp.players.local.vehicle.isSirenSoundOn())
+        setTimeout(() => {
+            mp.players.local.vehicle.setSiren(mp.players.local.vehicle.isSirenOn())
+            mp.players.local.vehicle.setSirenSound(mp.players.local.vehicle.isSirenSoundOn())
+        }, 1000);
     }catch(err) {}
 
    if(seatbelt){
