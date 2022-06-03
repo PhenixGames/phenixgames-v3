@@ -4,7 +4,8 @@
 const { interacteInventory } = require("./gui/inventory/index.js");
 const vehiclemoduele = require("./non-gui/vehicle/index.js");
 var Chatbool = false;
-
+mp.gui.chat.activate(false);
+mp.gui.chat.show(false);
 // -STRG-
 mp.keys.bind(0x11, true, function() {
     mp.events.callRemote('keypress:X');
@@ -43,6 +44,7 @@ mp.keys.bind(0x49, true, function() {
 //f6 - Chat
 mp.keys.bind(0x75, true, function() {
     mp.gui.chat.activate(!Chatbool);
+    mp.gui.chat.show(!Chatbool);
 });
 
 var isPlayerHealing = false;
