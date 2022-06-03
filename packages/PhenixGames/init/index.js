@@ -8,6 +8,10 @@ const generellAPI = require('../allgemein/');
 const weatherAPI = require('../weatherAPI');
 const Fuelstations = require('../Fuelstation/');
 const { delay } = require('../../../_assets/functions/delay');
+const { log } = require('../../../_assets/functions/log/logs');
+const {
+    spawn
+} = require('child_process');
 
 
 mp.events.delayInitialization = true;
@@ -47,4 +51,40 @@ mp.events.add('packagesLoaded', async() =>
     setInterval(() => {
         weatherAPI.setWeather();
     }, 10800000); // 3h
+});
+
+
+//! ERROR --
+process.on('unhandledRejection', err => {
+    log({
+        message: err,
+        isFatal: true
+    });
+
+    log({
+        message: 'BOT RESTARTED...'  + new Date(),
+        isFatal: false
+    });
+    spawn(process.argv[1], process.argv.slice(2), {
+        detached: true,
+        stdio: ['ignore', null, null]
+    }).unref()
+    process.exit()
+});
+
+process.on('uncaughtException', err => {
+    log({
+        message: err,
+        isFatal: true
+    });
+
+    log({
+        message: 'BOT RESTARTED...'  + new Date(),
+        isFatal: false
+    });
+    spawn(process.argv[1], process.argv.slice(2), {
+        detached: true,
+        stdio: ['ignore', null, null]
+    }).unref()
+    process.exit()
 });
