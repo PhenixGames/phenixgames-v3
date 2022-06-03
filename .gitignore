@@ -10,3 +10,5 @@ BugTrap-x64.dll
 core
 ragemp-server
 _assets/json/debug/debug.json
+_logs/debug_log/*
+_logs/error_log/*
