@@ -13,8 +13,8 @@ mp.players.local.setConfigFlag(429, true);
 
 mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {    
     mp.game.vehicle.defaultEngineBehaviour = false;//enginBehabior, dass der Motor ausbleibt beim einsteigen.
-    vehicle.setSiren(vehicle.isSirenOn());
-    vehicle.setSirenSound(vehicle.isSirenSoundOn());
+    mp.players.local.setSiren(mp.players.local.isSirenOn());
+    mp.players.local.setSirenSound(mp.players.local.isSirenSoundOn());
 });
 
 let seatbelt = false;
@@ -24,8 +24,8 @@ mp.events.add('Apply:SeatBelt', () => {
 
 mp.events.add('playerLeaveVehicle', ()  => {
 
-    vehicle.setSiren(vehicle.isSirenOn());
-    vehicle.setSirenSound(vehicle.isSirenSoundOn());
+    mp.players.local.setSiren(mp.players.local.isSirenOn());
+    mp.players.local.setSirenSound(mp.players.local.isSirenSoundOn());
 
    if(seatbelt){
     mp.game.graphics.notify('Du hast dich beim aussteigen abgeschnallt');
