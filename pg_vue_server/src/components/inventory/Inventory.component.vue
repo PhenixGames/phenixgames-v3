@@ -86,7 +86,6 @@ export default {
       }
     },
     getPlayerInventory(items) {
-      mp.console.logInfo(items, true, true);
       this.inv_items = JSON.parse(items);
       this.insertItemsIntoInv({item: this.inv_items});
     }

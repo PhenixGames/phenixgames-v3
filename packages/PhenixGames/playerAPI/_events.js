@@ -20,7 +20,7 @@ mp.events.add('Server:Init:Inventory', async (player) => {
     const items = await getPlayerInventory({
         player_id: player.getVariable('playerId')
     });
-    player.call('Player:Init:Inventory', [items]);
+    player.call('Player:Init:Inventory', [JSON.stringify(items)]);
 });
 
 //? Heal the player with a medikit
