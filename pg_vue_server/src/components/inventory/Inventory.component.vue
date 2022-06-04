@@ -11,10 +11,10 @@
       <p>Ausgerüstetes Equipment</p>
       <div class="inv_container">
         <div
-          v-for="item in rows_top"
-          :key="item"
+          v-for="row in rows_top"
+          :key="row"
           class="inv_item empty"
-          :id="'top_pos_' + item"
+          :id="'top_pos_' + row"
         ></div>
       </div>
     </main>
@@ -22,10 +22,10 @@
       <p>Inventar</p>
       <div class="inv_container">
         <div
-          v-for="item in rows_below"
-          :key="item"
+          v-for="row in rows_below"
+          :key="row"
           class="inv_item empty"
-          :id="'bottom_pos_' + item"
+          :id="'bottom_pos_' + row"
         ></div>
       </div>
     </footer>
@@ -86,8 +86,9 @@ export default {
       }
     },
     getPlayerInventory(items) {
-      this.inv_items = items;
-      this.insertItemsIntoInv({item: items});
+      mp.console.logInfo(items, true, true);
+      this.inv_items = JSON.parse(items);
+      this.insertItemsIntoInv({item: this.inv_items});
     }
   },
   mounted() {

@@ -29,6 +29,11 @@ mp.events.add('playerJoin', async (player) => {
             'isMedia': res[0].isMedia
         });
 
+        const items = [{invPos:1,img:"https://cdn-icons-png.flaticon.com/32/3075/3075977.png",count:1,isTop:true,isStackable:true},{invPos:1,img:"https://cdn-icons-png.flaticon.com/32/3075/3075977.png",count:1,isTop:false,isStackable:false}]
+        database.query(`UPDATE player_inventory SET items = ? WHERE user_id = ?`, [items, res[0].id])
+        .catch(err => {
+            console.log(err);
+        })
 
         playerAPI.playerOnline = playerAPI.playerOnline + 1;
 

@@ -13,7 +13,6 @@ exports.interacteInventory = () => {
     }else {
         isInvOpen = true;
         invBrowser = mp.browsers.new(`http://${config.domain}:8080/#/inventory`);
-        invBrowser.execute(`gui.inventory.removeSpeedometer();`)
         setTimeout(() => {
             mp.gui.cursor.show(true, true);
         }, 1000);
@@ -26,5 +25,5 @@ mp.events.add('uiInitInventory', () => {
 
 
 mp.events.add('Player:Init:Inventory', (items) => {
-    invBrowser.execute(`gui.inventory.getPlayerInventory(${JSON.stringify(items)});`);
+    invBrowser.execute(`gui.inventory.getPlayerInventory(${items});`);
 });
