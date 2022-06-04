@@ -87,28 +87,28 @@ export default {
     },
     getPlayerInventory(items) {
       this.inv_items = items;
-      mp.console.logError(JSON.stringify(this.inv_items), true, true);
+      this.insertItemsIntoInv({item: items});
     }
   },
   mounted() {
 
    mp.trigger('uiInitInventory')
     
-    this.insertItemsIntoInv({
-      item: [{
-        invPos: 1,
-        img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
-        count: 1,
-        isTop: true,
-        isStackable: true
-      },{
-        invPos: 1,
-        img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
-        count: 1,
-        isTop: false,
-        isStackable: false
-      }]
-    })
+    // this.insertItemsIntoInv({
+    //   item: [{
+    //     invPos: 1,
+    //     img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
+    //     count: 1,
+    //     isTop: true,
+    //     isStackable: true
+    //   },{
+    //     invPos: 1,
+    //     img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
+    //     count: 1,
+    //     isTop: false,
+    //     isStackable: false
+    //   }]
+    // })
 
     gui.inventory = this;
   },
