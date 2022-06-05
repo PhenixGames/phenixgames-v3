@@ -115,5 +115,5 @@ module.exports.InsertMarkerToDatabase = async function (fuelstation, pos) {
 
 mp.events.addCommand('fuelmarker', ( player, arg, id ) => {
     pos = player.position.x + ', ' + player.position.y + ', ' + (player.position.z - 1);
-    InsertMarkerToDatabase(id, pos);
+    this.InsertMarkerToDatabase(id, pos);
  });
