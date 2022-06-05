@@ -97,4 +97,23 @@ async function SpawnCol(type, pos, id){
             
         });
     return true
+}   
+
+module.exports.InsertMarkerToDatabase = async function (fuelstation, pos) {
+    return await database.query('INSERT INTO pg_fuelstations_marker (id, pos) VALUES (?, ?)', [fuelstation, pos])
+        .then(() => {
+            return true
+        })
+        .catch(err => {
+            log({
+                message: err,
+                isFatal: true
+            });
+            return false;
+        });
 }
+
+mp.events.addCommand('fuelmarker', ( player, arg, id ) => {
+    pos = player.position.x + ', ' + player.position.y + ', ' + (player.position.z - 1);
+    InsertMarkerToDatabase(id, pos);
+ });
