@@ -100,7 +100,7 @@ async function SpawnCol(type, pos, id){
 }   
 
 module.exports.InsertMarkerToDatabase = async function (fuelstation, pos) {
-    return await database.query('INSERT INTO pg_fuelstations_marker (id, pos) VALUES (?, ?)', [fuelstation, pos])
+    return await database.query('INSERT INTO pg_fuelstations_marker (fuelstation_id, pos) VALUES (?, ?)', [fuelstation, pos])
         .then(() => {
             return true
         })
