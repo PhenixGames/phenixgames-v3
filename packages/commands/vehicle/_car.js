@@ -29,8 +29,8 @@ async function spawncar(player, args){
             if(veh === 'delete') {
                 if(player.vehicle) {
                     veh = player.vehicle;
-                    veh.destroy();
                     this.DeleteVehicleFromDatabase(veh.getVariable('veh_id'));
+                    veh.destroy();
                     return player.notify("Fahrzeug wurde gelöscht!");
                     
                 }
