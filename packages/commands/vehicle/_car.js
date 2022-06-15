@@ -26,16 +26,7 @@ async function spawncar(player, args){
         let sec = args[2] || 0;
 
         try{
-            if(veh === 'delete') {
-                if(player.vehicle) {
-                    veh = player.vehicle;
-                    this.DeleteVehicleFromDatabase(veh.getVariable('veh_id'));
-                    veh.destroy();
-                    return player.notify("Fahrzeug wurde gelöscht!");
-                    
-                }
-                
-            }else if(veh === 'repair') {
+            if(veh === 'repair') {
                 return player.vehicle.repair()
             }
         }catch(err){
@@ -94,6 +85,28 @@ mp.events.addCommand("clean", async (player) => {
     if(!player.vehicle) return;
     clean(player);
 });
+mp.events.addCommand("dv", async (player, args, vid = null) => {
+    var veh_spawned = false;
+   if(vid = null){
+         if(!player.vehicle) return player.notify('~r~Du bist in keinem Auto!');
+         vid = player.vehicle.getVariable('veh_id');
+   }
+
+   mp.vehicles.forEach(
+    (vehicle) => {
+        if(vehicle.getVariable('veh_id') == vid) {
+            vehicle.destroy();
+            veh_spawned = true;
+        }
+    });
+    await DeleteVehicleFromDatabase(vid);
+    if(veh_spawned){
+        player.notify("~r~Das Fahrzeug mit der ID " + vid + " wurde aus Der Welt und der Datenbank entfernt!");
+    }else {
+        player.notify("~r~Das Fahrzeug mit der ID " + vid + " wurde aus der Datenbank entfernt");
+    }
+});
+
 
 async function clean(player){
     mp.players.forEach(
@@ -104,16 +117,16 @@ async function clean(player){
     );
 }
 
-module.exports.DeleteVehicleFromDatabase = async function (veh_id) {
+async function DeleteVehicleFromDatabase(veh_id){
     return await database.query('DELETE FROM pg_vehicles WHERE veh_id = ?', [veh_id])
-        .then(() => {
-            return true
-        })
-        .catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
-            return false;
+    .then(() => {
+        return true
+    })
+    .catch(err => {
+        log({
+            message: err,
+            isFatal: true
         });
+        return false;
+    });
 }
