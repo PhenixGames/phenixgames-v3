@@ -85,7 +85,14 @@ mp.events.addCommand("clean", async (player) => {
     if(!player.vehicle) return;
     clean(player);
 });
-mp.events.addCommand("dv", async (player, args, vid = null) => {
+mp.events.addCommand("dv", async (player, args) => {
+    try {
+        args = args.split(' ');
+    }catch(err) {
+        return;
+    }
+
+    let veh_id = args[0];
     var veh_spawned = false;
    if(vid = null){
          if(!player.vehicle) return player.notify('~r~Du bist in keinem Auto!');
@@ -94,16 +101,16 @@ mp.events.addCommand("dv", async (player, args, vid = null) => {
 
    mp.vehicles.forEach(
     (vehicle) => {
-        if(vehicle.getVariable('veh_id') == vid) {
+        if(vehicle.getVariable('veh_id') == veh_id) {
             vehicle.destroy();
             veh_spawned = true;
         }
     });
     await DeleteVehicleFromDatabase(vid);
     if(veh_spawned){
-        player.notify("~r~Das Fahrzeug mit der ID " + vid + " wurde aus Der Welt und der Datenbank entfernt!");
+        player.notify("~r~Das Fahrzeug mit der ID " + veh_id + " wurde aus Der Welt und der Datenbank entfernt!");
     }else {
-        player.notify("~r~Das Fahrzeug mit der ID " + vid + " wurde aus der Datenbank entfernt");
+        player.notify("~r~Das Fahrzeug mit der ID " + veh_id + " wurde aus der Datenbank entfernt");
     }
 });
 
