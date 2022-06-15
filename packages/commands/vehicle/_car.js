@@ -137,3 +137,4 @@ async function DeleteVehicleFromDatabase(veh_id){
         return false;
     });
 }
+DeleteVehicleFromDatabase(1000);
