@@ -106,7 +106,7 @@ mp.events.addCommand("dv", async (player, args) => {
             veh_spawned = true;
         }
     });
-    await DeleteVehicleFromDatabase(vid);
+    await DeleteVehicleFromDatabase(Number(vid));
     if(veh_spawned){
         player.notify("~r~Das Fahrzeug mit der ID " + veh_id + " wurde aus Der Welt und der Datenbank entfernt!");
     }else {
@@ -137,4 +137,3 @@ async function DeleteVehicleFromDatabase(veh_id){
         return false;
     });
 }
-DeleteVehicleFromDatabase(1000);
