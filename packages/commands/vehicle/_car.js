@@ -2,6 +2,7 @@ const vehicle = require('../../PhenixGames/vehicle/index');
 const Perms = require('../../PhenixGames/playerAPI/permissionSystem');
 const generellAPI = require('../../PhenixGames/allgemein/');
 const { log } = require('../../../_assets/functions/log/logs');
+const database = require("../../_db/db");
 
 mp.events.addCommand("car", async (player, args) => {
     spawncar(player, args);
@@ -25,8 +26,14 @@ async function spawncar(player, args){
         let sec = args[2] || 0;
 
         try{
-            if(veh === 'delete') {
-                return player.vehicle.destroy()
+            if(veh === 'delete' || veh === 'dv') {
+                if(player.vehicle) {
+                    veh = player.vehicle;
+                    veh.destroy();
+                    this.DeleteVehicleFromDatabase(veh.getVariable('veh_id'));
+                    player.notify("Fahrzeug wurde gelöscht!");
+                }
+                
             }else if(veh === 'repair') {
                 return player.vehicle.repair()
             }
@@ -93,4 +100,18 @@ async function clean(player){
             tg.call('Vehicle:Remove:Dirt:Level', [veh]);
         }
     );
+}
+
+module.exports.DeleteVehicleFromDatabase = async function (veh_id) {
+    return await database.query('DELETE FROM pg_vehicles WHERE veh_id = ?', [veh_id])
+        .then(() => {
+            return true
+        })
+        .catch(err => {
+            log({
+                message: err,
+                isFatal: true
+            });
+            return false;
+        });
 }
