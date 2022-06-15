@@ -26,18 +26,20 @@ async function spawncar(player, args){
         let sec = args[2] || 0;
 
         try{
-            if(veh === 'delete' || veh === 'dv') {
+            if(veh === 'delete') {
                 if(player.vehicle) {
                     veh = player.vehicle;
                     veh.destroy();
                     this.DeleteVehicleFromDatabase(veh.getVariable('veh_id'));
-                    player.notify("Fahrzeug wurde gelöscht!");
+                    return player.notify("Fahrzeug wurde gelöscht!");
+                    
                 }
                 
             }else if(veh === 'repair') {
                 return player.vehicle.repair()
             }
         }catch(err){
+            console.log(err);
             return player.notify('~r~Du bist in keinem Auto!');
         }
             
