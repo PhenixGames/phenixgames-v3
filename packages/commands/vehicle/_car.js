@@ -127,13 +127,17 @@ async function clean(player){
 async function DeleteVehicleFromDatabase(veh_id){
     return await database.query('DELETE FROM pg_vehicles WHERE veh_id = ?', [veh_id])
     .then(() => {
+        console.log("TRUEEEE");
         return true
+
     })
     .catch(err => {
+        console.log("FALSE: " + err);
         log({
             message: err,
             isFatal: true
         });
         return false;
+        
     });
 }
