@@ -30,7 +30,7 @@ mp.events.add('Destroy:Login:Cam', ( ) => {
 
 
 mp.events.add('Wrong:Password', () => {
-    mainBrowser.execute('gui.Login.methods.wrongPassword();')
+    mainBrowser.execute('gui.login.wrongPassword();')
 })
 
 mp.events.add('uiLogin_LoginButton', (password) => {
