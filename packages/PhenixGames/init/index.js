@@ -63,7 +63,7 @@ process.on('unhandledRejection', err => {
         message: err,
         isFatal: true
     });
-    if(!globalDebug) {
+    if(!globalDebug && process.platform !== 'win32') {
         log({
             message: 'BOT RESTARTED...'  + new Date(),
             isFatal: false
@@ -81,7 +81,7 @@ process.on('uncaughtException', err => {
         message: err,
         isFatal: true
     });
-    if(!globalDebug) {
+    if(!globalDebug && process.platform !== 'win32') {
         log({
             message: 'BOT RESTARTED...'  + new Date(),
             isFatal: false
