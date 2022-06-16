@@ -31,9 +31,19 @@ module.exports.saveVehicleData = async function (veh) {
     const veh_pos = veh.veh_pos;
 
     return await database.query(`INSERT INTO pg_vehicles (veh_name, veh_owner, veh_keys, veh_state, veh_pos) VALUES (?, ?, ?, ?, ?)`, [veh_name, veh_owner, veh_keys, veh_state, veh_pos])
-        .then(() => {return true})
+        .then((res) => {
+            return {
+                error: false,
+                id: res.insertId
+            }
+        })
         .catch(err => {
+            //ADD LOG
             console.error(err);
+            return {
+                error: true,
+                err: err
+            }
         });
 }
 
