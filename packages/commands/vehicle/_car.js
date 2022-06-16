@@ -58,6 +58,13 @@ async function spawncar(player, args){
             veh_state: '1',
             veh_pos: JSON.stringify(setVeh.position)
         });
+
+        if(saveVeh.error) {
+            return log({
+                message: 'Error: Vehicle could not be saved in database!',
+                isFatal: true
+            });
+        }
         
         vehicle.setLocalData(setVeh, {
             veh_id: saveVeh.id,
@@ -69,13 +76,6 @@ async function spawncar(player, args){
             veh_fuel: 100
             
         });
-
-        if(!saveVeh) {
-            return log({
-                message: 'Error: Vehicle could not be saved in database!',
-                isFatal: true
-            });
-        }
     }
 }
 
