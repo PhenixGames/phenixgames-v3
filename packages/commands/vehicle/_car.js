@@ -51,7 +51,7 @@ async function spawncar(player, args){
         
         player.call("Vehicle:Engine:state" , [false])
 
-        var saveVeh = vehicle.saveVehicleData({
+        var saveVeh = await vehicle.saveVehicleData({
             veh_name: veh,
             veh_owner: player.socialClub,
             veh_keys: JSON.stringify([player.getVariable('playerId')]),
