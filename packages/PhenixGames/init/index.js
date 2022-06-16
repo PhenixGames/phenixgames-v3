@@ -1,4 +1,5 @@
 const debug = require('../../../_assets/json/debug/debug.json').init;
+const globalDebug = require('../../../_assets/json/debug/debug.json').global;
 
 const console = require('better-console');
 const database = require("../../_db/db");
