@@ -62,16 +62,17 @@ process.on('unhandledRejection', err => {
         message: err,
         isFatal: true
     });
-
-    log({
-        message: 'BOT RESTARTED...'  + new Date(),
-        isFatal: false
-    });
-    spawn(process.argv[1], process.argv.slice(2), {
-        detached: true,
-        stdio: ['ignore', null, null]
-    }).unref()
-    process.exit()
+    if(!globalDebug) {
+        log({
+            message: 'BOT RESTARTED...'  + new Date(),
+            isFatal: false
+        });
+        spawn(process.argv[1], process.argv.slice(2), {
+            detached: true,
+            stdio: ['ignore', null, null]
+        }).unref()
+        process.exit()
+    }
 });
 
 process.on('uncaughtException', err => {
@@ -79,14 +80,15 @@ process.on('uncaughtException', err => {
         message: err,
         isFatal: true
     });
-
-    log({
-        message: 'BOT RESTARTED...'  + new Date(),
-        isFatal: false
-    });
-    spawn(process.argv[1], process.argv.slice(2), {
-        detached: true,
-        stdio: ['ignore', null, null]
-    }).unref()
-    process.exit()
+    if(!globalDebug) {
+        log({
+            message: 'BOT RESTARTED...'  + new Date(),
+            isFatal: false
+        });
+        spawn(process.argv[1], process.argv.slice(2), {
+            detached: true,
+            stdio: ['ignore', null, null]
+        }).unref()
+        process.exit()
+    }
 });

@@ -58,6 +58,8 @@ export default {
   methods: {
     //invPos, img, count, isStackable
     insertItemsIntoInv({item}) {
+      if(item === []) return;
+      
       for(let i in item) {
         let invPost = item[i].invPos;
         let img = item[i].img;
