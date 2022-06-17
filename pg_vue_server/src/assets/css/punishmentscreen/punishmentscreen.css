@@ -1,0 +1,61 @@
+@import url('../root.css');
+
+body {
+    margin: 0;
+    outline: none;
+    box-sizing: border-box;
+    user-select: none;
+    pointer-events: none;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+
+    background: #FFF;
+    background: var(--background_gradient);
+}
+
+.punishment {
+    height: 24%;
+    width: 30%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+
+.ps_logo {
+    display: flex;
+    justify-content: center;
+}
+
+.punishment img {
+    width: 150px;
+}
+
+.punishment_info {
+    margin: 20px 0;
+    background: #34343420;
+    padding: 20px 20px 40px 20px;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+
+.punishment_info h3 {
+    margin: 20px 0 50px 0;
+}
+
+.punishment_info p {
+    line-height: 0.4rem;
+}
+
+.punishment_info i {
+    margin: 0 15px;
+    text-align: right;
+    font-weight: 400;
+}

@@ -99,5 +99,5 @@ export default {
 </script>
 
 <style scoped>
-  @import url("@/assets/css/login/style.css");
+@import url("@/assets/css/login/style.css");
 </style>

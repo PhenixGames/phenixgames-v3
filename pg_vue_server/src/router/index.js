@@ -40,6 +40,11 @@ const routes = [
     path: '/gasstation',
     name: 'Gasstation',
     component: () => import('../views/Gasstation.vue')
+  },
+  {
+    path: '/punishmentscreen',
+    name: 'Punishmentscreen',
+    component: () => import('../views/Punishmentscreen.vue')
   }
 ]
 
