@@ -10,5 +10,6 @@ global.gui = {
     hud: null,
     deathscreen: null,
     inventory: null,
+    gasstation: null
 }
 global.app = app;
