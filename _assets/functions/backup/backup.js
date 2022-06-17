@@ -27,7 +27,7 @@ module.exports.db_backup = () => {
 
       fs.writeFileSync('./_assets/functions/backup/last_backup.json', JSON.stringify(newDate, null, 4))
 
-      exec(` mysqldump -u ${dbconfig.backup_user} -p'${dbconfig.backup_password}' ${dbconfig.database} --no-tablespaces > ${dbconfig.backup_repo}/${newDate.count+'_'+new Date().getDay()+'_'+new Date().getMonth()+'_'+new Date().getFullYear()}.backup.sql`, (error, stdout, stderr) => {
+      exec(` mysqldump -u ${dbconfig.backup_user} -h ${dbconfig.backup_host} -p'${dbconfig.backup_password}' ${dbconfig.database} --no-tablespaces > ${dbconfig.backup_repo}/${newDate.count+'_'+new Date().getDay()+'_'+new Date().getMonth()+'_'+new Date().getFullYear()}.backup.sql`, (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
