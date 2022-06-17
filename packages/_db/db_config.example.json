@@ -3,5 +3,9 @@
     "user": "",
     "password": "",
     "database": "",
-    "backup_repo": ""
+    "backup_repo": "",
+
+    
+    "backup_user": "",
+    "backup_password": ""
 }
