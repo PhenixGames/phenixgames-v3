@@ -9,7 +9,7 @@ window.addEventListener('load', function () {
     _O.value = _R.value + 'L';
     _W.style.setProperty('--val', +_R.value);
 
-    const currentPrice = _R.value * this.benzin;
+    const currentPrice = _R.value * this[selected_type];
 
     this.current_price = currentPrice;
 

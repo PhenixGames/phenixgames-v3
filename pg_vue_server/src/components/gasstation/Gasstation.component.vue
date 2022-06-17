@@ -98,7 +98,7 @@ export default {
   mounted() {
     gui.gasstation = this;
 
-    //mp.trigger('uiInitGasStation')
+    mp.trigger('uiInitGasStation')
 
     setTimeout(() => {
       document.querySelector('.gasstation').style.transform = "translate(0, -50%)"
