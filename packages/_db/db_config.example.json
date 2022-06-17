@@ -5,7 +5,6 @@
     "database": "",
     "backup_repo": "",
 
-    "backup_host": "",
     "backup_user": "",
     "backup_password": ""
 }
