@@ -58,7 +58,7 @@
 import range from '@/assets/js/gasstation/range.js';
 
 export default {
-  name: "pg_inventory",
+  name: "pg_Gasstation",
   data() {
     return {
       gasstation: "Tankstelle XYZ",

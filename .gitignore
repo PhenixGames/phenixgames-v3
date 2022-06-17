@@ -12,3 +12,5 @@ ragemp-server
 _assets/json/debug/debug.json
 _logs/debug_log/*
 _logs/error_log/*
+_assets/functions/backup/last_backup.json
+phenixgames-backup/

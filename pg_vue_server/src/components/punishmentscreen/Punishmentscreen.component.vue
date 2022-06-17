@@ -5,12 +5,13 @@
         </div>
 
         <div class="punishment_info center bold">
-            <h3 class="red">Dein Konto wurde gesperrt</h3>
+            <h3 class="red big">Dein Konto wurde gesperrt</h3>
             <p>
                 <p class="white">Adminname: <i>{{adminname}}</i></p>
                 <p class="white">Grund: <i>{{reason}}</i></p>
                 <p class="white">Verbleibende Zeit: <i>{{time_left}}</i></p>
                 <p class="white">Datum der Sperrung: <i>{{date_of_punishment}}</i></p>
+                <p class="white">Punishment ID: <i>{{punishment_id}}</i></p>
             </p>
         </div>
     </div>
@@ -19,20 +20,35 @@
 
 <script>
 export default {
-  name: "PG_Login",
+  name: "PG_Punishmentscreen",
   data() {
     return {
-      adminname: "Mittelblut9",
-      reason: "RDM",
-      time_left: "156",
-      date_of_punishment: "07.06.2022 22:57",
+      adminname: "",
+      reason: "",
+      time_left: "",
+      date_of_punishment: "",
+      punishment_id: ""
     };
   },
   mounted () {
-    gui.punishment = this;
+    gui.punishmentscreen = this;
+    const options = {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'};
+    console.log(new Date().toLocaleDateString('de-DE', options));
   },
   methods: {
-
+    initPunishmentscreen({
+        adminname,
+        reason,
+        time_left,
+        date_of_punishment,
+        punishment_id
+    }) {
+        this.adminname = adminname;
+        this.reason = reason;
+        this.time_left = time_left;
+        this.date_of_punishment = date_of_punishment;
+        this.punishment_id = punishment_id;
+    }
   },
 };
 </script>

@@ -1,4 +1,5 @@
 const console = require('better-console');
+const moment = require('moment')
 
 const database = require('../../_db/db');
 
@@ -62,14 +63,26 @@ mp.events.add('LoginAccount', (player, password) => {
     database.query('SELECT * FROM pg_users WHERE username = ? LIMIT 1', [player.socialClub]).then(async users => {
         users = await users[0];
 
-        var reason;
         var isPunish = await database.query('SELECT * FROM pg_punishments WHERE id = ? LIMIT 1', [users.id]).then(async pm => {
             if(pm.length <= 0) return false;
             pm = await pm[0];
-
-            if(pm.muted) return false;
+            if(pm.muted) {
+                player.setVariable('isMuted', true);
+                return false;
+            }
             if(pm.banned) {
-                reason = pm.reason;
+                const date = pm.till_date.split(',');
+                const days = date[0].split('.');
+                moment.locale('de')
+                var end_of_punishement = moment([days[2], days[1], days[0]]).fromNow() + ` (${days[2]}.${days[1]}.${days[0]} ${date[1]})`;
+
+                showPunishmentscreen(player, {
+                    adminname: pm.admin,
+                    reason: pm.reason,
+                    end_of_punishement,
+                    date_of_punishment: pm.date_of_punishment,
+                    punishment_id: pm.punishment_id
+                })
                 return true;
             }
 
@@ -81,7 +94,7 @@ mp.events.add('LoginAccount', (player, password) => {
             return true;
         });
 
-        if(isPunish) return player.kick(reason);
+        if(isPunish) return;
 
         if(await playerAPI.checkPassword(users.password, password) === false) {
             return player.call('Wrong:Password')
@@ -185,4 +198,8 @@ async function ApplyHealthAndArmour(player, playerId){
 
 function destroycam(player){
     player.call("Destroy:Login:Cam");
+}
+
+function showPunishmentscreen(player, punishment_infos) {
+    player.call('Player:Init:Punishmentscreen', [punishment_infos]);
 }

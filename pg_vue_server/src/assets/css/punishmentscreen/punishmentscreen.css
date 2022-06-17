@@ -17,7 +17,7 @@ body {
     height: 24%;
     width: 30%;
     position: absolute;
-    top: 40%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
@@ -55,7 +55,7 @@ body {
 }
 
 .punishment_info i {
-    margin: 0 15px;
+    margin: 0 30px;
     text-align: right;
     font-weight: 400;
 }

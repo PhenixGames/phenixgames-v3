@@ -6,6 +6,8 @@ require('./gui/register/namechooser/');
 require('./gui/inventory/')
 require('./gui/money/');
 require('./gui/HUD/');
+require('./gui/gasstation/');
+require('./gui/punishmentscreen/');
 
 require('./non-gui/vehicle/');
 require('./non-gui/noclip/');

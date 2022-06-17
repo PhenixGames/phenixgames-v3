@@ -13,6 +13,7 @@ const { log } = require('../../../_assets/functions/log/logs');
 const {
     spawn
 } = require('child_process');
+const { db_backup } = require('../../../_assets/functions/backup/backup');
 
 
 mp.events.delayInitialization = true;
@@ -50,6 +51,13 @@ mp.events.add('packagesLoaded', async() =>
         console.timeEnd('Player Server wurde gesynct in: ');
         
     }, 5000);
+
+    if(!globalDebug){
+        db_backup();
+        setInterval(() => {
+            db_backup();
+        }, 86400000); // 24h
+    }
 
     setInterval(() => {
         weatherAPI.setWeather();
