@@ -29,6 +29,7 @@ mp.events.add('playerEnterColshape', (player, shape) => {
       }
       Remove_all_marker_of_fuelstation(player);
       player.setVariable('isnearFuelstation', false);
+      player.setVariable("Fuelstation_id", null);
      });
 async function Get_Marker_out_of_Database(shape){
     return await database.query('SELECT * FROM pg_fuelstations_marker WHERE fuelstation_id = ?', [shape.getVariable('id')])
@@ -54,6 +55,7 @@ async function Player_entered_fuelstation(player, shape){
            }
        }
        player.setVariable('isnearFuelstation', true);
+       player.setVariable("Fuelstation_id", shape.getVariable('id'));
 }
 
 async function Spawn_Marker_Of_Fuelstation(player, pos, size, id){
@@ -64,3 +66,4 @@ async function Remove_all_marker_of_fuelstation(player){
     player.call("Fuelstation:Destroy:Markers");
     return true;
 }
+
