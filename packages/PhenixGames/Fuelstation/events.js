@@ -31,6 +31,14 @@ mp.events.add('playerEnterColshape', (player, shape) => {
       player.setVariable('isnearFuelstation', false);
       player.setVariable("Fuelstation_id", null);
      });
+
+     mp.events.add("Server:Request:Data:Fuelstation", (player) => {
+        var stationid = plazer.getVariable("Fuelstation_id");
+        var Benzinpreis = null;
+        var Dieselpreis = null;
+        var Fuelsationname = "Erorr 404 Name not found";
+        //Nearest cars need to be added
+     });
 async function Get_Marker_out_of_Database(shape){
     return await database.query('SELECT * FROM pg_fuelstations_marker WHERE fuelstation_id = ?', [shape.getVariable('id')])
     .then(res => {

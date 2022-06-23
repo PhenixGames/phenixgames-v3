@@ -1,6 +1,7 @@
 //https://docs.microsoft.com/de-de/windows/win32/inputdev/virtual-key-codes
 
 //const { info } = require("better-console");
+const { interacteGasstation } = require('./gui/gasstation/index.js')
 const { interacteInventory } = require("./gui/inventory/index.js");
 const vehiclemoduele = require("./non-gui/vehicle/index.js");
 var Chatbool = false;
@@ -19,6 +20,13 @@ mp.keys.bind(0x11, true, function() {
 // -X-
 mp.keys.bind(0x58, true, function() {
     mp.players.local.vehicle.setSirenSound((mp.players.local.vehicle.isSirenSoundOn() == 1) ? true : false)
+});
+
+// -E-
+mp.kezs.bind(0x45, true, function(){
+        if(mp.plazers.local.getVariable("isnearFuelstation")){
+            interacteGasstation();
+        }
 });
 
 //f2
