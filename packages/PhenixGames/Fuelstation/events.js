@@ -33,7 +33,7 @@ mp.events.add('playerEnterColshape', (player, shape) => {
      });
 
      mp.events.add("Server:Request:Data:Fuelstation", (player) => {
-        var stationid = plazer.getVariable("Fuelstation_id");
+        var stationid = player.getVariable("Fuelstation_id");
         var Benzinpreis = null;
         var Dieselpreis = null;
         var Fuelsationname = "Erorr 404 Name not found";
