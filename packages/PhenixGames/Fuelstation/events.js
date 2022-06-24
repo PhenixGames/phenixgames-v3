@@ -6,14 +6,11 @@ const debug = require('../../../_assets/json/debug/debug.json').fuelstation;
 
 mp.events.add('playerEnterColshape', (player, shape) => {
     if(Fuelstations.is_entity_fuelstation(shape)){
-        player.notify("Du betrittst das gelände einer Tankstelle");
+        Player_entered_fuelstation(player, shape)
+        if(debug) player.notify("Du betrittst das gelände einer Tankstelle");
     }else {
-        if(debug){
-        player.notify("~r~Du bist nicht in einer Tankstelle");
-        }
+        if(debug)player.notify("~r~Du bist nicht in einer Tankstelle");
     }
-    Player_entered_fuelstation(player, shape)
-
   });
   
   mp.events.add("playerExitColshape", (player, shape) => {
@@ -21,24 +18,41 @@ mp.events.add('playerEnterColshape', (player, shape) => {
           console.log("Player Exit Colshape");
       }
       if(Fuelstations.is_entity_fuelstation(shape)){
-          player.notify("~g~Du verlässt das gelände einer Tankstelle");
+          if(debug)player.notify("~g~Du verlässt das gelände einer Tankstelle");
       }else {
-          if(debug){
-          player.notify("~r~Du bist nicht in einer Tankstelle");
-          }
+          if(debug)player.notify("~r~Du bist nicht in einer Tankstelle");
       }
       Remove_all_marker_of_fuelstation(player);
       player.setVariable('isnearFuelstation', false);
       player.setVariable("Fuelstation_id", null);
      });
 
-     mp.events.add("Server:Request:Data:Fuelstation", (player) => {
-        var stationid = player.getVariable("Fuelstation_id");
-        var Benzinpreis = null;
-        var Dieselpreis = null;
-        var Fuelsationname = "Erorr 404 Name not found";
-        //Nearest cars need to be added
-     });
+mp.events.add("Server:Request:Data:Fuelstation", (player)  => {
+    var stationid = player.getVariable("Fuelstation_id");
+    var res = Get_Data_from_database(stationid);
+    var Benzinpreis = res[1].fuel_sell_price_b;
+    var Dieselpreis = res[1].fuel_sell_price_d;
+    var Fuelsationname = res[1].name;
+    var Cars = []; //Only the nearest 5 in range of fuelstation
+    let items = [
+        ['name', Fuelsationname],
+        ['diesel_price', Dieselpreis],
+        ['benzin_price', Benzinpreis],
+        ['cars', Cars]
+    ];
+    player.call("Player:Init:Gasstation", items)
+});
+async function Get_Data_from_database(stationid){
+    return await database.query('SELECT * FROM pg_fuelstations WHERE id = ?', [stationid])
+    .then(res => {
+        return res;
+    })
+    .catch(err => {
+        console.error(err);
+        return false;
+    })
+}
+
 async function Get_Marker_out_of_Database(shape){
     return await database.query('SELECT * FROM pg_fuelstations_marker WHERE fuelstation_id = ?', [shape.getVariable('id')])
     .then(res => {
