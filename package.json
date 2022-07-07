@@ -30,6 +30,6 @@
     "simple-node-logger": "^21.8.12",
     "sloc": "^0.2.1",
     "validator": "^13.7.0",
-    "vue-router": "^4.1.0"
+    "vue-router": "^4.1.1"
   }
 }
