@@ -6,9 +6,9 @@ const vehiclemoduele = require("./non-gui/vehicle/index.js");
 var Chatbool = false;
 mp.gui.chat.activate(false);
 mp.gui.chat.show(false);
-// -STRG-
+// -STRG- MOTOR
 mp.keys.bind(0x11, true, function() {
-    mp.events.callRemote('keypress:X');
+    mp.events.callRemote('keypress:STRG');
     if(mp.players.local.vehicle.isSirenOn()) {
         setTimeout(() => {
             mp.players.local.vehicle.setSiren(true);
@@ -16,12 +16,12 @@ mp.keys.bind(0x11, true, function() {
     }
 });
 
-// -X-
+// -X- SIRENE
 mp.keys.bind(0x58, true, function() {
     mp.players.local.vehicle.setSirenSound((mp.players.local.vehicle.isSirenSoundOn() == 1) ? true : false)
 });
 
-//f2
+//f2 NO CLIP
 mp.keys.bind(0x71, true, function() {
     mp.events.callRemote('Player:pressed:f2');
 });

@@ -10,23 +10,14 @@
     <main>
       <p>Ausgerüstetes Equipment</p>
       <div class="inv_container">
-        <div
-          v-for="row in rows_top"
-          :key="row"
-          class="inv_item empty"
-          :id="'top_pos_' + row"
-        ></div>
+        <div v-for="row in rows_top" :key="row" class="inv_item empty" :id="'top_pos_' + row" data-isstackable=""></div>
       </div>
     </main>
     <footer>
       <p>Inventar</p>
       <div class="inv_container">
-        <div
-          v-for="row in rows_below"
-          :key="row"
-          class="inv_item empty"
-          :id="'bottom_pos_' + row"
-        ></div>
+        <div v-for="row in rows_below" :key="row" class="inv_item empty" :id="'bottom_pos_' + row" data-isstackable="">
+        </div>
       </div>
     </footer>
   </section>
@@ -57,10 +48,10 @@ export default {
   },
   methods: {
     //invPos, img, count, isStackable
-    insertItemsIntoInv({item}) {
-      if(item === []) return;
-      
-      for(let i in item) {
+    insertItemsIntoInv({ item }) {
+      if (item === []) return;
+
+      for (let i in item) {
         let invPost = item[i].invPos;
         let img = item[i].img;
         let count = item[i].count;
@@ -70,47 +61,47 @@ export default {
         let itemDiv;
 
         (isTop) ? itemDiv = document.getElementById('top_pos_' + invPost) : itemDiv = document.getElementById('bottom_pos_' + invPost);
-
-        if(itemDiv.classList.contains('empty')) {
+        let innerDiv = document.createElement('div');
+        if (itemDiv.classList.contains('empty')) {
           itemDiv.classList.remove('empty');
           itemDiv.classList.add('full');
           itemDiv.dataset.isstackable = isStackable;
-          itemDiv.innerHTML = `<img src="${img}" />`;
-          if(isStackable) {
-            itemDiv.innerHTML += `<span>${count}</span>`;
+
+
+          innerDiv.innerHTML = `<img src="${img}" />`;
+          if (isStackable) {
+            innerDiv.innerHTML += `<span>${count}</span>`;
           }
         } else {
-          if(isStackable) {
-            let span = itemDiv.querySelector('span');
+          if (isStackable) {
+            let span = innerDiv.querySelector('span');
             span.innerHTML = parseInt(span.innerHTML) + count;
+            span.classList.add('no-drag');
           }
         }
+        itemDiv.append(innerDiv)
       }
-    },
-    getPlayerInventory(items) {
-      this.inv_items = JSON.parse(items);
-      this.insertItemsIntoInv({item: this.inv_items});
     }
   },
   mounted() {
 
-   mp.trigger('uiInitInventory')
-    
-    // this.insertItemsIntoInv({
-    //   item: [{
-    //     invPos: 1,
-    //     img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
-    //     count: 1,
-    //     isTop: true,
-    //     isStackable: true
-    //   },{
-    //     invPos: 1,
-    //     img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
-    //     count: 1,
-    //     isTop: false,
-    //     isStackable: false
-    //   }]
-    // })
+    //mp.trigger('uiInitInventory')
+
+    this.insertItemsIntoInv({
+      item: [{
+        invPos: 1,
+        img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
+        count: 1,
+        isTop: true,
+        isStackable: true
+      }, {
+        invPos: 1,
+        img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
+        count: 1,
+        isTop: false,
+        isStackable: false
+      }]
+    })
 
     gui.inventory = this;
   },

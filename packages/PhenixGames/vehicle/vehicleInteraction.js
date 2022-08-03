@@ -1,6 +1,6 @@
 const debug = require('../../../_assets/json/debug/debug.json').vehicle;
 
-mp.events.add('keypress:X', (player) => {
+mp.events.add('keypress:STRG', (player) => {
     try {
         var veh = player.vehicle;
         let fuel = veh.getVariable("veh_fuel");

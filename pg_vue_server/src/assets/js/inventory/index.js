@@ -19,11 +19,22 @@ window.addEventListener('load', function () {
     function dragAndDrop() {
         if (allDragableDivs.length > 0) {
             allDragableDivs.forEach(function (div) {
+                var isstackable;
                 div.addEventListener('mousedown', function (e) {
-                    if (!dragDiv && div.classList.contains('full')) {
+
+                    //RIGHT CLICK
+                    if(e.which == 3) {
+                        alert('right click triggered');
+                        return;
+                    }
+
+                    if (!dragDiv && div.classList.contains('full') && !div.classList.contains('no-drag')) {
                         oldParent = div;
                         div.classList.remove('full');
                         div.classList.add('empty');
+
+                        isstackable = div.dataset.isstackable;
+                        div.dataset.isstackable = "";
 
                         dragDiv = div.children[0];
 
@@ -54,6 +65,7 @@ window.addEventListener('load', function () {
                         dragDiv.style.left = '';
                         dragDiv.style.top = '';
                         dragDiv.style.zIndex = '';
+                        divUnderMousePosition.dataset.isstackable = isstackable
 
                         if (divUnderMousePosition.classList.contains('empty')) {
 
@@ -76,5 +88,8 @@ window.addEventListener('load', function () {
             });
         }
     }
+
+
+    
 
 });

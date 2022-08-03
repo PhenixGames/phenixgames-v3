@@ -25,5 +25,7 @@ mp.events.add('uiInitInventory', () => {
 
 
 mp.events.add('Player:Init:Inventory', (items) => {
-    invBrowser.execute(`gui.inventory.getPlayerInventory(${items});`);
+    invBrowser.execute(`gui.inventory.insertItemsIntoInv({
+        item: ${items}
+    );`);
 });

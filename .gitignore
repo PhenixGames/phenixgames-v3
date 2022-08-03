@@ -14,3 +14,5 @@ _logs/debug_log/*
 _logs/error_log/*
 _assets/functions/backup/last_backup.json
 phenixgames-backup/
+
+._*

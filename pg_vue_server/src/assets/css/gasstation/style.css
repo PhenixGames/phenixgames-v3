@@ -38,6 +38,15 @@ body {
     -o-transition: .4s transform;
 }
 
+.gs_types::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 70%;
+    background: #ffffff;
+    margin: 10px auto;
+}
+
 .gs_button {
     background: #FE550D;
     margin: 10px;

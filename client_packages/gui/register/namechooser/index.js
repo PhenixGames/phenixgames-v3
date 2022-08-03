@@ -1,7 +1,11 @@
 const config = require('_config/config').config;
 
-var browser = null;
+mp.players.local.freezePosition(true);
+mp.game.ui.displayRadar(false);
+mp.game.ui.displayHud(false);
+mp.gui.chat.show(false);
 
+var browser;
 mp.events.add('Player:InGameName:Choose', () => {
     mp.events.callRemote('Server:Player:interacteBrowser', true)
     browser = mp.browsers.new(`http://${config.domain}:8080/#/namechooser`);
@@ -10,10 +14,6 @@ mp.events.add('Player:InGameName:Choose', () => {
     }, 500);
 });
 
-mp.players.local.freezePosition(true);
-mp.game.ui.displayRadar(false);
-mp.game.ui.displayHud(false);
-mp.gui.chat.show(false);
 
 mp.events.add('uiNameChooser_accept', (firstname, lastname) => {
     mp.events.callRemote('Player:Set:InGameName', firstname, lastname);

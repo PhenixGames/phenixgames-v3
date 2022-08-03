@@ -17,11 +17,10 @@
       </div>
     </div>
 
-    <hr>
-
     <div class="gs_cars">
       <p class="center white">Fahrzeuge in der Nähe</p>
       <div class="gs_cars_near">
+        <p v-if="cars.length === 0" class="center bold">Keine Fahrzeuge in der Nähe</p>
         <div class="gs_button gs_buttons_cars cursor-pointer left" v-for="car in cars" :data-carid="car.id" :data-max="car.max" :data-fuel_type="car.fuel_type" :style="(selected_type !== car.fuel_type) ? 'cursor: not-allowed' : ''">
           <p class="center white bold">{{car.name}}</p>
         </div>
@@ -62,8 +61,8 @@ export default {
   data() {
     return {
       gasstation: "Tankstelle XYZ",
-      diesel: 0.78,
-      benzin: 0.48,
+      diesel: 0.00,
+      benzin: 0.00,
       selected_type: "",
       current_price: "0.00",
       current_fuel: 0, // CURRENT FUEL
@@ -80,9 +79,8 @@ export default {
     car_refuel() {
       if (parseInt(this.current_fuel) > parseInt(this.car_max) || parseInt(this.current_fuel) <= 0 || this.car_fuel_type !== this.selected_type) return;
 
-      mp.trigger("carRefuel", this.car, parseInt(this.current_fuel), parseInt(this.current_fuel));
+      mp.trigger("carRefuel", this.car, parseInt(this.current_fuel), parseInt(this.current_price));
     },
-
     initGasStation({
       gasstation_name,
       diesel_price,
@@ -96,9 +94,15 @@ export default {
     }
   },
   mounted() {
+    this.initGasStation({
+      gasstation_name: "Tankstelle XYZ",
+      diesel_price: 0.00,
+      benzin_price: 0.00,
+      cars: []
+    })
     gui.gasstation = this;
 
-    mp.trigger('uiInitGasStation')
+    //mp.trigger('uiInitGasStation')
 
     setTimeout(() => {
       document.querySelector('.gasstation').style.transform = "translate(0, -50%)"
