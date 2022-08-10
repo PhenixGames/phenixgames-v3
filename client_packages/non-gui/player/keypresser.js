@@ -23,7 +23,7 @@ mp.keys.bind(0x58, true, function() {
 });
 
 // -E-
-mp.kezs.bind(0x45, true, function(){
+mp.keys.bind(0x45, true, function(){
         if(mp.players.local.getVariable("isnearFuelstation")){
             interacteGasstation();
         }
