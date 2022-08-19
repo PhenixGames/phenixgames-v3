@@ -48,9 +48,9 @@ setInterval(() => {
         let amount = 0;
         if(!engine) return;
         if(!speed== 0){
-            amount = (speed / 1500) 
+            amount = (speed / 2000) 
         }else {
-            amount = 0.05
+            amount = 0.01
         }
         RemovefuelfromVehicle(veh, amount, fuel);
         }
