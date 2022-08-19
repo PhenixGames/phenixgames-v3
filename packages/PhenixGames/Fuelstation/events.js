@@ -30,10 +30,10 @@ mp.events.add('playerEnterColshape', (player, shape) => {
 mp.events.add("Server:Request:Data:Fuelstation", (player)  => {
     var stationid = player.getVariable("Fuelstation_id");
     var res = Get_Data_from_database(stationid);
-    var Benzinpreis = res[1].fuel_sell_price_b;
-    var Dieselpreis = res[1].fuel_sell_price_d;
+    var Benzinpreis = res[1].fuel_sell_price_b * res[1].business_profit_mp;
+    var Dieselpreis = res[1].fuel_sell_price_d * res[1].business_profit_mp;
     var Fuelsationname = res[1].name;
-    var Cars = []; //Only the nearest 5 in range of fuelstation
+    var Cars = []; //Only the nearest 5 in range of 5[meter=?] of fuelstation
     let items = [
         ['name', Fuelsationname],
         ['diesel_price', Dieselpreis],
@@ -41,6 +41,7 @@ mp.events.add("Server:Request:Data:Fuelstation", (player)  => {
         ['cars', Cars]
     ];
     player.call("Player:Init:Gasstation", items)
+    console.log(items);
 });
 async function Get_Data_from_database(stationid){
     return await database.query('SELECT * FROM pg_fuelstations WHERE id = ?', [stationid])
