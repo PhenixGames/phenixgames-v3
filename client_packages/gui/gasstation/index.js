@@ -17,7 +17,7 @@ exports.interacteGasstation = () => {
         isBrowserOpen = true;
         gasBrowser = mp.browsers.new(`http://${config.domain}:8080/#/gasstation`);
         mp.console.logInfo("Der Code wurde bis zum öffnen des Browsers ausgeführt", true, true);
-        mp.events.callremote("Server:Request:Data:Fuelstation");
+        mp.events.callRemote("Server:Request:Data:Fuelstation");
         mp.console.logInfo("Der Code wurde bis nach dem Browser ausgeführt", true, true);
         mp.gui.cursor.show(true, true);
         setTimeout(() => {
