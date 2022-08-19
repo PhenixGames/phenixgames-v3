@@ -28,6 +28,7 @@ mp.events.add('playerEnterColshape', (player, shape) => {
      });
 
 mp.events.add("Server:Request:Data:Fuelstation", (player)  => {
+    console.log("Got Called!")
     var stationid = player.getVariable("Fuelstation_id");
     var res = Get_Data_from_database(stationid);
     var Benzinpreis = res[1].fuel_sell_price_b * res[1].business_profit_mp;
