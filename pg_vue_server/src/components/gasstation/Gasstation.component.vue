@@ -94,20 +94,12 @@ export default {
     }
   },
   mounted() {
-    this.initGasStation({
-      gasstation_name: "Tankstelle XYZ",
-      diesel_price: 0.00,
-      benzin_price: 0.00,
-      cars: []
-    })
     gui.gasstation = this;
-
-    //mp.trigger('uiInitGasStation')
+    mp.trigger('uiInitGasStation');
 
     setTimeout(() => {
       document.querySelector('.gasstation').style.transform = "translate(0, -50%)"
     }, 400);
-
 
     const range = document.getElementById('r');
 
