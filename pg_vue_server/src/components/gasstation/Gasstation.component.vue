@@ -83,7 +83,7 @@ export default {
       mp.trigger("carRefuel", this.car, parseInt(this.current_fuel), parseInt(this.current_price));
     },
     initGasStation(items) {
-      document.getElementById('test_test').innerHTML = `Test ${JSON.stringify(items)}`
+      console.log(`init Called`, JSON.stringify(items))
       this.gasstation = items.name;
       this.diesel = items.diesel_price;
       this.benzin = items.benzin_price;
@@ -93,7 +93,7 @@ export default {
   mounted() {
     gui.gasstation = this;
     mp.trigger('uiInitGasStation');
-    document.getElementById('test_test').innerHTML = `Test 123`
+    console.log(`site loaded`);
 
     setTimeout(() => {
       document.querySelector('.gasstation').style.transform = "translate(0, -50%)"
