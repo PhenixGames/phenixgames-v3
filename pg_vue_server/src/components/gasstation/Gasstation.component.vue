@@ -6,6 +6,7 @@
       <div class="gs_button gs_buttons_types cursor-pointer left" :style="(selected_type == 'diesel') ? 'background: rgb(13, 162, 68)': ''"  @click="changeCurrentType('diesel')">
         <p class="center white bold pointer-events-none user-select-none">Diesel
           <br />
+          <p id="test_test"></p>
           <span class="white">1L / {{ diesel }}$</span>
         </p>
       </div>
@@ -87,17 +88,23 @@ export default {
       benzin_price,
       cars,
     }) {
+      document.getElementById('test_test').innerHTML = `Cars: ${JSON.stringify(cars)}, Name: ${gasstation_name}, Diesel: ${diesel_price}`
       this.gasstation = gasstation_name;
       this.diesel = diesel_price;
       this.benzin = benzin_price;
       this.cars = cars;
     }
   },
-  beforeCreate() {
-    gui.gasstation = this;
-    mp.trigger('uiInitGasStation');
-  },
   mounted() {
+    gui.gasstation = this;
+    //mp.trigger('uiInitGasStation');
+
+    this.initGasStation({
+      gasstation_name: "test",
+      diesel_price: 0.01,
+      benzin_price: 0.01,
+      cars: [{name: "test"}]
+    })
     setTimeout(() => {
       document.querySelector('.gasstation').style.transform = "translate(0, -50%)"
     }, 400);
