@@ -36,7 +36,8 @@ mp.events.add('uiInitGasStation', () => {
  }, {}, ...]
 */
 mp.events.add('Player:Init:Gasstation', (items) => {
-    mp.console.logWarning(items, true, true); // When pressing F11, you should now see a message saying "example"
+    mp.console.logWarning(items, true, true);
+    return; // When pressing F11, you should now see a message saying "example"
     gasBrowser.execute(`gui.gasstation.initGasStation({
         gasstation_name: '${items.name}',
         diesel_price: ${items.diesel_price},
