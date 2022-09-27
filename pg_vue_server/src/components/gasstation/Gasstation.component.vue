@@ -60,7 +60,7 @@ export default {
   name: "pg_Gasstation",
   data() {
     return {
-      gasstation: "Tankstelle XYZ",
+      gasstation: "",
       diesel: 0.00,
       benzin: 0.00,
       selected_type: "",
@@ -93,10 +93,11 @@ export default {
       this.cars = cars;
     }
   },
-  mounted() {
+  beforeCreate() {
     gui.gasstation = this;
     mp.trigger('uiInitGasStation');
-
+  },
+  mounted() {
     setTimeout(() => {
       document.querySelector('.gasstation').style.transform = "translate(0, -50%)"
     }, 400);

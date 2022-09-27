@@ -92,7 +92,7 @@ export default {
       this.already = false;
       this.password = "";
       this.password_repeat = "";
-      return (this.error_msg = "Das Passwort ist falsch!");
+      this.error_msg = "Das Passwort ist falsch!";
     }
   },
 };
