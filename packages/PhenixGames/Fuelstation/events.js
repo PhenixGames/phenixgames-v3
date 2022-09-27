@@ -35,12 +35,13 @@ mp.events.add("Server:Request:Data:Fuelstation", (player)  => {
     var Dieselpreis = res[1].fuel_sell_price_d * res[1].business_profit_mp;
     var Fuelsationname = res[1].name;
     var Cars = []; //Only the nearest 5 in range of 5[meter=?] of fuelstation
-    let items = [
-        ['name', Fuelsationname],
-        ['diesel_price', Dieselpreis],
-        ['benzin_price', Benzinpreis],
-        ['cars', Cars]
-    ];
+    let items = {
+        
+        'name': Fuelsationname,
+        'diesel_price': Dieselpreis,
+        'benzin_price': Benzinpreis,
+        'cars': Cars
+    };
     player.call("Player:Init:Gasstation", items)
     console.log(items);
 });
