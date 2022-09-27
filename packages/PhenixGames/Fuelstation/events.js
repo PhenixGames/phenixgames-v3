@@ -43,7 +43,8 @@ mp.events.add("Server:Request:Data:Fuelstation", async (player) => {
         'cars': Cars
     };
     player.call("Player:Init:Gasstation", items)
-    console.log(items);
+    if(debug)console.log(items);
+    
 });
 async function Get_Data_from_database(stationid){
     return await database.query('SELECT * FROM pg_fuelstations WHERE id = ?', [stationid])
