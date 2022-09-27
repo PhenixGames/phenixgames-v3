@@ -83,7 +83,7 @@ export default {
       mp.trigger("carRefuel", this.car, parseInt(this.current_fuel), parseInt(this.current_price));
     },
     initGasStation(items) {
-      document.getElementById('test_test').innerHTML = `Test`
+      document.getElementById('test_test').innerHTML = `Test ${items.gasstation_name}`
       this.gasstation = items.gasstation_name;
       this.diesel = items.diesel_price;
       this.benzin = items.benzin_price;
