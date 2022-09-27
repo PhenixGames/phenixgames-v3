@@ -42,7 +42,7 @@ mp.events.add("Server:Request:Data:Fuelstation", async (player) => {
         'benzin_price': Benzinpreis,
         'cars': Cars
     };
-    player.call("Player:Init:Gasstation", [items])
+    player.call("Player:Init:Gasstation", [JSON.stringify(items)])
     if(debug)console.log(items);
     
 });
