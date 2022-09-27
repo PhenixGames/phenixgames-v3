@@ -88,7 +88,7 @@ export default {
       benzin_price,
       cars,
     }) {
-      document.getElementById('test_test').innerHTML = `Cars: ${JSON.stringify(cars)}, Name: ${gasstation_name}, Diesel: ${diesel_price}`
+      document.getElementById('test_test').innerHTML = `Test`
       this.gasstation = gasstation_name;
       this.diesel = diesel_price;
       this.benzin = benzin_price;
