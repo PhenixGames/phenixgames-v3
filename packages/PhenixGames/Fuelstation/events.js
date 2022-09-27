@@ -31,6 +31,7 @@ mp.events.add("Server:Request:Data:Fuelstation", (player)  => {
     console.log("Got Called!")
     var stationid = player.getVariable("Fuelstation_id");
     var res = Get_Data_from_database(stationid);
+    console.log(res);
     var Benzinpreis = res[0].fuel_sell_price_b * res[0].business_profit_mp;
     var Dieselpreis = res[0].fuel_sell_price_d * res[0].business_profit_mp;
     var Fuelsationname = res[0].name;
