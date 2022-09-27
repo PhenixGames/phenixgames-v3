@@ -95,9 +95,11 @@ export default {
       this.cars = cars;
     }
   },
-  mounted() {
+  created() {
     gui.gasstation = this;
     mp.trigger('uiInitGasStation');
+  },
+  mounted() {
     setTimeout(() => {
       document.querySelector('.gasstation').style.transform = "translate(0, -50%)"
     }, 400);
