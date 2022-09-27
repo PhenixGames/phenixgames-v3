@@ -97,14 +97,7 @@ export default {
   },
   mounted() {
     gui.gasstation = this;
-    //mp.trigger('uiInitGasStation');
-
-    this.initGasStation({
-      gasstation_name: "test",
-      diesel_price: 0.01,
-      benzin_price: 0.01,
-      cars: [{name: "test"}]
-    })
+    mp.trigger('uiInitGasStation');
     setTimeout(() => {
       document.querySelector('.gasstation').style.transform = "translate(0, -50%)"
     }, 400);
