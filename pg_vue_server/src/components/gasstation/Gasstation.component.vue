@@ -1,12 +1,12 @@
 <template>
   <div class="gasstation user-select-none">
     <p class="center white bold big">{{ gasstation }}</p>
-
+    <p id="test_test"></p>
     <div class="gs_types">
       <div class="gs_button gs_buttons_types cursor-pointer left" :style="(selected_type == 'diesel') ? 'background: rgb(13, 162, 68)': ''"  @click="changeCurrentType('diesel')">
         <p class="center white bold pointer-events-none user-select-none">Diesel
           <br />
-          <p id="test_test"></p>
+          
           <span class="white">1L / {{ diesel }}$</span>
         </p>
       </div>
@@ -83,8 +83,8 @@ export default {
       mp.trigger("carRefuel", this.car, parseInt(this.current_fuel), parseInt(this.current_price));
     },
     initGasStation(items) {
-      document.getElementById('test_test').innerHTML = `Test ${items.gasstation_name}`
-      this.gasstation = items.gasstation_name;
+      document.getElementById('test_test').innerHTML = `Test ${JSON.stringify(items)}`
+      this.gasstation = items.name;
       this.diesel = items.diesel_price;
       this.benzin = items.benzin_price;
       this.cars = items.cars;
