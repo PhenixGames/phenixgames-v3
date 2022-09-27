@@ -34,12 +34,7 @@ mp.events.add('uiInitGasStation', () => {
  }, {}, ...]
 */
 mp.events.add('Player:Init:Gasstation', (items) => {
-    gasBrowser.execute(`gui.gasstation.initGasStation({
-        gasstation_name: '${items.name}',
-        diesel_price: ${items.diesel_price},
-        benzin_price: ${items.benzin_price},
-        cars: ${items.cars}
-    });`);
+    gasBrowser.execute(`gui.gasstation.initGasStation("${items}");`);
 });
 
 mp.events.add('carRefuel', (carId, carFuel, price) => {
