@@ -13,18 +13,16 @@ exports.interacteGasstation = () => {
     }else {
         isBrowserOpen = true;
         gasBrowser = mp.browsers.new(`http://${config.domain}:8080/#/gasstation`);
-        mp.events.callRemote("Server:Request:Data:Fuelstation");
         mp.gui.cursor.show(true, true);
         setTimeout(() => {
             mp.gui.cursor.show(true, true);
         }, 1000);
         
     }
-    process.exit()
 }
 
 mp.events.add('uiInitGasStation', () => {
-    mp.events.callRemote('Server:Init:GasstationUI');
+    mp.events.callRemote("Server:Request:Data:Fuelstation");
 })
 
 /**
