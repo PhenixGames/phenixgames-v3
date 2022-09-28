@@ -34,8 +34,7 @@ mp.events.add('uiInitGasStation', () => {
  }, {}, ...]
 */
 mp.events.add('Player:Init:Gasstation', (items) => {
-    mp.console.logInfo(JSON.stringify(items), true, true); // When pressing F11, you should now see a message saying "example"
-    gasBrowser.execute(`gui.gasstation.initGasStation("${[items]}");`);
+    gasBrowser.execute(`gui.gasstation.initGasStation("${items}");`);
 });
 
 mp.events.add('carRefuel', (carId, carFuel, price) => {
