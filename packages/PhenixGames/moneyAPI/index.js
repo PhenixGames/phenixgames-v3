@@ -99,3 +99,13 @@ module.exports.hasEnoughMoney = async function (playerId, needMoney, isBank) {
             return false;
         })
 }
+
+module.exports.UpdateMoneyHud = async function (player){
+    playerid = player.getVariable('playerid')
+    res = await this.getPlayerMoneyInfo(playerid) //Returns Only Res[0]
+    Updatevalue = res.hand_money
+    player.call("Player:HUD:Update:Money", Updatevalue);
+    if(debug){
+        console.log("MoneyHUD von Player " + playerid+ " wurde Geupdatet auf den Wert: " + Updatevalue)
+    }
+}

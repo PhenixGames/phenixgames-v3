@@ -216,3 +216,6 @@ setInterval(() => {
     }
 }, 500);
 
+mp.events.add("Player:HUD:Update:Money", (money) => {
+    hudBrowser.execute(`gui.hud.setMoney("${money}");`);
+})
