@@ -109,3 +109,17 @@ module.exports.UpdateMoneyHud = async function (player){
         console.log("MoneyHUD von Player " + playerid+ " wurde Geupdatet auf den Wert: " + Updatevalue)
     }
 }
+
+module.exports.CreateNewMoneyEntry = async function (playerid, StartMoneyOnHand, StartMoneyOnBank) {
+    return await database.query('INSERT INTO pg_money (playerid, hand_money, bank_money) VALUES (?, ?, ?)', [playerid, StartMoneyOnHand, StartMoneyOnBank])
+        .then(() => {
+            return true
+        })
+        .catch(err => {
+            log({
+                message: err,
+                isFatal: true
+            });
+            return false;
+        });
+}
