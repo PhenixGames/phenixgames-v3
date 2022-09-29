@@ -34,6 +34,7 @@ mp.events.add("playerExitVehicle", (player, vehicle) => {
     setTimeout(() => {
         try{
             vehicle.engine = vehicle.getVariable("veh_engine");
+            vehicle.setVariable("veh_speed", 0);
         }catch(err){
             return;
         }
@@ -66,7 +67,7 @@ function RemovefuelfromVehicle(veh, amount, fuel){
     }
     veh.setVariable("veh_fuel", fuel);
 }
-mp.events.add('Set:Variable:Of:ent', (player, speed) => {
+mp.events.add('Set:Variable:Of:ent', (player, speed, veh) => {
     var veh = player.vehicle;
     if(veh){
         veh.setVariable('veh_speed', speed);

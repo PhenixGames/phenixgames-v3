@@ -200,14 +200,15 @@ mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
     }, 10000);
 });
 
-setInterval(() => {//TODO Needs to be improved. When a player leaves the Vehicle while Vehicle has speed, speed gets not removed.
-
+setInterval(() => {
+    
     if(mp.players.local.vehicle){
         var vehicle = mp.players.local.vehicle;
 
         var speed = vehicle.getSpeed();
         speed = speed * 3.6;
         mp.events.callRemote('Set:Variable:Of:ent', speed);
+        
     }
 }, 500);
 
