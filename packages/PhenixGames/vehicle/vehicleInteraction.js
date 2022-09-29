@@ -67,7 +67,7 @@ function RemovefuelfromVehicle(veh, amount, fuel){
     }
     veh.setVariable("veh_fuel", fuel);
 }
-mp.events.add('Set:Variable:Of:ent', (player, speed, veh) => {
+mp.events.add('Set:Variable:Of:ent', (player, speed) => {
     var veh = player.vehicle;
     if(veh){
         veh.setVariable('veh_speed', speed);
