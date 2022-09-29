@@ -9,6 +9,7 @@ const debug = require('../../../_assets/json/debug/debug.json').account;
 const playerAPI = require('../playerAPI/');
 const generellAPI = require('../allgemein/');
 const permissionSystem = require('../playerAPI/permissionSystem');
+const MoneyAPI = requre('../moneyAPI/')
 const { log } = require('../../../_assets/functions/log/logs');
 const { UpdateMoneyHud } = require('../moneyAPI');
 
@@ -120,7 +121,7 @@ mp.events.add('LoginAccount', (player, password) => {
 
 mp.events.add('RegisterAccount', async (player, password) => {
     await playerAPI.saveNewPlayer(player.socialClub, password);
-
+    
     const playerId = await playerAPI.getPlayerId(player.socialClub);
 
     await playerAPI.changePlayerPos(player, config.airport.pos, config.airport.rot)
@@ -132,7 +133,8 @@ mp.events.add('RegisterAccount', async (player, password) => {
         'isInHouse': false,
         'isLoggedIn': true,
     });
-    
+    await MoneyAPI.CreateNewMoneyEntry(playerId, 1500, 3000)
+
     permissionSystem.setPlayerPermissionsLocal(player);
 
     player.call('Login:Succes:close:Windows');
