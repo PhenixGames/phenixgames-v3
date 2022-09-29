@@ -9,7 +9,7 @@ const debug = require('../../../_assets/json/debug/debug.json').account;
 const playerAPI = require('../playerAPI/');
 const generellAPI = require('../allgemein/');
 const permissionSystem = require('../playerAPI/permissionSystem');
-const MoneyAPI = requre('../moneyAPI/')
+const MoneyAPI = require('../moneyAPI/')
 const { log } = require('../../../_assets/functions/log/logs');
 const { UpdateMoneyHud } = require('../moneyAPI');
 
