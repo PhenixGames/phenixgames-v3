@@ -32,11 +32,6 @@ mp.events.add("playerLeaveVehicle", (player, vehicle) => {
 
 //Render For Car
 mp.events.add("render", () => {
-//testing
-//var pos = new mp.Vector3(-2096.231689453125, -320.1805114746094, 12.16186809539795);
-//mp.game.graphics.drawDebugSphere(pos.x , pos.y, 20, 255, 0, 0, 255);
-//
-
 
     if (Admin) {//Ist Er im Admin Dienst
         //Daten Vom Fahrzeug Rendern
@@ -127,11 +122,11 @@ mp.events.add("render", () => {
 
         });
 
-        linearray.map(item => {
+        linearray.map(item => {//Linearray beinhaltet die Schusslienein im Aktuellen Bereich
             mp.game.graphics.drawLine(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8], item[9], item[10]);
         });
 
-    }
+    }//Admin Dienst Abfrage Zu ende
     //Hier wird Das Speedometer Geupdated.
     if(mp.players.local.vehicle){
         var player = mp.players.local;
@@ -205,7 +200,7 @@ mp.events.add("Admin:draw:shot:line", (player, targetpos, targetEntity) => {
     }, 10000);
 });
 
-setInterval(() => {
+setInterval(() => {//TODO Needs to be improved. When a player leaves the Vehicle while Vehicle has speed, speed gets not removed.
 
     if(mp.players.local.vehicle){
         var vehicle = mp.players.local.vehicle;
