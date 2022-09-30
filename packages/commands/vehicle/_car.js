@@ -129,11 +129,6 @@ async function DeleteVehicleFromDatabase(veh_id){
 
     })
     .catch(err => {
-        log({
-            message: err,
-            isFatal: true
-        });
         return false;
-        
     });
 }

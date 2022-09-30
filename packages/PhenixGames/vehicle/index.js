@@ -38,8 +38,6 @@ module.exports.saveVehicleData = async function (veh) {
             }
         })
         .catch(err => {
-            //ADD LOG
-            console.error(err);
             return {
                 error: true,
                 err: err
@@ -64,7 +62,6 @@ module.exports.updateVehicleData = async function (veh) {
     return await database.query(`UPDATE pg_vehicles SET veh_name = ?, veh_owner = ?, veh_keys = ?, veh_state = ?, veh_pos = ?WHERE veh_id = ?`, [veh_name, veh_owner, veh_keys, veh_state, veh_id, veh_pos])
         .then(() => {return true})
         .catch(err => {
-            console.error(err);
             return false;
         })
 }
@@ -78,7 +75,6 @@ module.exports.updateVehicleData = async function (veh) {
 module.exports.updateVehiclePosition = async function (veh_id, veh_pos, veh_rot, veh) {
     return await database.query('UPDATE pg_vehicles SET veh_pos = ?, veh_rot = ?, veh_prim = ?, veh_sec = ?, veh_fuel = ? WHERE veh_id = ?', [JSON.stringify(veh_pos), JSON.stringify(veh_rot),veh.getColor(0), veh.getColor(1) , veh.getVariable("veh_fuel") ,veh_id])
         .catch(err => {
-            console.error(err);
             return false;
         })
 }
@@ -91,7 +87,6 @@ module.exports.getLatestCarInDatabase = async function () {
             }
         })
         .catch(err => {
-            console.error(err);
             return false;
         })
 }
@@ -105,7 +100,6 @@ module.exports.deleteVehicleData = async function (veh_id) {
     return await database.query('DELETE * FROM pg_vehicles WHERE veh_id = ?', [veh_id])
         .then(() => {return true})
         .catch(err => {
-            console.error(err);
             return false;
         })
 }
@@ -186,7 +180,7 @@ module.exports.spawnAllVehicles = async function () {
                 this.setLocalData(newVeh, res[i]);
             }
         }
-    });
+    }).catch(err => {});
 }
 
 module.exports.syncAllVehciles = async function () {

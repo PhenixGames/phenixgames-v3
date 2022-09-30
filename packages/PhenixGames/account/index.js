@@ -33,10 +33,7 @@ mp.events.add('playerJoin', async (player) => {
         });
 
         const items = [{invPos:1,img:"https://cdn-icons-png.flaticon.com/32/3075/3075977.png",count:1,isTop:true,isStackable:true},{invPos:1,img:"https://cdn-icons-png.flaticon.com/32/3075/3075977.png",count:1,isTop:false,isStackable:false}]
-        database.query(`UPDATE pg_user_inventory SET items = ? WHERE user_id = ?`, [JSON.stringify(items), res[0].id])
-        .catch(err => {
-            console.log(err);
-        })
+        database.query(`UPDATE pg_user_inventory SET items = ? WHERE user_id = ?`, [JSON.stringify(items), res[0].id]).catch(err => {});
 
         playerAPI.playerOnline = playerAPI.playerOnline + 1;
 
@@ -44,12 +41,7 @@ mp.events.add('playerJoin', async (player) => {
             message: `[SERVER]: [Registered] ${player.socialClub} has joined the server!`,
             isFatal: false
         });
-    }).catch(err => {
-        log({
-            message: err,
-            isFatal: true
-        });
-    });
+    }).catch(err => {});
 
     var name = await playerAPI.getPlayerInGame(player.getVariable('playerId'));
     if(name) {
@@ -89,10 +81,6 @@ mp.events.add('LoginAccount', (player, password) => {
             }
 
         }).catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
             return true;
         });
 
@@ -111,12 +99,7 @@ mp.events.add('LoginAccount', (player, password) => {
         player.call('Login:Succes:close:Windows');
         player.call('Player:Spawn:Options');
         
-    }).catch(err => {
-        log({
-            message: err,
-            isFatal: true
-        });
-    });
+    }).catch(err => {});
 });
 
 mp.events.add('RegisterAccount', async (player, password) => {

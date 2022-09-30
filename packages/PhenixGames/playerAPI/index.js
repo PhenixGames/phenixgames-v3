@@ -4,7 +4,6 @@ const database = require("../../_db/db");
 const config = require('../../../_assets/json/config.json');
 
 const validator = require('validator');
-const console = require('better-console');
 const bcryptjs = require('bcryptjs');
 const { log } = require('../../../_assets/functions/log/logs');
 
@@ -21,10 +20,6 @@ module.exports.getPlayerId = async function (username) {
             }
             return false;
         }).catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
             return false;
         })
 }
@@ -43,10 +38,6 @@ module.exports.saveNewPlayer = async function (username, password) {
             return true
         })
         .catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
             return false;
         });
 }
@@ -69,20 +60,12 @@ module.exports.checkPassword = async function (dbpwd, pwd) {
 module.exports.saveNewPlayerPos = async function (player_id, player_pos) {
     return await database.query('UPDATE pg_users SET last_pos = ? WHERE id = ?', [player_pos, player_id])
         .catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
             return false;
         })
 }
 module.exports.saveplayerHealthandArmour = async function (player_id, player_health, player_armour) {
     return await database.query('UPDATE pg_users SET health = ?, armour = ? WHERE id = ?', [player_health, player_armour, player_id])
         .catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
             return false;
         })
 }
@@ -105,10 +88,6 @@ module.exports.getLastPlayerPos = async function (player_id) {
             }
         })
         .catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
             return false;
         })
 }
@@ -167,10 +146,6 @@ module.exports.savePlayerInGameName = async function (playerId, name) {
             return true
         })
         .catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
             return false;
         });
 }
@@ -189,10 +164,6 @@ module.exports.getPlayerInGame = async function (playerId) {
             return res[0];
         })
         .catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
             return false;
         })
 }
@@ -216,10 +187,6 @@ module.exports.GetPlayerHealthFromDatabase = async function (playerid) {
         return res[0].health;
     })
     .catch(err => {
-        log({
-            message: err,
-            isFatal: true
-        });
         return false;
     })
 }
@@ -229,10 +196,6 @@ module.exports.GetPlayerArmourFromDatabase = async function (playerid) {
         return res[0].armour;
     })
     .catch(err => {
-        log({
-            message: err,
-            isFatal: true
-        });
         return false;
     })
 }

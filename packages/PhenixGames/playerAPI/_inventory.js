@@ -1,4 +1,3 @@
-const { log } = require("../../../_assets/functions/log/logs");
 const database = require("../../_db/db")
 
 /**
@@ -16,10 +15,6 @@ module.exports.getPlayerInventory = async ({
             }else return false;
         })
         .catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
             return false;
         });
 }

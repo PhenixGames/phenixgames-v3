@@ -61,7 +61,6 @@ module.exports.getPermsFromUser = async function (roleid) {
             return res[0];
         })
         .catch(err => {
-            console.error(err);
             return false;
         });
 }
@@ -79,9 +78,7 @@ module.exports.getRoleIdFromUser = async function (playerId) {
             }
             return res[0].roleId;
         })
-        .catch(err => {
-            console.error(err);
-        });
+        .catch(err => {});
 }
 
 /**
@@ -101,7 +98,6 @@ module.exports.getRoleInfo = async function (player) {
             return res[0];
         })
         .catch(err => {
-            console.error(err);
             return false;
         });
 }

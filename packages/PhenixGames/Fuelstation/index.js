@@ -45,10 +45,6 @@ async function GetDataFromDatabase(type){
         return res;
     })
     .catch(err => {
-        log({
-            message: err,
-            isFatal: true
-        });
         return false;
     })
  }
@@ -105,10 +101,6 @@ module.exports.InsertMarkerToDatabase = async function (fuelstation, pos) {
             return true
         })
         .catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
             return false;
         });
 }

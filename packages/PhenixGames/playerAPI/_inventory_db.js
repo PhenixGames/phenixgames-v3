@@ -1,8 +1,4 @@
 const database = require("../../_db/db")
-const {
-    log
-} = require("../../../_assets/functions/log/logs");
-
 
 
 /**
@@ -24,10 +20,6 @@ module.exports.updatePlayerInventoryToDatabase = async ({
                 });
             })
             .catch(err => {
-                log({
-                    message: err,
-                    isFatal: true
-                });
                 return reject({
                     error: true,
                     message: "Failed to save inventory"
@@ -58,10 +50,6 @@ module.exports.getPlayerInventory = async ({
             };
         })
         .catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
             return false
         });
 }
@@ -90,10 +78,6 @@ module.exports.getItemConfig = async ({
             }
         })
         .catch(err => {
-            log({
-                message: err,
-                isFatal: true
-            });
             return {
                 error: true,
                 message: "Failed to get item config"
