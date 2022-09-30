@@ -1,11 +1,8 @@
-const debug = require('../../../_assets/json/debug/debug.json').init;
-const globalDebug = require('../../../_assets/json/debug/debug.json').global;
+const debug = require('../../../_assets/json/debug/debug.json');
 
 const console = require('better-console');
-const database = require("../../_db/db");
 const vehicleAPI = require("../vehicle/")
 const playerAPI = require('../playerAPI/');
-const generellAPI = require('../allgemein/');
 const weatherAPI = require('../weatherAPI');
 const Fuelstations = require('../Fuelstation/');
 const { delay } = require('../../../_assets/functions/delay');
@@ -13,12 +10,12 @@ const { log } = require('../../../_assets/functions/log/logs');
 const {
     spawn
 } = require('child_process');
-const { db_backup } = require('../../../_assets/functions/backup/backup');
+const { DatabaseBackup } = require('../../../_assets/functions/DatabaseBackup/DatabaseBackup');
 
 
 mp.events.delayInitialization = true;
 (async () => {
-    if(debug){
+    if(debug.init){
         await delay(1);
         console.log('[PhenixGames] Initializing... no delay');
     }
@@ -52,11 +49,8 @@ mp.events.add('packagesLoaded', async() =>
         
     }, 5000);
 
-    if(!globalDebug){
-        db_backup();
-        setInterval(() => {
-            db_backup();
-        }, 86400000); // 24h
+    if(!debug.createBackup){
+        new DatabaseBackup();
     }
 
     setInterval(() => {
@@ -71,7 +65,7 @@ process.on('unhandledRejection', err => {
         message: err,
         isFatal: true
     });
-    if(!globalDebug && process.platform !== 'win32') {
+    if(!debug.global && process.platform !== 'win32') {
         log({
             message: 'BOT RESTARTED...'  + new Date(),
             isFatal: false
@@ -89,7 +83,7 @@ process.on('uncaughtException', err => {
         message: err,
         isFatal: true
     });
-    if(!globalDebug && process.platform !== 'win32') {
+    if(!debug.global && process.platform !== 'win32') {
         log({
             message: 'BOT RESTARTED...'  + new Date(),
             isFatal: false

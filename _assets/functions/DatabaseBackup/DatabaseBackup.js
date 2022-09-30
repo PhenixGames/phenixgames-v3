@@ -3,7 +3,7 @@ const dbconfig = require('../../../packages/_db/db_config.json');
 const { log } = require('../log/logs');
 
 
-class ExtractSQL {
+class DatabaseBackup {
     constructor() {
         this.dumb();
         this.pushToRepo();
@@ -39,7 +39,7 @@ class ExtractSQL {
 
     pushToRepo() {
         setTimeout(() => {
-            cp.exec(` git pull && git add . && git commit -m "Database backup created due server restart" && git push`, (error, stdout, stderr) => {
+            cp.exec(` git pull && git add ${this.getDataPath()} && git add ${this.getStructurePath()} && git commit -m "Database backup created due server restart" && git push`, (error, stdout, stderr) => {
               console.log(stdout);
               console.log(stderr);
               if (error !== null) {
@@ -54,7 +54,4 @@ class ExtractSQL {
           return true;
     }
 }
-
-new ExtractSQL();
-
-module.exports.ExtractSQL = new ExtractSQL();
+module.exports.DatabaseBackup = { DatabaseBackup };
