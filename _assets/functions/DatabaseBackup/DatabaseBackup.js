@@ -54,4 +54,4 @@ class DatabaseBackup {
           return true;
     }
 }
-module.exports.DatabaseBackup = { DatabaseBackup };
+module.exports.DatabaseBackup = DatabaseBackup;

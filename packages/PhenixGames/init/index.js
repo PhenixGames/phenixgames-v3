@@ -49,7 +49,7 @@ mp.events.add('packagesLoaded', async() =>
         
     }, 5000);
 
-    if(!debug.createBackup){
+    if(debug.createBackup){
         new DatabaseBackup();
     }
 
