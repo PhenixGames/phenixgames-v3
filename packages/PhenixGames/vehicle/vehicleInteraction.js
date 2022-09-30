@@ -34,6 +34,7 @@ mp.events.add("playerExitVehicle", (player, vehicle) => {
     setTimeout(() => {
         try{
             vehicle.engine = vehicle.getVariable("veh_engine");
+            vehicle.setVariable("veh_speed", 0);
         }catch(err){
             return;
         }

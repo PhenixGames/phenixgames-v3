@@ -9,7 +9,9 @@ const debug = require('../../../_assets/json/debug/debug.json').account;
 const playerAPI = require('../playerAPI/');
 const generellAPI = require('../allgemein/');
 const permissionSystem = require('../playerAPI/permissionSystem');
+const MoneyAPI = require('../moneyAPI/')
 const { log } = require('../../../_assets/functions/log/logs');
+const { UpdateMoneyHud } = require('../moneyAPI');
 
 mp.events.add('playerJoin', async (player) => {
     await database.query(`SELECT * FROM pg_users WHERE username = ?`, [player.socialClub]).then(res => {
@@ -119,7 +121,7 @@ mp.events.add('LoginAccount', (player, password) => {
 
 mp.events.add('RegisterAccount', async (player, password) => {
     await playerAPI.saveNewPlayer(player.socialClub, password);
-
+    
     const playerId = await playerAPI.getPlayerId(player.socialClub);
 
     await playerAPI.changePlayerPos(player, config.airport.pos, config.airport.rot)
@@ -131,7 +133,8 @@ mp.events.add('RegisterAccount', async (player, password) => {
         'isInHouse': false,
         'isLoggedIn': true,
     });
-    
+    await MoneyAPI.CreateNewMoneyEntry(playerId, 1500, 3000)
+
     permissionSystem.setPlayerPermissionsLocal(player);
 
     player.call('Login:Succes:close:Windows');
@@ -154,6 +157,7 @@ mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
 })
 
 mp.events.add('Player:Spawn:house', async (player) => {
+    // TODO This Code needs to be Fixed when adding Homes. 
     const playerId = player.getVariable('playerId');
     ApplyHealthAndArmour(player, playerId);
     return setHUD(player);
@@ -163,12 +167,14 @@ mp.events.add('Player:Spawn:LastPos', async (player) => {
     const playerId = player.getVariable('playerId');
     const lastPos = await playerAPI.getLastPlayerPos(playerId);
     ApplyHealthAndArmour(player, playerId);
-
+    // TODO This Code needs to be Fixed when adding Homes. 
+    // It needs to be added so the player spawns in the right dimension of the House
+    // The Code Below is Bullshit XD
     // if(player.getVariable('isInHouse')) {
     //     player.dimension = playerId;
     // }
 
-    console.log(JSON.stringify(lastPos) + ' last pos debug');
+    if(debug)console.log(JSON.stringify(lastPos) + ' last pos debug');
     player.position = new mp.Vector3(lastPos.x, lastPos.y, lastPos.z);
     destroycam(player);
     return setHUD(player);
@@ -183,17 +189,17 @@ mp.events.add('Player:Spawn:airport', async (player) => {
 
 function setHUD(player) {
     player.call('Player:ActivateHUD');
-
+    ApplyHudValues(player);
     generellAPI.saveLocalVar(player, {
         'syncPlayer': true
     });
 }
+function ApplyHudValues(player){
+    UpdateMoneyHud(player);
+}
 async function ApplyHealthAndArmour(player, playerId){
-    
-    let healt = await playerAPI.GetPlayerHealthFromDatabase(playerId);
-    let armour = await playerAPI.GetPlayerArmourFromDatabase(playerId);
-    player.health = healt;
-    player.armour = armour;
+    player.health = await playerAPI.GetPlayerHealthFromDatabase(playerId);
+    player.armour = await playerAPI.GetPlayerArmourFromDatabase(playerId);
 }
 
 function destroycam(player){
