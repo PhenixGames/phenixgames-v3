@@ -123,3 +123,17 @@ module.exports.CreateNewMoneyEntry = async function (playerid, StartMoneyOnHand,
             return false;
         });
 }
+
+/*
+Hasmoney
+AddMoney
+RemoveMoney
+
+HasBank
+Addbank
+Removebank
+
+
+UpdateHUD
+CreateMoneyEntry
+*/
