@@ -23,10 +23,12 @@ mp.keys.bind(0x58, true, function() {
 });
 
 // -E-
-mp.keys.bind(0x45, true, function(){
-        if(mp.players.local.getVariable("isnearFuelstation")){
-            interacteGasstation();
-        }
+var test = false;
+mp.keys.bind(0x45, true, function() {
+    if(mp.players.local.getVariable("isnearFuelstation") && !test) {
+        test = true;
+        return interacteGasstation();
+    }
 });
 
 //f2 NO CLIP

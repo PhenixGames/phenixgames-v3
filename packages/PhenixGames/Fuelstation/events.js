@@ -28,7 +28,6 @@ mp.events.add('playerEnterColshape', (player, shape) => {
      });
 
 mp.events.add("Server:Request:Data:Fuelstation", async (player) => {
-    console.log("Got Called!")
     var stationid = player.getVariable("Fuelstation_id");
     var res = await Get_Data_from_database(stationid);
     var Benzinpreis = res[0].fuel_sell_price_b * res[0].business_profit_mp;
@@ -36,14 +35,17 @@ mp.events.add("Server:Request:Data:Fuelstation", async (player) => {
     var Fuelsationname = res[0].name;
     var Cars = [{name: "test", name:"test2"}]; //Only the nearest 5 in range of 5[meter=?] of fuelstation
     let items = {
-        
         'name': Fuelsationname, 
         'diesel_price': Dieselpreis,
         'benzin_price': Benzinpreis,
         'cars': Cars
     };
     player.call("Player:Init:Gasstation", [JSON.stringify(items)])
-    if(debug)console.log(items);
+    if(debug) console.log(items);
+    
+    setTimeout(() => {
+        isEPressed = false;    
+    }, 500);
     
 });
 async function Get_Data_from_database(stationid){
