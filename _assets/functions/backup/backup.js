@@ -1,5 +1,5 @@
 const dbconfig = require('../../../packages/_db/db_config.json');
-const exec = require('child_process').exec;
+
 const fs = require('fs')
 const {log} = require('../log/logs');
 
