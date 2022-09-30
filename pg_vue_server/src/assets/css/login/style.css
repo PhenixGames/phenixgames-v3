@@ -41,6 +41,7 @@ body {
     color: #FFFFFF;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-image: url("../../img/login/login_bg.jpg");
     overflow: hidden;
 }
@@ -182,4 +183,8 @@ label span.text-checkbox {
 
 label input[type="checkbox"] {
     display: none;
+}
+
+#error_msg {
+    color: red !important;
 }
