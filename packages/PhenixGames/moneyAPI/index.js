@@ -101,6 +101,7 @@ module.exports.hasEnoughMoney = async function (playerId, needMoney, isBank) {
 }
 
 module.exports.UpdateMoneyHud = async function (player){
+    return 0;
     playerid = player.getVariable('playerid')
     res = await this.getPlayerMoneyInfo(playerid) //Returns Only Res[0]
     Updatevalue = res.hand_money
