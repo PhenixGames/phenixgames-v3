@@ -23,10 +23,8 @@ mp.keys.bind(0x58, true, function() {
 });
 
 // -E-
-var test = false;
 mp.keys.bind(0x45, true, function() {
-    if(mp.players.local.getVariable("isnearFuelstation") && !test) {
-        test = true;
+    if(mp.players.local.getVariable("isnearFuelstation")) {
         return interacteGasstation();
     }
 });
