@@ -1,5 +1,5 @@
 const vehicle = require('../../PhenixGames/vehicle/index');
-const Perms = require('../../PhenixGames/playerAPI/PermissionSystem');
+const Permissionsytem = require('../../PhenixGames/playerAPI/PermissionSystem');
 const generellAPI = require('../../PhenixGames/allgemein/');
 const { log } = require('../../../_assets/functions/log/logs');
 const database = require("../../_db/db");
@@ -13,7 +13,7 @@ mp.events.addCommand("veh", async (player, args) => {
 });
 
 async function spawncar(player, args){
-    if(await Perms.hasPermissions(player, ["car_spawn"])) {
+    if(await Permissionsytem.hasPermissions(player, ["car_spawn"])) {
         try {
             args = args.split(' ');
         }catch(err) {
@@ -30,7 +30,6 @@ async function spawncar(player, args){
                 return player.vehicle.repair()
             }
         }catch(err){
-            console.log(err);
             return player.notify('~r~Du bist in keinem Auto!');
         }
             
