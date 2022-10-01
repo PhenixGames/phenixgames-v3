@@ -11,6 +11,7 @@ const {
 const { DatabaseBackup } = require('../../../_assets/functions/DatabaseBackup/DatabaseBackup');
 const AccountAPI = require('../account/AcountAPI');
 const { FAPI } = require('../Fuelstation/FuelStationApi');
+const IplsAPI = require('../ipls');
 
 
 mp.events.delayInitialization = true;
@@ -36,6 +37,7 @@ mp.events.add('packagesLoaded', async() =>
     await vehicleAPI.spawnAllVehicles();
     weatherAPI.setWeather();
     await FAPI.load();
+    IplsAPI.load();
 
     await delay(15000);
 
