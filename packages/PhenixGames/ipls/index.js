@@ -12,7 +12,7 @@ class IplsApi {
 
 
     load() {
-        Ipls.forEach(content => {
+        this.ipls.forEach(content => {
             mp.world.requestIpl(content);
        });
     }
