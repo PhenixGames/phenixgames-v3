@@ -1,7 +1,6 @@
 const debug = require('../../../_assets/json/debug/debug.json').vehicle;
 
 const database = require("../../_db/db");
-const console = require('better-console');
 const generellAPI = require('../allgemein/index');
 
 class VehicleApi {
@@ -11,7 +10,6 @@ class VehicleApi {
         return await database.query('SELECT * FROM pg_vehicles WHERE veh_id = ? LIMIT 1', [id]).then(res => {
             return res[0];
         }).catch(err => {
-            console.error(err);
             return false;
         })
     }
