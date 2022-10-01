@@ -1,7 +1,7 @@
-const Perms = require('../../PhenixGames/playerAPI/permissionSystem.js');
+const PermissionSystem = require('../../PhenixGames/playerAPI/PermissionSystem.js');
 
 mp.events.addCommand('weapon', async (player, weapon = "specialcarbine_mk2") => {
-    if(await Perms.hasPermissions(player, ["spawn_weapon"])) {
+    if(await PermissionSystem.hasPermissions(player, ["spawn_weapon"])) {
         player.giveWeapon(mp.joaat("weapon_" + weapon), 10000);
     }
 });

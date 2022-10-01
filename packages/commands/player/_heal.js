@@ -1,8 +1,9 @@
-const Perms = require('../../PhenixGames/playerAPI/permissionSystem.js');
+const PermissionSystem = require("../../PhenixGames/playerAPI/PermissionSystem");
+
 
 mp.events.addCommand("heal", async (player) => {
 
-    if(await Perms.hasPermissions(player, ["heal"])) {
+    if(await PermissionSystem.hasPermissions(player, ["heal"])) {
         player.health = 100;
     }
 
@@ -11,7 +12,7 @@ mp.events.addCommand("heal", async (player) => {
 mp.events.addCommand("revive", async (player, target) => {
     if(!player.getVariable("Aduty"))return
 
-    if(await Perms.hasPermissions(player, ["tp_to"])) {
+    if(await PermissionSystem.hasPermissions(player, ["tp_to"])) {
         var playerFound = false;
         if(!isNaN(target)) {
             mp.players.forEach(

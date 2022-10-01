@@ -1,2 +1,2 @@
-require('./permissionSystem');
+require('./PermissionSystem');
 require('./_events');

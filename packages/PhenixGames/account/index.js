@@ -2,7 +2,7 @@ const config = require('../../../_assets/json/config.json');
 const debug = require('../../../_assets/json/debug/debug.json').account;
 
 const generellAPI = require('../allgemein/');
-const permissionSystem = require('../playerAPI/permissionSystem');
+const PermissionSystem = require('../playerAPI/PermissionSystem');
 const MoneyAPI = require('../moneyAPI/')
 const {
     log
@@ -69,7 +69,8 @@ mp.events.add('LoginAccount', async (player, password) => {
         return player.call('Wrong:Password')
     }
 
-    permissionSystem.setPlayerPermissionsLocal(player);
+    
+    PermissionSystem.setPerms(player, user.roleId);
 
     const hasCharacter = user.firstname && user.lastname;
     if (!hasCharacter) return player.call('Player:InGameName:Choose');
@@ -94,7 +95,7 @@ mp.events.add('RegisterAccount', async (player, password) => {
 
     await MoneyAPI.CreateNewMoneyEntry(user.id, 1500, 3000)
 
-    permissionSystem.setPlayerPermissionsLocal(player);
+    PermissionSystem.setPerms(player, user.roleId);
 
     const items = [{
         invPos: 1,

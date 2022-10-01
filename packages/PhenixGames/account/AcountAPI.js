@@ -190,6 +190,16 @@ class Account {
             }
         });
     }
+
+    async getRole(id) {
+        return await database.query('SELECT roleId FROM pg_users WHERE id = ?', [id])
+        .then(res => {
+            return res[0].roleId;
+        })
+        .catch(err => {
+            return false;
+        })
+    }
 }
 
 const AccountAPI = new Account();

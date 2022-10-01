@@ -1,58 +1,59 @@
 const debug = require('../../../_assets/json/debug/debug.json').admin;
 
-const Perms = require('../playerAPI/permissionSystem')
 const generellAPI = require('../allgemein/');
 const AccountAPI = require('../account/AcountAPI');
-
-const AdminUnsichtbar = 200;
+const PermissionSystem = require('../playerAPI/PermissionSystem');
 
 mp.events.addCommand("aduty", async (player) => {
+    const isTeam = await PermissionSystem.hasPermissions(player, ["isTeam"]);
+    const godmode = await PermissionSystem.hasPermissions(player, ["godmode"]);
 
-    if(await Perms.hasPermissions(player, ["isTeam"])) {
-        //? IF USER IS ALREADY IN GODMODE
-        if(await Perms.hasPermissions(player, ["godmode"])){
-            if(player.getVariable('Aduty')) {
-                generellAPI.saveLocalVar(player, {'Aduty': false})
+    if(!isTeam || !godmode) return;
 
-                player.call("Set:God", [false]);
-                player.call("Change:Admin:Duty:Value:On:Client", [false]);
+    if(player.getVariable('Aduty')) {
+        generellAPI.saveLocalVar(player, {
+            'Aduty': false
+        })
 
-                const user = await AccountAPI.get(player.getVariable('playerId'));
-                player.name = user.firstname + " " + user.lastname;
+        player.call("Set:God", [false]);
+        player.call("Change:Admin:Duty:Value:On:Client", [false]);
 
-                player.alpha = 255;
-            }else {
-                generellAPI.saveLocalVar(player, {'Aduty': true})
-                player.call("Set:God", [true]); 
-                player.call("Change:Admin:Duty:Value:On:Client", [true]);
-                player.alpha = AdminUnsichtbar;
-                player.name = player.name;
-            }
-        }
-        if(await Perms.hasPermissions(player, ["no_clip"])){
-            player.call("Player:Admin:Duty:noclip");
-        }
+        const user = await AccountAPI.get(player.getVariable('playerId'));
+        player.name = user.firstname + " " + user.lastname;
 
-        
-        
+        player.alpha = 255;
+    }else {
+        generellAPI.saveLocalVar(player, {
+            'Aduty': true
+        })
 
-        var rolename = await Perms.getRoleInfo(player);
+        player.call("Set:God", [true]); 
+        player.call("Change:Admin:Duty:Value:On:Client", [true]);
 
-        player.notify((player.getVariable('Aduty')) ? '~g~Du hast den Admindienst als ~r~'+ rolename.rolename + '~g~ angetreten': '~r~Du hast den AdminDienst verlassen');
+        player.alpha = PermissionSystem.getAdminAlpha();
+        player.name = player.name;
     }
+    
+
+    const noClip = await PermissionSystem.hasPermissions(player, ["no_clip"])
+    if(noClip){
+        player.call("Player:Admin:Duty:noclip");
+    }
+
+    const role = await PermissionSystem.getRole(await AccountAPI.getRole(player.getVariable('playerId')));
+
+    player.notify((player.getVariable('Aduty')) ? '~g~Du hast den Admindienst als ~r~'+ role.rolename + '~g~ angetreten': '~r~Du hast den AdminDienst verlassen');
 });
 
 
 mp.events.add("playerExitVehicle", (player, vehicle) => {
     if(player.getVariable('Aduty')){
         setTimeout(() => {
-            player.alpha = AdminUnsichtbar;
-        }, 1000);//Falls Probleme sind, Zeit hoch Setzen.
+            player.alpha = PermissionSystem.getAdminAlpha();
+        }, 1000);
     }
 });
-//Hier werden die Daten vom schießenden spieler an den Admin weitergeleitet.
+
 mp.events.add('Get:Shot:Info:to:Admin', (player, admin, targetpos, targetEntity) => {
    admin.call("Admin:draw:shot:line", [player, targetpos, targetEntity]);
 });
-//
-

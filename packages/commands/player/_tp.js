@@ -1,8 +1,8 @@
 const AccountAPI = require("../../PhenixGames/account/AcountAPI");
-const Perms = require('../../PhenixGames/playerAPI/permissionSystem')
+const PermissionSystem = require("../../PhenixGames/playerAPI/PermissionSystem");
 
 mp.events.addCommand('tp', async (player, location) => {
-    if(await Perms.hasPermissions(player, ["tp"])  && location.indexOf(',') !== -1) {
+    if(await PermissionSystem.hasPermissions(player, ["tp"])  && location.indexOf(',') !== -1) {
         const changePos = AccountAPI.changePos(player, JSON.stringify(location));
         if(!changePos) player.notify('Etwas ist schief gelaufen!')
     }
@@ -31,7 +31,7 @@ mp.events.addCommand('bringveh', async (player, target) =>{
 async function tpto(player, target){
     if(!player.getVariable("Aduty"))return
     
-    if(await Perms.hasPermissions(player, ["tp_to"])) {
+    if(await PermissionSystem.hasPermissions(player, ["tp_to"])) {
         var found = false;
         if(!isNaN(target)){
             mp.players.forEach(
@@ -52,7 +52,7 @@ async function tpto(player, target){
     }
 }
 async function bring(player, target){
-    if(await Perms.hasPermissions(player, ["tp_to"])) {
+    if(await PermissionSystem.hasPermissions(player, ["tp_to"])) {
         var found = false;
         if(!isNaN(target)){
             mp.players.forEach(
@@ -76,7 +76,7 @@ async function bring(player, target){
 async function tptoveh(player, target){
     if(!player.getVariable("Aduty"))return
     
-    if(await Perms.hasPermissions(player, ["tp_to"])) {
+    if(await PermissionSystem.hasPermissions(player, ["tp_to"])) {
         var found = false;
         if(!isNaN(target)){
             mp.vehicles.forEach(
@@ -98,7 +98,7 @@ async function tptoveh(player, target){
 }
 
 async function bringveh(player, target){
-    if(await Perms.hasPermissions(player, ["tp_to"])) {
+    if(await PermissionSystem.hasPermissions(player, ["tp_to"])) {
         var found = false;
         if(!isNaN(target)){
             mp.vehicles.forEach(
