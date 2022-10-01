@@ -16,8 +16,8 @@ class FuelStationApi {
         const fuelstations = await this.get();
 
         if(debug){
-           console.log("-- Create Fuelstations -- " + res.length + " --");
-           console.log(res);
+           console.log("-- Create Fuelstations -- " + fuelstations.length + " --");
+           console.log(fuelstations);
         }
         for(let i in fuelstations){
             try {

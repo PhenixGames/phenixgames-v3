@@ -35,12 +35,12 @@ mp.events.add("Server:Request:Data:Fuelstation", async (player) => {
         return player.call("Player:Gasstation:NotFound", [fuelstation]);
     }
 
-    const denzinpreis = FAPI.calculatePrice({
+    const dieselpreis = FAPI.calculatePrice({
         fueltype: "diesel",
         fuelstation
     });
 
-    const dieselpreis = FAPI.calculatePrice({
+    const benzinpreis = FAPI.calculatePrice({
         fueltype: "benzin",
         fuelstation
     })
@@ -55,7 +55,7 @@ mp.events.add("Server:Request:Data:Fuelstation", async (player) => {
     const items = {
         'name': fuelsationname,
         'diesel_price': dieselpreis,
-        'benzin_price': denzinpreis,
+        'benzin_price': benzinpreis,
         'cars': cars
     };
 
