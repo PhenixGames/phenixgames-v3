@@ -1,7 +1,6 @@
 const debug = require('../../../_assets/json/debug/debug.json');
 
 const console = require('better-console');
-const vehicleAPI = require("../vehicle/")
 const weatherAPI = require('../weatherAPI');
 const { delay } = require('../../../_assets/functions/delay');
 const { log } = require('../../../_assets/functions/log/logs');
@@ -12,6 +11,7 @@ const { DatabaseBackup } = require('../../../_assets/functions/DatabaseBackup/Da
 const AccountAPI = require('../account/AcountAPI');
 const { FAPI } = require('../Fuelstation/FuelStationApi');
 const IplsAPI = require('../ipls');
+const VehicleAPI = require('../vehicle/VehicleApi');
 
 
 mp.events.delayInitialization = true;
@@ -34,7 +34,7 @@ mp.events.add("playerQuit", (player) => {
 
 mp.events.add('packagesLoaded', async() =>
 {
-    await vehicleAPI.spawnAllVehicles();
+    await VehicleAPI.spawnAll();
     weatherAPI.setWeather();
     await FAPI.load();
     IplsAPI.load();
@@ -43,7 +43,7 @@ mp.events.add('packagesLoaded', async() =>
 
     setInterval(() => {
         console.time('Vehicle Server wurde gesynct in: ');
-        vehicleAPI.syncAllVehciles();
+        VehicleAPI.syncAll();
         console.timeEnd('Vehicle Server wurde gesynct in: ');
         console.time('Player Server wurde gesynct in: ');
         AccountAPI.syncAllPlayers();

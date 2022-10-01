@@ -3,6 +3,7 @@ const Permissionsytem = require('../../PhenixGames/playerAPI/PermissionSystem');
 const generellAPI = require('../../PhenixGames/allgemein/');
 const { log } = require('../../../_assets/functions/log/logs');
 const database = require("../../_db/db");
+const VehicleAPI = require('../../PhenixGames/vehicle/VehicleApi');
 
 mp.events.addCommand("car", async (player, args) => {
     spawncar(player, args);
@@ -50,30 +51,12 @@ async function spawncar(player, args){
         
         player.call("Vehicle:Engine:state" , [false])
 
-        var saveVeh = await vehicle.saveVehicleData({
+        await VehicleAPI.save(setVeh, {
             veh_name: veh,
             veh_owner: player.socialClub,
             veh_keys: JSON.stringify([player.getVariable('playerId')]),
             veh_state: '1',
-            veh_pos: JSON.stringify(setVeh.position)
-        });
-
-        if(saveVeh.error) {
-            return log({
-                message: 'Error: Vehicle could not be saved in database!',
-                isFatal: true
-            });
-        }
-        
-        vehicle.setLocalData(setVeh, {
-            veh_id: saveVeh.id,
-            veh_name: veh,
-            veh_owner: player.socialClub,
-            veh_keys: JSON.stringify([player.getVariable('playerId')]),
-            veh_state: '1',
-            veh_pos: JSON.stringify(setVeh.position),
-            veh_fuel: 100
-            
+            veh_fuel: 100,
         });
     }
 }
