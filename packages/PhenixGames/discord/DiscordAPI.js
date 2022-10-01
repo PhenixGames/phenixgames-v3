@@ -1,7 +1,7 @@
 class DiscordApi {
     constructor(){}
 
-    set(player, name) {
+    set(name) {
         let title = 'Spielt auf PhenixGames V3';
         let playing = `Spielt als ${name}`;
         mp.players.call("Set:Discord", [title, playing]); 

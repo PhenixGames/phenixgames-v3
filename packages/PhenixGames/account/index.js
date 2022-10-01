@@ -40,7 +40,7 @@ mp.events.add('playerJoin', async (player) => {
 
     if(user.firstname && user.lastname) {
         player.name = user.firstname + " " + user.lastname;
-        DiscordAPI.set(player, player.name);
+        DiscordAPI.set(player.name);
     }
 });
 
