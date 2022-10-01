@@ -9,7 +9,7 @@ const {
 } = require('../../../_assets/functions/log/logs');
 const AccountAPI = require('./AcountAPI');
 const DiscordAPI = require('../discord/DiscordAPI');
-const PunishmentsAPI = require('../Punishments/PunishmentsAPI');
+const PunishmentsAPI = require('../punishments/PunishmentsAPI');
 
 mp.events.add('playerJoin', async (player) => {
     const user = await AccountAPI.getByUsername(player.socialClub);
