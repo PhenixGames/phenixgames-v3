@@ -263,3 +263,8 @@ hr {
     pointer-events: none;
     user-select: none;
 }
+
+.gs_notfound {
+    font-size: 1.25rem;
+    transform: translate(-10px, 200px);
+}
