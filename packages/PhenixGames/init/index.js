@@ -3,7 +3,6 @@ const debug = require('../../../_assets/json/debug/debug.json');
 const console = require('better-console');
 const vehicleAPI = require("../vehicle/")
 const weatherAPI = require('../weatherAPI');
-const Fuelstations = require('../Fuelstation/');
 const { delay } = require('../../../_assets/functions/delay');
 const { log } = require('../../../_assets/functions/log/logs');
 const {
@@ -11,6 +10,7 @@ const {
 } = require('child_process');
 const { DatabaseBackup } = require('../../../_assets/functions/DatabaseBackup/DatabaseBackup');
 const AccountAPI = require('../account/AcountAPI');
+const { FAPI } = require('../Fuelstation/FuelStationApi');
 
 
 mp.events.delayInitialization = true;
@@ -35,7 +35,7 @@ mp.events.add('packagesLoaded', async() =>
 {
     await vehicleAPI.spawnAllVehicles();
     weatherAPI.setWeather();
-    await Fuelstations.Load_Fuel_stations();
+    await FAPI.load();
 
     await delay(15000);
 
