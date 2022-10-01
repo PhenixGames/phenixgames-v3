@@ -17,7 +17,7 @@ class DatabaseBackup {
     } 
 
     dumb() {
-        cp.exec(`mysqldump -u ${process.env.DB_USER} -p'${process.env.DB_PWD}' ${process.env.DB_NAME} --no-tablespaces > ${this.getStructurePath()}`, (error, stdout, stderr) => {
+        cp.exec(`mysqldump -u ${process.env.DB_USER} -p'${process.env.DB_PWD}' ${process.env.DB_NAME} --no-tablespaces --no-data > ${this.getStructurePath()}`, (error, stdout, stderr) => {
             if (error !== null) {
               log({
                 message: error,
