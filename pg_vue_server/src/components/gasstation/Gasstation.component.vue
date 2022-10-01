@@ -163,7 +163,7 @@ export default {
     });
 
     this.initComponent();
-    //mp.trigger('uiInitGasStation');
+    mp.trigger('uiInitGasStation');
   }
 };
 </script>
