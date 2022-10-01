@@ -1,17 +1,17 @@
 const mysql = require('mysql');
 const { log } = require('../../_assets/functions/log/logs');
-const dbconfig = require('./db_config.json');
 
 class Database {
   constructor() {
+    console.log(process.env)
     this.connection = mysql.createPool({
       connectionLimit: 100,
-      host: dbconfig.host,
-      user: dbconfig.user,
-      password: dbconfig.password,
-      database: dbconfig.database,
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PWD,
+      database: process.env.DB_NAME,
       acquireTimeout: 1000000,
-      debug: false
+      debug: JSON.parse(process.env.DB_DEBUG),
     });
 
     this.connection.getConnection((err, connection) => {

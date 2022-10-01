@@ -1,5 +1,4 @@
 const cp = require('child_process');
-const dbconfig = require('../../../packages/_db/db_config.json');
 const { log } = require('../log/logs');
 
 
@@ -18,7 +17,7 @@ class DatabaseBackup {
     } 
 
     dumb() {
-        cp.exec(`mysqldump -u ${dbconfig.backup_user} -p'${dbconfig.backup_password}' ${dbconfig.database} --no-tablespaces > ${this.getStructurePath()}`, (error, stdout, stderr) => {
+        cp.exec(`mysqldump -u ${process.env.DB_USER} -p'${process.env.DB_PWD}' ${process.env.DB_NAME} --no-tablespaces > ${this.getStructurePath()}`, (error, stdout, stderr) => {
             if (error !== null) {
               log({
                 message: error,
@@ -27,7 +26,7 @@ class DatabaseBackup {
             }
           });
 
-        cp.exec(`mysqldump -u ${dbconfig.backup_user} -p'${dbconfig.backup_password}' ${dbconfig.database} --no-tablespaces --no-create-info --no-create-db > ${this.getDataPath()}`, (error, stdout, stderr) => {
+        cp.exec(`mysqldump -u ${process.env.DB_USER} -p'${process.env.DB_PWD}' ${process.env.DB_NAME} --no-tablespaces --no-create-info --no-create-db > ${this.getDataPath()}`, (error, stdout, stderr) => {
             if (error !== null) {
                 log({
                     message: error,
