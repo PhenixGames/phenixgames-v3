@@ -1,9 +1,8 @@
 const debug = require('../../../_assets/json/debug/debug.json').admin;
 
-const playerAPI = require("../playerAPI");
 const Perms = require('../playerAPI/permissionSystem')
 const generellAPI = require('../allgemein/');
-const database = require('../../_db/db');
+const AccountAPI = require('../account/AcountAPI');
 
 const AdminUnsichtbar = 200;
 
@@ -18,8 +17,8 @@ mp.events.addCommand("aduty", async (player) => {
                 player.call("Set:God", [false]);
                 player.call("Change:Admin:Duty:Value:On:Client", [false]);
 
-                var name = await playerAPI.getPlayerInGame(player.getVariable('playerId'));
-                player.name = name.firstname + " " + name.lastname;
+                const user = await AccountAPI.get(player.getVariable('playerId'));
+                player.name = user.firstname + " " + user.lastname;
 
                 player.alpha = 255;
             }else {

@@ -1,10 +1,7 @@
 const debug = require('../../../_assets/json/debug/debug.json').playerapi;
 
 const database = require("../../_db/db");
-
-const playerAPI = require('./index');
 const generellAPI = require('../allgemein/');
-const console = require('better-console');
 
 
 // EXAMPLE permissionSystem.hasPermissions(player, ["ban_member"]);

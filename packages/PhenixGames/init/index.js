@@ -2,7 +2,6 @@ const debug = require('../../../_assets/json/debug/debug.json');
 
 const console = require('better-console');
 const vehicleAPI = require("../vehicle/")
-const playerAPI = require('../playerAPI/');
 const weatherAPI = require('../weatherAPI');
 const Fuelstations = require('../Fuelstation/');
 const { delay } = require('../../../_assets/functions/delay');
@@ -11,6 +10,7 @@ const {
     spawn
 } = require('child_process');
 const { DatabaseBackup } = require('../../../_assets/functions/DatabaseBackup/DatabaseBackup');
+const AccountAPI = require('../account/AcountAPI');
 
 
 mp.events.delayInitialization = true;
@@ -28,7 +28,7 @@ mp.events.delayInitialization = true;
 })();
 
 mp.events.add("playerQuit", (player) => {
-    playerAPI.playerOnline = playerAPI.playerOnline - 1;
+    AccountAPI.updatePlayerOnline();
 });
 
 mp.events.add('packagesLoaded', async() =>
@@ -44,7 +44,7 @@ mp.events.add('packagesLoaded', async() =>
         vehicleAPI.syncAllVehciles();
         console.timeEnd('Vehicle Server wurde gesynct in: ');
         console.time('Player Server wurde gesynct in: ');
-        playerAPI.syncAllPlayers();
+        AccountAPI.syncAllPlayers();
         console.timeEnd('Player Server wurde gesynct in: ');
         
     }, 5000);

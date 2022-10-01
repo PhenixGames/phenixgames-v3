@@ -3,7 +3,6 @@ const { log } = require('../../_assets/functions/log/logs');
 
 class Database {
   constructor() {
-    console.log(process.env)
     this.connection = mysql.createPool({
       connectionLimit: 100,
       host: process.env.DB_HOST,

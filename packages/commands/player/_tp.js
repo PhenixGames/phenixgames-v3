@@ -1,9 +1,9 @@
-const playerAPI = require("../../PhenixGames/playerAPI");
+const AccountAPI = require("../../PhenixGames/account/AcountAPI");
 const Perms = require('../../PhenixGames/playerAPI/permissionSystem')
 
 mp.events.addCommand('tp', async (player, location) => {
     if(await Perms.hasPermissions(player, ["tp"])  && location.indexOf(',') !== -1) {
-        const changePos = playerAPI.changePlayerPos(player, JSON.stringify(location));
+        const changePos = AccountAPI.changePos(player, JSON.stringify(location));
         if(!changePos) player.notify('Etwas ist schief gelaufen!')
     }
 });
@@ -38,7 +38,7 @@ async function tpto(player, target){
                 (tg) => {
                     if(tg.getVariable("playerId") == target){
                         const pos = tg.position.x + ', ' + tg.position.y + ', ' + tg.position.z;
-                        const changePos = playerAPI.changePlayerPos(player, pos, null, JSON.stringify(tg.dimension))
+                        const changePos = AccountAPI.changePos(player, pos, null, JSON.stringify(tg.dimension))
                         if(!changePos) player.notify('Etwas ist schief gelaufen!')
                         return found = true;
                     }
