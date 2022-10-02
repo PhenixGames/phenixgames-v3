@@ -58,4 +58,8 @@ mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
     player.call('Destroy:Login:Cam');
     
     AccountAPI.spawnAirport(player);
+
+    generellAPI.saveLocalVar(player, {
+        'syncPlayer': true
+    });
 })
