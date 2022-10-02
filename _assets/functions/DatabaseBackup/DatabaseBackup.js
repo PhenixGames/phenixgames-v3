@@ -141,6 +141,5 @@ class DatabaseBackup {
     return true;
   }
 }
-new DatabaseBackup();
 
 module.exports.DatabaseBackup = DatabaseBackup;
