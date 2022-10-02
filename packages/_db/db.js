@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const { log } = require('../../_assets/functions/log/logs');
+require('dotenv').config();
 
 class Database {
   constructor() {
