@@ -28,10 +28,6 @@ mp.events.delayInitialization = true;
     mp.events.delayInitialization = false;
 })();
 
-mp.events.add("playerQuit", (player) => {
-    AccountAPI.updatePlayerOnline();
-});
-
 mp.events.add('packagesLoaded', async() =>
 {
     await VehicleAPI.spawnAll();

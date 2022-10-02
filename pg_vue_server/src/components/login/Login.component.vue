@@ -3,9 +3,11 @@
     <div class="left">
       <div class="overlay user-select-none">
         <h1 id="welcome_msg">
-          {{ isLogin ? "Welcome back" : "Welcome Newbie" }}
+          {{ isLogin ? "Willkommen zurück" : "Willkommen Neuling" }}
         </h1>
-        <p id="info_text"></p>
+        <p id="info_text">
+          {{ isLogin ? "Logge dich ein um fortzufahren." : "Es sieht so aus als hättest du keinen Account. Bitte erstelle dir vorher einen Account um fortzufahren." }}
+        </p>
       </div>
     </div>
 
@@ -16,18 +18,18 @@
       </p>
       <form id="pg_login" @submit="submitForm">
         <div class="inputs">
-          <input id="login" v-model="password" type="password" placeholder="Password"
+          <input id="login" v-model="password" type="password" placeholder="Passwort"
             :class="isLogin ? '' : 'display-none'" />
           <br />
           <span :class="isLogin ? 'display-none' : ''">
-            <input id="register" v-model="password_register" type="password" placeholder="New password" />
-            <input id="register_repeat" v-model="password_repeat" type="password" placeholder="Repeat new password" />
+            <input id="register" v-model="password_register" type="password" placeholder="Neues passwort" />
+            <input id="register_repeat" v-model="password_repeat" type="password" placeholder="Passwort wiederholen" />
           </span>
         </div>
 
         <br /><br />
         <br />
-        <input type="submit" class="cursor-pointer" value="Login" />
+        <input type="submit" class="cursor-pointer" :value="isLogin ? 'Einloggen' : 'Registrieren'" />
       </form>
     </div>
   </div>
@@ -71,6 +73,9 @@ export default {
       this.password_repeat = "";
       
       return (this.error_msg = "Das Passwort ist falsch!");
+    },
+    register() {
+      this.isLogin = false;
     },
     initComponent() {
       gui.login = this;
