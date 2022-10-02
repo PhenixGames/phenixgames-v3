@@ -1,18 +1,14 @@
-const config = require('../../../_assets/json/config.json');
 const debug = require('../../../_assets/json/debug/debug.json').account;
 
 const generellAPI = require('../allgemein/');
-const PermissionSystem = require('../playerAPI/PermissionSystem');
-const MoneyAPI = require('../moneyAPI/')
-const {
-    log
-} = require('../../../_assets/functions/log/logs');
 const AccountAPI = require('./AcountAPI');
-const DiscordAPI = require('../discord/DiscordAPI');
-const PunishmentsAPI = require('../punishments/PunishmentsAPI');
 
 mp.events.add('Player:Spawn:airport', async (player) => {
     AccountAPI.spawnAirport(player);
+    player.call("Destroy:Login:Cam");
+    generellAPI.saveLocalVar(player, {
+        'syncPlayer': true
+    });
 });
 
 
@@ -42,3 +38,4 @@ mp.events.add('Player:Spawn:house', async (player) => {
     ApplyHealthAndArmour(player, playerId);
     return setHUD(player);
 });
+

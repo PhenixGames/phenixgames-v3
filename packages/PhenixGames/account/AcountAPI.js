@@ -100,10 +100,6 @@ class Account {
         this.updateArmour(id, await this.getArmour(id));
         
         this.setHud(player);
-    
-        generellAPI.saveLocalVar(player, {
-            'syncPlayer': true
-        });
     }
 
     async getPos(player) {
