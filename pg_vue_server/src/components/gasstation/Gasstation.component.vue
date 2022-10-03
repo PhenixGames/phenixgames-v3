@@ -80,7 +80,7 @@
         </div>
         <span class="total_price center bold white">{{ current_price }}$</span>
         <button class="gs_button gs_button_fuel cursor-pointer left">
-          <p class="center white bold pointer-events-none" @click="car_refuel">Tanken</p>
+          <p class="center white bold" @click="car_refuel">Tanken</p>
         </button>
       </div>
     </section>
@@ -116,7 +116,7 @@ export default {
       this.selected_type = type;
     },
     car_refuel() {
-      if (parseInt(this.new_fuel) > parseInt(this.car_max) || parseInt(this.new_fuel) <= 0 || this.car_fuel_type !== this.selected_type.toLowerCase()) return;
+      if (parseInt(this.new_fuel) > parseInt(this.car_max) || parseInt(this.new_fuel) <= 0 || this.car_fuel_type !== this.selected_type.toLowerCase()) return console.log('Error');
 
       mp.trigger("carRefuel", this.car, parseInt(this.new_fuel), parseInt(this.current_price));
     },
