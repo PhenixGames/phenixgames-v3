@@ -4,6 +4,9 @@ const database = require("../../_db/db");
 const generellAPI = require('../allgemein/index');
 
 class VehicleApi {
+
+    defaultFuel = 150;
+
     constructor() {}
 
     async get(id) {

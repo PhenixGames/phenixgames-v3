@@ -1,5 +1,6 @@
 const database = require("../../_db/db");
 const HandMoneyAPI = require("../moneyAPI/handmoney");
+const VehicleAPI = require("../vehicle/VehicleApi");
 const debug = require('../../../_assets/json/debug/debug.json').fuelstation;
 
 class FuelStationApi {
@@ -143,7 +144,7 @@ class FuelStationApi {
                         fuel: vehicle.getVariable('veh_fuel'),
                         type: vehicle.getVariable('veh_type'),
                         enigne: vehicle.engine,
-                        max: vehicle.getVariable('veh_max'),
+                        max: vehicle.getVariable('veh_max') || VehicleAPI.defaultFuel,
                     });
                 }
             }
