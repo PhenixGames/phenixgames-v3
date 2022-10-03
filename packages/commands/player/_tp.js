@@ -56,10 +56,9 @@ async function bring(player, target){
         if(!isNaN(target)){
             mp.players.forEach(
                 (tg) => {
-                    if(tg.getVariable("playerId") == target){
-                        tg.position = player.position;
-                        tg.heading = player.heading;
-                        tg.dimension = player.dimension;
+                    if(tg.getVariable("playerId") == target) {
+                        const changePos = AccountAPI.changePos(player, tg.position, player.heading, tg.dimension)
+                        if(!changePos) player.notify('Etwas ist schief gelaufen!')
                         return found = true;
                     }
                 }
@@ -81,9 +80,8 @@ async function tptoveh(player, target){
             mp.vehicles.forEach(
                 (tg) => {
                     if(tg.getVariable("veh_id") == target){
-                        player.position = tg.position;
-                        player.heading = tg.heading;
-                        player.dimension = tg.dimension;
+                        const changePos = AccountAPI.changePos(player, tg.position, player.heading, tg.dimension)
+                        if(!changePos) player.notify('Etwas ist schief gelaufen!')
                         return found = true;
                     }
                 }
@@ -103,9 +101,8 @@ async function bringveh(player, target){
             mp.vehicles.forEach(
                 (tg) => {
                     if(tg.getVariable("veh_id") == target){
-                        tg.position = player.position;
-                        tg.heading = player.heading;
-                        tg.dimension = player.dimension;
+                        const changePos = AccountAPI.changePos(player, tg.position, player.heading, tg.dimension)
+                        if(!changePos) player.notify('Etwas ist schief gelaufen!')
                         return found = true;
                     }
                 }
