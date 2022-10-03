@@ -8,8 +8,10 @@ mp.events.add('Open:Death:Browser', () => {
     mp.gui.cursor.visible = true;
 });
 mp.events.add('close:Death:Browser', () => {
+    if(Deathbrowser == null) return;
     mp.events.callRemote('Server:Player:interacteBrowser', false);
     Deathbrowser.destroy();
+    Deathbrowser = null;
     mp.gui.cursor.visible = false;
 });
 

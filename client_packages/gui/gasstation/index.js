@@ -7,10 +7,20 @@ exports.interacteGasstation = () => {
     if(mp.players.local.getVariable('hasBrowserOpen') || mp.players.local.isTypingInTextChat) return;
 
     if(isBrowserOpen) {
+        closeBrowser();
+    } else {
+        openBrowser();
+    }
+}
+function closeBrowser() {
+    if(isBrowserOpen) {
         gasBrowser.destroy();
         mp.gui.cursor.show(false, false);    
         isBrowserOpen = false;
-    }else {
+    }
+}
+function openBrowser() {
+    if(!isBrowserOpen) {
         isBrowserOpen = true;
         gasBrowser = mp.browsers.new(`http://${config.domain}:8080/#/gasstation`);
         mp.gui.cursor.show(true, true);
@@ -40,6 +50,10 @@ mp.events.add('Player:Init:Gasstation', (items) => {
 
 mp.events.add('Player:Gasstation:NotFound', (items) => {
     
+});
+
+mp.events.add('Player:Browser:Fuelstation:close', () => {
+    closeBrowser()
 });
 
 

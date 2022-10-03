@@ -3,8 +3,7 @@ require('./gui/login/');
 require('./gui/spawnChoose/');
 require('./gui/deathscreen');
 require('./gui/register/namechooser/');
-require('./gui/inventory/')
-require('./gui/money/');
+require('./gui/inventory/');
 require('./gui/HUD/');
 require('./gui/gasstation/');
 require('./gui/punishmentscreen/');
