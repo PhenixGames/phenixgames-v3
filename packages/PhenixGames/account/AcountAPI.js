@@ -131,7 +131,7 @@ class Account {
 
     setHud(player) {
         player.call('Player:ActivateHUD');
-        MoneyAPI.updateHud(player);
+        MoneyAPI.updateHud(player.getVariable('playerId'));
     }
 
     async updateHealth(id, health) {
@@ -188,11 +188,7 @@ class Account {
         });
     }
 
-    GetRagePlayerbyID(playerid){
-        mp.players.forEach((player) => {
-           if(player.getVariable('playerId') == playerid) return player;
-        });
-    }
+    
     async getRole(id) {
         return await database.query('SELECT roleId FROM pg_users WHERE id = ?', [id])
         .then(res => {

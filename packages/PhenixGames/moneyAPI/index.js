@@ -6,10 +6,14 @@ const BankAPI = require('./bank');
 class MoneyApi {
     constructor() {}
 
-    async updateHud(player) {
-        const playerid = player.getVariable('playerId');
+    async updateHud(playerid) {
         const money = await HandMoneyApi.get(playerid);
-        player.call("Player:HUD:Update:Money", [money]);
+
+        mp.players.forEach(player => {
+            if(player.id == playerid) {
+                player.call('updateMoney', [money]);
+            }
+        });
     }
 
     async add(playerid, handmoney, bankmoney) {
