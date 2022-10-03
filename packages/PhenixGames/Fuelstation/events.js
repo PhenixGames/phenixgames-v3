@@ -62,3 +62,8 @@ mp.events.add("Server:Request:Data:Fuelstation", async (player) => {
     player.call("Player:Init:Gasstation", [JSON.stringify(items)])
     if (debug) console.log(items);
 });
+
+
+mp.events.add('Server:Car:Refuel', (player, fuel, price) => {
+    FAPI.fuel(player, fuel);
+})

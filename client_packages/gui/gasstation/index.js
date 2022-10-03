@@ -43,6 +43,6 @@ mp.events.add('Player:Gasstation:NotFound', (items) => {
 });
 
 
-mp.events.add('carRefuel', (carId, carFuel, price) => {
-    mp.events.callRemote('Server:Car:Refuel', carId, carFuel, price);
+mp.events.add('carRefuel', (carFuel, price) => {
+    mp.events.callRemote('Server:Car:Refuel', carFuel, price);
 });

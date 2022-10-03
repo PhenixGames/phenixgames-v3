@@ -130,6 +130,14 @@ class FuelStationApi {
         player.setVariable('isnearFuelstation', true);
         player.setVariable("Fuelstation_id", shape.getVariable('id'));
     }
+
+    fuel(player, fuel) {
+        const car = mp.vehicles.getClosest([player.position.x, player.position.y, player.position.z], 1)[0];
+        if (!car) return false;
+
+        car.setVariable("veh_fuel", fuel);
+        player.notify("~g~Du hast dein Fahrzeug erfolgreich aufgefüllt!");
+    }
 }
 
 module.exports.FAPI = new FuelStationApi();
