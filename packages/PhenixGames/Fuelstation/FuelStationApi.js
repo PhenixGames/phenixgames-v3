@@ -132,7 +132,9 @@ class FuelStationApi {
     }
 
     getClosestVehicles(player, range = 1) {
-        return mp.vehicles.getClosest([player.position.x, player.position.y, player.position.z], range)[0];
+        return mp.vehicles.getClosestInDimension(player.position, player.dimension, 5);
+        //return mp.vehicles.getClosest([player.position.x, player.position.y, player.position.z], range)[0];
+
     }
 
     fuel(player, fuel) {
