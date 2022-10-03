@@ -58,6 +58,7 @@ async function spawncar(player, args){
             veh_state: '1',
             veh_fuel: 100,
             veh_type: 'benzin',
+            veh_maxfuel: 150,
         });
     }
 }

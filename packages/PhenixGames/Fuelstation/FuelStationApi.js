@@ -138,9 +138,11 @@ class FuelStationApi {
                 if(returnVehicles.length <= amount){
                     returnVehicles.push({
                         id: vehicle.getVariable('veh_id'),
+                        name: vehicle.model,
                         fuel: vehicle.getVariable('veh_fuel'),
                         type: vehicle.getVariable('veh_type'),
                         enigne: vehicle.engine,
+                        max: vehicle.getVariable('veh_maxfuel'),
                     });
                 }
             }
