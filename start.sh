@@ -1,5 +1,5 @@
 #!/bin/sh
-if [$1 = "Start" ]
+if ["$1" = "Start" ]
 then
 echo "Start script started"
 cd ./pg_vue_server
@@ -11,7 +11,7 @@ sleep 3
 pm2 start ragemp-server --name rage_server
 echo "rage server started"
 fi
-if [$1 = "kill" ]
+if ["$1" = "kill" ]
 then
 echo "Kill script Gestartet"
 pm2 stop rage_server
@@ -21,7 +21,7 @@ pm2 delete rage_server
 pm2 delete rage_vue
 echo "Server Deleted"
 fi
-if [$1 = "pull" ]
+if ["$1" = "pull" ]
 then
 pm2 stop rage_server
 pm2 stop rage_vue
@@ -40,7 +40,7 @@ sleep 3
 pm2 start ragemp-server --name rage_server
 echo "rage server started"
 fi
-if [$1 = "Restart"]
+if ["$1" = "Restart"]
 then
 echo "Restart script started"
 pm2 stop rage_server
