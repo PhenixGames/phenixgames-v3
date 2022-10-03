@@ -8,9 +8,9 @@ cd ./pg_vue_server
 pm2 start "npm run serve" --name rage_vue
 echo "vue server started"
 cd ..
-pm2 logs
-sleep 3
+sleep 2
 pm2 start ragemp-server --name rage_server
+pm2 logs
 echo "rage server started"
 fi
 if [ $type == "kill" ]
@@ -37,9 +37,9 @@ cd ./pg_vue_server
 pm2 start "npm run serve" --name rage_vue
 echo "vue server started"
 cd ..
-pm2 logs
-sleep 3
+sleep 2
 pm2 start ragemp-server --name rage_server
+pm2 logs
 echo "rage server started"
 fi
 if [ $type == "Restart"]
@@ -56,9 +56,9 @@ cd ./pg_vue_server
 pm2 start "npm run serve" --name rage_vue
 echo "vue server started"
 cd ..
-pm2 logs
-sleep 3
+sleep 2
 pm2 start ragemp-server --name rage_server
+pm2 logs
 echo "rage server started"
 fi
 echo "script by David"
