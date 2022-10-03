@@ -131,10 +131,20 @@ class FuelStationApi {
         player.setVariable("Fuelstation_id", shape.getVariable('id'));
     }
 
-    getClosestVehicles(player, range = 1) {
-        return mp.vehicles.getClosestInDimension(player.position, player.dimension, 5);
-        //return mp.vehicles.getClosest([player.position.x, player.position.y, player.position.z], range)[0];
-
+    getClosestVehicles(player, range = 1, amount_of_vehicles = 4) {
+        const returnVehicles = [];
+        mp.vehicles.forEachInRange(player.position, range,
+            (vehicle) => {
+                
+                if(returnVehicles.length < amount_of_vehicles){
+                    returnVehicles.push(vehicle);
+                }else {
+                    if(debug) console.log('Es wurden mehr als ' + amount_of_vehicles + ' Fahrzeuge in der nähe gefunden!');
+                }
+            }
+        );
+	
+	    return returnVehicles;
     }
 
     fuel(player, fuel) {
