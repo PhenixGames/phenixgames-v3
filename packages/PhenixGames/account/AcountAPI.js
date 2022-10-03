@@ -188,6 +188,11 @@ class Account {
         });
     }
 
+    GetRagePlayerbyID(playerid){
+        mp.players.forEach((player) => {
+           if(player.getVariable('playerId') == playerid) return player;
+        });
+    }
     async getRole(id) {
         return await database.query('SELECT roleId FROM pg_users WHERE id = ?', [id])
         .then(res => {
