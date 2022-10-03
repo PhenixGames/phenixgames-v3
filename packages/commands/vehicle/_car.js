@@ -1,7 +1,6 @@
 const vehicle = require('../../PhenixGames/vehicle/index');
 const Permissionsytem = require('../../PhenixGames/playerAPI/PermissionSystem');
 const generellAPI = require('../../PhenixGames/allgemein/');
-const { log } = require('../../../_assets/functions/log/logs');
 const database = require("../../_db/db");
 const VehicleAPI = require('../../PhenixGames/vehicle/VehicleApi');
 

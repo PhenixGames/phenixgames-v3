@@ -19,7 +19,7 @@
 
   <section class="money absolute display-flex align-items-center">
     <img src="../assets/img/hud/money.png" />
-    <span>{{money}}</span>
+    <span class="white bold">{{money}}</span>
   </section>
   
   <section class="speedometer white" v-if="showSpeedo">
@@ -94,7 +94,6 @@ export default {
       */
       setMoney(money) {
         //Convert money from 10000 to 10.000
-        console.log(money)
         this.money = Number(parseFloat(parseInt(money)).toFixed(2)).toLocaleString('de', {
             minimumFractionDigits: 0
         });
