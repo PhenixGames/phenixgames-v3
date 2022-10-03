@@ -74,8 +74,8 @@
       <div class="gs_fuel">
         <span class="absolute white">{{car_fuel}}L</span>
         <span class="absolute white">{{ car_max }}L</span>
-        <div class="gs_fuel_range" :style="{ '--min': car_fuel, '--max': car_max, '--val': 0 }">
-          <input type="range" id="r" value="0" min="{{car_fuel}}" max="{{car_max}}" />
+        <div class="gs_fuel_range" :style="{ '--min': 0, '--max': slider_max, '--val': 0 }">
+          <input type="range" id="r" value="0" min="0" max="{{slider_max}}" />
           <output for="r" class="white">0L</output>
         </div>
         <span class="total_price center bold white">{{ current_price }}$</span>
@@ -102,7 +102,7 @@ export default {
       selected_type: "",
       current_price: "0.00",
       new_fuel: 100, // CURRENT FUEL
-
+      slider_max: 0,
       cars: [],
       car: "0", // VEH ID
       car_max: 0, // VEH MAX FUEL
@@ -118,7 +118,7 @@ export default {
     car_refuel() {
       if (parseInt(this.new_fuel) > parseInt(this.car_max) || parseInt(this.new_fuel) <= 0 || this.car_fuel_type !== this.selected_type.toLowerCase()) return;
 
-      mp.trigger("carRefuel", this.car, parseInt(this.new_fuel), parseInt(this.current_price));
+      //mp.trigger("carRefuel", this.car, parseInt(this.new_fuel), parseInt(this.current_price));
     },
     initGasStation(items) {
       items = JSON.parse(items);
@@ -166,8 +166,8 @@ export default {
 
         const range = document.getElementById('r');
         range.value = 0;
-        range.max = this.car_max;
-        range.min = this.car_fuel;
+        range.max = this.car_max - this.car_fuel;
+
         this.new_fuel = this.car_fuel;
         this.current_price = 0;
         this.car_fuel_type = fuelType;
@@ -193,11 +193,11 @@ export default {
     fuel: 98.89738464355469,
     type: 'benzin',
     enigne: true,
-    max: 100
+    max: 150
   }
 ]
     this.initComponent();
-    mp.trigger('uiInitGasStation');
+    //mp.trigger('uiInitGasStation');
   }
 };
 </script>
