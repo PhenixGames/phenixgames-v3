@@ -47,10 +47,7 @@ mp.events.add("Server:Request:Data:Fuelstation", async (player) => {
 
     const fuelsationname = fuelstation.name;
 
-    var cars = [{
-        name: "test",
-        name: "test2"
-    }]; //Only the nearest 5 in range of 5[meter=?] of fuelstation
+    const cars = FAPI.getClosestVehicles(player, 5)
 
     const items = {
         'name': fuelsationname,
