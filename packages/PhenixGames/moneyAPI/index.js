@@ -3,19 +3,23 @@ const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
 const HandMoneyApi = require('./handmoney');
 const BankAPI = require('./bankapi');
 
+class MoneyApi {
+    constructor() {}
 
-module.exports.UpdateMoneyHud = async function (player){
-    const playerid = player.getVariable('playerid')
-    const money = await HandMoneyApi.get(playerid);
-    player.call("Player:HUD:Update:Money", money);
-}
+    async updateHud(player) {
+        const playerid = player.getVariable('playerid')
+        const money = await HandMoneyApi.get(playerid);
+        player.call("Player:HUD:Update:Money", money);
+    }
 
-module.exports.CreateNewMoneyEntry = async function (playerid, StartMoneyOnHand, StartMoneyOnBank) {
-    return await database.query('INSERT INTO pg_money (playerid, hand_money, bank_money) VALUES (?, ?, ?)', [playerid, StartMoneyOnHand, StartMoneyOnBank])
-        .then(() => {
-            return true
-        })
+    async add(playerid, handmoney, bankmoney) {
+        return await database.query('INSERT IGNORE INTO pg_money (playerid, hand_money, bank_money) VALUES (?, ?, ?)', [playerid, handmoney, bankmoney])
         .catch(err => {
             return false;
         });
+    }
 }
+
+const MoneyAPI = new MoneyApi();
+
+module.exports = MoneyAPI;

@@ -1,10 +1,11 @@
 const { log } = require("../../../_assets/functions/log/logs");
 const database = require("../../_db/db");
 const bcryptjs = require('bcryptjs');
-const { UpdateMoneyHud } = require("../moneyAPI");
+
 const generellAPI = require('../allgemein/');
 const validator = require('validator');
 const config = require('../../../_assets/json/config.json');
+const MoneyAPI = require("../moneyAPI");
 
 class Account {
 
@@ -130,7 +131,7 @@ class Account {
 
     setHud(player) {
         player.call('Player:ActivateHUD');
-        UpdateMoneyHud(player);
+        MoneyAPI.updateHud(player);
     }
 
     async updateHealth(id, health) {
