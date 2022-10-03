@@ -99,6 +99,7 @@ hr {
 }
 
 .gs_fuel {
+    background: rgba(0, 0, 0, 0.274);
     position: absolute;
     transform: translate(-300px, 150px);
     -webkit-transform: translate(-300px, 150px);
