@@ -101,7 +101,7 @@ async function bringveh(player, target){
             mp.vehicles.forEach(
                 (tg) => {
                     if(tg.getVariable("veh_id") == target){
-                        const changePos = AccountAPI.changePos(player, tg.position, player.heading, tg.dimension)
+                        const changePos = AccountAPI.changePos(target, player.position, player.heading, player.dimension)
                         if(!changePos) player.notify('Etwas ist schief gelaufen!')
                         return found = true;
                     }
