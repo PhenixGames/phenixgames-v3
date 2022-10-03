@@ -95,6 +95,7 @@ export default {
       mp.trigger("carRefuel", parseInt(this.current_fuel), parseInt(this.current_price));
     },
     initGasStation(items) {
+      console.log(items);
       items = JSON.parse(items);
       this.gasstation = items.name;
       this.diesel = items.diesel_price;
