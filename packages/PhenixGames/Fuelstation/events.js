@@ -46,8 +46,9 @@ mp.events.add("Server:Request:Data:Fuelstation", async (player) => {
     })
 
     const fuelsationname = fuelstation.name;
-
+    
     const cars = FAPI.getClosestVehicles(player, 5)
+    console.log(cars);
 
     const items = {
         'name': fuelsationname,
