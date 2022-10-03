@@ -133,9 +133,9 @@ class FuelStationApi {
 
     getClosestVehicles(player, range = 1, amount_of_vehicles = 1) {
         const returnVehicles = [];
-        mp.vehicles.forEachInRange(player.position, range,
+        mp.vehicles.forEachInRange(player.position, 100,
             (vehicle) => {
-                
+                console.log(vehicle);
                 if(returnVehicles.length < amount_of_vehicles){
                     returnVehicles.push(vehicle);
                 }else {
