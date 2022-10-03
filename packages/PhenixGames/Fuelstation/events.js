@@ -61,6 +61,6 @@ mp.events.add("Server:Request:Data:Fuelstation", async (player) => {
 });
 
 
-mp.events.add('Server:Car:Refuel', (player, fuel, price, id) => {
-    FAPI.fuel(player, fuel, id, price);
+mp.events.add('Server:Car:Refuel', (player, carId, fuel, price) => {
+    FAPI.fuel({player, fuel, id: carId, price});
 })

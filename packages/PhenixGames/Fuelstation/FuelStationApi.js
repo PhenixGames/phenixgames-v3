@@ -152,13 +152,14 @@ class FuelStationApi {
 	    return returnVehicles;
     }
 
-    fuel(player, fuel, id, price) {
+    fuel({player, fuel, id, price}) {
+
+        const hasMoney = HandMoneyAPI.has(player.getVariable("playerId"), price)
+        if(!hasMoney) return player.notify("~r~Du hast nicht genug Geld dabei!");
+
         mp.vehicles.forEachInRange(player.position, 10,
             (vehicle) => {
                 if(vehicle.getVariable('veh_id') == id){
-
-                    const hasMoney = HandMoneyAPI.has(player.getVariable("playerId"), price)
-                    if(!hasMoney) return player.notify("~r~Du hast nicht genug Geld dabei!");
                     
                     vehicle.setVariable('veh_fuel', parseInt(vehicle.getVariable("veh_fuel")) + fuel);
                     HandMoneyAPI.remove(player.getVariable("playerId"), price);
