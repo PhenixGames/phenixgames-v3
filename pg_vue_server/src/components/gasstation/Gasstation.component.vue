@@ -32,7 +32,7 @@
         <div class="gs_cars_near">
           <p v-if="cars.length === 0" class="center bold">Keine Fahrzeuge in der Nähe</p>
           <div class="gs_button gs_buttons_cars cursor-pointer left center white gs_button_cars_notactive"
-            v-for="car in cars" :data-carid="car.id" :data-max="car.max" :data-fuel_type="car.type"
+            v-for="car in cars" :data-carid="car.id" :data-max="car.max" :data-fuel_type="car.type" :data-fuel="car.fuel"
             :style="(selected_type.toLowerCase() !== car.type.toLowerCase() ) ? 'cursor: not-allowed' : 'background: #FE550D;'"
             @click="carClick">
 
@@ -55,7 +55,7 @@
         <span class="absolute white">0L</span>
         <span class="absolute white">{{ car_max }}L</span>
         <div class="gs_fuel_range" :style="{ '--min': 0, '--max': car_max, '--val': 0 }">
-          <input type="range" id="r" value="0" max="{{fuel_max}}" />
+          <input type="range" id="r" value="0" min="{{car_fuel}}" max="{{fuel_max}}" />
           <output for="r" class="white">0L</output>
         </div>
         <span class="total_price center bold white">{{ current_price }}$</span>
@@ -85,6 +85,7 @@ export default {
       cars: [],
       car: "0", // VEH ID
       car_max: 0, // VEH MAX FUEL
+      car_fuel: 0,
       car_fuel_type: "", // VEH FUEL TYPE,
       notFound: false,
     };
@@ -138,6 +139,7 @@ export default {
         div.style.transform = "translate(300px,150px)";
         this.car = evt.dataset.carid;
         this.car_max = evt.dataset.max;
+        this.car_fuel = evt.dataset.fuel.toFixed(0);
 
         const range = document.getElementById('r');
         range.value = 0;
