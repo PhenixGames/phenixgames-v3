@@ -1,7 +1,7 @@
 #!/bin/sh
 input ="$1"
 echo $input
-if [$input -eq "Start" ]
+if [ $input="password" ]
 then
 echo "Start script started"
 cd ./pg_vue_server
