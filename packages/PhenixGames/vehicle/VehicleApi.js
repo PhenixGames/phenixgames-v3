@@ -24,9 +24,12 @@ class VehicleApi {
         const veh_prim = veh.getColor(0);
         const veh_sec = veh.getColor(1);
         const veh_fuel = veh_data.veh_fuel;
+        const veh_max = veh_data.veh_max;
+        const veh_type = veh_data.veh_type;
 
-        return await database.query(`INSERT INTO pg_vehicles (veh_name, veh_owner, veh_keys, veh_state, veh_pos, veh_rot, veh_prim, veh_sec, veh_fuel) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [veh_name, veh_owner, veh_keys, veh_state, veh_pos, veh_rot, veh_prim, veh_sec, veh_fuel])
-        .then(res => {
+        return await database.query(`INSERT INTO pg_vehicles (veh_name, veh_owner, veh_keys, veh_state, veh_pos, veh_rot, veh_prim, veh_sec, veh_fuel, veh_max, veh_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
+        [veh_name, veh_owner, veh_keys, veh_state, veh_pos, veh_rot, veh_prim, veh_sec, veh_fuel, veh_max, veh_type]
+        ).then(res => {
             generellAPI.saveLocalVar(veh, {
                 'veh_id': res.insertId,
                 'veh_name': veh_name,
@@ -37,7 +40,9 @@ class VehicleApi {
                 'veh_rot': veh_rot,
                 'veh_fuel': veh_fuel,
                 'veh_prim_color': veh_prim,
-                'veh_sec_color': veh_sec
+                'veh_sec_color': veh_sec,
+                'veh_max': veh_max,
+                'veh_type': veh_type
             });
         })
         .catch(err => {
@@ -69,10 +74,12 @@ class VehicleApi {
             'veh_rot': veh_rot,
             'veh_fuel': veh_fuel,
             'veh_prim_color': veh_prim,
-            'veh_sec_color': veh_sec
+            'veh_sec_color': veh_sec,
+            'veh_max': veh_max,
+            'veh_type': veh_type
         });
-        return await database.query(`UPDATE pg_vehicles SET veh_name = ?, veh_owner = ?, veh_keys = ?, veh_state = ?, veh_pos = ?, veh_rot = ?, veh_prim = ?, veh_sec = ?, veh_fuel = ?  WHERE veh_id = ?`, 
-            [veh_name, veh_owner, veh_keys, veh_state, veh_pos, veh_rot, veh_prim, veh_sec, veh_fuel, veh_id]
+        return await database.query(`UPDATE pg_vehicles SET veh_name = ?, veh_owner = ?, veh_keys = ?, veh_state = ?, veh_pos = ?, veh_rot = ?, veh_prim = ?, veh_sec = ?, veh_fuel = ? veh_max = ? veh_type = ? WHERE veh_id = ?`, 
+            [veh_name, veh_owner, veh_keys, veh_state, veh_pos, veh_rot, veh_prim, veh_sec, veh_fuel, veh_id, veh_max, veh_type]
         ).catch(err => {
                 return false;
             })
