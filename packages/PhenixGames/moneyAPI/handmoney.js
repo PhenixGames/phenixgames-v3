@@ -5,12 +5,12 @@ class HandMoneyApi{
 
     constructor() {}
     async get(playerId) {
-        return await database.query('SELECT * FROM pg_money WHERE playerid = ?', [playerId])
+        return await database.query('SELECT hand_money FROM pg_money WHERE playerid = ?', [playerId])
             .then(res => {
                 if(res.length <= 0) {
                     return false;
                 }
-                return res[0];
+                return res[0].hand_money;
             })
             .catch(err => {
                 return false;
