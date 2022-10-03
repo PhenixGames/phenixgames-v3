@@ -131,7 +131,7 @@ class FuelStationApi {
         player.setVariable("Fuelstation_id", shape.getVariable('id'));
     }
 
-    getClosestVehicles(player, range = 1, amount_of_vehicles = 4) {
+    getClosestVehicles(player, range = 1, amount_of_vehicles = 1) {
         const returnVehicles = [];
         mp.vehicles.forEachInRange(player.position, range,
             (vehicle) => {
@@ -145,7 +145,7 @@ class FuelStationApi {
         );
 	
         if(debug){
-            console.log(returnVehicles);
+            console.log("Vehicles: " + returnVehicles);
         }
 	    return returnVehicles;
     }
