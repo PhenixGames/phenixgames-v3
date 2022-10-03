@@ -8,12 +8,12 @@ class BankApi{
         return await database.query('SELECT bank_money FROM pg_money WHERE playerid = ?', [playerId])
             .then(res => {
                 if(res.length <= 0) {
-                    return false;
+                    return 0;
                 }
                 return res[0].bank_money;
             })
             .catch(err => {
-                return false;
+                return 0;
             })
     }
 
