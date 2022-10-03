@@ -1,6 +1,6 @@
 const database = require("../../_db/db");
 const debug = require('../../../_assets/json/debug/debug.json').fuelstation;
-
+const Handmoney = require('../moneyAPI/handmoney');
 class FuelStationApi {
 
     types = [
@@ -150,10 +150,22 @@ class FuelStationApi {
 	    return returnVehicles;
     }
 
-    fuel(player, fuel) {
-        const car = this.getClosestVehicles({player, range: 6})[0];
-        if (!car) return false;
-
+    fuel(player, fuel, id, price) {
+        
+        mp.vehicles.forEachInRange(player.position, range,
+            (vehicle) => {
+                if(vehicle.getVariable('veh_id') == id){
+                    if(Handmoney.has(player.getVariable("PlayerId"), price)){
+                        vehicle.setVariable('veh_fuel', vehicle.getVariable("veh_fuel") + fuel);
+                        Handmoney.remove(player.getVariable("PlayerId"), price);
+                        player.notify("~g~Du hast erfolgreich getankt!");
+                    }else {
+                        player.notify("~r~Du hast nicht genug Geld dabei!");
+                    }
+                        
+                }
+            }
+        );
         car.setVariable("veh_fuel", fuel);
         player.notify("~g~Du hast dein Fahrzeug erfolgreich aufgefüllt!");
     }
