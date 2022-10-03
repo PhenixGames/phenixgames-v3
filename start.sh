@@ -28,7 +28,6 @@ function killServer () {
     echo "rage server killed"
     pm2 delete rage_vue || echo "$(tput setaf 1)ERROR DELETING VUE SERVER"
     echo "vue server killed"
-    exit 0
 }
 
 function pull () {
