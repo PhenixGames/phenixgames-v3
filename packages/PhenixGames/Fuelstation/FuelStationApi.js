@@ -131,12 +131,12 @@ class FuelStationApi {
         player.setVariable("Fuelstation_id", shape.getVariable('id'));
     }
 
-    getClosestVehicles(player, range = 5) {
-        return mp.vehicles.getClosest([player.position.x, player.position.y, player.position.z], 1).slice(0, range);
+    getClosestVehicles(player, range = 1) {
+        return mp.vehicles.getClosest([player.position.x, player.position.y, player.position.z], range)[0];
     }
 
     fuel(player, fuel) {
-        const car = this.getClosestVehicles(player, 0);
+        const car = this.getClosestVehicles(player);
         if (!car) return false;
 
         car.setVariable("veh_fuel", fuel);
