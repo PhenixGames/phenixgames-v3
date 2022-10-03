@@ -144,6 +144,9 @@ class FuelStationApi {
             }
         );
 	
+        if(debug){
+            console.log(returnVehicles);
+        }
 	    return returnVehicles;
     }
 
