@@ -1,64 +1,65 @@
 #!/bin/bash
+
 type=$1
+
+
+function startServer () {
+    echo "$(tput setaf 1)STARTING ALL SERVER"
+    cd ./pg_vue_server
+    pm2 start "npm run serve" --name rage_vue
+    echo "vue server started"
+    cd ..
+    sleep 2
+    pm2 start ragemp-server --name rage_server
+    pm2 logs
+}
+
+function restart () {
+    echo "$(tput setaf 1)RESTARTING ALL SERVER"
+    killServer
+    startServer
+}
+
+function killServer () {
+    echo "$(tput setaf 1)KILLING ALL SERVER"
+    pm2 stop rage_server || echo "$(tput setaf 1)ERROR STOPPING RAGE SERVER"
+    pm2 stop rage_vue || echo "$(tput setaf 1)ERROR STOPPING VUE SERVER" 
+    pm2 delete rage_server || echo "$(tput setaf 1)ERROR DELETING RAGE SERVER" 
+    echo "rage server killed"
+    pm2 delete rage_vue || echo "$(tput setaf 1)ERROR DELETING VUE SERVER"
+    echo "vue server killed"
+    exit 0
+}
+
+function pull () {
+    git pull
+    cd ./pg_vue_server
+    git pull
+    cd ..
+    startServer
+}
+
+
+if [ -z $type ]; 
+then
+    echo "Please specify a type"
+    exit 1
+fi
 
 if [ $type == "start" ]; 
 then
-echo "Start script started"
-cd ./pg_vue_server
-pm2 start "npm run serve" --name rage_vue
-echo "vue server started"
-cd ..
-sleep 2
-pm2 start ragemp-server --name rage_server
-pm2 logs
-echo "rage server started"
+    startServer
 fi
-if [ $type == "kill" ];
+
+if [ $type == "restart" ]; 
 then
-echo "Kill script Gestartet"
-pm2 stop rage_server
-pm2 stop rage_vue
-echo "Server stopped"
-pm2 delete rage_server
-pm2 delete rage_vue
-echo "Server Deleted"
+    restart
 fi
-if [ $type == "pull" ];
+if [ $type == "kill" ]; 
 then
-pm2 stop rage_server
-pm2 stop rage_vue
-echo "Server Ausgeschaltet"
-pm2 delete rage_server
-pm2 delete rage_vue
-echo "Server Deleted"
-git pull
-sleep .5
-cd ./pg_vue_server
-pm2 start "npm run serve" --name rage_vue
-echo "vue server started"
-cd ..
-sleep 2
-pm2 start ragemp-server --name rage_server
-pm2 logs
-echo "rage server started"
+    killServer
 fi
-if [ $type == "restart" ];
+if [ $type == "pull" ]; 
 then
-echo "Restart script started"
-pm2 stop rage_server
-pm2 stop rage_vue
-echo "Server stopped"
-pm2 delete rage_server
-pm2 delete rage_vue
-echo "Server Deleted"
-echo "Starting Restart"
-cd ./pg_vue_server
-pm2 start "npm run serve" --name rage_vue
-echo "vue server started"
-cd ..
-sleep 2
-pm2 start ragemp-server --name rage_server
-pm2 logs
-echo "rage server started"
+    pull
 fi
-echo "script by David"
