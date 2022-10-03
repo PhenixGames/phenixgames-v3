@@ -7,8 +7,9 @@ class MoneyApi {
     constructor() {}
 
     async updateHud(player) {
-        const playerid = player.getVariable('playerid')
+        const playerid = player.getVariable('playerid');
         const money = await HandMoneyApi.get(playerid);
+        console.log(playerid, money);
         player.call("Player:HUD:Update:Money", money);
     }
 
