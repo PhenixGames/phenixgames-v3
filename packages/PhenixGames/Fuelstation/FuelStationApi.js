@@ -135,7 +135,7 @@ class FuelStationApi {
         const returnVehicles = [];
         mp.vehicles.forEachInRange(player.position, 100,
             (vehicle) => {
-                console.log('Vehicles',vehicle);
+                console.log('Vehicles',vehicle.getVariable('veh_fuel'));
                 if(returnVehicles.length < amount_of_vehicles){
                     returnVehicles.push(vehicle);
                 }else {
