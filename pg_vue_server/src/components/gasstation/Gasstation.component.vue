@@ -118,7 +118,7 @@ export default {
     car_refuel() {
       if (parseInt(this.new_fuel) > parseInt(this.car_max) || parseInt(this.new_fuel) <= 0 || this.car_fuel_type !== this.selected_type.toLowerCase()) return;
 
-      //mp.trigger("carRefuel", this.car, parseInt(this.new_fuel), parseInt(this.current_price));
+      mp.trigger("carRefuel", this.car, parseInt(this.new_fuel), parseInt(this.current_price));
     },
     initGasStation(items) {
       items = JSON.parse(items);
@@ -197,7 +197,7 @@ export default {
   }
 ]
     this.initComponent();
-    //mp.trigger('uiInitGasStation');
+    mp.trigger('uiInitGasStation');
   }
 };
 </script>
