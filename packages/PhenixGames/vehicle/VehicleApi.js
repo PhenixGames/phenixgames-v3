@@ -105,7 +105,9 @@ class VehicleApi {
                         veh_rot: res[i].veh_rot,
                         veh_prim: res[i].veh_prim,
                         veh_sec: res[i].veh_sec,
-                        veh_fuel: res[i].veh_fuel
+                        veh_fuel: res[i].veh_fuel,
+                        veh_max: res[i].veh_max,
+                        veh_type: res[i].veh_type
                     });
                 }
             }
