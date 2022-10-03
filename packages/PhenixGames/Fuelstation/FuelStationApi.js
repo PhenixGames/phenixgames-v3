@@ -161,7 +161,7 @@ class FuelStationApi {
             (vehicle) => {
                 if(vehicle.getVariable('veh_id') == id){
                     
-                    vehicle.setVariable('veh_fuel', parseInt(vehicle.getVariable("veh_fuel")) + fuel);
+                    vehicle.setVariable('veh_fuel', fuel);
                     HandMoneyAPI.remove(player.getVariable("playerId"), price);
                     player.notify("~g~Du hast erfolgreich getankt!");
                 }
