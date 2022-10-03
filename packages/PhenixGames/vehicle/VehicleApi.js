@@ -79,7 +79,7 @@ class VehicleApi {
             'veh_type': veh_type
         });
         return await database.query(`UPDATE pg_vehicles SET veh_name = ?, veh_owner = ?, veh_keys = ?, veh_state = ?, veh_pos = ?, veh_rot = ?, veh_prim = ?, veh_sec = ?, veh_fuel = ? veh_max = ? veh_type = ? WHERE veh_id = ?`, 
-            [veh_name, veh_owner, veh_keys, veh_state, veh_pos, veh_rot, veh_prim, veh_sec, veh_fuel, veh_id, veh_max, veh_type]
+            [veh_name, veh_owner, veh_keys, veh_state, veh_pos, veh_rot, veh_prim, veh_sec, veh_fuel,  veh_max, veh_type, veh_id]
         ).catch(err => {
                 return false;
             })
