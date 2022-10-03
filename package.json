@@ -4,8 +4,8 @@
   "description": "Another PhenixGames Server",
   "scripts": {
     "start": "pm2 start ragemp-server --name rage_server && cd ./pg_vue_server && pm2 start \"npm run serve\" --name rage_vue && pm2 logs",
-    "restart": "pm2 stop rage_server && pm2 stop rage_vue && pm2 delete rage_vue  && pm2 start ragemp-server --name rage_server && cd ./pg_vue_server && pm2 start \"npm run serve\" --name rage_vue && pm2 logs",
-    "kill": "pm2 stop rage_server && pm2 stop rage_vue && pm2 delete rage_server && pm2 delete rage_vue",
+    "restart": "npm run kill && npm run start",
+    "kill": "pm2 stop rage_server || : && pm2 stop rage_vue || : && pm2 delete rage_server || : && pm2 delete rage_vue || :",
     "pull": "git pull && npm run kill && npm run start"
   },
   "repository": {
@@ -20,7 +20,7 @@
   "moduleDirectories": [
     "node_modules"
   ],
-  "homepage": "https://github.com/PhenixGames/phenixgames-v3#readme",
+  "homepage": "https://phenixgames.de",
   "dependencies": {
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
