@@ -1,6 +1,7 @@
 #!/bin/sh
-echo "$1"
-if ["$1" -eq "Start" ]
+input ="$1"
+echo $input
+if [$input -eq "Start" ]
 then
 echo "Start script started"
 cd ./pg_vue_server
