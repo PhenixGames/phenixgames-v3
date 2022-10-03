@@ -110,8 +110,8 @@ class FuelStationApi {
         });
         
         if (debug) {
-            console.log("-- Create Markers -- " + res.length + " --");
-            console.log(res);
+            console.log("-- Create Markers -- " + marker.length + " --");
+            console.log(marker);
         }
 
         for (let i in marker) {
