@@ -16,7 +16,7 @@
           <p class="center white bold pointer-events-none user-select-none">Diesel
             <br />
 
-            <span class="white">1L / {{ diesel }}$</span>
+            <span class="white pointer-events-none">1L / {{ diesel }}$</span>
           </p>
         </div>
         <div 
@@ -26,7 +26,7 @@
           >
           <p class="center white bold pointer-events-none user-select-none">Benzin
             <br />
-            <span class="white">1L / {{ benzin }}$</span>
+            <span class="white pointer-events-none">1L / {{ benzin }}$</span>
           </p>
         </div>
       </div>
@@ -56,8 +56,8 @@
             @click="carClick"
             >
 
-            <span><strong>Name:</strong> {{car.name}}</span>
-            <span><strong>Tank:</strong> {{car.fuel.toFixed(0)}}L</span>
+            <span class="pointer-events-none"><strong>Name:</strong> {{car.name}}</span>
+            <span class="pointer-events-none"><strong>Tank:</strong> {{car.fuel.toFixed(0)}}L</span>
 
           </div>
         </div>
@@ -67,15 +67,15 @@
 
       <div class="gs_management display-grid justify-content-center">
         <div class="gs_button cursor-pointer left">
-          <p class="center white bold">Management</p>
+          <p class="center white bold pointer-events-none">Management</p>
         </div>
       </div>
 
       <div class="gs_fuel">
         <span class="absolute white">{{car_fuel}}L</span>
         <span class="absolute white">{{ car_max }}L</span>
-        <div class="gs_fuel_range" :style="{ '--min': 0, '--max': car_max, '--val': 0 }">
-          <input type="range" id="r" value="{{car_fuel}}" min="{{car_fuel}}" max="{{fuel_max}}" />
+        <div class="gs_fuel_range" :style="{ '--min': 0, '--max': slider_max, '--val': 0 }">
+          <input type="range" id="r" value="0" min="0" max="{{slider_max}}" />
           <output for="r" class="white">0L</output>
         </div>
         <span class="total_price center bold white">{{ current_price }}$</span>
@@ -102,7 +102,7 @@ export default {
       selected_type: "",
       current_price: "0.00",
       new_fuel: 100, // CURRENT FUEL
-
+      slider_max: 0,
       cars: [],
       car: "0", // VEH ID
       car_max: 0, // VEH MAX FUEL
@@ -116,7 +116,7 @@ export default {
       this.selected_type = type;
     },
     car_refuel() {
-      if (parseInt(this.new_fuel) > parseInt(this.car_max) || parseInt(this.new_fuel) <= 0 || this.car_fuel_type !== this.selected_type.toLowerCase()) return;
+      if (parseInt(this.new_fuel) > parseInt(this.car_max) || parseInt(this.new_fuel) <= 0 || this.car_fuel_type !== this.selected_type.toLowerCase()) return console.log('Error');
 
       mp.trigger("carRefuel", this.car, parseInt(this.new_fuel), parseInt(this.current_price));
     },
@@ -166,7 +166,8 @@ export default {
 
         const range = document.getElementById('r');
         range.value = 0;
-        range.max = this.car_max;
+        range.max = this.car_max - this.car_fuel;
+
         this.new_fuel = this.car_fuel;
         this.current_price = 0;
         this.car_fuel_type = fuelType;
@@ -185,6 +186,16 @@ export default {
       document.querySelector('.gasstation').style.transform = "translate(0, -50%)"
     }, 400);
 
+    this.cars = [
+  {
+    id: 1092,
+    name: 'p1',
+    fuel: 98.89738464355469,
+    type: 'benzin',
+    enigne: true,
+    max: 150
+  }
+]
     this.initComponent();
     mp.trigger('uiInitGasStation');
   }

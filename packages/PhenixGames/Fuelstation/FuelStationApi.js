@@ -152,7 +152,7 @@ class FuelStationApi {
 	    return returnVehicles;
     }
 
-    fuel({player, fuel, id, price}) {
+    fuel({player, newfuel, id, price}) {
 
         const hasMoney = HandMoneyAPI.has(player.getVariable("playerId"), price)
         if(!hasMoney) return player.notify("~r~Du hast nicht genug Geld dabei!");
@@ -161,7 +161,7 @@ class FuelStationApi {
             (vehicle) => {
                 if(vehicle.getVariable('veh_id') == id){
                     
-                    vehicle.setVariable('veh_fuel', fuel);
+                    vehicle.setVariable('veh_fuel', parseInt(vehicle.getVariable('veh_fuel')) + newfuel);
                     HandMoneyAPI.remove(player.getVariable("playerId"), price);
                     player.notify("~g~Du hast erfolgreich getankt!");
                 }
