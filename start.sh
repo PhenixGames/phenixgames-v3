@@ -35,7 +35,7 @@ function pull () {
     cd ./pg_vue_server
     git pull
     cd ..
-    startServer
+    restart
 }
 
 
