@@ -1,97 +1,13 @@
 const database = require('../../_db/db');
-
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
+const {moneyapi} = require('moneyapi');
+const {bankapi} = require('bankapi');
 
-//! ******* GET ALL INFO OF PLAYER - MONEY *******
-
-/**
- * Get all Money data in Database of specific player.
- * @param {int} playerId 
- * @returns {boolean | object}
- */
-module.exports.getPlayerMoneyInfo = async function (playerId) {
-    return await database.query('SELECT * FROM pg_money WHERE playerid = ?', [playerId])
-        .then(res => {
-            if(res.length <= 0) {
-                return false;
-            }
-            return res[0];
-        })
-        .catch(err => {
-            return false;
-        })
-}
-
-//! ******* UPDATE MONEY *******
-/**
- * Update Hand or Bank Money from player.
- * @param {int} playerId 
- * @param {int} newMoney 
- * @param {boolean} isBank 
- * @returns {boolean}
- */
-module.exports.updateMoney = async function (playerId, newMoney, isBank) {
-    return await database.query(`UPDATE pg_money SET ${(isBank) ? 'bank' : 'hand'}_money = ? WHERE playerid = ?`, [newMoney, playerId])
-        .then(() => {return true})
-        .catch(err => {
-            return false;
-        })
-}
-
-//! ******* TRANSFER MONEY *******
-
-/**
- * ? Transfer Hand-Money between two Players.
- * @param {int} playerId 
- * @param {int} targetId 
- * @param {int} newPlayerMoney 
- * @param {int} newTargetMoney 
- * @param {boolean} isBank 
- * @returns 
- */
-module.exports.transferMoneyToPlayer = async function(playerId, targetId, newPlayerMoney, newTargetMoney, isBank) {
-    return await database.query(`UPDATE pg_money SET ${(isBank) ? 'bank' : 'hand'}_money = ? WHERE playerid = ?; UPDATE pg_money SET ${(isBank) ? 'bank' : 'hand'}_money = ? WHERE playerid = ?`, [newPlayerMoney, playerId, newTargetMoney, targetId])
-        .then(() => {return true})
-        .catch(err => {
-            return false;
-        })
-}
-
-/**
- * 
- * @param {int} playerId 
- * @param {int} needMoney 
- * @param {boolean} isBank 
- * @returns {boolean}
- */
-module.exports.hasEnoughMoney = async function (playerId, needMoney, isBank) {
-    return await database.query(`SELECT ${(isBank) ? 'bank' : 'hand'}_money FROM pg_money WHERE playerid = ?`, [playerId])
-        .then(res => {
-            if(res.length > 0) {
-                const dbMoney = (isBank) ? res[0].bank_money : res[0].hand_money;
-                if(dbMoney >= needMoney) {
-                    return true;
-                }else {
-                    return false;
-                }
-            }else {
-                return false;
-            }
-        })
-        .catch(err => {
-            return false;
-        })
-}
 
 module.exports.UpdateMoneyHud = async function (player){
-    return 0;
     playerid = player.getVariable('playerid')
-    res = await this.getPlayerMoneyInfo(playerid) //Returns Only Res[0]
-    Updatevalue = res.hand_money
-    player.call("Player:HUD:Update:Money", Updatevalue);
-    if(debug){
-        console.log("MoneyHUD von Player " + playerid+ " wurde Geupdatet auf den Wert: " + Updatevalue)
-    }
+    money = await moneyapi.get(playerid);
+    player.call("Player:HUD:Update:Money", money);
 }
 
 module.exports.CreateNewMoneyEntry = async function (playerid, StartMoneyOnHand, StartMoneyOnBank) {
@@ -103,17 +19,3 @@ module.exports.CreateNewMoneyEntry = async function (playerid, StartMoneyOnHand,
             return false;
         });
 }
-
-/*
-Hasmoney
-AddMoney
-RemoveMoney
-
-HasBank
-Addbank
-Removebank
-
-
-UpdateHUD
-CreateMoneyEntry
-*/
