@@ -42,7 +42,7 @@ pm2 start ragemp-server --name rage_server
 pm2 logs
 echo "rage server started"
 fi
-if [ $type == "Restart" ];
+if [ $type == "restart" ];
 then
 echo "Restart script started"
 pm2 stop rage_server
