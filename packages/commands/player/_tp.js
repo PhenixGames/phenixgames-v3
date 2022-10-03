@@ -56,8 +56,7 @@ async function bring(player, target){
             mp.players.forEach(
                 (tg) => {
                     if(tg.getVariable("playerId") == target) {
-                        console.log(player.heading);
-                        AccountAPI.changePos(tg, player.position, player.heading, player.dimension)
+                        AccountAPI.changePos(tg, player.position, null, player.dimension)
                         return found = true;
                     }
                 }
@@ -79,7 +78,7 @@ async function tptoveh(player, target){
             mp.vehicles.forEach(
                 (tg) => {
                     if(tg.getVariable("veh_id") == target){
-                        AccountAPI.changePos(player, tg.position, player.heading, tg.dimension)
+                        AccountAPI.changePos(player, tg.position, null, tg.dimension)
                         return found = true;
                     }
                 }
@@ -99,7 +98,7 @@ async function bringveh(player, target){
             mp.vehicles.forEach(
                 (tg) => {
                     if(tg.getVariable("veh_id") == target){
-                        AccountAPI.changePos(tg, player.position, player.heading, player.dimension)
+                        AccountAPI.changePos(tg, player.position, null, player.dimension)
                         return found = true;
                     }
                 }
