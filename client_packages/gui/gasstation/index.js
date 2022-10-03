@@ -49,7 +49,7 @@ mp.events.add('Player:Init:Gasstation', (items) => {
 
 
 mp.events.add('Player:Gasstation:NotFound', (items) => {
-    
+    gasBrowser.execute("gui.gasstation.notFound();");
 });
 
 mp.events.add('Player:Browser:Fuelstation:close', () => {
