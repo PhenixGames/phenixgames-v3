@@ -37,8 +37,7 @@ async function tpto(player, target){
             mp.players.forEach(
                 (tg) => {
                     if(tg.getVariable("playerId") == target){
-                        const changePos = AccountAPI.changePos(player, tg.position, null, JSON.stringify(tg.dimension))
-                        if(!changePos) player.notify('Etwas ist schief gelaufen!')
+                        AccountAPI.changePos(player, tg.position, null, JSON.stringify(tg.dimension))
                         return found = true;
                     }
                 }
@@ -57,8 +56,8 @@ async function bring(player, target){
             mp.players.forEach(
                 (tg) => {
                     if(tg.getVariable("playerId") == target) {
-                        const changePos = AccountAPI.changePos(tg, player.position, player.heading, player.dimension)
-                        if(!changePos) player.notify('Etwas ist schief gelaufen!')
+                        console.log(player.heading);
+                        AccountAPI.changePos(tg, player.position, player.heading, player.dimension)
                         return found = true;
                     }
                 }
@@ -80,8 +79,7 @@ async function tptoveh(player, target){
             mp.vehicles.forEach(
                 (tg) => {
                     if(tg.getVariable("veh_id") == target){
-                        const changePos = AccountAPI.changePos(player, tg.position, player.heading, tg.dimension)
-                        if(!changePos) player.notify('Etwas ist schief gelaufen!')
+                        AccountAPI.changePos(player, tg.position, player.heading, tg.dimension)
                         return found = true;
                     }
                 }
@@ -101,8 +99,7 @@ async function bringveh(player, target){
             mp.vehicles.forEach(
                 (tg) => {
                     if(tg.getVariable("veh_id") == target){
-                        const changePos = AccountAPI.changePos(tg, player.position, player.heading, player.dimension)
-                        if(!changePos) player.notify('Etwas ist schief gelaufen!')
+                        AccountAPI.changePos(tg, player.position, player.heading, player.dimension)
                         return found = true;
                     }
                 }
