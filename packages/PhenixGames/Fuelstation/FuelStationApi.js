@@ -138,7 +138,7 @@ class FuelStationApi {
                 if(returnVehicles.length <= amount){
                     returnVehicles.push({
                         id: vehicle.getVariable('veh_id'),
-                        name: vehicle.model,
+                        name: vehicle.getVariable('veh_name'),
                         fuel: vehicle.getVariable('veh_fuel'),
                         type: vehicle.getVariable('veh_type'),
                         enigne: vehicle.engine,

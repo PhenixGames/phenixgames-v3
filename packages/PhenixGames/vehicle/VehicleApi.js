@@ -55,7 +55,9 @@ class VehicleApi {
         veh_rot = veh.heading,
         veh_prim = veh.getColor(0),
         veh_sec = veh.getColor(1),
-        veh_fuel = veh.getVariable('veh_fuel')
+        veh_fuel = veh.getVariable('veh_fuel'),
+        veh_max = veh.getVariable('veh_max'),
+        veh_type = veh.getVariable('veh_type')
     }) {
         generellAPI.saveLocalVar(veh, {
             'veh_id': veh_id,
