@@ -1,13 +1,13 @@
 const database = require('../../_db/db');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
-const HandMoneyApi = require('./handmoney');
 const BankAPI = require('./bank');
+const HandMoneyAPI = require('./handmoney');
 
 class MoneyApi {
     constructor() {}
 
     async updateHud(playerid) {
-        const money = await HandMoneyApi.get(playerid);
+        const money = await HandMoneyAPI.get(playerid);
 
         mp.players.forEach(player => {
             if(player.id == playerid) {
