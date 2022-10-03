@@ -1,12 +1,12 @@
 const database = require('../../_db/db');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
-const {moneyapi} = require('moneyapi');
-const {bankapi} = require('bankapi');
+const HandMoneyApi = require('moneyapi');
+const BankAPI = require('bankapi');
 
 
 module.exports.UpdateMoneyHud = async function (player){
-    playerid = player.getVariable('playerid')
-    money = await moneyapi.get(playerid);
+    const playerid = player.getVariable('playerid')
+    const money = await HandMoneyApi.get(playerid);
     player.call("Player:HUD:Update:Money", money);
 }
 

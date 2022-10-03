@@ -1,7 +1,7 @@
 const database = require('../../_db/db');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
 
-class HandMoneyAPI{
+class HandMoneyApi{
 
     constructor() {}
     async get(playerId) {
@@ -40,5 +40,5 @@ class HandMoneyAPI{
    
 }
 
-const handMoneyAPI = new HandMoneyAPI();
-module.exports = handMoneyAPI;
+const HandMoneyAPI = new HandMoneyApi();
+module.exports = HandMoneyAPI;

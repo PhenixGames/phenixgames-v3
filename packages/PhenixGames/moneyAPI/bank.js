@@ -1,7 +1,7 @@
 const database = require('../../_db/db');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
 
-class BankAPI{
+class BankApi{
 
     constructor() {}
     async get(playerId) {
@@ -40,5 +40,5 @@ class BankAPI{
    
 }
 
-const bankAPI = new BankAPI();
-module.exports = bankAPI;
+const BankAPI = new BankApi();
+module.exports = BankAPI;
