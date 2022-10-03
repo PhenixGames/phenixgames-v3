@@ -37,8 +37,7 @@ async function tpto(player, target){
             mp.players.forEach(
                 (tg) => {
                     if(tg.getVariable("playerId") == target){
-                        const pos = tg.position.x + ', ' + tg.position.y + ', ' + tg.position.z;
-                        const changePos = AccountAPI.changePos(player, pos, null, JSON.stringify(tg.dimension))
+                        const changePos = AccountAPI.changePos(player, tg.position, null, JSON.stringify(tg.dimension))
                         if(!changePos) player.notify('Etwas ist schief gelaufen!')
                         return found = true;
                     }
