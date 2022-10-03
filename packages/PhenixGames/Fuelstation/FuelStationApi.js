@@ -152,7 +152,6 @@ class FuelStationApi {
     }
 
     fuel(player, fuel, id, price) {
-        
         mp.vehicles.forEachInRange(player.position, 10,
             (vehicle) => {
                 if(vehicle.getVariable('veh_id') == id){
@@ -166,8 +165,6 @@ class FuelStationApi {
                 }
             }
         );
-        car.setVariable("veh_fuel", fuel);
-        player.notify("~g~Du hast dein Fahrzeug erfolgreich aufgefüllt!");
     }
 }
 
