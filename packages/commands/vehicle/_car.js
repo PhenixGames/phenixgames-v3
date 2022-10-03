@@ -57,6 +57,7 @@ async function spawncar(player, args){
             veh_keys: JSON.stringify([player.getVariable('playerId')]),
             veh_state: '1',
             veh_fuel: 100,
+            veh_type: 'benzin',
         });
     }
 }
