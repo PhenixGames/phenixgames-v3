@@ -18,8 +18,8 @@ class HandMoneyApi{
     }
 
     async has(playerId, money) {
-        current = await this.get(playerId);
-        return current >= money;
+        const playerMoney = await this.get(playerId);
+        return playerMoney >= money;
     }
 
     async add(playerId, money) {

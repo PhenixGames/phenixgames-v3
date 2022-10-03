@@ -139,7 +139,8 @@ export default {
         div.style.transform = "translate(300px,150px)";
         this.car = evt.dataset.carid;
         this.car_max = evt.dataset.max;
-        this.car_fuel = evt.dataset.fuel.toFixed(0);
+        this.car_fuel = evt.dataset.fuel;
+        this.car_fuel = this.car_fuel.toFixed(0);
 
         const range = document.getElementById('r');
         range.value = 0;
@@ -147,6 +148,13 @@ export default {
         this.current_fuel = 0;
         this.current_price = 0;
         this.car_fuel_type = evt.dataset.fuel_type;
+
+        range.addEventListener('input', e => {
+          const value = range.value;
+          this.current_fuel = value;
+          this.current_price = (value * this[this.selected_type]).toFixed(2);
+        });
+        
       }, 300);
     }
   },
@@ -154,13 +162,6 @@ export default {
     setTimeout(() => {
       document.querySelector('.gasstation').style.transform = "translate(0, -50%)"
     }, 400);
-
-    const range = document.getElementById('r');
-    range.addEventListener('input', e => {
-      const value = range.value;
-      this.current_fuel = value;
-      this.current_price = (value * this[this.selected_type]).toFixed(2);
-    });
 
     this.initComponent();
     mp.trigger('uiInitGasStation');
