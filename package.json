@@ -3,10 +3,10 @@
   "version": "0.2.7",
   "description": "Another PhenixGames Server",
   "scripts": {
-    "start": "pm2 start ragemp-server --name rage_server && cd ./pg_vue_server && pm2 start \"npm run serve\" --name rage_vue && pm2 logs",
-    "restart": "npm run kill && npm run start",
-    "kill": "pm2 stop rage_server || : && pm2 stop rage_vue || : && pm2 delete rage_server || : && pm2 delete rage_vue || :",
-    "pull": "git pull && npm run kill && npm run start"
+    "start": "./start.sh start",
+    "restart": "./start.sh restart",
+    "kill": "./start.sh kill",
+    "pull": "./start.sh pull"
   },
   "repository": {
     "type": "git",
