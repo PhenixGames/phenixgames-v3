@@ -145,7 +145,7 @@ class FuelStationApi {
         );
 	
         if(debug){
-            console.log("Vehicles: " + returnVehicles);
+            console.log("Vehicles: " + JSON.stringify(returnVehicles));
         }
 	    return returnVehicles;
     }
