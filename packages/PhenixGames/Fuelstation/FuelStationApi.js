@@ -142,7 +142,7 @@ class FuelStationApi {
                         fuel: vehicle.getVariable('veh_fuel'),
                         type: vehicle.getVariable('veh_type'),
                         enigne: vehicle.engine,
-                        max: vehicle.getVariable('veh_maxfuel'),
+                        max: vehicle.getVariable('veh_max'),
                     });
                 }
             }

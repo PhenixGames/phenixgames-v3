@@ -9,7 +9,7 @@
       <p class="center white bold big">{{ gasstation }}</p>
       <div class="gs_types">
         <div class="gs_button gs_buttons_types cursor-pointer left"
-          :style="(selected_type == 'diesel') ? 'background: rgb(13, 162, 68)': '' "
+          :style="(selected_type.toLowerCase() == 'diesel') ? 'background: rgb(13, 162, 68)': '' "
           @click='changeCurrentType("diesel")'>
           <p class="center white bold pointer-events-none user-select-none">Diesel
             <br />
@@ -18,7 +18,7 @@
           </p>
         </div>
         <div class="gs_button gs_buttons_types cursor-pointer left"
-          :style="(selected_type == 'benzin') ? 'background: rgb(13, 162, 68)': '' "
+          :style="(selected_type.toLowerCase()  == 'benzin') ? 'background: rgb(13, 162, 68)': '' "
           @click='changeCurrentType("benzin")'>
           <p class="center white bold pointer-events-none user-select-none">Benzin
             <br />
@@ -31,10 +31,14 @@
         <p class="center white">Fahrzeuge in der Nähe</p>
         <div class="gs_cars_near">
           <p v-if="cars.length === 0" class="center bold">Keine Fahrzeuge in der Nähe</p>
-          <div class="gs_button gs_buttons_cars cursor-pointer left" v-for="car in cars" :data-carid="car.id"
-            :data-max="car.max" :data-fuel_type="car.fuel_type"
-            :style="(selected_type !== car.fuel_type) ? 'cursor: not-allowed' : ''">
-            <p class="center white bold">{{car.name}}</p>
+          <div class="gs_button gs_buttons_cars cursor-pointer left center white gs_button_cars_notactive"
+            v-for="car in cars" :data-carid="car.id" :data-max="car.max" :data-fuel_type="car.type"
+            :style="(selected_type.toLowerCase() !== car.type.toLowerCase() ) ? 'cursor: not-allowed' : 'background: #FE550D;'"
+            @click="carClick">
+
+            <span><strong>Name:</strong> {{car.name}}</span>
+            <span><strong>Tank:</strong> {{car.fuel.toFixed(0)}}L</span>
+
           </div>
         </div>
       </div>
@@ -51,7 +55,7 @@
         <span class="absolute white">0L</span>
         <span class="absolute white">{{ car_max }}L</span>
         <div class="gs_fuel_range" :style="{ '--min': 0, '--max': car_max, '--val': 0 }">
-          <input type="range" id="r" value="0" />
+          <input type="range" id="r" value="0" max="{{fuel_max}}" />
           <output for="r" class="white">0L</output>
         </div>
         <span class="total_price center bold white">{{ current_price }}$</span>
@@ -92,10 +96,9 @@ export default {
     car_refuel() {
       if (parseInt(this.current_fuel) > parseInt(this.car_max) || parseInt(this.current_fuel) <= 0 || this.car_fuel_type !== this.selected_type) return;
 
-      mp.trigger("carRefuel", parseInt(this.current_fuel), parseInt(this.current_price));
+      //mp.trigger("carRefuel", parseInt(this.current_fuel), parseInt(this.current_price));
     },
     initGasStation(items) {
-      console.log(items);
       items = JSON.parse(items);
       this.gasstation = items.name;
       this.diesel = items.diesel_price;
@@ -107,6 +110,42 @@ export default {
     },
     gasstationNotFound() {
       return (this.notFound = true);
+    },
+    carClick(evt) {
+      evt = evt.target;
+      if (this.selected_type == "") return;
+      if (evt.dataset.fuel_type.toLowerCase() !== this.selected_type) return;
+
+      var offset = evt.offsetTop;
+      if (offset > 400) {
+        offset = 400;
+      }
+
+      const div = document.querySelector('.gs_fuel');
+      div.style.transform = "";
+
+      if (evt.style.backgroundColor == "rgb(13, 162, 68)") {
+        evt.style.backgroundColor = "";
+        return;
+      }
+
+      evt.style.backgroundColor = "#0DA244";
+
+
+
+      setTimeout(() => {
+        div.style.top = (offset - 200) + "px";
+        div.style.transform = "translate(300px,150px)";
+        this.car = evt.dataset.carid;
+        this.car_max = evt.dataset.max;
+
+        const range = document.getElementById('r');
+        range.value = 0;
+        range.max = this.car_max;
+        this.current_fuel = 0;
+        this.current_price = 0;
+        this.car_fuel_type = evt.dataset.fuel_type;
+      }, 300);
     }
   },
   mounted() {
@@ -119,48 +158,6 @@ export default {
       const value = range.value;
       this.current_fuel = value;
       this.current_price = (value * this[this.selected_type]).toFixed(2);
-    });
-
-    document.querySelectorAll('.gs_buttons_cars').forEach(button => {
-      button.addEventListener('click', e => {
-
-        if (this.selected_type == "") return;
-        if (button.dataset.fuel_type !== this.selected_type) return;
-
-        var offset = button.offsetTop;
-        if (offset > 400) {
-          offset = 400;
-        }
-
-        const div = document.querySelector('.gs_fuel');
-        div.style.transform = "";
-
-        if (button.style.backgroundColor == "rgb(13, 162, 68)") {
-          button.style.backgroundColor = "";
-          return;
-        }
-
-        document.querySelectorAll('.gs_buttons_cars').forEach(button => {
-          button.style.backgroundColor = "";
-        });
-        button.style.backgroundColor = "#0DA244";
-
-
-
-        setTimeout(() => {
-          div.style.top = (offset - 200) + "px";
-          div.style.transform = "translate(290px,300px)";
-          this.car = button.dataset.carid;
-          this.car_max = button.dataset.max;
-
-          const range = document.getElementById('r');
-          range.value = 0;
-          range.max = this.car_max;
-          this.current_fuel = 0;
-          this.current_price = 0;
-          this.car_fuel_type = button.dataset.fuel_type;
-        }, 300);
-      });
     });
 
     this.initComponent();

@@ -71,18 +71,22 @@
 
 .gs_cars_near {
     display: grid;
-    justify-content: center;
+
     height: 300px;
     overflow-x: hidden;
 }
 
 .gs_buttons_cars {
-    max-width: 260px;
     max-height: 50px;
-    padding: 0 10px;
-    display: flex;
+    padding: 10px 20px;
+    display: grid;
     justify-content: center;
     align-items: center;
+    transition: background .2s;
+}
+
+.gs_button_cars_notactive {
+    background: #e97c4e;
 }
 
 hr {
@@ -96,11 +100,11 @@ hr {
 
 .gs_fuel {
     position: absolute;
-    transform: translate(-300px, 300px);
-    -webkit-transform: translate(-300px, 300px);
-    -moz-transform: translate(-300px, 300px);
-    -ms-transform: translate(-300px, 300px);
-    -o-transform: translate(-300px, 300px);
+    transform: translate(-300px, 150px);
+    -webkit-transform: translate(-300px, 150px);
+    -moz-transform: translate(-300px, 150px);
+    -ms-transform: translate(-300px, 150px);
+    -o-transform: translate(-300px, 150px);
     z-index: -1;
     backdrop-filter: blur(10px);
     padding: 20px 10px;
