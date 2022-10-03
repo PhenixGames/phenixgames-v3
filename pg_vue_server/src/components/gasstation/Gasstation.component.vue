@@ -75,7 +75,7 @@
         <span class="absolute white">{{car_fuel}}L</span>
         <span class="absolute white">{{ car_max }}L</span>
         <div class="gs_fuel_range" :style="{ '--min': 0, '--max': car_max, '--val': 0 }">
-          <input type="range" id="r" value="0" min="{{car_fuel}}" max="{{fuel_max}}" />
+          <input type="range" id="r" value="{{car_fuel}}" min="{{car_fuel}}" max="{{fuel_max}}" />
           <output for="r" class="white">0L</output>
         </div>
         <span class="total_price center bold white">{{ current_price }}$</span>

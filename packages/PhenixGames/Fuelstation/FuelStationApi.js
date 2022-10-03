@@ -153,7 +153,7 @@ class FuelStationApi {
 
     fuel(player, fuel, id, price) {
         
-        mp.vehicles.forEachInRange(player.position, range,
+        mp.vehicles.forEachInRange(player.position, 10,
             (vehicle) => {
                 if(vehicle.getVariable('veh_id') == id){
 
