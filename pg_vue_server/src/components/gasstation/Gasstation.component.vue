@@ -96,7 +96,7 @@ export default {
     car_refuel() {
       if (parseInt(this.current_fuel) > parseInt(this.car_max) || parseInt(this.current_fuel) <= 0 || this.car_fuel_type !== this.selected_type) return;
 
-      //mp.trigger("carRefuel", parseInt(this.current_fuel), parseInt(this.current_price));
+      mp.trigger("carRefuel", parseInt(this.current_fuel), parseInt(this.current_price));
     },
     initGasStation(items) {
       items = JSON.parse(items);
