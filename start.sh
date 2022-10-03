@@ -13,7 +13,7 @@ pm2 start ragemp-server --name rage_server
 pm2 logs
 echo "rage server started"
 fi
-if [ $type == "kill" ]
+if [ $type == "kill" ];
 then
 echo "Kill script Gestartet"
 pm2 stop rage_server
@@ -23,7 +23,7 @@ pm2 delete rage_server
 pm2 delete rage_vue
 echo "Server Deleted"
 fi
-if [ $type == "pull" ]
+if [ $type == "pull" ];
 then
 pm2 stop rage_server
 pm2 stop rage_vue
@@ -42,7 +42,7 @@ pm2 start ragemp-server --name rage_server
 pm2 logs
 echo "rage server started"
 fi
-if [ $type == "Restart"]
+if [ $type == "Restart"];
 then
 echo "Restart script started"
 pm2 stop rage_server
