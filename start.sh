@@ -1,7 +1,7 @@
 #!/bin/sh
-input ="$1"
-echo $input
-if [ $input="password" ]
+type=$1
+
+if [ $type == "start" ]; 
 then
 echo "Start script started"
 cd ./pg_vue_server
@@ -13,7 +13,7 @@ sleep 3
 pm2 start ragemp-server --name rage_server
 echo "rage server started"
 fi
-if ["$1" -eq "kill" ]
+if [ $type == "kill" ]
 then
 echo "Kill script Gestartet"
 pm2 stop rage_server
@@ -23,7 +23,7 @@ pm2 delete rage_server
 pm2 delete rage_vue
 echo "Server Deleted"
 fi
-if ["$1" -eq "pull" ]
+if [ $type == "pull" ]
 then
 pm2 stop rage_server
 pm2 stop rage_vue
@@ -42,7 +42,7 @@ sleep 3
 pm2 start ragemp-server --name rage_server
 echo "rage server started"
 fi
-if ["$1" -eq "Restart"]
+if [ $type == "Restart"]
 then
 echo "Restart script started"
 pm2 stop rage_server
