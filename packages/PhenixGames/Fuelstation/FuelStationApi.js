@@ -159,7 +159,7 @@ class FuelStationApi {
                     const hasMoney = HandMoneyAPI.has(player.getVariable("playerId"), price)
                     if(!hasMoney) return player.notify("~r~Du hast nicht genug Geld dabei!");
                     
-                    vehicle.setVariable('veh_fuel', vehicle.getVariable("veh_fuel") + fuel);
+                    vehicle.setVariable('veh_fuel', parseInt(vehicle.getVariable("veh_fuel")) + fuel);
                     HandMoneyAPI.remove(player.getVariable("playerId"), price);
                     player.notify("~g~Du hast erfolgreich getankt!");
                 }
