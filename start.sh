@@ -1,4 +1,5 @@
 #!/bin/sh
+echo "$1"
 if ["$1" -eq "Start" ]
 then
 echo "Start script started"
