@@ -149,7 +149,7 @@ class FuelStationApi {
     }
 
     fuel(player, fuel) {
-        const car = this.getClosestVehicles({player, range: 6, amount: 1});
+        const car = this.getClosestVehicles({player, range: 6});
         if (!car) return false;
 
         car.setVariable("veh_fuel", fuel);
