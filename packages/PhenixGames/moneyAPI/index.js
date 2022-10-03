@@ -1,7 +1,7 @@
 const database = require('../../_db/db');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
 const HandMoneyApi = require('./handmoney');
-const BankAPI = require('./bankapi');
+const BankAPI = require('./bank');
 
 
 module.exports.UpdateMoneyHud = async function (player){
