@@ -67,8 +67,8 @@ export default {
               CarWarning: false,
               CarError: false
           },
-          tank: 10,
-          speed: 10,
+          tank: 0,
+          speed: 0,
           veh_state: {},
           player_id: '0',
           time: '',
