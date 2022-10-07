@@ -27,7 +27,7 @@ mp.events.add("playerExitColshape", (player, shape) => {
 
 mp.events.add("Server:Request:Data:Fuelstation", async (player) => {
 
-    if(player.isInVehicle()) return player.notify("~r~Du kannst nicht in einem Fahrzeug sein!");
+    if(player.vehicle) return player.notify("~r~Du kannst nicht in einem Fahrzeug sein!");
 
     const fuelstation = await FAPI.getFuelStation({
         stationid: player.getVariable("Fuelstation_id")
