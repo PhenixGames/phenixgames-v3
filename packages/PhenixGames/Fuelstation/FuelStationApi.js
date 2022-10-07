@@ -160,6 +160,7 @@ class FuelStationApi {
         mp.vehicles.forEachInRange(player.position, 10,
             (vehicle) => {
                 if(vehicle.getVariable('veh_id') == id){
+                    if(vehicle.engine) return player.notify("~r~Du musst den Motor ausmachen!");
                     
                     vehicle.setVariable('veh_fuel', parseInt(vehicle.getVariable('veh_fuel')) + newfuel);
                     HandMoneyAPI.remove(player.getVariable("playerId"), price);
