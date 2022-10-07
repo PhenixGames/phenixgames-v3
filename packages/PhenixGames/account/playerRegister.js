@@ -2,7 +2,7 @@ const debug = require('../../../_assets/json/debug/debug.json').account;
 
 const generellAPI = require('../allgemein/');
 const PermissionSystem = require('../playerAPI/PermissionSystem');
-const MoneyAPI = require('../moneyAPI/')
+const MoneyAPI = require('../moneyAPI/MoneyApi')
 const AccountAPI = require('./AcountAPI');
 
 mp.events.add('RegisterAccount', async (player, password) => {

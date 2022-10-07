@@ -1,4 +1,4 @@
-const MoneyAPI = require('.');
+const MoneyAPI = require('./MoneyApi');
 const database = require('../../_db/db');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
 
