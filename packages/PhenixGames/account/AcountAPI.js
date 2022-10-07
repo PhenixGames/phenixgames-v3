@@ -5,7 +5,7 @@ const bcryptjs = require('bcryptjs');
 const generellAPI = require('../allgemein/');
 const validator = require('validator');
 const config = require('../../../_assets/json/config.json');
-const MoneyAPI = require("../moneyAPI");
+const MoneyAPI = require("../moneyAPI/MoneyApi");
 
 class Account {
 
