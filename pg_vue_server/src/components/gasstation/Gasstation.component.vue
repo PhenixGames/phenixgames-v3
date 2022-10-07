@@ -155,8 +155,6 @@ export default {
 
       evt.style.backgroundColor = "#0DA244";
 
-
-
       setTimeout(() => {
         div.style.top = (offset - 200) + "px";
         div.style.transform = "translate(300px,150px)";
@@ -186,16 +184,25 @@ export default {
       document.querySelector('.gasstation').style.transform = "translate(0, -50%)"
     }, 400);
 
-    this.cars = [
-  {
-    id: 1092,
-    name: 'p1',
-    fuel: 98.89738464355469,
-    type: 'benzin',
-    enigne: true,
-    max: 150
-  }
-]
+    // Debug Code - Bitte nicht löschen (hilft beim lokalen Testen!)
+    // this.cars = [
+    //   {
+    //     id: 1092,
+    //     name: 'p1',
+    //     fuel: 98.89738464355469,
+    //     type: 'benzin',
+    //     enigne: true,
+    //     max: 150
+    //   },
+    //   {
+    //     id: 1092,
+    //     name: 'Audi E-Tron',
+    //     fuel: 98.89738464355469,
+    //     type: 'benzin',
+    //     enigne: true,
+    //     max: 150
+    //   }
+    // ]
     this.initComponent();
     mp.trigger('uiInitGasStation');
   }

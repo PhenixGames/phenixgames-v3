@@ -71,7 +71,7 @@
 
 .gs_cars_near {
     display: grid;
-
+    align-content: baseline;
     height: 300px;
     overflow-x: hidden;
 }
