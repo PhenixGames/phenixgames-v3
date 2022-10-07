@@ -1,9 +1,12 @@
 const database = require('../../_db/db');
-const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
 const MoneyAPI = require('./MoneyApi');
-class BankApi{
+const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
+
+
+class Api {
 
     constructor() {}
+
     async get(playerId) {
         return await database.query('SELECT bank_money FROM pg_money WHERE playerid = ?', [playerId])
             .then(res => {
@@ -44,5 +47,5 @@ class BankApi{
    
 }
 
-const BankAPI = new BankApi();
+const BankAPI = new Api();
 module.exports = BankAPI;

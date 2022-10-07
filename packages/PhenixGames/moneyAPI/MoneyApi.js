@@ -1,12 +1,14 @@
+const database = require('../../_db/db');
 const BankAPI = require('./bank');
 const HandMoneyAPI = require('./handmoney');
 
-class MoneyApi {
+class Api {
+    
     constructor() {}
 
     async updateHud(playerid) {
         const money = await HandMoneyAPI.get(playerid);
-
+        console.log('money', money);
         mp.players.forEach(player => {
             if(player.id == playerid) {
                 player.call('updateMoney', [money]);
@@ -21,7 +23,5 @@ class MoneyApi {
         });
     }
 }
-
-const MoneyAPI = new MoneyApi();
-
-module.exports = MoneyAPI;
+const MoneyAPI = new Api();
+module.exports = MoneyAPI
