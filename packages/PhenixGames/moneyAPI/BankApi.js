@@ -3,11 +3,11 @@ const MoneyAPI = require('./MoneyApi');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
 
 
-class Api {
+class BankApi {
 
     constructor() {}
 
-    async get(playerId) {
+    async getBank(playerId) {
         return await database.query('SELECT bank_money FROM pg_money WHERE playerid = ?', [playerId])
             .then(res => {
                 if(res.length <= 0) {
@@ -20,12 +20,12 @@ class Api {
             })
     }
 
-    async has(playerId, money) {
+    async hasBank(playerId, money) {
         current = await this.get(playerId);
         return current >= money;
     }
 
-    async add(playerId, money) {
+    async addBank(playerId, money) {
         return await database.query('UPDATE pg_money SET bank_money = bank_money + ? WHERE playerid = ?', [money, playerId])
             .then(() => {
                 MoneyAPI.updateHud(player);
@@ -35,7 +35,7 @@ class Api {
             })
     }
 
-    async remove(playerId, money) {
+    async removeBank(playerId, money) {
         return await database.query('UPDATE pg_money SET bank_money = bank_money - ? WHERE playerid = ?', [money, playerId])
             .then(() => {
                 MoneyAPI.updateHud(player);
@@ -46,6 +46,4 @@ class Api {
     }
    
 }
-
-const BankAPI = new Api();
-module.exports = BankAPI;
+module.exports = BankApi;

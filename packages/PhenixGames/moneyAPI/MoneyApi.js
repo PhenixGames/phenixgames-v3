@@ -1,14 +1,17 @@
-const database = require('../../_db/db');
-const BankAPI = require('./bank');
-const HandMoneyAPI = require('./handmoney');
+const classes = require('extends-classes');
 
-class Api {
+const database = require('../../_db/db');
+const BankApi = require('./BankApi');
+const HandMoneyApi = require('./HandMoneyApi');
+
+class Api extends classes(BankApi, HandMoneyApi) {
     
-    constructor() {}
+    constructor() {
+        super();
+    }
 
     async updateHud(playerid) {
-        const money = await HandMoneyAPI.get(playerid);
-        console.log('money', money);
+        const money = await this.getHand(playerid);
         mp.players.forEach(player => {
             if(player.id == playerid) {
                 player.call('updateMoney', [money]);
@@ -22,6 +25,7 @@ class Api {
             return false;
         });
     }
+    
 }
-const MoneyAPI = new Api();
-module.exports = MoneyAPI
+
+module.exports = new Api()
