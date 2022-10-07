@@ -56,7 +56,7 @@ module.exports.setWeather = async function () {
             }
         })
         .catch(err => {
-            console.error(err);
+            console.error(`WeatherAPI Error: ${err.toString()}`);
             return false;
         })
 }
