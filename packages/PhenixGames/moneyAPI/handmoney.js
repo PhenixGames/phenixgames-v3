@@ -1,7 +1,6 @@
 const MoneyAPI = require('.');
 const database = require('../../_db/db');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
-const AccountAPI = require('../account/AcountAPI');
 
 class HandMoneyApi{
 
@@ -25,18 +24,16 @@ class HandMoneyApi{
     }
 
     async add(playerId, money) {
-        const player = AccountAPI.GetRagePlayerbyID(playerId);
         return await database.query('UPDATE pg_money SET hand_money = bank_money + ? WHERE playerid = ?', [money, playerId])
-            .then(() => {MoneyAPI.updateHud(player); return true})
+            .then(() => {MoneyAPI.updateHud(playerId); return true})
             .catch(err => {
                 return false;
             })
     }
 
     async remove(playerId, money) {
-        const player = AccountAPI.GetRagePlayerbyID(playerId);
         return await database.query('UPDATE pg_money SET hand_money = bank_money - ? WHERE playerid = ?', [money, playerId])
-            .then(() => {MoneyAPI.updateHud(player); return true})
+            .then(() => {MoneyAPI.updateHud(playerId); return true})
             .catch(err => {
                 return false;
             })
