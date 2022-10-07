@@ -118,7 +118,9 @@ export default {
     car_refuel() {
       if (parseInt(this.new_fuel) > parseInt(this.car_max) || parseInt(this.new_fuel) <= 0 || this.car_fuel_type !== this.selected_type.toLowerCase()) return console.log('Error');
 
-      mp.trigger("carRefuel", this.car, parseInt(this.new_fuel), parseInt(this.current_price));
+      try {
+        mp.trigger("carRefuel", this.car, parseInt(this.new_fuel), parseInt(this.current_price));
+      }catch(err) {}
     },
     initGasStation(items) {
       items = JSON.parse(items);
@@ -155,8 +157,6 @@ export default {
 
       evt.style.backgroundColor = "#0DA244";
 
-
-
       setTimeout(() => {
         div.style.top = (offset - 200) + "px";
         div.style.transform = "translate(300px,150px)";
@@ -186,18 +186,29 @@ export default {
       document.querySelector('.gasstation').style.transform = "translate(0, -50%)"
     }, 400);
 
-    this.cars = [
-  {
-    id: 1092,
-    name: 'p1',
-    fuel: 98.89738464355469,
-    type: 'benzin',
-    enigne: true,
-    max: 150
-  }
-]
+    // Debug Code - Bitte nicht löschen (hilft beim lokalen Testen!)
+    // this.cars = [
+    //   {
+    //     id: 1092,
+    //     name: 'p1',
+    //     fuel: 98.89738464355469,
+    //     type: 'benzin',
+    //     enigne: true,
+    //     max: 150
+    //   },
+    //   {
+    //     id: 1092,
+    //     name: 'Audi E-Tron',
+    //     fuel: 98.89738464355469,
+    //     type: 'benzin',
+    //     enigne: true,
+    //     max: 150
+    //   }
+    // ]
     this.initComponent();
-    mp.trigger('uiInitGasStation');
+    try {
+      mp.trigger('uiInitGasStation');
+    }catch(err) {}
   }
 };
 </script>
