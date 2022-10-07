@@ -24,7 +24,9 @@ class BankApi{
 
     async add(playerId, money) {
         return await database.query('UPDATE pg_money SET bank_money = bank_money + ? WHERE playerid = ?', [money, playerId])
-            .then(() => {MoneyAPI.updateHud(playerId); return true})
+            .then(() => {
+                MoneyAPI.updateHud(player);
+            })
             .catch(err => {
                 return false;
             })
@@ -32,7 +34,9 @@ class BankApi{
 
     async remove(playerId, money) {
         return await database.query('UPDATE pg_money SET bank_money = bank_money - ? WHERE playerid = ?', [money, playerId])
-            .then(() => {MoneyAPI.updateHud(playerId); return true})
+            .then(() => {
+                MoneyAPI.updateHud(player);
+            })
             .catch(err => {
                 return false;
             })
