@@ -1,0 +1,17 @@
+packages/_db/db_config.json
+node_modules/
+bin/*
+dotnet/*
+client_packages/.listcache
+client_packages/_config/config.js
+ragemp-server
+ragemp-server.exe
+BugTrap-x64.dll
+core
+ragemp-server
+_assets/json/debug/debug.json
+_logs/debug_log/*
+_logs/error_log/*
+_assets/functions/DatabaseBackup/last_backup.json
+.env
+._*

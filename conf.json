@@ -1,0 +1,14 @@
+{
+	"maxplayers" : 10,
+	"name" : "PhenixGames v3 - Dev server", 
+	"gamemode" : "Roleplay", 
+	"stream-distance" : 500.0,
+	"announce" : false,
+	"language" : "de",
+	"csharp" : "disabled",
+	"voice-chat" : true,
+	"voice-chat-sample-rate" : 48000,
+	"sync-rate" : 20,
+	"port": 22005,
+	"allow-cef-debugging": true
+}

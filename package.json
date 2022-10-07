@@ -1,0 +1,36 @@
+{
+  "name": "phenixgames-v3",
+  "version": "0.2.7",
+  "description": "Another PhenixGames Server",
+  "scripts": {
+    "start": "./start.sh start",
+    "restart": "./start.sh restart",
+    "kill": "./start.sh kill",
+    "pull": "./start.sh pull"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhenixGames/phenixgames-v3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PhenixGames/phenixgames-v3/issues"
+  },
+  "moduleDirectories": [
+    "node_modules"
+  ],
+  "homepage": "https://phenixgames.de",
+  "dependencies": {
+    "axios": "^1.0.0",
+    "bcryptjs": "^2.4.3",
+    "better-console": "^1.0.1",
+    "dotenv": "^16.0.3",
+    "moment": "^2.29.4",
+    "mysql": "^2.18.1",
+    "simple-node-logger": "^21.8.12",
+    "sloc": "^0.2.1",
+    "validator": "^13.7.0",
+    "vue-router": "^4.1.5"
+  }
+}
