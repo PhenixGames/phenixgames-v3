@@ -23,29 +23,32 @@
   </section>
   
   <section class="speedometer white" v-if="showSpeedo">
-    <div class="veh_tank">
-      <span id="tank">{{ tank }}</span>
-      <span>Liter</span>
-      <img src="../assets/img/hud/tank.svg" />
+    <div class="display-flex">
+      <div class="veh_tank">
+        <span id="tank">{{ tank }}</span>
+        <span>L</span>
+        <img src="../assets/img/hud/fuel.png" />
+      </div>
+      <div class="veh_speed">
+        <img src="../assets/img/hud/speed.png" />
+        <span id="speed">{{ speed }}</span>
+        <span>km/h</span>
+      </div>
     </div>
-    <div class="veh_state">
+    <div class="veh_state absolute">
       <div class="car_info">
         <img src="../assets/img/hud/car.svg" class="car" />
-        <img src="../assets/img/hud/lock.svg" class="car_lock" />
+        <img src="../assets/img/hud/lock.svg" :style="{stateActive: carLocked}"  v-if="carLocked"/>
+        <img src="../assets/img/hud/lock.svg" :style="{stateActive: !carLocked}" v-else/>
       </div>
       <div class="car_heal">
-        <img src="../assets/img/hud/warning.svg" />
-        <img src="../assets/img/hud/error.svg" />
+        <img src="../assets/img/hud/warning.svg" :style="{stateActive: CarWarning}" />
+        <img src="../assets/img/hud/error.svg" :style="{stateActive: CarError}"/>
       </div>
       <div class="engine_state">
-        <img src="../assets/img/hud/lamp.svg" />
-        <img src="../assets/img/hud/engine.svg" />
+        <img src="../assets/img/hud/lamp.svg" :style="{stateActive: lightsOn}" />
+        <img src="../assets/img/hud/engine.svg" :style="{stateActive: enigneOn}" />
       </div>
-    </div>
-    <div class="veh_speed">
-      <img src="../assets/img/hud/speed.svg" />
-      <span id="speed">{{ speed }}</span>
-      <span>km/h</span>
     </div>
   </section>
 </template>
@@ -57,8 +60,15 @@ export default {
       return {
           voiceType: false,
           showSpeedo: false,
-          tank: 0,
-          speed: 0,
+          carStates: {
+              lightsOn: false,
+              enigneOn: false,
+              carLocked: false,
+              CarWarning: false,
+              CarError: false
+          },
+          tank: 10,
+          speed: 10,
           veh_state: {},
           player_id: '0',
           time: '',
@@ -74,7 +84,10 @@ export default {
           this.voiceType = type;
       },
       showSpeedometer() {
-          this.showSpeedo = true
+          this.showSpeedo = true;
+          setTimeout(() => {
+            document.querySelector('.speedometer').style.bottom = "15px";  
+          }, 100);
       },
       removeSpeedometer() {
           this.showSpeedo = false
@@ -82,9 +95,6 @@ export default {
       setSpeedometer(tank, speed, veh_state) {
           this.tank = tank;
           this.speed = speed;
-
-          //TODO
-          //Implement veh_state (locked, engine broken, etc)
       },
       setPlayerId(player_id) {
           this.player_id = player_id

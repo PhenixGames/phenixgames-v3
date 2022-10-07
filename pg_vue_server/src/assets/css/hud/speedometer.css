@@ -1,137 +1,68 @@
 /*? ------------SPEEDOMETER------------ */
 
+:root {
+    --speedoBackground: rgba(33, 47, 43, 0.321);
+}
+
 .speedometer {
     position: absolute;
-    bottom: 15px;
+    bottom: -100px;
     left: 50%;
     transform: translateX(-50%);
     -webkit-transform: translateX(-50%);
     -moz-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
-    display: flex;
-    background: #303030;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+    height: 40px;
+    transition: bottom .6s ease-in-out;
 }
 
-.veh_tank {
-    background: green;
-    padding: 5px 10px;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+.speedometer .veh_speed,
+.speedometer .veh_tank {
+    width: max-content;
+    height: 30px;
+    background: var(--speedoBackground);
+    border-radius: 5px;
+    padding: 3px 10px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin: 0 10px;
 }
 
-.veh_tank span:first-child {
-    font-size: 1.3rem;
-    font-weight: 900;
-}
-
-.veh_tank span:nth-child(2) {
-    font-size: 0.8rem;
-    font-weight: 700;
-    margin: 0 10px -5px 5px;
-}
-
-.veh_tank img {
-    width: 30px;
-}
-
-.veh_state {
-    padding: 5px 20px;
-    width: 130px;
-    height: 35px
-}
-
-.veh_state .car {
+.speedometer div img {
     width: 25px;
-    transform: translateY(0px);
-    -webkit-transform: translateY(0px);
-    -moz-transform: translateY(0px);
-    -ms-transform: translateY(0px);
-    -o-transform: translateY(0px);
+    height: 25px;
+    border-radius: 5px;
+    margin: 0 5px;
 }
 
-.veh_state .car_info {
-    float: left;
-    display: flex;
-    transform: translateY(10px);
-    -webkit-transform: translateY(10px);
-    -moz-transform: translateY(10px);
-    -ms-transform: translateY(10px);
-    -o-transform: translateY(10px);
-}
-
-.veh_state .car_lock {
-    width: 20px;
-    transform: translateY(-10px);
-    -webkit-transform: translateY(-10px);
-    -moz-transform: translateY(-10px);
-    -ms-transform: translateY(-10px);
-    -o-transform: translateY(-10px);
-}
-
-.veh_state .car_heal {
-    text-align: center;
-    display: grid;
-    transform: translate(20px, 8px);
-    -webkit-transform: translate(20px, 8px);
-    -moz-transform: translate(20px, 8px);
-    -ms-transform: translate(20px, 8px);
-    -o-transform: translate(20px, 8px);
-}
-
-.veh_state .engine_state {
-    float: right;
-    display: grid;
-    margin: 10px;
-    transform: translate(10px, -32px);
-    -webkit-transform: translate(10px, -32px);
-    -moz-transform: translate(10px, -32px);
-    -ms-transform: translate(10px, -32px);
-    -o-transform: translate(10px, -32px);
-}
-
-.veh_state .engine_state img:first-child {
-    transform: translateX(20px);
-    -webkit-transform: translateX(20px);
-    -moz-transform: translateX(20px);
-    -ms-transform: translateX(20px);
-    -o-transform: translateX(20px);
-}
-
-.veh_state .car_heal img:last-child {
-    margin: 2px 0;
-}
-
-.veh_speed {
+.speedometer .veh_state {
+    transform: translate(-27px, -70px);
+    width: max-content;
     display: flex;
     align-items: center;
-    background: green;
-    padding: 5px 10px;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    justify-content: space-between;
+    margin: 5px 45px;
+    border-radius: 5px;
 }
 
-.veh_speed span:nth-child(2) {
-    margin: 0 0 0 8px;
-    font-size: 1.3rem;
-    font-weight: 900;
+.speedometer .veh_state img {
+    width: 15px;
+    border-radius: 5px;
+    margin: 0 12px;
+    opacity: .2;
 }
 
-.veh_speed span:nth-child(3) {
-    font-size: 0.8rem;
-    font-weight: 700;
-    margin: 0 10px -5px 5px;
+.speedometer .veh_state img:nth-child(1) {
+    margin-left: 0;
+}
+
+.stateActive {
+    opacity: 1;
 }
