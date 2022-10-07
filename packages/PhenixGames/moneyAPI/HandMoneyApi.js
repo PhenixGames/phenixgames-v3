@@ -19,13 +19,15 @@ class HandMoneyApi {
     }
 
     async hasHand(playerId, money) {
-        const playerMoney = await this.get(playerId);
+        const playerMoney = await this.getHand(playerId);
         return playerMoney >= money;
     }
 
     async addHand(playerId, money) {
         return await database.query('UPDATE pg_money SET hand_money = bank_money + ? WHERE playerid = ?', [money, playerId])
-            .then(() => {MoneyAPI.updateHud(playerId); return true})
+            .then(() => {
+                this.updateHud(playerId);
+            })
             .catch(err => {
                 return false;
             })
@@ -33,7 +35,9 @@ class HandMoneyApi {
 
     async removeHand(playerId, money) {
         return await database.query('UPDATE pg_money SET hand_money = bank_money - ? WHERE playerid = ?', [money, playerId])
-            .then(() => {MoneyAPI.updateHud(playerId); return true})
+            .then(() => {
+                this.updateHud(playerId);
+            })
             .catch(err => {
                 return false;
             })
