@@ -14,7 +14,7 @@ class Api extends classes(BankApi, HandMoneyApi) {
         const money = await this.getHand(playerid);
         mp.players.forEach(player => {
             if(player.id == playerid) {
-                player.call('updateMoney', [money]);
+                player.call('Player:HUD:Update:Money', [money]);
             }
         });
     }
