@@ -4,19 +4,31 @@
   </section>
   <section id="inventar" class="user-select-none">
     <header class="cursor-pointer" id="close_inv">
-      <span> <img src="../../assets/img/inventory/arrrow-left-30.png" /> </span>
+      <span>
+        <img src="../../assets/img/inventory/arrrow-left-30.png" />
+      </span>
       <span>Verlassen/Zur&uuml;ck</span>
     </header>
     <main>
       <p>Ausgerüstetes Equipment</p>
       <div class="inv_container">
-        <div v-for="row in rows_top" :key="row" class="inv_item empty" :id="'top_pos_' + row" data-isstackable=""></div>
+        <div 
+        v-for="row in rows_top" 
+        :key="row" class="inv_item empty" 
+        :id="`top_pos_${row}`" 
+        data-isstackable="false"
+        ></div>
       </div>
     </main>
     <footer>
       <p>Inventar</p>
       <div class="inv_container">
-        <div v-for="row in rows_below" :key="row" class="inv_item empty" :id="'bottom_pos_' + row" data-isstackable="">
+        <div 
+        v-for="row in rows_below" 
+        :key="row" 
+        class="inv_item empty" 
+        :id="`bottom_pos_${row}`" 
+        data-isstackable="false">
         </div>
       </div>
     </footer>
@@ -48,8 +60,8 @@ export default {
   },
   methods: {
     //invPos, img, count, isStackable
-    insertItemsIntoInv({ item }) {
-      if (item === []) return;
+    insertItemsIntoInv({ item = [] }) {
+      if (item.length === 0) return;
 
       for (let i in item) {
         let invPost = item[i].invPos;
@@ -58,20 +70,19 @@ export default {
         let isTop = item[i].isTop;
         let isStackable = item[i].isStackable;
 
-        let itemDiv;
+        const itemDiv = (isTop) ? document.getElementById(`top_pos_${invPost}`) : document.getElementById(`bottom_pos_${invPost}`);
+        
+        const innerDiv = document.createElement('div');
 
-        (isTop) ? itemDiv = document.getElementById('top_pos_' + invPost) : itemDiv = document.getElementById('bottom_pos_' + invPost);
-        let innerDiv = document.createElement('div');
         if (itemDiv.classList.contains('empty')) {
           itemDiv.classList.remove('empty');
           itemDiv.classList.add('full');
           itemDiv.dataset.isstackable = isStackable;
 
-
           innerDiv.innerHTML = `<img src="${img}" />`;
-          if (isStackable) {
-            innerDiv.innerHTML += `<span>${count}</span>`;
-          }
+
+          if (isStackable) innerDiv.innerHTML += `<span>${count}</span>`;
+          
         } else {
           if (isStackable) {
             let span = innerDiv.querySelector('span');
@@ -84,8 +95,9 @@ export default {
     }
   },
   mounted() {
-
-    //mp.trigger('uiInitInventory')
+    try {
+      mp.trigger('uiInitInventory');
+    }catch(err) {}
 
     this.insertItemsIntoInv({
       item: [{
