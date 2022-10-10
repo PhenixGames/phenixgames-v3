@@ -137,6 +137,18 @@ class VehicleApi {
     async isKeyOwner(id, keys) {
         return keys.indexOf(id) !== -1;
     }
+
+    getNearVehicles({pos, range, id}) {
+        let returnVehicle = {};
+        mp.vehicles.forEachInRange(pos, range,
+            (vehicle) => {
+                if(vehicle.getVariable('veh_id') == id){
+                    return returnVehicle = vehicle;
+                }
+            }
+        );
+        return returnVehicle;
+    }
 }
 
 const VehicleAPI = new VehicleApi();
