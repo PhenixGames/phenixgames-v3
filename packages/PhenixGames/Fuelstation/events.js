@@ -63,6 +63,6 @@ mp.events.add("Server:Request:Data:Fuelstation", async (player) => {
 });
 
 
-mp.events.add('Server:Car:Refuel', (player, carId, newfuel, price) => {
-    FAPI.fuel({player, newfuel, id: carId, price});
-})
+mp.events.add('Server:Car:Refuel', async (player, carId, newfuel, price) => {
+    return await FAPI.fuel({player, newfuel, id: carId, price});
+});

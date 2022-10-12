@@ -101,7 +101,7 @@ export default {
       benzin: 0.00,
       selected_type: "",
       current_price: "0.00",
-      new_fuel: 100, // CURRENT FUEL
+      new_fuel: 0, // CURRENT FUEL
       slider_max: 0,
       cars: [],
       car: "0", // VEH ID
@@ -118,8 +118,9 @@ export default {
     car_refuel() {
       if (parseInt(this.new_fuel) > parseInt(this.car_max) || parseInt(this.new_fuel) <= 0 || this.car_fuel_type !== this.selected_type.toLowerCase()) return console.log('Error');
 
+      console.log('Refuel');
       try {
-        mp.trigger("carRefuel", this.car, parseInt(this.new_fuel), parseInt(this.current_price));
+        return mp.trigger("carRefuel", this.car, parseInt(this.new_fuel), parseInt(this.current_price));
       }catch(err) {}
     },
     initGasStation(items) {
