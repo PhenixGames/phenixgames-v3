@@ -19,17 +19,6 @@ mp.events.add('keypress:STRG', (player) => {
         return;
     }
 });
-mp.events.add("vehicleDeath", (vehicle) => {
-    setTimeout(() => {
-        try {
-            if(vehicle) return vehicle.destroy(); 
-        }catch(err){
-        }
-        
-    }, 10000);
-    
-});
-
 mp.events.add("playerExitVehicle", (player, vehicle) => {
     setTimeout(() => {
         try{
