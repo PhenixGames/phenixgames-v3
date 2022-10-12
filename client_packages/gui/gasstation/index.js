@@ -57,8 +57,9 @@ mp.events.add('Player:Browser:Fuelstation:close', () => {
 });
 
 mp.events.add('carRefuel', (carId, carFuel, price) => {
-    //closeBrowser();
-    mp.gui.chat.push("carRefuel", price);
-    mp.events.callRemote('Server:Car:Refuel', carId, carFuel, price);
-    return true;
+    if(isBrowserOpen) {
+        closeBrowser();
+        mp.events.callRemote('Server:Car:Refuel', carId, carFuel, price);
+        return true;
+    }
 });

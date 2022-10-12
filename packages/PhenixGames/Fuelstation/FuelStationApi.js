@@ -161,9 +161,8 @@ class FuelStationApi {
         if(vehicle.engine) return player.notify("~r~Du musst den Motor ausmachen!");
 
         MoneyApi.removeHand(player.getVariable("playerId"), price);
-        vehicle.setVariable('veh_fuel', parseInt(vehicle.getVariable('veh_fuel')) + newfuel);
+        vehicle.setVariable('veh_fuel', parseInt(vehicle.getVariable('veh_fuel')).toFixed(0) + newfuel);
 
-        console.log(vehicle.getVariable('veh_fuel'), newfuel);
         return player.notify(`~g~Du hast erfolgreich ${newfuel}L getankt!`);
     }
 }
