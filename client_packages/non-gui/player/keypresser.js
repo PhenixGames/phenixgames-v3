@@ -25,6 +25,9 @@ mp.keys.bind(0x58, true, function() {
 // -E-
 mp.keys.bind(0x45, true, function() {
     if(mp.players.local.getVariable("isnearFuelstation")) {
+        if(mp.players.local.vehicle) {
+            return player.notify("~r~Du kannst nicht in einem Fahrzeug sein!");
+        }
         return interacteGasstation();
     }
 });
