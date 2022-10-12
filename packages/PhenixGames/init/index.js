@@ -21,7 +21,7 @@ mp.events.delayInitialization = true;
         console.log('[PhenixGames] Initializing... no delay');
     }
     else {
-        await delay(15000);
+        await delay(5000);
         console.log('[PhenixGames] Initializing... 15 seconds delay');
     }
     
