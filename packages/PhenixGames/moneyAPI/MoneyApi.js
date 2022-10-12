@@ -13,7 +13,7 @@ class Api extends classes(BankApi, HandMoneyApi) {
     async updateHud(playerid) {
         const money = await this.getHand(playerid);
         mp.players.forEach(player => {
-            if(player.id == playerid) {
+            if(player.getVariable('playerId') == playerid) {
                 player.call('Player:HUD:Update:Money', [money]);
             }
         });
