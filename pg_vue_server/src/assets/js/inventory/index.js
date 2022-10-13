@@ -23,11 +23,7 @@ window.addEventListener('load', function () {
     var isstackable;
 
 
-    var i = 0;
-
     function dragAndDrop() {
-        ++i;
-        if (i > 1) return i = 0;
 
         if (allDragableDivs.length > 0) {
             allDragableDivs.forEach(function (div) {
@@ -41,8 +37,6 @@ window.addEventListener('load', function () {
                     }
 
                     oldParent = div;
-
-                    isstackable = div.dataset.isstackable;
 
                     dragDiv = div.querySelector('div');
                     dragDiv.style.position = 'absolute';
@@ -70,33 +64,25 @@ window.addEventListener('load', function () {
                     const isTheSameItem = isSameItem(dragDiv, divUnderMouse);
 
 
-                    if (isTheSameItem && isstackable == "true") {
+                    if (isTheSameItem) {
                         stackItems(dragDiv, divUnderMouse);
                         return clear();
                     }
 
                     if (divUnderMouse.classList.contains('empty')) {
-                        cleanOldDiv();
-                        
                         divUnderMouse.classList.remove('empty');
                         divUnderMouse.classList.add('full');
 
                         divUnderMouse.dataset.itemid = dragDiv.parentNode.dataset.itemid;
                         divUnderMouse.dataset.amount = dragDiv.parentNode.dataset.amount;
+                        divUnderMouse.dataset.isstackable = dragDiv.parentNode.dataset.isstackable;
 
+                        cleanOldDiv();
                         resetDiv(div.parentNode);
 
                         divUnderMouse.append(dragDiv);
                     } else {
                         oldParent.append(dragDiv);
-                    }
-
-                    function cleanOldDiv() {
-                        oldParent.classList.remove('full');
-                        oldParent.classList.add('empty');
-                        oldParent.dataset.itemid = '';
-                        oldParent.dataset.amount = '';
-                        oldParent.dataset.isstackable = '';
                     }
 
                     clear();
@@ -105,8 +91,26 @@ window.addEventListener('load', function () {
                         oldParent = null;
                         isstackable = null;
 
+                        document.removeEventListener('mousemove', function (e) {
+                            return true
+                        });
+                        document.removeEventListener('mouseup', function (e) {
+                            return true
+                        });
+                        document.removeEventListener('mousedown', function (e) {
+                            return true
+                        });
+
                         updateAllDragableDivs();
                         dragAndDrop();
+                    }
+
+                    function cleanOldDiv() {
+                        oldParent.classList.remove('full');
+                        oldParent.classList.add('empty');
+                        oldParent.dataset.itemid = '';
+                        oldParent.dataset.amount = '';
+                        oldParent.dataset.isstackable = '';
                     }
 
                     return;
@@ -120,8 +124,11 @@ window.addEventListener('load', function () {
     }
 
     function stackItems(div, target) {
+        
         const divParent = div.parentNode;
         const targetParent = target.parentNode.parentNode;
+
+        if(targetParent.dataset.isstackable == 'false') return;
 
         var amount = parseInt(divParent.dataset.amount);
         var targetAmount = parseInt(targetParent.dataset.amount);
@@ -130,14 +137,12 @@ window.addEventListener('load', function () {
 
         targetParent.querySelector('span').innerHTML = amount + targetAmount;
 
-        console.log(divParent)
         divParent.classList.remove('full');
         divParent.classList.add('empty');
 
         resetDiv(div.parentNode);
 
         div.remove();
-        console.log('1')
         return;
     }
 

@@ -98,6 +98,33 @@ export default {
         itemDiv.append(innerDiv)
       }
     },
+    saveItems() {
+      const items = document.querySelectorAll('.inv_item.full');
+
+      const itemsArr = [];
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+
+        const divId = items[i].id;
+
+        const isTop = divId.includes('top_pos_');
+        const invPos = divId.split('_')[2];
+        const isStackable = item.dataset.isstackable;
+        const itemId = item.dataset.itemid;
+        const amount = item.dataset.amount;
+
+        itemsArr.push({
+          isTop,
+          invPos,
+          isStackable,
+          itemId,
+          amount
+        });
+      }
+
+      //mp.trigger('saveInventory', JSON.stringify(itemsArr));
+    },
+    
   },
   mounted() {
     try {
@@ -128,7 +155,7 @@ export default {
         itemId: "1"
       }
     ]
-    })
+    });
 
     gui.inventory = this;
   },
