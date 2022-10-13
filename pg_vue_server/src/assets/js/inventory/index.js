@@ -4,8 +4,13 @@ window.addEventListener('load', function () {
         return false;
     }
 
-    updateAllDragableDivs();
-    dragAndDrop();
+    let loaded = false;
+
+    if (!loaded) {
+        loaded = true;
+        updateAllDragableDivs();
+        dragAndDrop();
+    }
 
     var allDragableDivs;
 
@@ -13,83 +18,134 @@ window.addEventListener('load', function () {
         allDragableDivs = document.querySelectorAll('.full');
     }
 
-    var dragDiv;
-    var oldParent;
+    var dragDiv
+    var oldParent
+    var isstackable;
+
+
+    var i = 0;
 
     function dragAndDrop() {
+        ++i;
+        if (i > 1) return i = 0;
+
         if (allDragableDivs.length > 0) {
             allDragableDivs.forEach(function (div) {
-                var isstackable;
+                if (dragDiv && !div.classList.contains('full') && div.classList.contains('no-drag')) return;
+
                 div.addEventListener('mousedown', function (e) {
 
                     //RIGHT CLICK
-                    if(e.which == 3) {
-                        alert('right click triggered');
-                        return;
+                    if (e.which == 3) {
+                        return openContextMenu(e);
                     }
 
-                    if (!dragDiv && div.classList.contains('full') && !div.classList.contains('no-drag')) {
-                        oldParent = div;
-                        div.classList.remove('full');
-                        div.classList.add('empty');
+                    oldParent = div;
 
-                        isstackable = div.dataset.isstackable;
-                        div.dataset.isstackable = "";
+                    isstackable = div.dataset.isstackable;
 
-                        dragDiv = div.children[0];
+                    dragDiv = div.querySelector('div');
+                    dragDiv.style.position = 'absolute';
+                    dragDiv.style.zIndex = '99';
 
-                        dragDiv.style.position = 'absolute';
-                        dragDiv.style.zIndex = '9999';
+                    document.addEventListener('mousemove', function (e) {
+                        if (!dragDiv) {
+                            return document.removeEventListener('mousemove', function (e) {
+                                return true
+                            });
+                        }
 
-                        document.addEventListener('mousemove', function (e) {
-                            if (dragDiv) {
-                                dragDiv.style.left = e.clientX - 25 + 'px';
-                                dragDiv.style.top = e.clientY - 20 + 'px';
-                            } else {
-                                document.removeEventListener('mousemove', function (e) {
-                                    return true
-                                });
-                            }
-                        });
-                    }
+                        dragDiv.style.left = e.clientX - 25 + 'px';
+                        dragDiv.style.top = e.clientY - 20 + 'px';
+                    });
                 });
 
                 div.addEventListener('mouseup', function (e) {
-                    if (dragDiv) {
-                        dragDiv.style.pointerEvents = 'none';
+                    if (!dragDiv) return;
 
-                        var divUnderMousePosition = document.elementFromPoint(e.clientX, e.clientY);
+                    dragDiv.style = 'null';
 
-                        dragDiv.style.pointerEvents = 'all';
-                        dragDiv.style.position = 'relative';
-                        dragDiv.style.left = '';
-                        dragDiv.style.top = '';
-                        dragDiv.style.zIndex = '';
-                        divUnderMousePosition.dataset.isstackable = isstackable
+                    const divUnderMouse = document.elementFromPoint(e.clientX, e.clientY);
 
-                        if (divUnderMousePosition.classList.contains('empty')) {
+                    const isTheSameItem = isSameItem(dragDiv, divUnderMouse);
 
-                            divUnderMousePosition.classList.remove('empty');
-                            divUnderMousePosition.classList.add('full');
 
-                            divUnderMousePosition.append(dragDiv);
-                        } else {
-                            oldParent.classList.remove('empty');
-                            oldParent.classList.add('full');
-                            oldParent.append(dragDiv);
-                        }
+                    if (isTheSameItem && isstackable == "true") {
+                        stackItems(dragDiv, divUnderMouse);
+                        return clear();
+                    }
+
+                    if (divUnderMouse.classList.contains('empty')) {
+                        cleanOldDiv();
+                        
+                        divUnderMouse.classList.remove('empty');
+                        divUnderMouse.classList.add('full');
+
+                        divUnderMouse.dataset.itemid = dragDiv.parentNode.dataset.itemid;
+                        divUnderMouse.dataset.amount = dragDiv.parentNode.dataset.amount;
+
+                        resetDiv(div.parentNode);
+
+                        divUnderMouse.append(dragDiv);
+                    } else {
+                        oldParent.append(dragDiv);
+                    }
+
+                    function cleanOldDiv() {
+                        oldParent.classList.remove('full');
+                        oldParent.classList.add('empty');
+                        oldParent.dataset.itemid = '';
+                        oldParent.dataset.amount = '';
+                        oldParent.dataset.isstackable = '';
+                    }
+
+                    clear();
+                    function clear() {
+                        dragDiv = null;
+                        oldParent = null;
+                        isstackable = null;
 
                         updateAllDragableDivs();
                         dragAndDrop();
-
-                        dragDiv = null;
                     }
+
+                    return;
                 });
             });
         }
     }
 
+    function isSameItem(div, target) {
+        return div.dataset.itemid == target.dataset.itemid
+    }
 
-    
+    function stackItems(div, target) {
+        const divParent = div.parentNode;
+        const targetParent = target.parentNode.parentNode;
 
+        var amount = parseInt(divParent.dataset.amount);
+        var targetAmount = parseInt(targetParent.dataset.amount);
+
+        target.dataset.amount = amount + targetAmount;
+
+        targetParent.querySelector('span').innerHTML = amount + targetAmount;
+
+        console.log(divParent)
+        divParent.classList.remove('full');
+        divParent.classList.add('empty');
+
+        resetDiv(div.parentNode);
+
+        div.remove();
+        console.log('1')
+        return;
+    }
+
+    function resetDiv(div) {
+        div.dataset.isstackable = "";
+        div.dataset.amount = "";
+        div.dataset.itemid = ""
+    }
+
+    function openContextMenu(div) {}
 });
