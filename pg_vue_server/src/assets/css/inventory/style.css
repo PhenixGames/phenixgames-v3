@@ -25,7 +25,7 @@ body {
     overflow-y: scroll;
     max-height: 90vh;
     scrollbar-width: none;
-    border: 1px solid red
+    border: 1px solid red;
 }
 
 #inventar::-webkit-scrollbar {
@@ -36,7 +36,7 @@ body {
 #inventar header {
     display: flex;
     align-items: center;
-    color: #D54E23;
+    color: #d54e23;
 }
 
 #inventar header span:last-child {
@@ -52,7 +52,7 @@ body {
     margin: 0 0 0 10px;
     font-weight: 800;
     letter-spacing: 1.01px;
-    color: #D54E23;
+    color: #d54e23;
 }
 
 .inv_container {
@@ -62,7 +62,7 @@ body {
 .inv_item {
     min-height: 80px;
     min-width: 80px;
-    background: #D54E23;
+    background: #d54e23;
     margin: 20px 10px;
     float: left;
     cursor: pointer;
@@ -70,12 +70,11 @@ body {
     justify-content: center;
     align-items: center;
 
-    
-    transition: opacity .2s ease-in-out;
-    -webkit-transition: opacity .2s ease-in-out;
-    -moz-transition: opacity .2s ease-in-out;
-    -ms-transition: opacity .2s ease-in-out;
-    -o-transition: opacity .2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+    -webkit-transition: opacity 0.2s ease-in-out;
+    -moz-transition: opacity 0.2s ease-in-out;
+    -ms-transition: opacity 0.2s ease-in-out;
+    -o-transition: opacity 0.2s ease-in-out;
 }
 
 .inv_item_hover {
@@ -100,7 +99,7 @@ body {
     margin: 0 0 0 10px;
     font-weight: 800;
     letter-spacing: 1.01px;
-    color: #D54E23;
+    color: #d54e23;
 }
 
 #inv_slot {
