@@ -6,7 +6,8 @@
     "start": "./start.sh start",
     "restart": "./start.sh restart",
     "kill": "./start.sh kill",
-    "pull": "./start.sh pull"
+    "pull": "./start.sh pull",
+    "format": "prettier --write './**/*.{css,js,vue}'"
   },
   "repository": {
     "type": "git",

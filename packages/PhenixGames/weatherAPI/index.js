@@ -4,9 +4,11 @@ const console = require('better-console');
 const weatherData = require('./weather.json');
 
 module.exports.setWeather = async function () {
-   
-    axios.get('https://api.weatherapi.com/v1/current.json?key=2b1171e4b8514e86961162109222702&q=Los Angeles&aqi=no')
-        .then(res => {
+    axios
+        .get(
+            'https://api.weatherapi.com/v1/current.json?key=2b1171e4b8514e86961162109222702&q=Los Angeles&aqi=no'
+        )
+        .then((res) => {
             /**
              * {
                 "location": {
@@ -36,27 +38,29 @@ module.exports.setWeather = async function () {
             }
              */
 
-            if(res.status === 200) {
-
+            if (res.status === 200) {
                 let currentDate = new Date();
 
-                mp.world.time.set(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds());
+                mp.world.time.set(
+                    currentDate.getHours(),
+                    currentDate.getMinutes(),
+                    currentDate.getSeconds()
+                );
 
                 for (const [index, [key, value]] of Object.entries(Object.entries(weatherData))) {
-                    if(res.data.current.condition.text.indexOf(value) !== -1) {
+                    if (res.data.current.condition.text.indexOf(value) !== -1) {
                         //Wetter ist schon das gleiche
-                        if(mp.world.weather === key) return;
+                        if (mp.world.weather === key) return;
 
-                        return mp.world.weather = key;
+                        return (mp.world.weather = key);
                     }
                 }
-
-            }else {
+            } else {
                 return false;
             }
         })
-        .catch(err => {
+        .catch((err) => {
             console.error(`WeatherAPI Error: ${err.toString()}`);
             return false;
-        })
-}
+        });
+};

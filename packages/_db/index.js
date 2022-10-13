@@ -1,1 +1,1 @@
-require('./db')
+require('./db');
