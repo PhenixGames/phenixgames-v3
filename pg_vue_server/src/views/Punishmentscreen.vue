@@ -7,7 +7,7 @@ import Punishmentscreen from '../components/punishmentscreen/Punishmentscreen.co
 export default {
     name: 'pg_punishmentscreen',
     components: {
-        Punishmentscreen
-    }
-}
+        Punishmentscreen,
+    },
+};
 </script>

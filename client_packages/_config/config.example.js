@@ -1,5 +1,5 @@
-exports.config [
+exports.config[
     {
-        'domain': ''
+        domain: '',
     }
-]
+];
