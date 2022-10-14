@@ -15,6 +15,7 @@ exports.interacteInventory = () => {
 };
 function closeBrowser() {
     if (isInvOpen) {
+        invBrowser.execute('saveInventory();');
         invBrowser.destroy();
         mp.gui.cursor.show(false, false);
         isInvOpen = false;
@@ -34,6 +35,10 @@ function openBrowser() {
 mp.events.add('uiInitInventory', () => {
     mp.events.callRemote('Server:Init:Inventory');
 });
+
+mp.events.add('uiSaveInventory', (items) => {
+    mp.events.callRemote('Server:Save:Inventory', items);
+})
 
 mp.events.add('Player:Browser:Inventory:close', () => {
     closeBrowser();

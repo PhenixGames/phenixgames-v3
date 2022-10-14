@@ -92,9 +92,37 @@ export default {
                 itemDiv.append(innerDiv);
             }
         },
+        saveInventory() {
+            let inv = document.getElementById('inventar');
+            let invItems = inv.querySelectorAll('.inv_item');
+            let invItemsArr = [];
+
+            for (let i = 0; i < invItems.length; i++) {
+                let item = invItems[i];
+                if (item.classList.contains('full')) {
+                    let img = item.querySelector('img').src;
+                    let count = item.querySelector('span').innerHTML;
+                    let isStackable = item.dataset.isstackable;
+                    let isTop = item.parentElement.parentElement.id === 'inventar' ? true : false;
+                    let invPos = item.id.split('_')[2];
+
+                    invItemsArr.push({
+                        img,
+                        count,
+                        isStackable,
+                        isTop,
+                        invPos,
+                    });
+                }
+            }
+            mp.trigger('saveInventory', JSON.stringify(invItemsArr));
+        },
+        }
     },
     mounted() {
-        //mp.trigger('uiInitInventory')
+        try {
+            mp.trigger('uiInitInventory');
+        }catch(e) {}
 
         this.insertItemsIntoInv({
             item: [
