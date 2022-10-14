@@ -1,12 +1,10 @@
-const PermissionSystem = require('../../PhenixGames/playerAPI/PermissionSystem')
+const PermissionSystem = require('../../PhenixGames/playerAPI/PermissionSystem');
 
-mp.events.addCommand('perms', (player, args) => {
+mp.events.addCommand('perms', (player, args) => {});
 
-});
-
-mp.events.addCommand("permsupdate", (player, args) => {
+mp.events.addCommand('permsupdate', (player, args) => {
     mp.players.forEach((player) => {
-        if(player.getVariable('syncPlayer')) {
+        if (player.getVariable('syncPlayer')) {
             PermissionSystem.setPerms(player);
         }
     });

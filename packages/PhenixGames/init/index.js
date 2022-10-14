@@ -4,32 +4,27 @@ const console = require('better-console');
 const weatherAPI = require('../weatherAPI');
 const { delay } = require('../../../_assets/functions/delay');
 const { log } = require('../../../_assets/functions/log/logs');
-const {
-    spawn
-} = require('child_process');
+const { spawn } = require('child_process');
 const { DatabaseBackup } = require('../../../_assets/functions/DatabaseBackup/DatabaseBackup');
 const AccountAPI = require('../account/AcountAPI');
 const { FAPI } = require('../Fuelstation/FuelStationApi');
 const IplsAPI = require('../ipls');
 const VehicleAPI = require('../vehicle/VehicleApi');
 
-
 mp.events.delayInitialization = true;
 (async () => {
-    if(debug.init){
+    if (debug.init) {
         await delay(1);
         console.log('[PhenixGames] Initializing... no delay');
-    }
-    else {
-        await delay(15000);
+    } else {
+        await delay(5000);
         console.log('[PhenixGames] Initializing... 15 seconds delay');
     }
-    
+
     mp.events.delayInitialization = false;
 })();
 
-mp.events.add('packagesLoaded', async() =>
-{
+mp.events.add('packagesLoaded', async () => {
     await VehicleAPI.spawnAll();
     weatherAPI.setWeather();
     await FAPI.load();
@@ -44,10 +39,9 @@ mp.events.add('packagesLoaded', async() =>
         console.time('Player Server wurde gesynct in: ');
         AccountAPI.syncAllPlayers();
         console.timeEnd('Player Server wurde gesynct in: ');
-        
     }, 5000);
 
-    if(debug.createBackup){
+    if (debug.createBackup) {
         new DatabaseBackup();
     }
 
@@ -56,40 +50,39 @@ mp.events.add('packagesLoaded', async() =>
     }, 10800000); // 3h
 });
 
-
 //! ERROR --
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
     log({
         message: err,
-        isFatal: true
+        isFatal: true,
     });
-    if(!debug.global && process.platform !== 'win32') {
+    if (!debug.global && process.platform !== 'win32') {
         log({
-            message: 'BOT RESTARTED...'  + new Date(),
-            isFatal: false
+            message: 'BOT RESTARTED...' + new Date(),
+            isFatal: false,
         });
         spawn(process.argv[1], process.argv.slice(2), {
             detached: true,
-            stdio: ['ignore', null, null]
-        }).unref()
-        process.exit()
+            stdio: ['ignore', null, null],
+        }).unref();
+        process.exit();
     }
 });
 
-process.on('uncaughtException', err => {
+process.on('uncaughtException', (err) => {
     log({
         message: err,
-        isFatal: true
+        isFatal: true,
     });
-    if(!debug.global && process.platform !== 'win32') {
+    if (!debug.global && process.platform !== 'win32') {
         log({
-            message: 'BOT RESTARTED...'  + new Date(),
-            isFatal: false
+            message: 'BOT RESTARTED...' + new Date(),
+            isFatal: false,
         });
         spawn(process.argv[1], process.argv.slice(2), {
             detached: true,
-            stdio: ['ignore', null, null]
-        }).unref()
-        process.exit()
+            stdio: ['ignore', null, null],
+        }).unref();
+        process.exit();
     }
 });

@@ -1,0 +1,5 @@
+node_modules/
+phenixgames-backup
+*.min.js
+jquery.js
+._*
