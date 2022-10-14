@@ -9,7 +9,7 @@ class Api {
         return await database
             .query(`SELECT items FROM pg_user_inventory WHERE user_id = ? LIMIT 1`, [id])
             .then((res) => {
-                return res[0].items || [];    
+                return res[0].items || [];
             })
             .catch((err) => {
                 return [];
@@ -18,9 +18,12 @@ class Api {
 
     async update(id, items) {
         return await database
-            .query(`UPDATE pg_user_inventory SET items = ? WHERE user_id = ?`, [JSON.stringify(items), id])
-            .then(async res => {
-                if(res.insertId === 0) {
+            .query(`UPDATE pg_user_inventory SET items = ? WHERE user_id = ?`, [
+                JSON.stringify(items),
+                id,
+            ])
+            .then(async (res) => {
+                if (res.insertId === 0) {
                     return await this.save(id);
                 }
             })
@@ -31,7 +34,10 @@ class Api {
 
     async save(id) {
         return await database
-            .query(`INSERT IGNORE INTO pg_user_inventory (user_id, items) VALUES (?, ?)`, [id, JSON.stringify(defaultInventory)])
+            .query(`INSERT IGNORE INTO pg_user_inventory (user_id, items) VALUES (?, ?)`, [
+                id,
+                JSON.stringify(defaultInventory),
+            ])
             .catch((err) => {
                 return false;
             });
