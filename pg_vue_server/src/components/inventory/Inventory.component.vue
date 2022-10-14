@@ -2,6 +2,14 @@
     <section id="logo">
         <img src="../../assets/img/_logo/web/PhenixGames_Logo_no_text.svg" />
     </section>
+    <div 
+        class="inv_context display-none absolute white" 
+        data-itemid=""
+    >
+        <p class="cursor-pointer" data-action="use">Benutzen</p>
+        <p class="cursor-pointer" data-action="split">Aufteilen</p>
+        <p class="red cursor-pointer" data-action="drop">Wegwerfen</p>
+    </div>
     <section id="inventar" class="user-select-none">
         <header class="cursor-pointer" id="close_inv">
             <span> <img src="../../assets/img/inventory/arrrow-left-30.png" /> </span>
@@ -10,25 +18,15 @@
         <main>
             <p>Ausgerüstetes Equipment</p>
             <div class="inv_container">
-                <div
-                    v-for="row in rows_top"
-                    :key="row"
-                    class="inv_item empty"
-                    :id="'top_pos_' + row"
-                    data-isstackable=""
-                ></div>
+                <div v-for="row in rows_top" :key="row" class="inv_item empty" :id="'top_pos_' + row"
+                    data-isstackable=""></div>
             </div>
         </main>
         <footer>
             <p>Inventar</p>
             <div class="inv_container">
-                <div
-                    v-for="row in rows_below"
-                    :key="row"
-                    class="inv_item empty"
-                    :id="'bottom_pos_' + row"
-                    data-isstackable=""
-                ></div>
+                <div v-for="row in rows_below" :key="row" class="inv_item empty" :id="'bottom_pos_' + row"
+                    data-isstackable=""></div>
             </div>
         </footer>
     </section>
@@ -94,9 +92,37 @@ export default {
                 itemDiv.append(innerDiv);
             }
         },
+        saveInventory() {
+            let inv = document.getElementById('inventar');
+            let invItems = inv.querySelectorAll('.inv_item');
+            let invItemsArr = [];
+
+            for (let i = 0; i < invItems.length; i++) {
+                let item = invItems[i];
+                if (item.classList.contains('full')) {
+                    let img = item.querySelector('img').src;
+                    let count = item.querySelector('span').innerHTML;
+                    let isStackable = item.dataset.isstackable;
+                    let isTop = item.parentElement.parentElement.id === 'inventar' ? true : false;
+                    let invPos = item.id.split('_')[2];
+
+                    invItemsArr.push({
+                        img,
+                        count,
+                        isStackable,
+                        isTop,
+                        invPos,
+                    });
+                }
+            }
+            mp.trigger('saveInventory', JSON.stringify(invItemsArr));
+        },
+        }
     },
     mounted() {
-        //mp.trigger('uiInitInventory')
+        try {
+            mp.trigger('uiInitInventory');
+        }catch(e) {}
 
         this.insertItemsIntoInv({
             item: [
