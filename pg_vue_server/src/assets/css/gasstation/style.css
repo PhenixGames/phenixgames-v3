@@ -12,11 +12,11 @@
     position: fixed;
     top: 50%;
     left: 0;
-    transform: translate(-500px,-50%);
-    -webkit-transform: translate(-500px,-50%);
-    -moz-transform: translate(-500px,-50%);
-    -ms-transform: translate(-500px,-50%);
-    -o-transform: translate(-500px,-50%);
+    transform: translate(-500px, -50%);
+    -webkit-transform: translate(-500px, -50%);
+    -moz-transform: translate(-500px, -50%);
+    -ms-transform: translate(-500px, -50%);
+    -o-transform: translate(-500px, -50%);
     background: #ffffff;
     background-image: var(--background_gradient);
     height: 650px;
@@ -27,11 +27,11 @@
     -ms-border-radius: 0 24px 24px 0;
     -o-border-radius: 0 24px 24px 0;
     scrollbar-width: 0;
-    transition: .4s transform;
-    -webkit-transition: .4s transform;
-    -moz-transition: .4s transform;
-    -ms-transition: .4s transform;
-    -o-transition: .4s transform;
+    transition: 0.4s transform;
+    -webkit-transition: 0.4s transform;
+    -moz-transition: 0.4s transform;
+    -ms-transition: 0.4s transform;
+    -o-transition: 0.4s transform;
 }
 
 .gs_types::before {
@@ -44,7 +44,7 @@
 }
 
 .gs_button {
-    background: #FE550D;
+    background: #fe550d;
     margin: 10px;
     border-radius: 15px;
     -webkit-border-radius: 15px;
@@ -82,7 +82,7 @@
     display: grid;
     justify-content: center;
     align-items: center;
-    transition: background .2s;
+    transition: background 0.2s;
 }
 
 .gs_button_cars_notactive {
@@ -116,11 +116,11 @@ hr {
     -moz-border-radius: 0 10px 10px 0;
     -ms-border-radius: 0 10px 10px 0;
     -o-border-radius: 0 10px 10px 0;
-    transition: .3s transform;
-    -webkit-transition: .3s transform;
-    -moz-transition: .3s transform;
-    -ms-transition: .3s transform;
-    -o-transition: .3s transform;
+    transition: 0.3s transform;
+    -webkit-transition: 0.3s transform;
+    -moz-transition: 0.3s transform;
+    -ms-transition: 0.3s transform;
+    -o-transition: 0.3s transform;
 }
 
 .gs_fuel span {
@@ -156,14 +156,14 @@ hr {
 }
 
 .gs_button_fuel {
-    background: #0DAE48;
+    background: #0dae48;
     height: 50px;
-    box-shadow: 0px 5px 0px #0DA244;
-    border: 0
+    box-shadow: 0px 5px 0px #0da244;
+    border: 0;
 }
 
 .gs_button_fuel:active {
-    box-shadow: 0px 2px 0px #0DA244;
+    box-shadow: 0px 2px 0px #0da244;
     transform: translateY(3px);
     -webkit-transform: translateY(3px);
     -moz-transform: translateY(3px);
@@ -180,8 +180,7 @@ hr {
     font: 1em/1 arial, sans-serif;
 }
 
-
-[type=range] {
+[type='range'] {
     flex: 1;
     margin: 0;
     padding: 0;
@@ -190,12 +189,12 @@ hr {
     font: inherit;
 }
 
-[type=range],
-[type=range]::-webkit-slider-thumb {
+[type='range'],
+[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
 }
 
-[type=range]::-webkit-slider-runnable-track {
+[type='range']::-webkit-slider-runnable-track {
     box-sizing: border-box;
     border: none;
     width: 12.5em;
@@ -203,7 +202,7 @@ hr {
     background: #ccc;
 }
 
-[type=range]::-moz-range-track {
+[type='range']::-moz-range-track {
     box-sizing: border-box;
     border: none;
     width: 12.5em;
@@ -211,7 +210,7 @@ hr {
     background: #ccc;
 }
 
-[type=range]::-ms-track {
+[type='range']::-ms-track {
     box-sizing: border-box;
     border: none;
     width: 12.5em;
@@ -219,7 +218,7 @@ hr {
     background: #ccc;
 }
 
-[type=range]::-webkit-slider-thumb {
+[type='range']::-webkit-slider-thumb {
     margin-top: -0.625em;
     box-sizing: border-box;
     border: none;
@@ -229,7 +228,7 @@ hr {
     background: #f90;
 }
 
-[type=range]::-moz-range-thumb {
+[type='range']::-moz-range-thumb {
     box-sizing: border-box;
     border: none;
     width: 1.5em;
@@ -238,7 +237,7 @@ hr {
     background: #f90;
 }
 
-[type=range]::-ms-thumb {
+[type='range']::-ms-thumb {
     margin-top: 0;
     box-sizing: border-box;
     border: none;
@@ -248,22 +247,22 @@ hr {
     background: #f90;
 }
 
-[type=range]::-ms-tooltip {
+[type='range']::-ms-tooltip {
     display: none;
 }
 
-[type=range]~output {
+[type='range'] ~ output {
     display: none;
 }
 
-.js [type=range]~output {
+.js [type='range'] ~ output {
     display: block;
     position: absolute;
     left: 0.75em;
     top: 50px;
     padding: 0.8em 0.5em;
     border-radius: 3px;
-    transform: translate(calc((var(--val) - var(--min))/(var(--max) - var(--min))*11em - 50%));
+    transform: translate(calc((var(--val) - var(--min)) / (var(--max) - var(--min)) * 11em - 50%));
     color: #eee;
     pointer-events: none;
     user-select: none;

@@ -1,8 +1,7 @@
 window.addEventListener('load', function () {
-
     window.ondragstart = function () {
         return false;
-    }
+    };
 
     updateAllDragableDivs();
     dragAndDrop();
@@ -21,20 +20,23 @@ window.addEventListener('load', function () {
             allDragableDivs.forEach(function (div) {
                 var isstackable;
                 div.addEventListener('mousedown', function (e) {
-
                     //RIGHT CLICK
-                    if(e.which == 3) {
+                    if (e.which == 3) {
                         alert('right click triggered');
                         return;
                     }
 
-                    if (!dragDiv && div.classList.contains('full') && !div.classList.contains('no-drag')) {
+                    if (
+                        !dragDiv &&
+                        div.classList.contains('full') &&
+                        !div.classList.contains('no-drag')
+                    ) {
                         oldParent = div;
                         div.classList.remove('full');
                         div.classList.add('empty');
 
                         isstackable = div.dataset.isstackable;
-                        div.dataset.isstackable = "";
+                        div.dataset.isstackable = '';
 
                         dragDiv = div.children[0];
 
@@ -47,7 +49,7 @@ window.addEventListener('load', function () {
                                 dragDiv.style.top = e.clientY - 20 + 'px';
                             } else {
                                 document.removeEventListener('mousemove', function (e) {
-                                    return true
+                                    return true;
                                 });
                             }
                         });
@@ -65,10 +67,9 @@ window.addEventListener('load', function () {
                         dragDiv.style.left = '';
                         dragDiv.style.top = '';
                         dragDiv.style.zIndex = '';
-                        divUnderMousePosition.dataset.isstackable = isstackable
+                        divUnderMousePosition.dataset.isstackable = isstackable;
 
                         if (divUnderMousePosition.classList.contains('empty')) {
-
                             divUnderMousePosition.classList.remove('empty');
                             divUnderMousePosition.classList.add('full');
 
@@ -88,8 +89,4 @@ window.addEventListener('load', function () {
             });
         }
     }
-
-
-    
-
 });

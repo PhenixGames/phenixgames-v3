@@ -7,7 +7,7 @@ import Deathscreen from '../components/Deathscreen.component.vue';
 export default {
     name: 'pg_deathscreen',
     components: {
-        Deathscreen
-    }
-}
+        Deathscreen,
+    },
+};
 </script>
