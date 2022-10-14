@@ -3,6 +3,8 @@ window.addEventListener('load', function () {
         return false;
     };
 
+    window.addEventListener('contextmenu', e => e.preventDefault())
+
     updateAllDragableDivs();
     dragAndDrop();
 
@@ -22,7 +24,88 @@ window.addEventListener('load', function () {
                 div.addEventListener('mousedown', function (e) {
                     //RIGHT CLICK
                     if (e.which == 3) {
-                        alert('right click triggered');
+
+                        let divUnderClick = document.elementFromPoint(e.clientX, e.clientY);
+                        if(!divUnderClick.id) divUnderClick = divUnderClick.parentNode.parentNode;
+
+                        const contextMenu = document.querySelector('.inv_context');
+                        if(!contextMenu) return;
+
+                        contextMenu.classList.remove('display-none');
+                        contextMenu.style.top = divUnderClick.offsetTop + 80 + 'px';
+                        contextMenu.style.left = divUnderClick.offsetLeft + 'px';
+
+
+                        window.addEventListener('click', function (e) {
+                            if (e.target.classList.contains('inv_context')) {
+                                return handleContextInput();
+                            }
+
+                            try {
+                                const parent = e.target.parentNode.classList;
+
+                                if(parent.contains('inv_context')) {
+                                    return handleContextInput();
+                                }
+                                removeContextMenu();
+                            }catch(err) {
+                                removeContextMenu();
+                            }
+
+                            function removeContextMenu() {
+                                contextMenu.classList.add('display-none');
+                            
+                                removeEventListener();
+                                function removeEventListener() {
+                                    window.removeEventListener('click', function () {
+                                        return true;
+                                    });
+                                }
+                            }
+
+
+                            function handleContextInput() {
+                                const action = e.target.dataset.action;
+                                if(!action) return;
+
+                                const itemid = e.target.dataset.itemid
+
+                                switch (action) {
+                                    case 'drop':
+                                        dropItem(itemid);
+                                        break;
+                                    case 'use':
+                                        useItem(itemid);
+                                        break;
+                                    case 'split':
+                                        splitItem(itemid);
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+                            }
+
+                            function dropItem(itemid) {
+                                try {
+                                    mp.trigger('dropItem', itemid);
+                                    removeContextMenu();
+                                }catch(err) {}
+                            }
+                            function useItem(itemid) {
+                                try {
+                                    mp.trigger('useItem', itemid);
+                                    removeContextMenu();
+                                }catch(err) {}
+                            }
+                            function splitItem(itemid) {
+                                try {
+                                    mp.trigger('splitItem', itemid);
+                                }catch(err) {}
+                            }
+
+                        });
+
                         return;
                     }
 
