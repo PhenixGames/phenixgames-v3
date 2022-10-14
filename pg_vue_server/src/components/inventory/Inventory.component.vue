@@ -2,10 +2,7 @@
     <section id="logo">
         <img src="../../assets/img/_logo/web/PhenixGames_Logo_no_text.svg" />
     </section>
-    <div 
-        class="inv_context display-none absolute white" 
-        data-itemid=""
-    >
+    <div class="inv_context display-none absolute white" data-itemid="">
         <p class="cursor-pointer" data-action="use">Benutzen</p>
         <p class="cursor-pointer" data-action="split">Aufteilen</p>
         <p class="red cursor-pointer" data-action="drop">Wegwerfen</p>
@@ -18,15 +15,25 @@
         <main>
             <p>Ausgerüstetes Equipment</p>
             <div class="inv_container">
-                <div v-for="row in rows_top" :key="row" class="inv_item empty" :id="'top_pos_' + row"
-                    data-isstackable=""></div>
+                <div
+                    v-for="row in rows_top"
+                    :key="row"
+                    class="inv_item empty"
+                    :id="'top_pos_' + row"
+                    data-isstackable=""
+                ></div>
             </div>
         </main>
         <footer>
             <p>Inventar</p>
             <div class="inv_container">
-                <div v-for="row in rows_below" :key="row" class="inv_item empty" :id="'bottom_pos_' + row"
-                    data-isstackable=""></div>
+                <div
+                    v-for="row in rows_below"
+                    :key="row"
+                    class="inv_item empty"
+                    :id="'bottom_pos_' + row"
+                    data-isstackable=""
+                ></div>
             </div>
         </footer>
     </section>

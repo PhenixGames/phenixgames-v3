@@ -38,7 +38,7 @@ mp.events.add('uiInitInventory', () => {
 
 mp.events.add('uiSaveInventory', (items) => {
     mp.events.callRemote('Server:Save:Inventory', items);
-})
+});
 
 mp.events.add('Player:Browser:Inventory:close', () => {
     closeBrowser();
