@@ -1,33 +1,33 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 * {
-	outline: none;
-	user-select: none;
-	box-sizing: border-box;
-	font-family: "Roboto", sans-serif !important;
+    outline: none;
+    user-select: none;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif !important;
 }
 
 body {
-	background: #141212;
+    background: #141212;
 }
 
 .logo img {
-	width: 200px;
-	margin: 20px 0 0 50px;
+    width: 200px;
+    margin: 20px 0 0 50px;
 }
 
 .header {
-	display: flex;
+    display: flex;
     justify-content: center;
     font-size: 1.8em;
-	transform: translateX(-110px) translateY(100px);
+    transform: translateX(-110px) translateY(100px);
 }
 
 .quotes {
-	margin: 300px 0 0 0;
+    margin: 300px 0 0 0;
 }
 
 hr {
-	transform: translateY(20px);
+    transform: translateY(20px);
     width: 500px;
 }
 
@@ -45,7 +45,7 @@ hr {
     z-index: -1;
     width: 100%;
     height: 40px;
-    background: red; 
+    background: red;
     animation: deathscreenloading 300s linear;
 }
 
@@ -69,7 +69,7 @@ hr {
     border: 0;
     border-radius: 10px;
     font-size: 1.3em;
-    transition: 0.5s ease-in-out; 
+    transition: 0.5s ease-in-out;
     opacity: 0;
     display: none;
     cursor: pointer;
@@ -79,12 +79,11 @@ hr {
     box-shadow: 0px 0px 20px #000000;
 }
 
-
-@media screen and (min-width:1440px) {
-   .header {
-       font-size: 2em;
-   }
-   .quotes {
-       font-size: 2em;
-   }
+@media screen and (min-width: 1440px) {
+    .header {
+        font-size: 2em;
+    }
+    .quotes {
+        font-size: 2em;
+    }
 }

@@ -1,16 +1,15 @@
 const debug = require('../../../_assets/json/debug/debug.json').playerapi;
 
-const database = require("../../_db/db");
+const database = require('../../_db/db');
 const generellAPI = require('../allgemein');
-
 
 class PermissionSystemApi {
     constructor() {}
 
     async hasPermissions(player, permission) {
         const playerPermissions = JSON.parse(player.getVariable('user_permissions'));
-        if(!playerPermissions) return false;
-        
+        if (!playerPermissions) return false;
+
         let hasPerms = [];
 
         for (let i in permission) {
@@ -18,14 +17,14 @@ class PermissionSystemApi {
                 return hasPerms.push(true);
             }
             if (playerPermissions[permission[i]] === 1) {
-                hasPerms.push(true)
+                hasPerms.push(true);
             } else {
                 hasPerms.push(false);
             }
         }
-        hasPerms = hasPerms.filter(b => b === false);
+        hasPerms = hasPerms.filter((b) => b === false);
 
-        return (hasPerms.length === 0) ? true : false;
+        return hasPerms.length === 0 ? true : false;
     }
 
     getAdminAlpha() {
@@ -33,29 +32,31 @@ class PermissionSystemApi {
     }
 
     async getRole(roleId) {
-        return await database.query('SELECT * FROM pg_permission_roles WHERE roleid = ? LIMIT 1', [roleId])
-            .then(res => {
+        return await database
+            .query('SELECT * FROM pg_permission_roles WHERE roleid = ? LIMIT 1', [roleId])
+            .then((res) => {
                 if (res.length <= 0) {
                     return false;
                 }
                 return res[0];
             })
-            .catch(err => {
+            .catch((err) => {
                 return false;
             });
     }
 
     async getPermissionList(roleId) {
-        return await database.query('SELECT * FROM pg_permission_list WHERE roleid = ? LIMIT 1', [roleId])
-        .then(res => {
-            if (res.length <= 0) {
+        return await database
+            .query('SELECT * FROM pg_permission_list WHERE roleid = ? LIMIT 1', [roleId])
+            .then((res) => {
+                if (res.length <= 0) {
+                    return false;
+                }
+                return res[0];
+            })
+            .catch((err) => {
                 return false;
-            }
-            return res[0];
-        })
-        .catch(err => {
-            return false;
-        });
+            });
     }
 
     async setPerms(player, roleId) {
@@ -65,7 +66,7 @@ class PermissionSystemApi {
         }
         const playerPermissions = await this.getPermissionList(role.roleid);
         generellAPI.saveLocalVar(player, {
-            'user_permissions': JSON.stringify(playerPermissions)
+            user_permissions: JSON.stringify(playerPermissions),
         });
     }
 }

@@ -7,5 +7,10 @@
     --white: #ffffff;
     --black: #141212;
     --background: rgba(255, 231, 13, 0.486);
-    --background_gradient: linear-gradient(90deg, rgba(255,204,13,0.8379552504595589) 0%, rgba(255,163,13,0.8883754185267857) 48%, rgba(254,85,13,0.9500000683867297) 100%);
+    --background_gradient: linear-gradient(
+        90deg,
+        rgba(255, 204, 13, 0.8379552504595589) 0%,
+        rgba(255, 163, 13, 0.8883754185267857) 48%,
+        rgba(254, 85, 13, 0.9500000683867297) 100%
+    );
 }

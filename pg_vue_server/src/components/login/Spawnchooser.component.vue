@@ -45,16 +45,14 @@
 export default {
     name: 'pg_spawnchooser',
     data() {
-        return {
-
-        }
+        return {};
     },
     methods: {
         chooseSpawn(type) {
-            mp.trigger('Player:Spawn', type)
-        }
-    }
-}
+            mp.trigger('Player:Spawn', type);
+        },
+    },
+};
 </script>
 
 <style scoped>

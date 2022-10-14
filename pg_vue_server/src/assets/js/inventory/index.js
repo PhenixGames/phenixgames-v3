@@ -1,16 +1,10 @@
 window.addEventListener('load', function () {
-
     window.ondragstart = function () {
         return false;
-    }
+    };
 
-    let loaded = false;
-
-    if (!loaded) {
-        loaded = true;
-        updateAllDragableDivs();
-        dragAndDrop();
-    }
+    updateAllDragableDivs();
+    dragAndDrop();
 
     var allDragableDivs;
 
@@ -18,139 +12,81 @@ window.addEventListener('load', function () {
         allDragableDivs = document.querySelectorAll('.full');
     }
 
-    var dragDiv
-    var oldParent
-    var isstackable;
-
+    var dragDiv;
+    var oldParent;
 
     function dragAndDrop() {
-
         if (allDragableDivs.length > 0) {
             allDragableDivs.forEach(function (div) {
-                if (dragDiv && !div.classList.contains('full') && div.classList.contains('no-drag')) return;
-
+                var isstackable;
                 div.addEventListener('mousedown', function (e) {
-
                     //RIGHT CLICK
                     if (e.which == 3) {
-                        return openContextMenu(e);
+                        alert('right click triggered');
+                        return;
                     }
 
-                    oldParent = div;
+                    if (
+                        !dragDiv &&
+                        div.classList.contains('full') &&
+                        !div.classList.contains('no-drag')
+                    ) {
+                        oldParent = div;
+                        div.classList.remove('full');
+                        div.classList.add('empty');
 
-                    dragDiv = div.querySelector('div');
-                    dragDiv.style.position = 'absolute';
-                    dragDiv.style.zIndex = '99';
+                        isstackable = div.dataset.isstackable;
+                        div.dataset.isstackable = '';
 
-                    document.addEventListener('mousemove', function (e) {
-                        if (!dragDiv) {
-                            return document.removeEventListener('mousemove', function (e) {
-                                return true
-                            });
-                        }
+                        dragDiv = div.children[0];
 
-                        dragDiv.style.left = e.clientX - 25 + 'px';
-                        dragDiv.style.top = e.clientY - 20 + 'px';
-                    });
+                        dragDiv.style.position = 'absolute';
+                        dragDiv.style.zIndex = '9999';
+
+                        document.addEventListener('mousemove', function (e) {
+                            if (dragDiv) {
+                                dragDiv.style.left = e.clientX - 25 + 'px';
+                                dragDiv.style.top = e.clientY - 20 + 'px';
+                            } else {
+                                document.removeEventListener('mousemove', function (e) {
+                                    return true;
+                                });
+                            }
+                        });
+                    }
                 });
 
                 div.addEventListener('mouseup', function (e) {
-                    if (!dragDiv) return;
+                    if (dragDiv) {
+                        dragDiv.style.pointerEvents = 'none';
 
-                    dragDiv.style = 'null';
+                        var divUnderMousePosition = document.elementFromPoint(e.clientX, e.clientY);
 
-                    const divUnderMouse = document.elementFromPoint(e.clientX, e.clientY);
+                        dragDiv.style.pointerEvents = 'all';
+                        dragDiv.style.position = 'relative';
+                        dragDiv.style.left = '';
+                        dragDiv.style.top = '';
+                        dragDiv.style.zIndex = '';
+                        divUnderMousePosition.dataset.isstackable = isstackable;
 
-                    const isTheSameItem = isSameItem(dragDiv, divUnderMouse);
+                        if (divUnderMousePosition.classList.contains('empty')) {
+                            divUnderMousePosition.classList.remove('empty');
+                            divUnderMousePosition.classList.add('full');
 
-
-                    if (isTheSameItem) {
-                        stackItems(dragDiv, divUnderMouse);
-                        return clear();
-                    }
-
-                    if (divUnderMouse.classList.contains('empty')) {
-                        divUnderMouse.classList.remove('empty');
-                        divUnderMouse.classList.add('full');
-
-                        divUnderMouse.dataset.itemid = dragDiv.parentNode.dataset.itemid;
-                        divUnderMouse.dataset.amount = dragDiv.parentNode.dataset.amount;
-                        divUnderMouse.dataset.isstackable = dragDiv.parentNode.dataset.isstackable;
-
-                        cleanOldDiv();
-                        resetDiv(div.parentNode);
-
-                        divUnderMouse.append(dragDiv);
-                    } else {
-                        oldParent.append(dragDiv);
-                    }
-
-                    clear();
-                    function clear() {
-                        dragDiv = null;
-                        oldParent = null;
-                        isstackable = null;
-
-                        document.removeEventListener('mousemove', function (e) {
-                            return true
-                        });
-                        document.removeEventListener('mouseup', function (e) {
-                            return true
-                        });
-                        document.removeEventListener('mousedown', function (e) {
-                            return true
-                        });
+                            divUnderMousePosition.append(dragDiv);
+                        } else {
+                            oldParent.classList.remove('empty');
+                            oldParent.classList.add('full');
+                            oldParent.append(dragDiv);
+                        }
 
                         updateAllDragableDivs();
                         dragAndDrop();
-                    }
 
-                    function cleanOldDiv() {
-                        oldParent.classList.remove('full');
-                        oldParent.classList.add('empty');
-                        oldParent.dataset.itemid = '';
-                        oldParent.dataset.amount = '';
-                        oldParent.dataset.isstackable = '';
+                        dragDiv = null;
                     }
-
-                    return;
                 });
             });
         }
     }
-
-    function isSameItem(div, target) {
-        return div.dataset.itemid == target.dataset.itemid
-    }
-
-    function stackItems(div, target) {
-        
-        const divParent = div.parentNode;
-        const targetParent = target.parentNode.parentNode;
-
-        if(targetParent.dataset.isstackable == 'false') return;
-
-        var amount = parseInt(divParent.dataset.amount);
-        var targetAmount = parseInt(targetParent.dataset.amount);
-
-        target.dataset.amount = amount + targetAmount;
-
-        targetParent.querySelector('span').innerHTML = amount + targetAmount;
-
-        divParent.classList.remove('full');
-        divParent.classList.add('empty');
-
-        resetDiv(div.parentNode);
-
-        div.remove();
-        return;
-    }
-
-    function resetDiv(div) {
-        div.dataset.isstackable = "";
-        div.dataset.amount = "";
-        div.dataset.itemid = ""
-    }
-
-    function openContextMenu(div) {}
 });

@@ -1,55 +1,53 @@
 var getNormalizedVector = function (vector) {
-    var mag = Math.sqrt(
-      vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
-    );
+    var mag = Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
     vector.x = vector.x / mag;
     vector.y = vector.y / mag;
     vector.z = vector.z / mag;
     return vector;
-  };
-  var getCrossProduct = function (v1, v2) {
+};
+var getCrossProduct = function (v1, v2) {
     var vector = new mp.Vector3(0, 0, 0);
     vector.x = v1.y * v2.z - v1.z * v2.y;
     vector.y = v1.z * v2.x - v1.x * v2.z;
     vector.z = v1.x * v2.y - v1.y * v2.x;
     return vector;
-  };
-  var bindVirtualKeys = {
-    F2: 0x71
-  };
-  var bindASCIIKeys = {
+};
+var bindVirtualKeys = {
+    F2: 0x71,
+};
+var bindASCIIKeys = {
     Q: 69,
     E: 81,
     LCtrl: 17,
-    Shift: 16
-  };
-  var isNoClip = false;
-  var noClipCamera;
-  var shiftModifier = false;
-  var controlModifier = false;
-  var localPlayer = mp.players.local;
-  var Adminduty = false;
-  mp.keys.bind(bindVirtualKeys.F2, true, function () {
-    if(Adminduty){
-    isNoClip = !isNoClip;
-    mp.game.ui.displayRadar(!isNoClip);
-    if (isNoClip) {
-      startNoClip();
-    } else {
-      stopNoClip();
+    Shift: 16,
+};
+var isNoClip = false;
+var noClipCamera;
+var shiftModifier = false;
+var controlModifier = false;
+var localPlayer = mp.players.local;
+var Adminduty = false;
+mp.keys.bind(bindVirtualKeys.F2, true, function () {
+    if (Adminduty) {
+        isNoClip = !isNoClip;
+        mp.game.ui.displayRadar(!isNoClip);
+        if (isNoClip) {
+            startNoClip();
+        } else {
+            stopNoClip();
+        }
     }
-    }
-  });
-  
-  mp.events.add("Player:Admin:Duty:noclip", () => {//Um den Wert Adminduty zu verändern
-    Adminduty = !Adminduty
-  
-  });
-  function startNoClip() {
+});
+
+mp.events.add('Player:Admin:Duty:noclip', () => {
+    //Um den Wert Adminduty zu verändern
+    Adminduty = !Adminduty;
+});
+function startNoClip() {
     var camPos = new mp.Vector3(
-      localPlayer.position.x,
-      localPlayer.position.y,
-      localPlayer.position.z
+        localPlayer.position.x,
+        localPlayer.position.y,
+        localPlayer.position.z
     );
     var camRot = mp.game.cam.getGameplayCamRot(2);
     noClipCamera = mp.cameras.new('default', camPos, camRot, 45);
@@ -59,23 +57,23 @@ var getNormalizedVector = function (vector) {
     //localPlayer.setInvincible(true);
     localPlayer.setVisible(false, false);
     localPlayer.setCollision(false, false);
-  }
-  function stopNoClip() {
+}
+function stopNoClip() {
     if (noClipCamera) {
-      localPlayer.position = noClipCamera.getCoord();
-      localPlayer.setHeading(noClipCamera.getRot(2).z);
-      noClipCamera.destroy(true);
-      noClipCamera = null;
+        localPlayer.position = noClipCamera.getCoord();
+        localPlayer.setHeading(noClipCamera.getRot(2).z);
+        noClipCamera.destroy(true);
+        noClipCamera = null;
     }
     mp.game.cam.renderScriptCams(false, false, 0, true, false);
     localPlayer.freezePosition(false);
     //localPlayer.setInvincible(false);
     localPlayer.setVisible(true, false);
     localPlayer.setCollision(true, false);
-  }
-  mp.events.add('render', function () {
+}
+mp.events.add('render', function () {
     if (!noClipCamera || mp.gui.cursor.visible) {
-      return;
+        return;
     }
     controlModifier = mp.keys.isDown(bindASCIIKeys.LCtrl);
     shiftModifier = mp.keys.isDown(bindASCIIKeys.Shift);
@@ -83,9 +81,9 @@ var getNormalizedVector = function (vector) {
     var fastMult = 1;
     var slowMult = 1;
     if (shiftModifier) {
-      fastMult = 6;
+        fastMult = 6;
     } else if (controlModifier) {
-      slowMult = 0.5;
+        slowMult = 0.5;
     }
     var rightAxisX = mp.game.controls.getDisabledControlNormal(0, 220);
     var rightAxisY = mp.game.controls.getDisabledControlNormal(0, 221);
@@ -98,36 +96,28 @@ var getNormalizedVector = function (vector) {
     vector.y = rr.y * leftAxisY * fastMult * slowMult;
     vector.z = rr.z * leftAxisY * fastMult * slowMult;
     var upVector = new mp.Vector3(0, 0, 1);
-    var rightVector = getCrossProduct(
-      getNormalizedVector(rr),
-      getNormalizedVector(upVector)
-    );
+    var rightVector = getCrossProduct(getNormalizedVector(rr), getNormalizedVector(upVector));
     rightVector.x *= leftAxisX * 0.5;
     rightVector.y *= leftAxisX * 0.5;
     rightVector.z *= leftAxisX * 0.5;
     var upMovement = 0.0;
     if (mp.keys.isDown(bindASCIIKeys.Q)) {
-      upMovement = 0.5;
+        upMovement = 0.5;
     }
     var downMovement = 0.0;
     if (mp.keys.isDown(bindASCIIKeys.E)) {
-      downMovement = 0.5;
+        downMovement = 0.5;
     }
     mp.players.local.position = new mp.Vector3(
-      pos.x + vector.x + 1,
-      pos.y + vector.y + 1,
-      pos.z + vector.z + 1
+        pos.x + vector.x + 1,
+        pos.y + vector.y + 1,
+        pos.z + vector.z + 1
     );
     mp.players.local.heading = rr.z;
     noClipCamera.setCoord(
-      pos.x - vector.x + rightVector.x,
-      pos.y - vector.y + rightVector.y,
-      pos.z - vector.z + rightVector.z + upMovement - downMovement
+        pos.x - vector.x + rightVector.x,
+        pos.y - vector.y + rightVector.y,
+        pos.z - vector.z + rightVector.z + upMovement - downMovement
     );
-    noClipCamera.setRot(
-      rot.x + rightAxisY * -5.0,
-      0.0,
-      rot.z + rightAxisX * -5.0,
-      2
-    );
-  });
+    noClipCamera.setRot(rot.x + rightAxisY * -5.0, 0.0, rot.z + rightAxisX * -5.0, 2);
+});
