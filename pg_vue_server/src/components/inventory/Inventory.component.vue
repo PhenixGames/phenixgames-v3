@@ -69,18 +69,17 @@ export default {
             if (item === []) return;
 
             for (let i in item) {
-                console.log(item[i]);
-                let invPost = item[i].invPos;
-                let img = item[i].img;
-                let count = item[i].count;
-                let isTop = item[i].isTop;
-                let isStackable = item[i].isStackable;
+                const invPos = item[i].invPos;
+                const imgPath = item[i].img;
+                const count = item[i].count;
+                const isTop = item[i].isTop;
+                const isStackable = item[i].isStackable;
 
                 let itemDiv;
 
                 isTop
-                    ? (itemDiv = document.getElementById('top_pos_' + invPost))
-                    : (itemDiv = document.getElementById('bottom_pos_' + invPost));
+                    ? (itemDiv = document.getElementById('top_pos_' + invPos))
+                    : (itemDiv = document.getElementById('bottom_pos_' + invPos));
                 let innerDiv = document.createElement('div');
                 if (itemDiv.classList.contains('empty')) {
                     itemDiv.classList.remove('empty');
@@ -88,7 +87,7 @@ export default {
                     itemDiv.dataset.isstackable = isStackable;
 
                     const img = document.createElement('img');
-                    img.src = img;
+                    img.src = imgPath;
                     innerDiv.appendChild(img);
 
                     const count = document.createElement('span');
