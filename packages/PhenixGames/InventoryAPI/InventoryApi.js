@@ -32,11 +32,11 @@ class Api {
             });
     }
 
-    async save(id) {
+    async save(id, items = this.defaultInventory) {
         return await database
             .query(`INSERT IGNORE INTO pg_user_inventory (id, items) VALUES (?, ?)`, [
                 id,
-                JSON.stringify(defaultInventory),
+                JSON.stringify(items),
             ])
             .catch((err) => {
                 return false;

@@ -40,7 +40,7 @@ mp.events.add('RegisterAccount', async (player, password) => {
         },
     ];
 
-    await InventoryApi.save(user.id, JSON.stringify(items));
+    await InventoryApi.save(user.id, items);
 
     player.call('Player:InGameName:Choose');
     return;
