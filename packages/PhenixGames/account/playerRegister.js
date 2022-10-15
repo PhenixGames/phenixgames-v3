@@ -19,7 +19,7 @@ mp.events.add('RegisterAccount', async (player, password) => {
         isLoggedIn: true,
     });
 
-    await MoneyAPI.CreateNewMoneyEntry(user.id, 1500, 3000);
+    await MoneyAPI.add(user.id, 1500, 3000);
 
     PermissionSystem.setPerms(player, user.roleId);
 
