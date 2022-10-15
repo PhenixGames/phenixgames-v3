@@ -122,7 +122,7 @@ export default {
                     });
                 }
             }
-            mp.trigger('saveInventory', JSON.stringify(invItemsArr));
+            mp.trigger('uiSaveInventory', JSON.stringify(invItemsArr));
         },
     },
     mounted() {
