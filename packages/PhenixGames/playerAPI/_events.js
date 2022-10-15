@@ -19,7 +19,7 @@ mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, bon
 mp.events.add('Server:Init:Inventory', async (player) => {
     const items = await InventoryApi.get(player.getVariable('playerId'));
 
-    player.call('Player:Init:Inventory', [JSON.stringify(items)]);
+    player.call('Player:Init:Inventory', [items]);
 });
 
 //? Save the player inventory

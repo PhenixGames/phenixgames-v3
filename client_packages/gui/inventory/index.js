@@ -15,7 +15,7 @@ exports.interacteInventory = () => {
 };
 function closeBrowser() {
     if (isInvOpen) {
-        invBrowser.execute('saveInventory();');
+        invBrowser.execute('gui.inventory.saveInventory();');
         invBrowser.destroy();
         mp.gui.cursor.show(false, false);
         isInvOpen = false;
@@ -45,7 +45,5 @@ mp.events.add('Player:Browser:Inventory:close', () => {
 });
 
 mp.events.add('Player:Init:Inventory', (items) => {
-    invBrowser.execute(`gui.inventory.insertItemsIntoInv({
-        item: ${items}
-    );`);
+    invBrowser.execute("gui.inventory.insertItemsIntoInv('"+items+"');");
 });

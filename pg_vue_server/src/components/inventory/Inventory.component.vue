@@ -64,10 +64,12 @@ export default {
     },
     methods: {
         //invPos, img, count, isStackable
-        insertItemsIntoInv({ item }) {
+        insertItemsIntoInv(item) {
+            item = JSON.parse(item);
             if (item === []) return;
 
             for (let i in item) {
+                console.log(item[i]);
                 let invPost = item[i].invPos;
                 let img = item[i].img;
                 let count = item[i].count;
@@ -85,10 +87,14 @@ export default {
                     itemDiv.classList.add('full');
                     itemDiv.dataset.isstackable = isStackable;
 
-                    innerDiv.innerHTML = `<img src="${img}" />`;
-                    if (isStackable) {
-                        innerDiv.innerHTML += `<span>${count}</span>`;
-                    }
+                    const img = document.createElement('img');
+                    img.src = img;
+                    innerDiv.appendChild(img);
+
+                    const count = document.createElement('span');
+                    count.innerText = count;
+                    innerDiv.appendChild(count);
+
                 } else {
                     if (isStackable) {
                         let span = innerDiv.querySelector('span');
@@ -130,24 +136,24 @@ export default {
             mp.trigger('uiInitInventory');
         }catch(e) {}
 
-        this.insertItemsIntoInv({
-            item: [
-                {
-                    invPos: 1,
-                    img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
-                    count: 1,
-                    isTop: true,
-                    isStackable: true,
-                },
-                {
-                    invPos: 1,
-                    img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
-                    count: 1,
-                    isTop: false,
-                    isStackable: false,
-                },
-            ],
-        });
+        // this.insertItemsIntoInv({
+        //     item: [
+        //         {
+        //             invPos: 1,
+        //             img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
+        //             count: 1,
+        //             isTop: true,
+        //             isStackable: true,
+        //         },
+        //         {
+        //             invPos: 1,
+        //             img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
+        //             count: 1,
+        //             isTop: false,
+        //             isStackable: false,
+        //         },
+        //     ],
+        // });
 
         gui.inventory = this;
     },

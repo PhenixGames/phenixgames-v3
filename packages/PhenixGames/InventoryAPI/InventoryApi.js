@@ -3,7 +3,7 @@ const database = require('../../_db/db');
 class Api {
     constructor() {}
 
-    static defaultInventory = [];
+    defaultInventory = [];
 
     async get(id) {
         return await database
