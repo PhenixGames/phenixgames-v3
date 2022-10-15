@@ -124,7 +124,6 @@ export default {
             }
             mp.trigger('saveInventory', JSON.stringify(invItemsArr));
         },
-        }
     },
     mounted() {
         try {
