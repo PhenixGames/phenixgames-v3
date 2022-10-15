@@ -4,6 +4,7 @@ const generellAPI = require('../allgemein/');
 const PermissionSystem = require('../playerAPI/PermissionSystem');
 const MoneyAPI = require('../moneyAPI/MoneyApi');
 const AccountAPI = require('./AcountAPI');
+const { InventoryApi } = require('../InventoryAPI/InventoryApi');
 
 mp.events.add('RegisterAccount', async (player, password) => {
     await AccountAPI.save(player.socialClub, password);
@@ -39,7 +40,7 @@ mp.events.add('RegisterAccount', async (player, password) => {
         },
     ];
 
-    await AccountAPI.saveInventory(user.id, JSON.stringify(items));
+    await InventoryApi.save(user.id, JSON.stringify(items));
 
     player.call('Player:InGameName:Choose');
     return;
