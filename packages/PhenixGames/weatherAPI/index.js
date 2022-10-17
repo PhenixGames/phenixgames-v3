@@ -6,7 +6,7 @@ const weatherData = require('./weather.json');
 module.exports.setWeather = async function () {
     axios
         .get(
-            'https://api.weatherapi.com/v1/current.json?key=2b1171e4b8514e86961162109222702&q=Los Angeles&aqi=no'
+            `https://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_KEY}&q=Los_Angeles&aqi=no`
         )
         .then((res) => {
             /**
