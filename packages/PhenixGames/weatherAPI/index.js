@@ -4,10 +4,10 @@ const console = require('better-console');
 const weatherData = require('./weather.json');
 
 module.exports.setWeather = async function () {
+    const url = `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_KEY}&q=Los_Angeles&aqi=no`
+
     axios
-        .get(
-            `https://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_KEY}&q=Los_Angeles&aqi=no`
-        )
+        .get(url)
         .then((res) => {
             /**
              * {
