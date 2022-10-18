@@ -8,9 +8,9 @@ class api {
     NPC_Array = [];
 
     /*
-        - Load All Garages from Database
+        + Load All Garages from Database
         - Load All Ausparkpunkte From Database into an Array Witch Update function
-        - Get All Vehicles From Player Which are "InGarage" 
+        + Get All Vehicles From Player Which are "InGarage" 
         - Is Ausparkpunkt Free function
         - Spawn Vehicle From DB
         + Car Death => Delete Car from Map and add InGarage True
@@ -68,11 +68,38 @@ class api {
             shortRange: true,
         });
     }
-
-    async LoadAusparkpunkte() {}
-    async GetVehiclesFromPlayerGarage() {}
-    async IsAusparkpunktempty() {}
+    
+    async IsAusparkpunktempty(pos, range = 5) {
+        //Hier muss geschaut werden ob ein Ausparkpunkt frei ist ( Umkreis von 5 Meter )
+        if(pos == undefined) return false;
+        //TODO
+    }
+    
     async SpawnVehicleFromGarage(player, vehicle) {}
+    async LoadAusparkpunkte(shapeid) {
+        return await database
+            .query(`SELECT * FROM pg_garage_ausparkpunkte WHERE garagen_id = ?`, [shapeid])
+            .then((res) => {
+                return res;
+            })
+            .catch((err) => {
+                return false;
+            });
+            //TODO Hier muss noch der Code zum Spawnen von Markern rein
+    }
+    async GetVehiclesFromPlayerGarage(playerid) {
+        return await database
+            .query(`SELECT * FROM pg_vehicles WHERE veh_owner = ? AND veh_state = ?`, [
+                playerid,
+                true,
+            ])
+            .then((res) => {
+                return res;
+            })
+            .catch((err) => {
+                return false;
+            });
+    }
     async Load_NPC_on_Player(player) {
         for (let i in this.NPC_Array) {
             player.call('Garage:LoadNPC', [
