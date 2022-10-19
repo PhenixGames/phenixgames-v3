@@ -61,7 +61,6 @@ export default {
         initPunishmentscreen({ adminname, reason, time_left, date_of_punishment, punishment_id }) {
             this.adminname = adminname;
             this.reason = reason;
-            this.time_left = time_left;
             this.date_of_punishment_timestamp = parseInt(date_of_punishment);
             this.date_of_punishment = new Date(parseInt(date_of_punishment)).toLocaleString(
                 'de-DE',
@@ -78,10 +77,10 @@ export default {
         },
 
         calculateTimeLeft() {
-            const today = new Date();
+            const today = new Date().getTime();
             const dateOfPunishment = new Date(this.date_of_punishment_timestamp).getTime();
 
-            const timeLeft = dateOfPunishment - today.getTime();
+            const timeLeft = dateOfPunishment - today;
             const timeLeftInDays = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
             const timeLeftInHours = Math.floor(timeLeft / (1000 * 60 * 60));
             const timeLeftInMinutes = Math.floor(timeLeft / (1000 * 60));
