@@ -6,23 +6,23 @@
 
         <div class="punishment_info bold white">
             <h3 class="red big center">Dein Konto wurde gesperrt</h3>
-            <div style="width: 100%">
+            <div>
                 <span>Admin:</span>
                 <span>{{ adminname }}</span>
             </div>
-            <div style="width: 100%">
+            <div>
                 <span>Grund:</span>
                 <span>{{ reason }}</span>
             </div>
-            <div style="width: 100%">
+            <div>
                 <span>Verbleibende Zeit:</span>
                 <span class="red">{{ time_left }}</span>
             </div>
-            <div style="width: 100%">
+            <div>
                 <span>Datum der Sperrung:</span>
                 <span>{{ date_of_punishment }}</span>
             </div>
-            <div style="width: 100%">
+            <div>
                 <span>Punishment ID:</span>
                 <span>{{ punishment_id }}</span>
             </div>
