@@ -1,3 +1,3 @@
-mp.events.addCommand('vrange', async (player, rage) => {
-    player.call('Player:set:Rage:Voice', rage);
+mp.events.addCommand('vrange', async (player, range) => {
+    player.call('Player:set:Rage:Voice', range);
 });

@@ -1,6 +1,5 @@
 //https://docs.microsoft.com/de-de/windows/win32/inputdev/virtual-key-codes
 
-//const { info } = require("better-console");
 const { interacteGasstation } = require('./gui/gasstation/index.js');
 const { interacteInventory } = require('./gui/inventory/index.js');
 const vehiclemoduele = require('./non-gui/vehicle/index.js');

@@ -1,6 +1,5 @@
 const debug = require('../../../_assets/json/debug/debug.json').weatherapi;
 const axios = require('axios');
-const console = require('better-console');
 const weatherData = require('./weather.json');
 
 module.exports.setWeather = async function () {
