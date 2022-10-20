@@ -33,7 +33,9 @@ function openBrowser() {
 }
 
 mp.events.add('uiInitInventory', () => {
-    mp.events.callRemote('Server:Init:Inventory');
+    if(isInvOpen) {
+        mp.events.callRemote('Server:Init:Inventory');
+    }
 });
 
 mp.events.add('uiSaveInventory', (items) => {
@@ -45,5 +47,7 @@ mp.events.add('Player:Browser:Inventory:close', () => {
 });
 
 mp.events.add('Player:Init:Inventory', (items) => {
-    invBrowser.execute("gui.inventory.insertItemsIntoInv(" + items + ");");
+    if(isInvOpen) {
+        invBrowser.execute("gui.inventory.insertItemsIntoInv(" + items + ");");
+    }
 });

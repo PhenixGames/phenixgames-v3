@@ -59,7 +59,6 @@ export default {
     name: 'pg_inventory',
     data() {
         return {
-            inv_items: {},
             rows_top: 7,
             rows_below: 28,
         };
@@ -138,13 +137,13 @@ export default {
         },
     },
     mounted() {
+        gui.inventory = this;
+
         try {
             mp.trigger('uiInitInventory');
         } catch (e) {}
 
         //this.insertItemsIntoInv("[{\"invPos\":1,\"img\":\"https://cdn-icons-png.flaticon.com/32/3075/3075977.png\",\"count\":1,\"isTop\":true,\"isStackable\":true},{\"invPos\":1,\"img\":\"https://cdn-icons-png.flaticon.com/32/3075/3075977.png\",\"count\":1,\"isTop\":false,\"isStackable\":false}]");
-
-        gui.inventory = this;
     },
 };
 </script>

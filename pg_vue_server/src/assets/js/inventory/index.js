@@ -1,12 +1,14 @@
 window.addEventListener('load', function () {
-    window.ondragstart = function () {
+    window.ondragstart = function () {  
         return false;
     };
 
     window.addEventListener('contextmenu', (e) => e.preventDefault());
 
-    updateAllDragableDivs();
-    dragAndDrop();
+    setTimeout(() => {
+        updateAllDragableDivs();
+        dragAndDrop();    
+    }, 200);
 
     var allDragableDivs;
 
@@ -20,6 +22,7 @@ window.addEventListener('load', function () {
     function dragAndDrop() {
         if (allDragableDivs.length > 0) {
             allDragableDivs.forEach(function (div) {
+                
                 var isstackable;
                 div.addEventListener('mousedown', function (e) {
                     //RIGHT CLICK
@@ -56,6 +59,9 @@ window.addEventListener('load', function () {
                                 removeEventListener();
                                 function removeEventListener() {
                                     window.removeEventListener('click', function () {
+                                        return true;
+                                    });
+                                    div.removeEventListener('mousedown', function () {
                                         return true;
                                     });
                                 }
