@@ -45,5 +45,5 @@ mp.events.add('Player:Browser:Inventory:close', () => {
 });
 
 mp.events.add('Player:Init:Inventory', (items) => {
-    invBrowser.execute("gui.inventory.insertItemsIntoInv('"+items+"');");
+    invBrowser.execute("gui.inventory.insertItemsIntoInv('" + items + "');");
 });

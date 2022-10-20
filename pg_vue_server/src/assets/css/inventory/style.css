@@ -25,7 +25,6 @@ body {
     overflow-y: scroll;
     max-height: 90vh;
     scrollbar-width: none;
-    border: 1px solid red;
 }
 
 #inventar::-webkit-scrollbar {

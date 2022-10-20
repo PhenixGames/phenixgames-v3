@@ -93,7 +93,6 @@ export default {
                     const count = document.createElement('span');
                     count.innerText = count;
                     innerDiv.appendChild(count);
-
                 } else {
                     if (isStackable) {
                         let span = innerDiv.querySelector('span');
@@ -133,7 +132,7 @@ export default {
     mounted() {
         try {
             mp.trigger('uiInitInventory');
-        }catch(e) {}
+        } catch (e) {}
 
         // this.insertItemsIntoInv({
         //     item: [
