@@ -21,6 +21,7 @@
                     class="inv_item empty"
                     :id="'top_pos_' + row"
                     data-isstackable=""
+                    data-isTop="true"
                 ></div>
             </div>
         </main>
@@ -33,6 +34,7 @@
                     class="inv_item empty"
                     :id="'bottom_pos_' + row"
                     data-isstackable=""
+                    data-istop="false"
                 ></div>
             </div>
         </footer>
@@ -42,12 +44,12 @@
         <p>Test</p>
     </section>
 
-    <section id="inv_char">
+    <!-- <section id="inv_char">
         <div class="inv_char_img">
             <img src="../../assets/img/inventory/inv_char.svg" />
         </div>
         <div class="inv_char_items"></div>
-    </section>
+    </section> -->
 </template>
 
 <script>
@@ -66,6 +68,7 @@ export default {
         //invPos, img, count, isStackable
         insertItemsIntoInv(item) {
             item = JSON.parse(item);
+            
             if (item === []) return;
 
             for (let i in item) {
@@ -81,27 +84,32 @@ export default {
                     ? (itemDiv = document.getElementById('top_pos_' + invPos))
                     : (itemDiv = document.getElementById('bottom_pos_' + invPos));
                 let innerDiv = document.createElement('div');
+                
                 if (itemDiv.classList.contains('empty')) {
                     itemDiv.classList.remove('empty');
                     itemDiv.classList.add('full');
                     itemDiv.dataset.isstackable = isStackable;
 
-                    const img = document.createElement('img');
-                    img.src = imgPath;
-                    innerDiv.appendChild(img);
+                    const imgDiv = document.createElement('img');
+                    imgDiv.src = imgPath;
+                    innerDiv.appendChild(imgDiv);
 
-                    const count = document.createElement('span');
-                    count.innerText = count;
-                    innerDiv.appendChild(count);
+                    const countSpan = document.createElement('span');
+                    countSpan.innerText = count;
+                    innerDiv.appendChild(countSpan);
                 } else {
                     if (isStackable) {
-                        let span = innerDiv.querySelector('span');
-                        span.innerHTML = parseInt(span.innerHTML) + count;
-                        span.classList.add('no-drag');
+                        const span = innerDiv.querySelector('span');
+                        try {
+                            span.innerHTML = parseInt(span.innerHTML) + count;
+                            span.classList.add('no-drag');
+                        } catch(e) {}
+                        
                     }
                 }
                 itemDiv.append(innerDiv);
             }
+
         },
         saveInventory() {
             let inv = document.getElementById('inventar');
@@ -114,7 +122,7 @@ export default {
                     let img = item.querySelector('img').src;
                     let count = item.querySelector('span').innerHTML;
                     let isStackable = item.dataset.isstackable;
-                    let isTop = item.parentElement.parentElement.id === 'inventar' ? true : false;
+                    let isTop = JSON.parse(item.dataset.istop);
                     let invPos = item.id.split('_')[2];
 
                     invItemsArr.push({
@@ -134,24 +142,7 @@ export default {
             mp.trigger('uiInitInventory');
         } catch (e) {}
 
-        // this.insertItemsIntoInv({
-        //     item: [
-        //         {
-        //             invPos: 1,
-        //             img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
-        //             count: 1,
-        //             isTop: true,
-        //             isStackable: true,
-        //         },
-        //         {
-        //             invPos: 1,
-        //             img: 'https://cdn-icons-png.flaticon.com/32/3075/3075977.png',
-        //             count: 1,
-        //             isTop: false,
-        //             isStackable: false,
-        //         },
-        //     ],
-        // });
+        //this.insertItemsIntoInv("[{\"invPos\":1,\"img\":\"https://cdn-icons-png.flaticon.com/32/3075/3075977.png\",\"count\":1,\"isTop\":true,\"isStackable\":true},{\"invPos\":1,\"img\":\"https://cdn-icons-png.flaticon.com/32/3075/3075977.png\",\"count\":1,\"isTop\":false,\"isStackable\":false}]");
 
         gui.inventory = this;
     },
