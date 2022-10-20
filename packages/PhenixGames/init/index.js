@@ -1,6 +1,5 @@
 const debug = require('../../../_assets/json/debug/debug.json');
 
-const console = require('better-console');
 const weatherAPI = require('../weatherAPI');
 const { delay } = require('../../../_assets/functions/delay');
 const { log } = require('../../../_assets/functions/log/logs');
