@@ -1,5 +1,5 @@
-const { FAPI } = require("../../PhenixGames/Fuelstation/FuelStationApi");
-const PermissionSystem = require("../../PhenixGames/playerAPI/PermissionSystem");
+const { FAPI } = require('../../PhenixGames/Fuelstation/FuelStationApi');
+const PermissionSystem = require('../../PhenixGames/playerAPI/PermissionSystem');
 
 mp.events.addCommand('fuelmarker', (player, arg, id) => {
     if (!player.getVariable('Aduty')) return;
