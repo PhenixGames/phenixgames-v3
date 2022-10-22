@@ -67,7 +67,7 @@ export default {
         //invPos, img, count, isStackable
         insertItemsIntoInv(item) {
             item = JSON.parse(item);
-            
+
             if (item === []) return;
 
             for (let i in item) {
@@ -83,7 +83,7 @@ export default {
                     ? (itemDiv = document.getElementById('top_pos_' + invPos))
                     : (itemDiv = document.getElementById('bottom_pos_' + invPos));
                 let innerDiv = document.createElement('div');
-                
+
                 if (itemDiv.classList.contains('empty')) {
                     itemDiv.classList.remove('empty');
                     itemDiv.classList.add('full');
@@ -102,13 +102,11 @@ export default {
                         try {
                             span.innerHTML = parseInt(span.innerHTML) + count;
                             span.classList.add('no-drag');
-                        } catch(e) {}
-                        
+                        } catch (e) {}
                     }
                 }
                 itemDiv.append(innerDiv);
             }
-
         },
         saveInventory() {
             let inv = document.getElementById('inventar');

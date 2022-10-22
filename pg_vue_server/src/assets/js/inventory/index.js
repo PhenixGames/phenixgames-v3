@@ -1,5 +1,5 @@
 window.addEventListener('load', function () {
-    window.ondragstart = function () {  
+    window.ondragstart = function () {
         return false;
     };
 
@@ -7,7 +7,7 @@ window.addEventListener('load', function () {
 
     setTimeout(() => {
         updateAllDragableDivs();
-        dragAndDrop();    
+        dragAndDrop();
     }, 200);
 
     var allDragableDivs;
@@ -22,7 +22,6 @@ window.addEventListener('load', function () {
     function dragAndDrop() {
         if (allDragableDivs.length > 0) {
             allDragableDivs.forEach(function (div) {
-                
                 var isstackable;
                 div.addEventListener('mousedown', function (e) {
                     //RIGHT CLICK
