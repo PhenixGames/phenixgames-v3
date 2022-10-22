@@ -25,7 +25,6 @@ body {
     overflow-y: scroll;
     max-height: 90vh;
     scrollbar-width: none;
-    border: 1px solid red;
 }
 
 #inventar::-webkit-scrollbar {
@@ -113,4 +112,10 @@ body {
 
 .inv_char_img img {
     width: 80%;
+}
+
+.inv_context {
+    padding: 10px 20px;
+    background: rgb(55, 55, 55);
+    z-index: 9;
 }
