@@ -51,3 +51,15 @@ mp.events.add('Player:Init:Inventory', (items) => {
         invBrowser.execute("gui.inventory.insertItemsIntoInv(" + items + ");");
     }
 });
+
+mp.events.add('dropItem', (itemid) => {
+    mp.events.callRemote('Server:Item:Drop', itemid);
+});
+
+mp.events.add('useItem', (itemid) => {
+    mp.events.callRemote('Server:Item:Use', itemid);
+});
+
+mp.events.add('splitItem', (itemid, amount) => {
+    mp.events.callRemote('Server:Item:Split', itemid);
+});

@@ -81,7 +81,7 @@ window.addEventListener('load', function () {
                                         useItem(itemid);
                                         break;
                                     case 'split':
-                                        splitItem(itemid);
+                                        splitItem(itemid, 0);
                                         break;
 
                                     default:
@@ -101,9 +101,9 @@ window.addEventListener('load', function () {
                                     removeContextMenu();
                                 } catch (err) {}
                             }
-                            function splitItem(itemid) {
+                            function splitItem(itemid, amount) {
                                 try {
-                                    mp.trigger('splitItem', itemid);
+                                    mp.trigger('splitItem', itemid, amount);
                                 } catch (err) {}
                             }
                         });
