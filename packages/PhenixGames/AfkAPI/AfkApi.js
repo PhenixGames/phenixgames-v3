@@ -5,7 +5,7 @@ const debug = require('../../../_assets/json/debug/debug.json').afk;
 
 class AfkApi {
 
-    defaultAfkMaxTick = 2;
+    defaultAfkMaxTick = 100;
 
     constructor() {
         console.log('[PhenixGames] AfkApi initialized');
