@@ -55,17 +55,17 @@ class Api {
 
     async isStackable(id) {
         const item = await this.get(id);
-        return item.isStackable;
+        return JSON.parse(item.isStackable);
     }
 
     async isDropable(id) {
         const item = await this.get(id);
-        return item.isDropable;
+        return JSON.parse(item.isDropable);
     }
 
     async isSplitable(id) {
         const item = await this.get(id);
-        return item.isSplitable;
+        return JSON.parse(item.isSplitable);
     }
 
     async getMaxCount(id) {
