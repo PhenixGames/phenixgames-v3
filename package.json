@@ -1,38 +1,38 @@
 {
-  "name": "phenixgames-v3",
-  "version": "0.2.7",
-  "description": "Another PhenixGames Server",
-  "scripts": {
-    "start": "./start.sh start",
-    "restart": "./start.sh restart",
-    "kill": "./start.sh kill",
-    "pull": "./start.sh pull",
-    "format": "prettier --write './**/*.{css,js,vue}'"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PhenixGames/phenixgames-v3.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/PhenixGames/phenixgames-v3/issues"
-  },
-  "moduleDirectories": [
-    "node_modules"
-  ],
-  "homepage": "https://phenixgames.de",
-  "dependencies": {
-    "axios": "^1.1.3",
-    "bcryptjs": "^2.4.3",
-    "dotenv": "^16.0.3",
-    "extends-classes": "^1.0.5",
-    "moment": "^2.29.4",
-    "mysql": "^2.18.1",
-    "prettier": "^2.7.1",
-    "simple-node-logger": "^21.8.12",
-    "sloc": "^0.2.1",
-    "validator": "^13.7.0",
-    "vue-router": "^4.1.5"
-  }
+    "name": "phenixgames-v3",
+    "version": "0.2.7",
+    "description": "Another PhenixGames Server",
+    "scripts": {
+        "start": "./start.sh start",
+        "restart": "./start.sh restart",
+        "kill": "./start.sh kill",
+        "pull": "./start.sh pull",
+        "format": "prettier --write ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PhenixGames/phenixgames-v3.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/PhenixGames/phenixgames-v3/issues"
+    },
+    "moduleDirectories": [
+        "node_modules"
+    ],
+    "homepage": "https://phenixgames.de",
+    "dependencies": {
+        "axios": "^1.1.3",
+        "bcryptjs": "^2.4.3",
+        "dotenv": "^16.0.3",
+        "extends-classes": "^1.0.5",
+        "moment": "^2.29.4",
+        "mysql": "^2.18.1",
+        "prettier": "^2.7.1",
+        "simple-node-logger": "^21.8.12",
+        "sloc": "^0.2.1",
+        "validator": "^13.7.0",
+        "vue-router": "^4.1.5"
+    }
 }
