@@ -40,8 +40,7 @@
                 <img
                     src="../assets/img/hud/lock.svg"
                     :style="{ stateActive: carLocked }"
-                    v-if="carLocked"
-                />
+                    v-if="carLocked" />
                 <img src="../assets/img/hud/lock.svg" :style="{ stateActive: !carLocked }" v-else />
             </div>
             <div class="car_heal">

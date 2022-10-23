@@ -27,22 +27,19 @@
                         v-model="password"
                         type="password"
                         placeholder="Passwort"
-                        :class="isLogin ? '' : 'display-none'"
-                    />
+                        :class="isLogin ? '' : 'display-none'" />
                     <br />
                     <span :class="isLogin ? 'display-none' : ''">
                         <input
                             id="register"
                             v-model="password_register"
                             type="password"
-                            placeholder="Neues passwort"
-                        />
+                            placeholder="Neues passwort" />
                         <input
                             id="register_repeat"
                             v-model="password_repeat"
                             type="password"
-                            placeholder="Passwort wiederholen"
-                        />
+                            placeholder="Passwort wiederholen" />
                     </span>
                 </div>
 
@@ -51,8 +48,7 @@
                 <input
                     type="submit"
                     class="cursor-pointer"
-                    :value="isLogin ? 'Einloggen' : 'Registrieren'"
-                />
+                    :value="isLogin ? 'Einloggen' : 'Registrieren'" />
             </form>
         </div>
     </div>

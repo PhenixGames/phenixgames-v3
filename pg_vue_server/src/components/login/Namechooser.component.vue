@@ -2,8 +2,7 @@
     <div class="namechooser">
         <img
             src="../../assets/img/_logo/web/PhenixGames_Logo_no_text.svg"
-            ondragstart="return false"
-        />
+            ondragstart="return false" />
 
         <form class="namechooserform" @submit="submitForm" v-show="showNamechooser">
             <p class="desc white bold user-select-none">
@@ -15,14 +14,12 @@
                 type="text"
                 id="firstname"
                 v-model="firstname"
-                placeholder="Dein zukünftiger Vorname..."
-            />
+                placeholder="Dein zukünftiger Vorname..." />
             <input
                 type="text"
                 id="lastname"
                 v-model="lastname"
-                placeholder="Dein zukünftiger Nachname..."
-            />
+                placeholder="Dein zukünftiger Nachname..." />
             <input type="submit" class="cursor-pointer" value="Weiter" />
         </form>
 

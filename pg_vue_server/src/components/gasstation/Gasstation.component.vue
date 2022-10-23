@@ -15,8 +15,7 @@
                             ? 'background: rgb(13, 162, 68)'
                             : ''
                     "
-                    @click="changeCurrentType('diesel')"
-                >
+                    @click="changeCurrentType('diesel')">
                     <p class="center white bold pointer-events-none user-select-none">
                         Diesel
                         <br />
@@ -31,8 +30,7 @@
                             ? 'background: rgb(13, 162, 68)'
                             : ''
                     "
-                    @click="changeCurrentType('benzin')"
-                >
+                    @click="changeCurrentType('benzin')">
                     <p class="center white bold pointer-events-none user-select-none">
                         Benzin
                         <br />
@@ -58,8 +56,7 @@
                                 ? 'cursor: not-allowed'
                                 : 'background: #FE550D;'
                         "
-                        @click="carClick"
-                    >
+                        @click="carClick">
                         <span class="pointer-events-none"
                             ><strong>Name:</strong> {{ car.name }}</span
                         >
