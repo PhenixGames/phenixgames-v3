@@ -1,4 +1,4 @@
-const debug = require('../../../_assets/json/debug/debug.json').vehicle;
+const debug = require('../../../_assets/json/debug/debug.json').sync;
 const AccountAPI = require('../account/AcountAPI');
 const VehicleAPI = require('../vehicle/VehicleApi');
 const { setWeather } = require('../weatherAPI');
