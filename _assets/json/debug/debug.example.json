@@ -14,5 +14,6 @@
     "vehicle": false,
     "voice": false,
     "weatherapi": false,
-    "garage": false
+    "garage": false,
+    "sync": false
 }

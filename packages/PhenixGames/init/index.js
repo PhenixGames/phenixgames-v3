@@ -9,6 +9,7 @@ const AccountAPI = require('../account/AcountAPI');
 const { FAPI } = require('../Fuelstation/FuelStationApi');
 const IplsAPI = require('../ipls');
 const VehicleAPI = require('../vehicle/VehicleApi');
+const { SyncApi } = require('../SyncAPI/SyncApi');
 
 mp.events.delayInitialization = true;
 (async () => {
@@ -31,22 +32,12 @@ mp.events.add('packagesLoaded', async () => {
 
     await delay(15000);
 
-    setInterval(() => {
-        console.time('Vehicle Server wurde gesynct in: ');
-        VehicleAPI.syncAll();
-        console.timeEnd('Vehicle Server wurde gesynct in: ');
-        console.time('Player Server wurde gesynct in: ');
-        AccountAPI.syncAllPlayers();
-        console.timeEnd('Player Server wurde gesynct in: ');
-    }, 5000);
+    SyncApi.sync();
+    SyncApi.syncWeather();
 
     if (debug.createBackup) {
         new DatabaseBackup();
     }
-
-    setInterval(() => {
-        weatherAPI.setWeather();
-    }, 10800000); // 3h
 });
 
 //! ERROR --
