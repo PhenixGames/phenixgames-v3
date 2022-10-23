@@ -4,9 +4,7 @@ const { AfkApi } = require('../AfkAPI/AfkApi');
 const VehicleAPI = require('../vehicle/VehicleApi');
 const { setWeather } = require('../weatherAPI');
 
-
 class SyncApi {
-
     defaultTick = 5000;
     defaultWeatherTick = 10800000; // 3h
 
@@ -28,9 +26,8 @@ class SyncApi {
     syncWeather() {
         setInterval(() => {
             setWeather();
-        }, this.defaultWeatherTick); 
+        }, this.defaultWeatherTick);
     }
-
 }
 
 module.exports.SyncApi = new SyncApi();
