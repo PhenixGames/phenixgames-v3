@@ -15,5 +15,6 @@
     "voice": false,
     "weatherapi": false,
     "garage": false,
-    "sync": false
+    "sync": false,
+    "afk": false
 }
