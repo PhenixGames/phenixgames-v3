@@ -7,6 +7,7 @@ const { setWeather } = require('../weatherAPI');
 class SyncApi {
 
     defaultTick = 5000;
+    defaultWeatherTick = 10800000; // 3h
 
     constructor() {}
 
@@ -18,13 +19,13 @@ class SyncApi {
             console.time('Player Server wurde gesynct in: ');
             AccountAPI.syncAllPlayers();
             console.timeEnd('Player Server wurde gesynct in: ');
-        }, 5000);
+        }, this.defaultTick);
     }
 
     syncWeather() {
         setInterval(() => {
             setWeather();
-        }, 10800000); // 3h
+        }, this.defaultWeatherTick); 
     }
 
 }
