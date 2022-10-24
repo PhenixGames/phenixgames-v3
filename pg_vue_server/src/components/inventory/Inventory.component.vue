@@ -21,8 +21,7 @@
                     class="inv_item empty"
                     :id="'top_pos_' + row"
                     data-isstackable=""
-                    data-isTop="true"
-                ></div>
+                    data-isTop="true"></div>
             </div>
         </main>
         <footer>
@@ -34,8 +33,7 @@
                     class="inv_item empty"
                     :id="'bottom_pos_' + row"
                     data-isstackable=""
-                    data-istop="false"
-                ></div>
+                    data-istop="false"></div>
             </div>
         </footer>
     </section>

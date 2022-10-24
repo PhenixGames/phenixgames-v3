@@ -7,8 +7,8 @@
         "restart": "./start.sh restart",
         "kill": "./start.sh kill",
         "pull": "./start.sh pull",
-        "format": "prettier --write .",
-        "check": "prettier --check ."
+        "format": "prettier --write . --bracket-same-line=true",
+        "check": "prettier --check . --bracket-same-line=true"
     },
     "repository": {
         "type": "git",
