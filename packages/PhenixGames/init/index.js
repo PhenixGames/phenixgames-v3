@@ -10,6 +10,7 @@ const { FAPI } = require('../Fuelstation/FuelStationApi');
 const IplsAPI = require('../ipls');
 const VehicleAPI = require('../vehicle/VehicleApi');
 const { SyncApi } = require('../SyncAPI/SyncApi');
+const database = require('../../_db/db');
 
 mp.events.delayInitialization = true;
 (async () => {
@@ -42,6 +43,7 @@ mp.events.add('packagesLoaded', async () => {
 
 //! ERROR --
 process.on('unhandledRejection', (err) => {
+    database.close();
     log({
         message: err,
         isFatal: true,
@@ -60,6 +62,7 @@ process.on('unhandledRejection', (err) => {
 });
 
 process.on('uncaughtException', (err) => {
+    database.close();
     log({
         message: err,
         isFatal: true,
