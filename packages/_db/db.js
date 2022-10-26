@@ -7,51 +7,56 @@ require('dotenv').config();
 const database = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PWD, {
     host: process.env.DB_HOST,
     dialect: 'mysql',
-    logging: JSON.parse(process.env.DB_DEBUG),
+    logging: (...msg) => {
+        if (msg[1].showWarnings) {
+            log({ message: msg, type: 'db' });
+        }
+    },
     pool: {
         max: 5,
         min: 0,
         acquire: 30000,
-        idle: 10000
+        idle: 10000,
     },
     retry: {
-        max: 3
+        max: 3,
     },
     define: {
         freezeTableName: true,
-        timestamps: false
-    }
+        timestamps: false,
+    },
 });
 
 (async () => {
     const dir = path.resolve('packages/Models/tables/');
-
-    await database.authenticate().then(() => {
-        fs.readdirSync(dir).forEach(file => {
-            console.log('Loading model: ' + file);
-            require(path.join(dir, file));
+    await database
+        .authenticate()
+        .then(() => {
+            fs.readdirSync(dir).forEach(async (file) => {
+                console.log('Loading model: ' + file);
+                require(path.join(dir, file));
+            });
+        })
+        .catch((err) => {
+            log({
+                message: 'There was an error when creating models: ' + err.toString(),
+                isFatal: true,
+            });
         });
-    }).catch(err => {
-        log({
-            message: 'There was an error when creating models: ' + err.toString(),
-            isFatal: true
-        });
-    });
+    await database.sync({ alter: true });
 })();
-
 
 database.afterSync(async (connection) => {
     log({
-        message: "Database connection established and synced successfully.",
-        isFatal: false
+        message: `Successfully synced ${connection.name.plural}.`,
+        isFatal: false,
     });
-
 });
 
 database.afterDestroy((error) => {
     log({
-        message: "Database connection error! " + error.toString(),
-        isFatal: true
+        message: 'Database connection error! ' + error.toString(),
+        isFatal: true,
     });
 });
 
