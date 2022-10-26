@@ -59,6 +59,11 @@ class Account {
                 });
 
                 await user.createInventory();
+
+                await user.createMoney({
+                    bank_money: 0,
+                    hand_money: 1500,
+                });
             })
             .catch((err) => {
                 return false;

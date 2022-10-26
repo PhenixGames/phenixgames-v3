@@ -19,28 +19,30 @@ class HandMoneyApi {
     }
 
     async addHand(playerId, money) {
-        return await user.updateMoney({
-            hand_money: Sequelize.literal(`hand_money + ${money}`),
-        })
-        .then(() => {
-            this.updateHud(playerId);
-        })
-        .catch((err) => {
-            return false;
-        });
+        return await user
+            .updateMoney({
+                hand_money: Sequelize.literal(`hand_money + ${money}`),
+            })
+            .then(() => {
+                this.updateHud(playerId);
+            })
+            .catch((err) => {
+                return false;
+            });
     }
 
     async removeHand(playerId, money) {
         const user = AccountAPI.get(playerId);
-        return await user.updateMoney({
-            hand_money: Sequelize.literal(`hand_money - ${money}`),
-        })
-        .then(() => {
-            this.updateHud(playerId);
-        })
-        .catch((err) => {
-            return false;
-        });
+        return await user
+            .updateMoney({
+                hand_money: Sequelize.literal(`hand_money - ${money}`),
+            })
+            .then(() => {
+                this.updateHud(playerId);
+            })
+            .catch((err) => {
+                return false;
+            });
     }
 }
 

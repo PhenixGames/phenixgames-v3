@@ -34,7 +34,7 @@ class BankApi {
 
     async removeBank(playerId, money) {
         const user = AccountAPI.get(playerId);
-        
+
         return await user
             .updateMoney({
                 bank_money: Sequelize.literal(bank_money - money),

@@ -17,17 +17,6 @@ class Api extends classes(BankApi, HandMoneyApi) {
             }
         });
     }
-
-    async add(playerid, handmoney, bankmoney) {
-        return await database
-            .query(
-                'INSERT IGNORE INTO pg_money (playerid, hand_money, bank_money) VALUES (?, ?, ?)',
-                [playerid, handmoney, bankmoney]
-            )
-            .catch((err) => {
-                return false;
-            });
-    }
 }
 
 module.exports = new Api();

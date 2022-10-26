@@ -1,5 +1,6 @@
 const debug = require('../../../_assets/json/debug/debug.json').playerapi;
 
+const pg_permission_roles = require('../../Models/tables/pg_permission_roles');
 const database = require('../../_db/db');
 const generellAPI = require('../allgemein');
 
@@ -32,13 +33,14 @@ class PermissionSystemApi {
     }
 
     async getRole(roleId) {
-        return await database
-            .query('SELECT * FROM pg_permission_roles WHERE roleid = ? LIMIT 1', [roleId])
-            .then((res) => {
-                if (res.length <= 0) {
-                    return false;
-                }
-                return res[0];
+        return await pg_permission_roles
+            .findOne({
+                where: {
+                    role_id: roleId,
+                },
+            })
+            .then((role) => {
+                return role;
             })
             .catch((err) => {
                 return false;
@@ -46,17 +48,11 @@ class PermissionSystemApi {
     }
 
     async getPermissionList(roleId) {
-        return await database
-            .query('SELECT * FROM pg_permission_list WHERE roleid = ? LIMIT 1', [roleId])
-            .then((res) => {
-                if (res.length <= 0) {
-                    return false;
-                }
-                return res[0];
-            })
-            .catch((err) => {
-                return false;
-            });
+        const role = await this.getRole(roleId);
+        if (!role) {
+            return false;
+        }
+        return role.getPermissions();
     }
 
     async setPerms(player, roleId) {

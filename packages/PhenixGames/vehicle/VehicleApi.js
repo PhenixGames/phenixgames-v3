@@ -1,5 +1,6 @@
 const debug = require('../../../_assets/json/debug/debug.json').vehicle;
 
+const pg_vehicles = require('../../Models/tables/pg_vehicles');
 const database = require('../../_db/db');
 const generellAPI = require('../allgemein/index');
 
@@ -9,10 +10,14 @@ class VehicleApi {
     constructor() {}
 
     async get(id) {
-        return await database
-            .query('SELECT * FROM pg_vehicles WHERE veh_id = ? LIMIT 1', [id])
+        return await pg_vehicles
+            .findOne({
+                where: {
+                    veh_id: id,
+                },
+            })
             .then((res) => {
-                return res[0];
+                return res;
             })
             .catch((err) => {
                 return false;
@@ -32,23 +37,20 @@ class VehicleApi {
         const veh_max = veh_data.veh_max;
         const veh_type = veh_data.veh_type;
 
-        return await database
-            .query(
-                `INSERT INTO pg_vehicles (veh_name, veh_owner, veh_keys, veh_state, veh_pos, veh_rot, veh_prim, veh_sec, veh_fuel, veh_max, veh_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-                [
-                    veh_name,
-                    veh_owner,
-                    veh_keys,
-                    veh_state,
-                    veh_pos,
-                    veh_rot,
-                    veh_prim,
-                    veh_sec,
-                    veh_fuel,
-                    veh_max,
-                    veh_type,
-                ]
-            )
+        return await pg_vehicles
+            .create({
+                veh_name: veh_name,
+                veh_owner: veh_owner,
+                veh_keys: veh_keys,
+                veh_state: veh_state,
+                veh_pos: veh_pos,
+                veh_rot: veh_rot,
+                veh_prim: veh_prim,
+                veh_sec: veh_sec,
+                veh_fuel: veh_fuel,
+                veh_max: veh_max,
+                veh_type: veh_type,
+            })
             .then((res) => {
                 generellAPI.saveLocalVar(veh, {
                     veh_id: res.insertId,
@@ -101,32 +103,32 @@ class VehicleApi {
             veh_max: veh_max,
             veh_type: veh_type,
         });
-        return await database
-            .query(
-                `UPDATE pg_vehicles SET veh_name = ?, veh_owner = ?, veh_keys = ?, veh_state = ?, veh_pos = ?, veh_rot = ?, veh_prim = ?, veh_sec = ?, veh_fuel = ?, veh_max = ?, veh_type = ? WHERE veh_id = ?`,
-                [
-                    veh_name,
-                    veh_owner,
-                    veh_keys,
-                    veh_state,
-                    veh_pos,
-                    veh_rot,
-                    veh_prim,
-                    veh_sec,
-                    veh_fuel,
-                    veh_max,
-                    veh_type,
-                    veh_id,
-                ]
-            )
+        return await pg_vehicles
+            .update({
+                veh_id: veh_id,
+                veh_name: veh_name,
+                veh_owner: veh_owner,
+                veh_keys: veh_keys,
+                veh_state: veh_state,
+                veh_pos: veh_pos,
+                veh_rot: veh_rot,
+                veh_fuel: veh_fuel,
+                veh_prim_color: veh_prim,
+                veh_sec_color: veh_sec,
+                veh_max: veh_max,
+                veh_type: veh_type,
+            })
+            .then((res) => {
+                return true;
+            })
             .catch((err) => {
                 return false;
             });
     }
 
     async spawnAll() {
-        await database
-            .query('SELECT * FROM pg_vehicles WHERE veh_state = 1')
+        await pg_vehicles
+            .findAll()
             .then((res) => {
                 if (res.length > 0) {
                     for (let i in res) {
