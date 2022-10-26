@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const database = require('../../_db/db');
 const pg_characters = require('./pg_characters');
+const pg_user_inventory = require('./pg_user_inventory');
 
 class Pg_users extends Model {}
 
@@ -39,6 +40,13 @@ Pg_users.init(
 Pg_users.hasOne(pg_characters, {
     foreignKey: 'player_id',
     as: 'character',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+
+Pg_users.hasOne(pg_user_inventory, {
+    foreignKey: 'player_id',
+    as: 'inventory',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 });

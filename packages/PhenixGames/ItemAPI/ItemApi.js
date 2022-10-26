@@ -1,38 +1,63 @@
+const pg_items = require('../../Models/tables/pg_items');
 const database = require('../../_db/db');
 
 class Api {
     constructor() {}
 
     async get(id) {
-        return await database
-            .query(`SELECT * FROM items WHERE id = ?`, [id])
-            .then((res) => {
-                return res[0] || [];
+        return await pg_items
+            .findOne({
+                where: {
+                    id,
+                },
             })
             .catch((err) => {
-                return [];
+                return false;
             });
     }
 
-    async add({ img, isStackable, maxCount, isDropable, isSplitable, weight }) {
-        return await database
-            .query(
-                `INSERT INTO items (img, isStackable, maxCount, isDropable, isSplitable, weight) VALUES (?, ?, ?, ?, ?, ?)`,
-                [img, isStackable, maxCount, isDropable, isSplitable, weight]
-            )
-            .then((res) => {
-                return res.insertId;
+    async add({
+        img,
+        isStackable,
+        maxCount,
+        isDropable,
+        isSplitable,
+        weight,
+        isUsable,
+        isSellable,
+    }) {
+        return await pg_items
+            .create({
+                img,
+                isStackable,
+                maxCount,
+                isDropable,
+                isSplitable,
+                weight,
+                isUsable,
+                isSellable,
             })
             .catch((err) => {
-                return null;
+                return false;
             });
     }
 
     async update({ id, img, isStackable, maxCount, isDropable, isSplitable, weight }) {
-        return await database
-            .query(
-                `UPDATE items SET img = ?, isStackable = ?, maxCount = ?, isDropable = ?, isSplitable = ?, weight = ? WHERE id = ?`,
-                [img, isStackable, maxCount, isDropable, isSplitable, weight, id]
+        return await pg_items
+            .update(
+                {
+                    img,
+                    isStackable,
+                    maxCount,
+                    isDropable,
+                    isSplitable,
+                    weight,
+                },
+                {
+                    where: {
+                        id,
+                    },
+                }
             )
             .then((res) => {
                 return res.affectedRows > 0;
@@ -43,8 +68,12 @@ class Api {
     }
 
     async delete(id) {
-        return await database
-            .query(`DELETE FROM items WHERE id = ?`, [id])
+        return await pg_items
+            .destroy({
+                where: {
+                    id,
+                },
+            })
             .then((res) => {
                 return res.affectedRows > 0;
             })

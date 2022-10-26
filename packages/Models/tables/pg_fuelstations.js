@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const database = require('../../_db/db');
+const pg_fuelstations_marker = require('./pg_fuelstations_marker');
 
 class Pg_fuelstations extends Model {}
 
@@ -42,6 +43,12 @@ Pg_fuelstations.init(
         modelName: 'pg_fuelstations',
     }
 );
+
+Pg_fuelstations.hasMany(pg_fuelstations_marker, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+    as: 'markers',
+});
 
 const pg_fuelstations = Pg_fuelstations;
 module.exports = pg_fuelstations;

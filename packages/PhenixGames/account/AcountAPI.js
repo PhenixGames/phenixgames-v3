@@ -1,5 +1,4 @@
 const { log } = require('../../../_assets/functions/log/logs');
-const database = require('../../_db/db');
 const bcryptjs = require('bcryptjs');
 
 const validator = require('validator');
@@ -33,24 +32,16 @@ class Account {
         const firstname = validator.trim(name[0]);
         const lastname = validator.trim(name[1]);
 
-        return await pg_characters
-            .update(
-                {
-                    firstname,
-                    lastname,
-                },
-                {
-                    where: {
-                        player_id: id,
-                    },
-                }
-            )
-            .then(() => {
-                return true;
-            })
-            .catch((err) => {
-                return false;
-            });
+        const user = this.get(id);
+
+        if (!user) {
+            return false;
+        }
+
+        user.updateCharacter({
+            firstname: firstname,
+            lastname: lastname,
+        });
     }
 
     async save(username, password) {
@@ -62,10 +53,12 @@ class Account {
                 password: password,
             })
             .then(async (user) => {
-                return await user.createCharacter({
+                await user.createCharacter({
                     firstname: 'John',
                     lastname: 'Doe',
                 });
+
+                await user.createInventory();
             })
             .catch((err) => {
                 return false;
