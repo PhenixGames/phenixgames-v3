@@ -5,7 +5,7 @@ class Pg_money extends Model {}
 
 Pg_money.init(
     {
-        playerid: {
+        player_id: {
             type: DataTypes.INTEGER,
         },
         hand_money: {

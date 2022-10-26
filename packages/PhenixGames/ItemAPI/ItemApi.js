@@ -1,5 +1,4 @@
 const pg_items = require('../../Models/tables/pg_items');
-const database = require('../../_db/db');
 
 class Api {
     constructor() {}
