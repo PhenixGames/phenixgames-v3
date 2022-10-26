@@ -1,21 +1,16 @@
 const database = require('../../_db/db');
+const AccountAPI = require('../account/AcountAPI');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
+const { Sequelize } = require('sequelize');
 
 class HandMoneyApi {
     constructor() {}
 
     async getHand(playerId) {
-        return await database
-            .query('SELECT hand_money FROM pg_money WHERE playerid = ?', [playerId])
-            .then((res) => {
-                if (res.length <= 0) {
-                    return 0;
-                }
-                return res[0].hand_money;
-            })
-            .catch((err) => {
-                return 0;
-            });
+        const user = AccountAPI.get(playerId);
+
+        const { hand_money } = await user.getMoney();
+        return hand_money;
     }
 
     async hasHand(playerId, money) {
@@ -24,31 +19,28 @@ class HandMoneyApi {
     }
 
     async addHand(playerId, money) {
-        return await database
-            .query('UPDATE pg_money SET hand_money = bank_money + ? WHERE playerid = ?', [
-                money,
-                playerId,
-            ])
-            .then(() => {
-                this.updateHud(playerId);
-            })
-            .catch((err) => {
-                return false;
-            });
+        return await user.updateMoney({
+            hand_money: Sequelize.literal(`hand_money + ${money}`),
+        })
+        .then(() => {
+            this.updateHud(playerId);
+        })
+        .catch((err) => {
+            return false;
+        });
     }
 
     async removeHand(playerId, money) {
-        return await database
-            .query('UPDATE pg_money SET hand_money = bank_money - ? WHERE playerid = ?', [
-                money,
-                playerId,
-            ])
-            .then(() => {
-                this.updateHud(playerId);
-            })
-            .catch((err) => {
-                return false;
-            });
+        const user = AccountAPI.get(playerId);
+        return await user.updateMoney({
+            hand_money: Sequelize.literal(`hand_money - ${money}`),
+        })
+        .then(() => {
+            this.updateHud(playerId);
+        })
+        .catch((err) => {
+            return false;
+        });
     }
 }
 

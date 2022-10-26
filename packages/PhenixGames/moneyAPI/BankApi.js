@@ -7,9 +7,6 @@ class BankApi {
 
     async getBank(playerId) {
         const user = AccountAPI.get(playerId);
-        if (!user) {
-            return false;
-        }
 
         const { bank_money } = await user.getMoney();
         return bank_money;
@@ -22,9 +19,6 @@ class BankApi {
 
     async addBank(playerId, money) {
         const user = AccountAPI.get(playerId);
-        if (!user) {
-            return false;
-        }
 
         return await user
             .updateMoney({
@@ -40,10 +34,7 @@ class BankApi {
 
     async removeBank(playerId, money) {
         const user = AccountAPI.get(playerId);
-        if (!user) {
-            return false;
-        }
-
+        
         return await user
             .updateMoney({
                 bank_money: Sequelize.literal(bank_money - money),
