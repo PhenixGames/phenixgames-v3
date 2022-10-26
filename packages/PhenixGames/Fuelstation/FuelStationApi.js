@@ -1,3 +1,4 @@
+const { log } = require('../../../_assets/functions/log/logs');
 const database = require('../../_db/db');
 const MoneyApi = require('../moneyAPI/MoneyApi');
 const VehicleAPI = require('../vehicle/VehicleApi');
