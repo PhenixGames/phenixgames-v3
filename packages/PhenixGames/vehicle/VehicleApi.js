@@ -168,11 +168,14 @@ class VehicleApi {
     }
 
     async delete(id) {
-        return await database
-            .query('DELETE * FROM pg_vehicles WHERE veh_id = ?', [id])
-            .catch((err) => {
-                return false;
-            });
+        return await pg_vehicles.destroy({
+            where: {
+                veh_id: id,
+            },
+        })
+        .catch((err) => {
+            return false;
+        });
     }
 
     async isVehicleOwner(id, owner) {
