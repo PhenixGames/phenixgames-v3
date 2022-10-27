@@ -8,11 +8,10 @@ Pg_permission_roles.init(
     {
         rolename: {
             type: DataTypes.STRING,
-            unique: true,
         },
         role_id: {
             type: DataTypes.INTEGER,
-            unique: true,
+            unique: 'role_id',
         },
     },
     {
@@ -22,7 +21,6 @@ Pg_permission_roles.init(
 );
 
 Pg_permission_roles.hasOne(pg_permission_list, {
-    foreignKey: 'role_id',
     as: 'permissions',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',

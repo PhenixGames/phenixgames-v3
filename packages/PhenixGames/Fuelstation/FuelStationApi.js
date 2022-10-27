@@ -1,5 +1,6 @@
 const { log } = require('../../../_assets/functions/log/logs');
 const pg_fuelstations = require('../../Models/tables/pg_fuelstations');
+const pg_fuelstations_marker = require('../../Models/tables/pg_fuelstations_marker');
 const MoneyApi = require('../moneyAPI/MoneyApi');
 const VehicleAPI = require('../vehicle/VehicleApi');
 const debug = require('../../../_assets/json/debug/debug.json').fuelstation;
@@ -54,7 +55,14 @@ class FuelStationApi {
                 });
         }
 
-        return await pg_fuelstations.findAll();
+        return await pg_fuelstations
+            .findAll()
+            .then((fuelstations) => {
+                return fuelstations;
+            })
+            .catch((err) => {
+                return [];
+            });
     }
 
     spawn(type, pos, id) {

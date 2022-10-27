@@ -5,9 +5,6 @@ class Pg_permission_list extends Model {}
 
 Pg_permission_list.init(
     {
-        role_id: {
-            type: DataTypes.INTEGER,
-        },
         root: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,

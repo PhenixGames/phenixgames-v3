@@ -1,3 +1,4 @@
+const pg_user_inventory = require('../../Models/tables/pg_user_inventory');
 const AccountAPI = require('../account/AcountAPI');
 
 class Api {
@@ -7,14 +8,20 @@ class Api {
 
     async get(id) {
         const user = await AccountAPI.get(id);
-        return user.getInventory();
+        return await user.getInventory();
     }
 
     async update(id, items) {
-        const user = await AccountAPI.get(id);
-        user.updateInventory({
-            items: items,
-        });
+        pg_user_inventory.update(
+            {
+                items: items,
+            },
+            {
+                where: {
+                    user_id: id,
+                },
+            }
+        );
     }
 }
 

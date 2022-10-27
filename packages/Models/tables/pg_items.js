@@ -5,6 +5,10 @@ class Pg_items extends Model {}
 
 Pg_items.init(
     {
+        name: {
+            type: DataTypes.STRING,
+            unique: 'name',
+        },
         img: {
             type: DataTypes.STRING,
         },

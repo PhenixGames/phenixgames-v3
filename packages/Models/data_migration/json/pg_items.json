@@ -1,0 +1,13 @@
+[
+    {
+        "name": "Test Item",
+        "img": "https://www.ikea.com/de/de/images/products/arv-broellop-platte-auf-fuss-mit-abdeckung-klarglas__0713433_pe729526_s5.jpg?f=xl",
+        "isStackable": 1,
+        "maxCount": 1,
+        "isDropable": 1,
+        "isSplitable": 1,
+        "isUsable": 1,
+        "isSellable": 1,
+        "weight": 100
+    }
+]

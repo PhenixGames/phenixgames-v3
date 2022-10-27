@@ -3,7 +3,6 @@ const bcryptjs = require('bcryptjs');
 
 const validator = require('validator');
 const config = require('../../../_assets/json/config.json');
-const MoneyAPI = require('../moneyAPI/MoneyApi');
 const pg_users = require('../../Models/tables/pg_users');
 const pg_characters = require('../../Models/tables/pg_characters');
 

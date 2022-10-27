@@ -52,7 +52,7 @@ class VehicleApi {
             })
             .then((res) => {
                 generellAPI.saveLocalVar(veh, {
-                    veh_id: res.insertId,
+                    veh_id: res.veh_id,
                     veh_name: veh_name,
                     veh_owner: veh_owner,
                     veh_keys: veh_keys,
@@ -131,15 +131,11 @@ class VehicleApi {
             .then((res) => {
                 if (res.length > 0) {
                     for (let i in res) {
-                        var newVeh = mp.vehicles.new(
-                            mp.joaat(res[i].veh_name),
-                            JSON.parse(res[i].veh_pos),
-                            {
-                                heading: Number(res[i].veh_rot),
-                                numberPlate: res[i].veh_owner,
-                                color: [res[i].veh_prim, res[i].veh_sec],
-                            }
-                        );
+                        const newVeh = mp.vehicles.new(mp.joaat(res[i].veh_name), res[i].veh_pos, {
+                            heading: Number(res[i].veh_rot),
+                            numberPlate: res[i].veh_owner,
+                            color: [res[i].veh_prim, res[i].veh_sec],
+                        });
                         this.update(newVeh, {
                             veh_id: res[i].veh_id,
                             veh_name: res[i].veh_name,

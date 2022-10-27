@@ -44,6 +44,13 @@ const database = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process
             });
         });
     await database.sync({ alter: true });
+
+    const data_mg_path = path.resolve('packages/Models/data_migration/');
+    fs.readdirSync(data_mg_path).forEach(async (file) => {
+        if (!file.includes('.default')) return;
+        console.log('Inserting default data from: ' + file);
+        require(path.join(data_mg_path, file));
+    });
 })();
 
 database.afterSync(async (connection) => {

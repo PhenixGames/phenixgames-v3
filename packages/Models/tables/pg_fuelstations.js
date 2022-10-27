@@ -6,6 +6,10 @@ class Pg_fuelstations extends Model {}
 
 Pg_fuelstations.init(
     {
+        type: {
+            type: DataTypes.INTEGER,
+            defaultValue: 2,
+        },
         fuel_stored: {
             type: DataTypes.INTEGER,
             defaultValue: 1500,
