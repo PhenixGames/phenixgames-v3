@@ -8,8 +8,8 @@ module.exports.setWeather = async function () {
     axios
         .get(url, {
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         })
         .then((res) => {
             /**
@@ -55,8 +55,6 @@ module.exports.setWeather = async function () {
                 const temperature = weatherRes.temperature;
                 const weatherCode = weatherRes.weatherCode;
 
-
-
                 for (const [index, [key, value]] of Object.entries(Object.entries(weatherData))) {
                     if (weatherCode.indexOf(value) !== -1) {
                         //Wetter ist schon das gleiche
@@ -70,7 +68,7 @@ module.exports.setWeather = async function () {
             }
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err);
             console.error(`WeatherAPI Error: ${err.toString()}`);
             return false;
         });
