@@ -1,6 +1,4 @@
-const {
-    log
-} = require('../../../_assets/functions/log/logs');
+const { log } = require('../../../_assets/functions/log/logs');
 const bcryptjs = require('bcryptjs');
 
 const validator = require('validator');
@@ -15,7 +13,8 @@ class Account {
     constructor() {}
 
     async get(id) {
-        return await pg_users.findOne({
+        return await pg_users
+            .findOne({
                 where: {
                     id,
                 },
@@ -46,15 +45,17 @@ class Account {
             return false;
         }
 
-        return await pg_characters
-            .update({
+        return await pg_characters.update(
+            {
                 firstname: firstname,
                 lastname: lastname,
-            }, {
+            },
+            {
                 where: {
                     player_id: id,
                 },
-            })
+            }
+        );
     }
 
     async save(username, password) {
@@ -100,15 +101,17 @@ class Account {
 
     async updatePos(id, pos) {
         return await pg_characters
-            .update({
-                last_pos: pos,
-            }, {
-                where: {
-                    player_id: id,
+            .update(
+                {
+                    last_pos: pos,
                 },
-            })
+                {
+                    where: {
+                        player_id: id,
+                    },
+                }
+            )
             .catch((err) => {
-                console.log(err);
                 return false;
             });
     }
@@ -145,13 +148,16 @@ class Account {
 
     async updateHealth(id, health) {
         return await pg_characters
-            .update({
-                health: health,
-            }, {
-                where: {
-                    id: id,
+            .update(
+                {
+                    health: health,
                 },
-            })
+                {
+                    where: {
+                        id: id,
+                    },
+                }
+            )
             .catch((err) => {
                 return false;
             });
@@ -159,13 +165,16 @@ class Account {
 
     async updateArmour(id, armour) {
         return await pg_characters
-            .update({
-                armour: armour,
-            }, {
-                where: {
-                    id: id,
+            .update(
+                {
+                    armour: armour,
                 },
-            })
+                {
+                    where: {
+                        id: id,
+                    },
+                }
+            )
             .catch((err) => {
                 return false;
             });

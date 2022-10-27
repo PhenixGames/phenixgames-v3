@@ -13,7 +13,7 @@ class PermissionSystemApi {
         let hasPerms = [];
 
         const isRoot = playerPermissions.root;
-        if(isRoot) {
+        if (isRoot) {
             return true;
         }
 
