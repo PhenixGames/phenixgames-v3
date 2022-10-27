@@ -3,20 +3,13 @@ const axios = require('axios');
 const weatherData = require('./weather.json');
 
 module.exports.setWeather = async function () {
-    const los_Angeles = ["-118.2436849","34.0522342"];
-    const url = `https://api.tomorrow.io/v4/timelines?location=${los_Angeles}&fields=temperature&timesteps=1h&units=metric&apikey=${process.env.WEATHER_KEY}`;
+    const url = `https://api.tomorrow.io/v4/timelines?location=33.881736797808436,-118.28735076847484&fields=weatherCode,temperature,cloudCover&timesteps=current&units=metric&apikey=${process.env.WEATHER_KEY}`;
 
     axios
         .get(url, {
             headers: {
-                'Content-Type': 'application/json',
-                payload: {
-                    location: los_Angeles,
-                    fields: ["weatherCode, temperature, cloudCover"],
-                    units: "metric",
-                    timesteps: ["current"],
-                } 
-            },
+                'Content-Type': 'application/json'
+            }
         })
         .then((res) => {
             /**
@@ -57,8 +50,17 @@ module.exports.setWeather = async function () {
                     currentDate.getSeconds()
                 );
 
+                res = res.data.data.timelines[0];
+            
+                const cloudCover = res.cloudCover;
+                const temperature = res.temperature;
+                const weatherCode = res.weatherCode;
+
+
+
                 for (const [index, [key, value]] of Object.entries(Object.entries(weatherData))) {
-                    if (res.data.current.condition.text.indexOf(value) !== -1) {
+                    console.log(key, value, weatherCode);
+                    if (weatherCode.indexOf(value) !== -1) {
                         //Wetter ist schon das gleiche
                         if (mp.world.weather === key) return;
 
@@ -70,6 +72,7 @@ module.exports.setWeather = async function () {
             }
         })
         .catch((err) => {
+            console.log(err)
             console.error(`WeatherAPI Error: ${err.toString()}`);
             return false;
         });
