@@ -50,16 +50,14 @@ module.exports.setWeather = async function () {
                     currentDate.getSeconds()
                 );
 
-                res = res.data.data.timelines[0];
-            
-                const cloudCover = res.cloudCover;
-                const temperature = res.temperature;
-                const weatherCode = res.weatherCode;
+                const weatherRes = res.data.data.timelines[0].intervals[0].values;
+                const cloudCover = weatherRes.cloudCover;
+                const temperature = weatherRes.temperature;
+                const weatherCode = weatherRes.weatherCode;
 
 
 
                 for (const [index, [key, value]] of Object.entries(Object.entries(weatherData))) {
-                    console.log(key, value, weatherCode);
                     if (weatherCode.indexOf(value) !== -1) {
                         //Wetter ist schon das gleiche
                         if (mp.world.weather === key) return;
