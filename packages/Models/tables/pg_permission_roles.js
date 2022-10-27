@@ -8,9 +8,11 @@ Pg_permission_roles.init(
     {
         rolename: {
             type: DataTypes.STRING,
+            unique: true,
         },
         role_id: {
             type: DataTypes.INTEGER,
+            unique: true,
         },
     },
     {

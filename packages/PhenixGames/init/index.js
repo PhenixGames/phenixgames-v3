@@ -10,6 +10,8 @@ const IplsAPI = require('../ipls');
 const VehicleAPI = require('../vehicle/VehicleApi');
 const { SyncApi } = require('../SyncAPI/SyncApi');
 const database = require('../../_db/db');
+const pg_permission_roles = require('../../Models/tables/pg_permission_roles');
+const pg_permission_list = require('../../Models/tables/pg_permission_list');
 
 mp.events.delayInitialization = true;
 (async () => {
@@ -41,13 +43,13 @@ mp.events.add('packagesLoaded', async () => {
 });
 
 //! ERROR --
-process.on('unhandledRejection', (err) => {
-    database.close();
+process.on('unhandledRejection', async (err) => {
     log({
         message: err,
         isFatal: true,
     });
     if (!debug.global && process.platform !== 'win32') {
+        await database.close();
         log({
             message: 'BOT RESTARTED...' + new Date(),
             isFatal: false,
@@ -60,13 +62,13 @@ process.on('unhandledRejection', (err) => {
     }
 });
 
-process.on('uncaughtException', (err) => {
-    database.close();
+process.on('uncaughtException', async (err) => {
     log({
         message: err,
         isFatal: true,
     });
     if (!debug.global && process.platform !== 'win32') {
+        await database.close();
         log({
             message: 'BOT RESTARTED...' + new Date(),
             isFatal: false,

@@ -7,7 +7,7 @@ class HandMoneyApi {
     constructor() {}
 
     async getHand(playerId) {
-        const user = AccountAPI.get(playerId);
+        const user = await AccountAPI.get(playerId);
 
         const { hand_money } = await user.getMoney();
         return hand_money;
@@ -32,7 +32,7 @@ class HandMoneyApi {
     }
 
     async removeHand(playerId, money) {
-        const user = AccountAPI.get(playerId);
+        const user = await AccountAPI.get(playerId);
         return await user
             .updateMoney({
                 hand_money: Sequelize.literal(`hand_money - ${money}`),

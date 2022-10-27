@@ -11,7 +11,6 @@ mp.events.add('Player:Spawn:airport', async (player) => {
 
 mp.events.add('Player:Spawn:LastPos', async (player) => {
     const lastPos = await AccountAPI.getPos(player);
-
     initPlayer(player);
     AccountAPI.changePos(player, lastPos);
     return;

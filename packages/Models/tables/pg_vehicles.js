@@ -14,7 +14,7 @@ Pg_vehicles.init(
             type: DataTypes.STRING,
         },
         veh_owner: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
         },
         veh_keys: {
             type: DataTypes.JSON(DataTypes.INTEGER),

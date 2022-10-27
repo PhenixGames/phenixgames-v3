@@ -1,7 +1,6 @@
 const debug = require('../../../_assets/json/debug/debug.json').playerapi;
 
 const pg_permission_roles = require('../../Models/tables/pg_permission_roles');
-const database = require('../../_db/db');
 const generellAPI = require('../allgemein');
 
 class PermissionSystemApi {
@@ -13,11 +12,13 @@ class PermissionSystemApi {
 
         let hasPerms = [];
 
+        const isRoot = playerPermissions.root;
+        if(isRoot) {
+            return true;
+        }
+
         for (let i in permission) {
-            if (playerPermissions[permission[i]] === 'root') {
-                return hasPerms.push(true);
-            }
-            if (playerPermissions[permission[i]] === 1) {
+            if (playerPermissions[permission[i]]) {
                 hasPerms.push(true);
             } else {
                 hasPerms.push(false);
@@ -32,11 +33,11 @@ class PermissionSystemApi {
         return 200;
     }
 
-    async getRole(roleId) {
+    async getRole(role_id) {
         return await pg_permission_roles
             .findOne({
                 where: {
-                    role_id: roleId,
+                    role_id,
                 },
             })
             .then((role) => {
@@ -60,7 +61,7 @@ class PermissionSystemApi {
         if (!role) {
             return false;
         }
-        const playerPermissions = await this.getPermissionList(role.roleid);
+        const playerPermissions = await this.getPermissionList(role.role_id);
         generellAPI.saveLocalVar(player, {
             user_permissions: JSON.stringify(playerPermissions),
         });

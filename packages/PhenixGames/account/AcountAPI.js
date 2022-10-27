@@ -1,4 +1,6 @@
-const { log } = require('../../../_assets/functions/log/logs');
+const {
+    log
+} = require('../../../_assets/functions/log/logs');
 const bcryptjs = require('bcryptjs');
 
 const validator = require('validator');
@@ -14,10 +16,16 @@ class Account {
 
     async get(id) {
         return await pg_users.findOne({
-            where: {
-                id,
-            },
-        });
+                where: {
+                    id,
+                },
+            })
+            .then((user) => {
+                return user;
+            })
+            .catch((err) => {
+                return false;
+            });
     }
 
     async getByUsername(username) {
@@ -38,10 +46,15 @@ class Account {
             return false;
         }
 
-        user.updateCharacter({
-            firstname: firstname,
-            lastname: lastname,
-        });
+        return await pg_characters
+            .update({
+                firstname: firstname,
+                lastname: lastname,
+            }, {
+                where: {
+                    player_id: id,
+                },
+            })
     }
 
     async save(username, password) {
@@ -87,17 +100,15 @@ class Account {
 
     async updatePos(id, pos) {
         return await pg_characters
-            .update(
-                {
-                    last_pos: pos,
+            .update({
+                last_pos: pos,
+            }, {
+                where: {
+                    player_id: id,
                 },
-                {
-                    where: {
-                        player_id: id,
-                    },
-                }
-            )
+            })
             .catch((err) => {
+                console.log(err);
                 return false;
             });
     }
@@ -114,19 +125,9 @@ class Account {
     }
 
     async getPos(player) {
-        return await pg_users
-            .findOne({
-                where: {
-                    id: player.getVariable('playerId'),
-                },
-                attributes: ['last_pos'],
-            })
-            .then((res) => {
-                return JSON.parse(res.last_pos);
-            })
-            .catch((err) => {
-                return false;
-            });
+        const user = await this.get(player.getVariable('playerId'));
+        const character = await user.getCharacter();
+        return JSON.parse(character.last_pos);
     }
 
     checkPassword(password, dbpassword) {
@@ -140,21 +141,17 @@ class Account {
 
     setHud(player) {
         player.call('Player:ActivateHUD');
-        MoneyAPI.updateHud(player.getVariable('playerId'));
     }
 
     async updateHealth(id, health) {
         return await pg_characters
-            .update(
-                {
-                    health: health,
+            .update({
+                health: health,
+            }, {
+                where: {
+                    id: id,
                 },
-                {
-                    where: {
-                        id: id,
-                    },
-                }
-            )
+            })
             .catch((err) => {
                 return false;
             });
@@ -162,16 +159,13 @@ class Account {
 
     async updateArmour(id, armour) {
         return await pg_characters
-            .update(
-                {
-                    armour: armour,
+            .update({
+                armour: armour,
+            }, {
+                where: {
+                    id: id,
                 },
-                {
-                    where: {
-                        id: id,
-                    },
-                }
-            )
+            })
             .catch((err) => {
                 return false;
             });
@@ -220,7 +214,7 @@ class Account {
     syncAllPlayers() {
         mp.players.forEach((player) => {
             if (!player.getVariable('isInEvent') && player.getVariable('syncPlayer')) {
-                this.updatePos(player.getVariable('playerId'), JSON.stringify(player.position));
+                this.updatePos(player.getVariable('playerId'), player.position);
                 this.updateHealth(player.getVariable('playerId'), player.health);
                 this.updateArmour(player.getVariable('playerId'), player.armour);
             }

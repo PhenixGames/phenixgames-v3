@@ -1,6 +1,5 @@
 const classes = require('extends-classes');
 
-const database = require('../../_db/db');
 const BankApi = require('./BankApi');
 const HandMoneyApi = require('./HandMoneyApi');
 

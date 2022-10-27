@@ -1,7 +1,6 @@
 const debug = require('../../../_assets/json/debug/debug.json').vehicle;
 
 const pg_vehicles = require('../../Models/tables/pg_vehicles');
-const database = require('../../_db/db');
 const generellAPI = require('../allgemein/index');
 
 class VehicleApi {
@@ -29,7 +28,7 @@ class VehicleApi {
         const veh_owner = veh_data.veh_owner;
         const veh_keys = veh_data.veh_keys;
         const veh_state = veh_data.veh_state;
-        const veh_pos = JSON.stringify(veh.position);
+        const veh_pos = veh.position;
         const veh_rot = veh.heading;
         const veh_prim = veh.getColor(0);
         const veh_sec = veh.getColor(1);
@@ -80,7 +79,7 @@ class VehicleApi {
             veh_owner = veh.getVariable('veh_owner'),
             veh_keys = veh.getVariable('veh_keys'),
             veh_state = veh.getVariable('veh_state'),
-            veh_pos = JSON.stringify(veh.position),
+            veh_pos = veh.position,
             veh_rot = veh.heading,
             veh_prim = veh.getColor(0),
             veh_sec = veh.getColor(1),
