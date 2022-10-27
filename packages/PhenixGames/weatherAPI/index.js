@@ -4,10 +4,21 @@ const console = require('better-console');
 const weatherData = require('./weather.json');
 
 module.exports.setWeather = async function () {
-    const url = `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_KEY}&q=Los_Angeles&aqi=no`
+    const los_Angeles = ["-118.2436849","34.0522342"];
+    const url = `https://api.tomorrow.io/v4/timelines?location=${los_Angeles}&fields=temperature&timesteps=1h&units=metric&apikey=${process.env.WEATHER_KEY}`;
 
     axios
-        .get(url)
+        .get(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                payload: {
+                    location: los_Angeles,
+                    fields: ["weatherCode, temperature, cloudCover"],
+                    units: "metric",
+                    timesteps: ["current"],
+                } 
+            },
+        })
         .then((res) => {
             /**
              * {
