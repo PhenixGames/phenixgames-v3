@@ -1,4 +1,3 @@
-const console = require('better-console');
 const debug = require('../../../_assets/json/debug/debug.json').allgemein;
 
 mp.events.add('debug', (player) => {

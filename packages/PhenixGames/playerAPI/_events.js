@@ -1,6 +1,6 @@
-const debug = require('../../../_assets/json/debug/debug.json').playerapi;
+const { InventoryApi } = require('../InventoryAPI/InventoryApi');
 
-const { getPlayerInventory } = require('./_inventory');
+const debug = require('../../../_assets/json/debug/debug.json').playerapi;
 
 mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, boneIndex, damage) => {
     let newdamage;
@@ -17,10 +17,13 @@ mp.events.add('Server:Handle:Damage', (Shootingplayer, targetplayer, weapon, bon
 
 //? Get the player inventory
 mp.events.add('Server:Init:Inventory', async (player) => {
-    const items = await getPlayerInventory({
-        player_id: player.getVariable('playerId'),
-    });
-    player.call('Player:Init:Inventory', [JSON.stringify(items)]);
+    const items = await InventoryApi.get(player.getVariable('playerId'));
+    player.call('Player:Init:Inventory', [items]);
+});
+
+//? Save the player inventory
+mp.events.add('Server:Save:Inventory', async (player, items) => {
+    await InventoryApi.update(player.getVariable('playerId'), items);
 });
 
 //? Heal the player with a medikit

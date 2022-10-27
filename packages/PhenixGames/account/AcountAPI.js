@@ -67,28 +67,6 @@ class Account {
             });
     }
 
-    async saveInventory(id, items) {
-        return await database
-            .query('INSERT INTO pg_user_inventory (id, items) VALUES (?, ?)', [
-                id,
-                JSON.stringify(items),
-            ])
-            .catch((err) => {
-                return false;
-            });
-    }
-
-    async updateInventory(id, items) {
-        return await database
-            .query(`UPDATE pg_user_inventory SET items = ? WHERE id = ?`, [
-                JSON.stringify(items),
-                id,
-            ])
-            .catch((err) => {
-                return false;
-            });
-    }
-
     changePos(player, pos, rot = false, dim = false) {
         try {
             player.position = new mp.Vector3(Number(pos.x), Number(pos.y), Number(pos.z));

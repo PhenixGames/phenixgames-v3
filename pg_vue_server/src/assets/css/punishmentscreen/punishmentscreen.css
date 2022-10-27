@@ -15,7 +15,7 @@ body {
 
 .punishment {
     height: 24%;
-    width: 30%;
+    width: 40%;
     position: absolute;
     top: 35%;
     left: 50%;
@@ -36,7 +36,8 @@ body {
 }
 
 .punishment_info {
-    margin: 20px 0;
+    height: 20vh;
+    margin: 20px 0 0 0;
     background: #34343420;
     padding: 20px 20px 40px 20px;
     border-radius: 30px;
@@ -50,12 +51,13 @@ body {
     margin: 20px 0 50px 0;
 }
 
-.punishment_info p {
-    line-height: 0.4rem;
+.punishment_info div {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
 }
 
-.punishment_info i {
-    margin: 0 30px;
+.punishment_info div span:nth-child(2) {
     text-align: right;
-    font-weight: 400;
+    max-width: 250px;
 }

@@ -1,6 +1,5 @@
 const debug = require('../../../_assets/json/debug/debug.json');
 
-const console = require('better-console');
 const weatherAPI = require('../weatherAPI');
 const { delay } = require('../../../_assets/functions/delay');
 const { log } = require('../../../_assets/functions/log/logs');
@@ -10,6 +9,8 @@ const AccountAPI = require('../account/AcountAPI');
 const { FAPI } = require('../Fuelstation/FuelStationApi');
 const IplsAPI = require('../ipls');
 const VehicleAPI = require('../vehicle/VehicleApi');
+const { SyncApi } = require('../SyncAPI/SyncApi');
+const database = require('../../_db/db');
 
 mp.events.delayInitialization = true;
 (async () => {
@@ -32,26 +33,17 @@ mp.events.add('packagesLoaded', async () => {
 
     await delay(15000);
 
-    setInterval(() => {
-        console.time('Vehicle Server wurde gesynct in: ');
-        VehicleAPI.syncAll();
-        console.timeEnd('Vehicle Server wurde gesynct in: ');
-        console.time('Player Server wurde gesynct in: ');
-        AccountAPI.syncAllPlayers();
-        console.timeEnd('Player Server wurde gesynct in: ');
-    }, 5000);
+    SyncApi.sync();
+    SyncApi.syncWeather();
 
     if (debug.createBackup) {
         new DatabaseBackup();
     }
-
-    setInterval(() => {
-        weatherAPI.setWeather();
-    }, 10800000); // 3h
 });
 
 //! ERROR --
 process.on('unhandledRejection', (err) => {
+    database.close();
     log({
         message: err,
         isFatal: true,
@@ -70,6 +62,7 @@ process.on('unhandledRejection', (err) => {
 });
 
 process.on('uncaughtException', (err) => {
+    database.close();
     log({
         message: err,
         isFatal: true,
