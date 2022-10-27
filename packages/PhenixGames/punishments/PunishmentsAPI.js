@@ -52,17 +52,10 @@ class PunishmentsApi {
     }
 
     showPunishmentScreen(player, data) {
-        const date = data.till_date.split(',');
-        const days = date[0].split('.');
-        moment.locale('de');
-        var end_of_punishement =
-            moment([days[2], days[1], days[0]]).fromNow() +
-            ` (${days[2]}.${days[1]}.${days[0]} ${date[1]})`;
-
-        let punishment_infos = {
+        const punishment_infos = {
             adminname: data.admin,
             reason: data.reason,
-            end_of_punishement,
+            end_of_punishement: data.till_date,
             date_of_punishment: data.date_of_punishment,
             punishment_id: data.punishment_id,
         };
@@ -74,7 +67,7 @@ class PunishmentsApi {
         let id = Math.floor(Math.random() * 1000000000) + 1;
 
         const exists = await this.getPunishment(id);
-        if (exists) {
+        if (exists.punishment_id) {
             return this.generatePunishmentId();
         }
 
@@ -86,7 +79,12 @@ class PunishmentsApi {
             where: {
                 punishment_id: id,
             },
-        });
+        }).then(res => {
+            return res;
+        })
+        .catch(err => {
+            return false;
+        })
     }
 }
 

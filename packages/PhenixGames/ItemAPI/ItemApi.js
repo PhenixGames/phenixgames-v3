@@ -11,7 +11,7 @@ class Api {
                 },
             })
             .catch((err) => {
-                return false;
+                return [];
             });
     }
 
