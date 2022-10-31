@@ -131,7 +131,7 @@ class VehicleApi {
             .then((res) => {
                 if (res.length > 0) {
                     for (let i in res) {
-                        const newVeh = mp.vehicles.new(mp.joaat(res[i].veh_name), res[i].veh_pos, {
+                        const newVeh = mp.vehicles.new(mp.joaat(res[i].veh_name), JSON.parse(res[i].veh_pos), {
                             heading: Number(res[i].veh_rot),
                             numberPlate: res[i].veh_owner,
                             color: [res[i].veh_prim, res[i].veh_sec],

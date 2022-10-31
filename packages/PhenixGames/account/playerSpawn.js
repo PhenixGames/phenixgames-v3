@@ -32,9 +32,4 @@ async function initPlayer(player) {
 }
 
 // ---------------------------------------------- //
-mp.events.add('Player:Spawn:house', async (player) => {
-    // TODO This Code needs to be Fixed when adding Homes.
-    const playerId = player.getVariable('playerId');
-    ApplyHealthAndArmour(player, playerId);
-    return setHUD(player);
-});
+mp.events.add('Player:Spawn:house', async (player) => {});

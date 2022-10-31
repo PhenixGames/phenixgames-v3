@@ -43,6 +43,9 @@ Pg_vehicles.init(
         veh_max: {
             type: DataTypes.FLOAT,
         },
+        veh_type: {
+            type: DataTypes.STRING,
+        },
     },
     {
         sequelize: database,
