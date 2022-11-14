@@ -15,6 +15,7 @@ Pg_vehicles.init(
         },
         veh_owner: {
             type: DataTypes.STRING,
+            defaultValue: 'Staat',
         },
         veh_keys: {
             type: DataTypes.JSON(DataTypes.INTEGER),
@@ -42,9 +43,11 @@ Pg_vehicles.init(
         },
         veh_max: {
             type: DataTypes.FLOAT,
+            defaultValue: 100,
         },
         veh_type: {
             type: DataTypes.STRING,
+            defaultValue: 'benzin'
         },
     },
     {

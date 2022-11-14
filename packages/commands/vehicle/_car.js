@@ -51,7 +51,7 @@ async function spawncar(player, args) {
             veh_name: veh,
             veh_owner: player.socialClub,
             veh_keys: [player.getVariable('playerId')],
-            veh_state: '1',
+            veh_state: true,
             veh_fuel: 100,
             veh_type: 'benzin',
             veh_maxfuel: 150,
