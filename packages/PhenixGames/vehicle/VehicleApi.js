@@ -103,25 +103,27 @@ class VehicleApi {
             veh_type: veh_type,
         });
         return await pg_vehicles
-            .update({
-                veh_id: veh_id,
-                veh_name: veh_name,
-                veh_owner: veh_owner,
-                veh_keys: veh_keys,
-                veh_state: veh_state,
-                veh_pos: JSON.parse(veh_pos),
-                veh_rot: veh_rot,
-                veh_fuel: veh_fuel,
-                veh_prim_color: veh_prim,
-                veh_sec_color: veh_sec,
-                veh_max: veh_max,
-                veh_type: veh_type,
-            },
-            {
-                where: {
-                    veh_id,
+            .update(
+                {
+                    veh_id: veh_id,
+                    veh_name: veh_name,
+                    veh_owner: veh_owner,
+                    veh_keys: veh_keys,
+                    veh_state: veh_state,
+                    veh_pos: JSON.parse(veh_pos),
+                    veh_rot: veh_rot,
+                    veh_fuel: veh_fuel,
+                    veh_prim_color: veh_prim,
+                    veh_sec_color: veh_sec,
+                    veh_max: veh_max,
+                    veh_type: veh_type,
                 },
-            })
+                {
+                    where: {
+                        veh_id,
+                    },
+                }
+            )
             .then((res) => {
                 return true;
             })
@@ -136,11 +138,15 @@ class VehicleApi {
             .then((res) => {
                 if (res.length > 0) {
                     for (let i in res) {
-                        const newVeh = mp.vehicles.new(mp.joaat(res[i].veh_name), JSON.parse(res[i].veh_pos), {
-                            heading: res[i].veh_rot,
-                            numberPlate: res[i].veh_owner,
-                            color: [res[i].veh_prim, res[i].veh_sec],
-                        });
+                        const newVeh = mp.vehicles.new(
+                            mp.joaat(res[i].veh_name),
+                            JSON.parse(res[i].veh_pos),
+                            {
+                                heading: res[i].veh_rot,
+                                numberPlate: res[i].veh_owner,
+                                color: [res[i].veh_prim, res[i].veh_sec],
+                            }
+                        );
                         this.update(newVeh, {
                             veh_id: res[i].veh_id,
                             veh_name: res[i].veh_name,

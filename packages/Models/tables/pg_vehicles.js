@@ -47,7 +47,7 @@ Pg_vehicles.init(
         },
         veh_type: {
             type: DataTypes.STRING,
-            defaultValue: 'benzin'
+            defaultValue: 'benzin',
         },
     },
     {
