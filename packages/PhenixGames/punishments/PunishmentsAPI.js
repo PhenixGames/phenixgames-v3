@@ -75,16 +75,18 @@ class PunishmentsApi {
     }
 
     async getPunishment(id) {
-        return await pg_punishments.findOne({
-            where: {
-                punishment_id: id,
-            },
-        }).then(res => {
-            return res;
-        })
-        .catch(err => {
-            return false;
-        })
+        return await pg_punishments
+            .findOne({
+                where: {
+                    punishment_id: id,
+                },
+            })
+            .then((res) => {
+                return res;
+            })
+            .catch((err) => {
+                return false;
+            });
     }
 }
 

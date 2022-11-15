@@ -16,7 +16,7 @@ function closeBrowser() {
 }
 
 mp.events.add('Player:Init:Punishmentscreen', (punishment_infos) => {
-    if(!isBrowserOpen) openBrowser();
+    if (!isBrowserOpen) openBrowser();
     psBrowser.execute(`gui.punishmentscreen.initPunishmentscreen({
         adminname: '${punishment_infos.adminname}',
         reason: '${punishment_infos.reason}',
@@ -29,4 +29,4 @@ mp.events.add('Player:Init:Punishmentscreen', (punishment_infos) => {
 mp.events.add('Player:Punishmentscreen:Close', () => {
     closeBrowser();
     return;
-})
+});
