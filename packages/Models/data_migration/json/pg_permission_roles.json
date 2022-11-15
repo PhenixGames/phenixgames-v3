@@ -1,0 +1,30 @@
+[
+    {
+        "role_id": 10,
+        "rolename": "Projekt Leitung"
+    },
+    {
+        "role_id": 9,
+        "rolename": "Administration"
+    },
+    {
+        "role_id": 8,
+        "rolename": "Support"
+    },
+    {
+        "role_id": 7,
+        "rolename": "Entwicklung"
+    },
+    {
+        "role_id": 6,
+        "rolename": "Content"
+    },
+    {
+        "role_id": 5,
+        "rolename": "Designer"
+    },
+    {
+        "role_id": 4,
+        "rolename": "Mapper"
+    }
+]

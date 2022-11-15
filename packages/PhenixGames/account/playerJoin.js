@@ -33,8 +33,9 @@ mp.events.add('playerJoin', async (player) => {
         isFatal: false,
     });
 
-    if (user.firstname && user.lastname) {
-        player.name = user.firstname + ' ' + user.lastname;
+    const character = await user.getCharacter();
+    if (character.firstname && character.lastname) {
+        player.name = character.firstname + ' ' + character.lastname;
         DiscordAPI.set(player);
     }
 });

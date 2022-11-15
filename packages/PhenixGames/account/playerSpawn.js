@@ -11,7 +11,6 @@ mp.events.add('Player:Spawn:airport', async (player) => {
 
 mp.events.add('Player:Spawn:LastPos', async (player) => {
     const lastPos = await AccountAPI.getPos(player);
-
     initPlayer(player);
     AccountAPI.changePos(player, lastPos);
     return;
@@ -33,9 +32,4 @@ async function initPlayer(player) {
 }
 
 // ---------------------------------------------- //
-mp.events.add('Player:Spawn:house', async (player) => {
-    // TODO This Code needs to be Fixed when adding Homes.
-    const playerId = player.getVariable('playerId');
-    ApplyHealthAndArmour(player, playerId);
-    return setHUD(player);
-});
+mp.events.add('Player:Spawn:house', async (player) => {});

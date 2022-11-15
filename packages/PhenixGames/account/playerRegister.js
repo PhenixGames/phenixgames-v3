@@ -19,8 +19,6 @@ mp.events.add('RegisterAccount', async (player, password) => {
         isLoggedIn: true,
     });
 
-    await MoneyAPI.add(user.id, 1500, 3000);
-
     PermissionSystem.setPerms(player, user.roleId);
 
     const items = [
@@ -40,7 +38,7 @@ mp.events.add('RegisterAccount', async (player, password) => {
         },
     ];
 
-    await InventoryApi.save(user.id, items);
+    await InventoryApi.update(user.id, items);
 
     player.call('Player:InGameName:Choose');
     return;

@@ -1,4 +1,6 @@
-const database = require('../../_db/db');
+const { log } = require('../../../_assets/functions/log/logs');
+const pg_fuelstations = require('../../Models/tables/pg_fuelstations');
+const pg_fuelstations_marker = require('../../Models/tables/pg_fuelstations_marker');
 const MoneyApi = require('../moneyAPI/MoneyApi');
 const VehicleAPI = require('../vehicle/VehicleApi');
 const debug = require('../../../_assets/json/debug/debug.json').fuelstation;
@@ -38,15 +40,28 @@ class FuelStationApi {
     }
 
     async get(id = false) {
-        let query = `SELECT * FROM pg_fuelstations ${id ? 'WHERE id = ?' : ''}`;
+        if (id) {
+            return await pg_fuelstations
+                .findOne({
+                    where: {
+                        id: id,
+                    },
+                })
+                .then((fuelstation) => {
+                    return fuelstation;
+                })
+                .catch((err) => {
+                    return false;
+                });
+        }
 
-        return await database
-            .query(query, [id])
-            .then((res) => {
-                return id ? res[0] : res;
+        return await pg_fuelstations
+            .findAll()
+            .then((fuelstations) => {
+                return fuelstations;
             })
             .catch((err) => {
-                return false;
+                return [];
             });
     }
 
@@ -63,24 +78,22 @@ class FuelStationApi {
     }
 
     async getFuelStation({ stationid }) {
-        return await database
-            .query('SELECT * FROM pg_fuelstations WHERE id = ?', [stationid])
-            .then((res) => {
-                return res[0];
-            })
-            .catch((err) => {
-                return false;
-            });
+        return await pg_fuelstations.findOne({
+            where: {
+                id: stationid,
+            },
+        });
     }
 
     async getMarker({ stationid }) {
-        return await database
-            .query('SELECT * FROM pg_fuelstations_marker WHERE fuelstation_id = ?', [stationid])
-            .then((res) => {
-                return res;
+        return await pg_fuelstations
+            .findOne({
+                where: {
+                    id: stationid,
+                },
             })
-            .catch((err) => {
-                return false;
+            .then((fuelstation) => {
+                return fuelstation.getMarkers();
             });
     }
 
@@ -105,14 +118,15 @@ class FuelStationApi {
     }
 
     async saveMarker(id, pos) {
-        return await database
-            .query('INSERT INTO pg_fuelstations_marker (fuelstation_id, pos) VALUES (?, ?)', [
-                id,
-                pos,
-            ])
-            .catch((err) => {
-                return false;
-            });
+        const fuelstation = await this.get(id);
+
+        if (!fuelstation) {
+            return false;
+        }
+
+        fuelstation.createMarker({
+            pos: pos,
+        });
     }
 
     async enter(player, shape) {
@@ -162,7 +176,11 @@ class FuelStationApi {
         const hasMoney = MoneyApi.hasHand(player.getVariable('playerId'), price);
         if (!hasMoney) return player.notify('~r~Du hast nicht genug Geld dabei!');
 
-        const vehicle = VehicleAPI.getNearVehicles({ pos: player.position, range: 10, id });
+        const vehicle = VehicleAPI.getNearVehicles({
+            pos: player.position,
+            range: 10,
+            id,
+        });
         if (vehicle.engine) return player.notify('~r~Du musst den Motor ausmachen!');
 
         MoneyApi.removeHand(player.getVariable('playerId'), price);

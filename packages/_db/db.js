@@ -1,48 +1,70 @@
-const mysql = require('mysql');
+const { Sequelize } = require('sequelize');
 const { log } = require('../../_assets/functions/log/logs');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 
-class Database {
-    constructor() {
-        this.connection = mysql.createPool({
-            connectionLimit: 100,
-            host: process.env.DB_HOST,
-            user: process.env.DB_USER,
-            password: process.env.DB_PWD,
-            database: process.env.DB_NAME,
-            acquireTimeout: 1000000,
-            debug: JSON.parse(process.env.DB_DEBUG),
-        });
+const database = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PWD, {
+    host: process.env.DB_HOST,
+    dialect: 'mysql',
+    logging: (...msg) => {
+        if (msg[1].showWarnings) {
+            log({ message: msg, type: 'db' });
+        }
+    },
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000,
+    },
+    retry: {
+        max: 3,
+    },
+    define: {
+        freezeTableName: true,
+        timestamps: false,
+    },
+});
 
-        this.connection.getConnection((err, connection) => {
-            if (err) throw err;
-            console.log('-------Database connected successfully------');
-            connection.release();
-        });
-    }
-    query(sql, args) {
-        return new Promise((resolve, reject) => {
-            this.connection.query(sql, args, (err, rows) => {
-                if (err) {
-                    log({
-                        message: err,
-                        isFatal: true,
-                    });
-                    return reject(err);
-                }
-                resolve(rows);
+(async () => {
+    const dir = path.resolve('packages/Models/tables/');
+    await database
+        .authenticate()
+        .then(() => {
+            fs.readdirSync(dir).forEach(async (file) => {
+                console.log('Loading model: ' + file);
+                require(path.join(dir, file));
+            });
+        })
+        .catch((err) => {
+            log({
+                message: 'There was an error when creating models: ' + err.toString(),
+                isFatal: true,
             });
         });
-    }
-    close() {
-        return new Promise((resolve, reject) => {
-            this.connection.end((err) => {
-                if (err) return reject(err);
-                resolve();
-            });
-        });
-    }
-}
+    await database.sync({ alter: true });
 
-const database = new Database();
+    const data_mg_path = path.resolve('packages/Models/data_migration/');
+    fs.readdirSync(data_mg_path).forEach(async (file) => {
+        if (!file.includes('.default')) return;
+        console.log('Inserting default data from: ' + file);
+        require(path.join(data_mg_path, file));
+    });
+})();
+
+database.afterSync(async (connection) => {
+    log({
+        message: `Successfully synced ${connection.name.plural}.`,
+        isFatal: false,
+    });
+});
+
+database.afterDestroy((error) => {
+    log({
+        message: 'Database connection error! ' + error.toString(),
+        isFatal: true,
+    });
+});
+
 module.exports = database;
