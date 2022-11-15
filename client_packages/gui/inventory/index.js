@@ -40,7 +40,6 @@ mp.events.add('uiInitInventory', () => {
 
 mp.events.add('uiSaveInventory', (items) => {
     if (isInvOpen) {
-        mp.gui.chat.push(`uiSaveInventory: ${items}`);
         mp.events.callRemote('Server:Save:Inventory', items);
     }
 });

@@ -58,7 +58,7 @@ class Account {
     }
 
     async save(username, password) {
-        password = this.hash(password);
+        password = await this.hash(password);
 
         return await pg_users
             .create({
@@ -137,8 +137,10 @@ class Account {
     }
 
     hash(string) {
-        const salt = 12;
-        return bcryptjs.hashSync(string, salt);
+        return new Promise((resolve) => {
+            const salt = 12;
+            return resolve(bcryptjs.hashSync(string, salt));
+        });
     }
 
     setHud(player) {

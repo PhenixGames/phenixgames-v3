@@ -13,10 +13,12 @@ Pg_items.init(
             type: DataTypes.STRING,
         },
         isStackable: {
-            type: DataTypes.TINYINT,
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         maxCount: {
             type: DataTypes.INTEGER,
+            defaultValue: 1
         },
         isDropable: {
             type: DataTypes.BOOLEAN,

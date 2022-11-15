@@ -2,6 +2,7 @@ const database = require('../../_db/db');
 const AccountAPI = require('../account/AcountAPI');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
 const { Sequelize } = require('sequelize');
+const pg_money = require('../../Models/tables/pg_money');
 
 class HandMoneyApi {
     constructor() {}
@@ -19,30 +20,33 @@ class HandMoneyApi {
     }
 
     async addHand(playerId, money) {
-        return await user
-            .updateMoney({
-                hand_money: Sequelize.literal(`hand_money + ${money}`),
-            })
-            .then(() => {
-                this.updateHud(playerId);
-            })
-            .catch((err) => {
-                return false;
-            });
+        pg_money.update({
+            hand_money: Sequelize.literal(`hand_money + ${money}`),
+        }, {
+            where: {
+                player_id: playerId,
+            },
+        }).then(() => {
+            this.updateHud(playerId);
+        })
+        .catch((err) => {
+            return false;
+        });
     }
 
     async removeHand(playerId, money) {
-        const user = await AccountAPI.get(playerId);
-        return await user
-            .updateMoney({
-                hand_money: Sequelize.literal(`hand_money - ${money}`),
-            })
-            .then(() => {
-                this.updateHud(playerId);
-            })
-            .catch((err) => {
-                return false;
-            });
+        pg_money.update({
+            hand_money: Sequelize.literal(`hand_money - ${money}`),
+        }, {
+            where: {
+                player_id: playerId,
+            },
+        }).then(() => {
+            this.updateHud(playerId);
+        })
+        .catch((err) => {
+            return false;
+        });
     }
 }
 
