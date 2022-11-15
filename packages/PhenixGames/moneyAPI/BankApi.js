@@ -18,33 +18,43 @@ class BankApi {
     }
 
     async addBank(playerId, money) {
-        pg_money.update({
-            hand_money: Sequelize.literal(`bank_money + ${money}`),
-        }, {
-            where: {
-                player_id: playerId,
-            },
-        }).then(() => {
-            this.updateHud(playerId);
-        })
-        .catch((err) => {
-            return false;
-        });
+        pg_money
+            .update(
+                {
+                    hand_money: Sequelize.literal(`bank_money + ${money}`),
+                },
+                {
+                    where: {
+                        player_id: playerId,
+                    },
+                }
+            )
+            .then(() => {
+                this.updateHud(playerId);
+            })
+            .catch((err) => {
+                return false;
+            });
     }
 
     async removeBank(playerId, money) {
-        pg_money.update({
-            hand_money: Sequelize.literal(`bank_money - ${money}`),
-        }, {
-            where: {
-                player_id: playerId,
-            },
-        }).then(() => {
-            this.updateHud(playerId);
-        })
-        .catch((err) => {
-            return false;
-        });
+        pg_money
+            .update(
+                {
+                    hand_money: Sequelize.literal(`bank_money - ${money}`),
+                },
+                {
+                    where: {
+                        player_id: playerId,
+                    },
+                }
+            )
+            .then(() => {
+                this.updateHud(playerId);
+            })
+            .catch((err) => {
+                return false;
+            });
     }
 }
 module.exports = BankApi;

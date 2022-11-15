@@ -14,11 +14,11 @@ Pg_items.init(
         },
         isStackable: {
             type: DataTypes.BOOLEAN,
-            defaultValue: false
+            defaultValue: false,
         },
         maxCount: {
             type: DataTypes.INTEGER,
-            defaultValue: 1
+            defaultValue: 1,
         },
         isDropable: {
             type: DataTypes.BOOLEAN,

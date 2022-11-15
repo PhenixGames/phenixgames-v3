@@ -20,33 +20,43 @@ class HandMoneyApi {
     }
 
     async addHand(playerId, money) {
-        pg_money.update({
-            hand_money: Sequelize.literal(`hand_money + ${money}`),
-        }, {
-            where: {
-                player_id: playerId,
-            },
-        }).then(() => {
-            this.updateHud(playerId);
-        })
-        .catch((err) => {
-            return false;
-        });
+        pg_money
+            .update(
+                {
+                    hand_money: Sequelize.literal(`hand_money + ${money}`),
+                },
+                {
+                    where: {
+                        player_id: playerId,
+                    },
+                }
+            )
+            .then(() => {
+                this.updateHud(playerId);
+            })
+            .catch((err) => {
+                return false;
+            });
     }
 
     async removeHand(playerId, money) {
-        pg_money.update({
-            hand_money: Sequelize.literal(`hand_money - ${money}`),
-        }, {
-            where: {
-                player_id: playerId,
-            },
-        }).then(() => {
-            this.updateHud(playerId);
-        })
-        .catch((err) => {
-            return false;
-        });
+        pg_money
+            .update(
+                {
+                    hand_money: Sequelize.literal(`hand_money - ${money}`),
+                },
+                {
+                    where: {
+                        player_id: playerId,
+                    },
+                }
+            )
+            .then(() => {
+                this.updateHud(playerId);
+            })
+            .catch((err) => {
+                return false;
+            });
     }
 }
 
