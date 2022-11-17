@@ -1,5 +1,7 @@
 require('./non-gui/player/keypresser.js');
-//Var
+require('./non-gui/player/medikit');
+require('./non-gui/player/weste');
+
 const colour = { r: 255, g: 0, b: 0 }; // set this to the colour you want
 const serverName = 'PhenixGames'; // set this to the pause menu title you want
 //Der Code wird Ausgeführt wenn alle Sachen vom Client geladen wurden.
