@@ -1,13 +1,24 @@
 [
     {
-        "name": "Test Item",
-        "img": "https://www.ikea.com/de/de/images/products/arv-broellop-platte-auf-fuss-mit-abdeckung-klarglas__0713433_pe729526_s5.jpg?f=xl",
-        "isStackable": 1,
-        "maxCount": 1,
-        "isDropable": 1,
-        "isSplitable": 1,
-        "isUsable": 1,
-        "isSellable": 1,
-        "weight": 100
+        "name": "Medikit",
+        "img": "https://cdn.iconscout.com/icon/premium/png-256-thumb/medikit-24-137836.png",
+        "isStackable": true,
+        "maxCount": 10,
+        "isDropable": true,
+        "isSplitable":true,
+        "isUsable": true,
+        "isSellable": false,
+        "weight": 10
+    },
+    {
+        "name": "Weste",
+        "img": "https://cdn.iconscout.com/icon/premium/png-256-thumb/western-5432636-4661161.png",
+        "isStackable": true,
+        "maxCount": 10,
+        "isDropable": true,
+        "isSplitable":true,
+        "isUsable": true,
+        "isSellable": false,
+        "weight": 10
     }
 ]
