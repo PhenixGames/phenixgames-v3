@@ -1,3 +1,3 @@
 mp.events.add('player:use:weste', (player) => {
-    player.callRemote('server:use:weste');
+    player.callRemote('Server:Use:Medikit');
 });
