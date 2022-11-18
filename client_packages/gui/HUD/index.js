@@ -233,7 +233,7 @@ mp.events.add('render', () => {
                 });
             }
         }
-        if(player.getVariable('isAFK')){
+        if (player.getVariable('isAFK')) {
             if (
                 mp.players.local.position.subtract(player.position).length() < 10 &&
                 mp.players.local.position.subtract(player.position).length() !== 0
