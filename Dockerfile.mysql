@@ -1,0 +1,9 @@
+FROM mysql:5.7
+
+ENV MYSQL_ROOT_PASSWORD=root
+ENV MYSQL_DATABASE=phenixgames_v3
+ENV MYSQL_USER=root
+
+VOLUME [ "./mysql:/var/lib/mysql" ]
+
+EXPOSE 3306

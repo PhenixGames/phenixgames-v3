@@ -1,17 +1,20 @@
 #!/bin/bash
 
 type=$1
+server=$2
 
 
 function startServer () {
-    echo "$(tput setaf 1)STARTING ALL SERVER"
-    cd ./pg_vue_server
-    pm2 start "npm run serve" --name rage_vue
-    echo "vue server started"
-    cd ..
-    sleep 2
-    pm2 start ragemp-server --name rage_server
-    pm2 logs
+
+    echo "Starting server $server"
+
+    if [ $server == "rage" ]; then
+        pm2 start ragemp-server --name rage_server
+    fi
+    if [ $server == "vue" ]; then
+        cd ./pg_vue_server
+        pm2 start "npm run serve" --name rage_vue
+    fi
 }
 
 function restart () {

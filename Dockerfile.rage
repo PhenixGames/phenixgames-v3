@@ -1,0 +1,16 @@
+FROM ubuntu:22.04
+
+EXPOSE 22005/udp
+EXPOSE 22006
+
+WORKDIR /opt/app
+
+COPY . /opt/app
+
+RUN chmod +x ragemp-server
+RUN chmod +x ./
+
+RUN ./ragemp-server
+
+# prevent container from exiting
+CMD tail -f /dev/null
