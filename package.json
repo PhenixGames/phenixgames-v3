@@ -2,11 +2,12 @@
     "name": "phenixgames-v3",
     "version": "0.2.7",
     "description": "Another PhenixGames Server",
+    "private": true,
     "scripts": {
-        "start": "./start.sh start",
-        "restart": "./start.sh restart",
-        "kill": "./start.sh kill",
-        "pull": "./start.sh pull",
+        "start": "docker compose up -d",
+        "stop": "docker compose down",
+        "rage": "docker compose exec rage bash",
+        "mysql": "docker compose exec mysql bash",
         "format": "prettier --write . --bracket-same-line=true",
         "check": "prettier --check . --bracket-same-line=true"
     },
@@ -14,8 +15,8 @@
         "type": "git",
         "url": "git+https://github.com/PhenixGames/phenixgames-v3.git"
     },
-    "author": "",
-    "license": "ISC",
+    "author": "PhenixGames",
+    "license": "GLP-3.0",
     "bugs": {
         "url": "https://github.com/PhenixGames/phenixgames-v3/issues"
     },
