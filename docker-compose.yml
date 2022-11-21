@@ -1,52 +1,46 @@
 version: '3.9'
 
 volumes:
-  db_data:
+    db_data:
+    rage:
 
 services:
+    rage:
+        build:
+            context: .
+            dockerfile: .docker/rage/Dockerfile
+        volumes:
+            - /opt/ragemp_server:/server
+        ports:
+            - '22005:22005/udp'
+            - 22006:22006
+        restart: unless-stopped
+        tty: true
+        stdin_open: true
 
-  rage:
-    build:
-      context: .
-      dockerfile: Dockerfile.rage
-    volumes:
-      - .:/app
-    ports:
-      - 3000:3000
-    
-    restart: unless-stopped
-  
-  # vue:
-  #   image: node:18.8.0
-  #   volumes:
-  #     - .:/vue
-  #   working_dir: /vue
-  #   command: bash -c "cd pg_vue_server && npm run serve"
-  #   ports:
-  #     - 3001:3001
-  #   depends_on:
-  #     - rage
-    
+    vue:
+        build:
+            context: ./phenixgames-v3-vue
+            dockerfile: .docker/Dockerfile
+        volumes:
+            - .:/vue
+        working_dir: /vue
+        ports:
+            - 3000:3000
+        depends_on:
+            - rage
+        stdin_open: true
 
-  mysql:
-    image: mysql:5.7
-    container_name: phenixgames-db
-
-    restart: always
-
-    volumes:
-      - db_data:/var/lib/mysql
-
-    ports:
-      - 3306:3306
-
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: rage
-      MYSQL_USER: rage
-      MYSQL_PASSWORD: rage
-
-    depends_on:
-      - rage
-
-    
+    mysql:
+        build:
+            context: ../../.
+            dockerfile: .docker/mysql/Dockerfile
+        container_name: mysql
+        volumes:
+            - db_data:/var/lib/mysql
+        ports:
+            - 3306:3306
+        restart: unless-stopped
+        depends_on:
+            - rage
+        stdin_open: true

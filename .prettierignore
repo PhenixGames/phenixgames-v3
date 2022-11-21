@@ -12,3 +12,5 @@ bin
 core
 _backup
 _logs
+
+Dockerfile.*

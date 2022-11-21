@@ -1,0 +1,9 @@
+node_modules
+phenixgames-backup
+env.example
+./docker
+docker-compose.yml
+linux_x64.tar.gz
+core
+.git/
+.github/

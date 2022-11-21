@@ -1,0 +1,21 @@
+FROM jevico/ragemp-server
+
+RUN apt-get update \
+    && apt-get install -y curl jq 
+
+RUN curl --silent --location https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y \
+  nodejs
+RUN echo "Node: " && node -v
+RUN echo "NPM: " && npm -v
+
+EXPOSE 22005/udp
+EXPOSE 22006
+
+WORKDIR /app
+RUN ls -a
+COPY . .
+
+RUN npm install
+RUN chmod +x ragemp-server
+RUN ./ragemp-server

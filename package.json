@@ -4,10 +4,9 @@
     "description": "Another PhenixGames Server",
     "private": true,
     "scripts": {
-        "start": "pm2 start docker compose up -d --name phenixgames-v3",
-        "stop": "docker compose down && pm2 delete phenixgames-v3",
         "rage": "docker compose exec rage bash",
         "mysql": "docker compose exec mysql bash",
+        "vue": "docker compose exec vue bash",
         "format": "prettier --write . --bracket-same-line=true",
         "check": "prettier --check . --bracket-same-line=true"
     },
