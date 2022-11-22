@@ -13,9 +13,10 @@ EXPOSE 22005/udp
 EXPOSE 22006
 
 WORKDIR /app
-RUN ls -a
+
 COPY . .
 
+RUN ls -la
 RUN npm install
 RUN chmod +x ragemp-server
 RUN ./ragemp-server
