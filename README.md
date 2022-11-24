@@ -4,7 +4,7 @@
 
 ### **Add vue server**
 ```cmd
-git clone https://github.com/PhenixGames/phenixgames-v3-vue.git pg_vue_server
+git clone https://github.com/PhenixGames/phenixgames-v3-vue.git
 ```
 
 ### **Requirements:**
