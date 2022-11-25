@@ -32,7 +32,7 @@ jobs:
                 github-token: ${{ secrets.GITHUB_TOKEN }}
                 script: |
                 github.issues.createComment({
-                    issue_number: ${{ github.event.number }},
+                    issue_number: context.issue.number,
                     owner: context.repo.owner,
                     repo: context.repo.repo,
                     body: ':warning: Prettier failed. Please run `npm run prettier` and commit the changes.'
@@ -45,7 +45,7 @@ jobs:
                 github-token: ${{ secrets.GITHUB_TOKEN }}
                 script: |
                 github.issues.createComment({
-                    issue_number: ${{ github.event.number }},
+                    issue_number: context.issue.number,
                     owner: context.repo.owner,
                     repo: context.repo.repo,
                     body: 'Prettier found no errors. :100:'
