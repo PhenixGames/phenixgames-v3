@@ -25,29 +25,29 @@ jobs:
                   dry: true
                   only_changed: True
 
-            name: Comment on failed prettier
-            runs-on: ubuntu-latest
-            if: ${{ failure() }}
-            steps:
+            - name: Comment on failed prettier
+              runs-on: ubuntu-latest
+              if: ${{ failure() }}
+              steps:
                 - name: Checkout
-                uses: actions/checkout@v2
+                  uses: actions/checkout@v2
 
                 - name: Failed Comment
-                uses: mb2dev/github-action-comment-pull-request@1.0.0
-                with:
+                  uses: mb2dev/github-action-comment-pull-request@1.0.0
+                  with:
                     message: "Prettier found some errors. Please run `npm run format` and commit the changes."
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            name: Comment on success prettier
-            runs-on: ubuntu-latest
-            if: ${{ success() }}
-            steps:
+            - name: Comment on success prettier
+              runs-on: ubuntu-latest
+              if: ${{ success() }}
+              steps:
                 - name: Checkout
-                uses: actions/checkout@v2
+                  uses: actions/checkout@v2
 
                 - name: Success Comment
-                uses: mb2dev/github-action-comment-pull-request@1.0.0
-                with:
+                  uses: mb2dev/github-action-comment-pull-request@1.0.0
+                  with:
                     message: "Prettier found no errors. Good job!"
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
