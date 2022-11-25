@@ -24,3 +24,28 @@ jobs:
                   prettier_options: '--check . --single-quote --bracket-same-line=true'
                   dry: true
                   only_changed: True
+
+            - name: Send comment on failure
+              runs-on: ubuntu-latest
+              uses: mshick/add-pr-comment@v2
+                  permissions:
+                  pull-requests: write
+              steps:
+                - uses: mshick/add-pr-comment@v2
+                    with:
+                    if: ${{ failure() }}
+                    message: |
+                        Prettier found some errors. Please run `npm run prettier` and commit the changes.
+
+            - name: Send comment on success
+                runs-on: ubuntu-latest
+                uses: mshick/add-pr-comment@v2
+                permissions:
+                    pull-requests: write
+                steps:
+                - uses: mshick/add-pr-comment@v2
+                    with:
+                    if: ${{ success() }}
+                    message: |
+                        Prettier found no errors. Good job!
+
