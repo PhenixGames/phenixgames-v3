@@ -26,7 +26,7 @@ jobs:
                   only_changed: True
 
             - name: Comment on failed prettier
-              runs-on: ubuntu-latest
+              uses: actions/github-script@v2
               if: ${{ failure() }}
               steps:
                 - name: Checkout
@@ -39,7 +39,7 @@ jobs:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Comment on success prettier
-              runs-on: ubuntu-latest
+              uses: actions/github-script@v2
               if: ${{ success() }}
               steps:
                 - name: Checkout
