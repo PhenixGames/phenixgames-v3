@@ -30,22 +30,22 @@ jobs:
               if: ${{ failure() }}
               with:
                 script: |
-                github.rest.issues.createComment({
-                    issue_number: context.issue.number,
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    body: ':warning: Prettier failed. Please run `npm run prettier` and commit the changes.'
-                })
+                    github.rest.issues.createComment({
+                        issue_number: context.issue.number,
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        body: ':warning: Prettier failed. Please run `npm run prettier` and commit the changes.'
+                    })
 
             - name: Comment on success prettier
               uses: actions/github-script@v6
               if: ${{ success() }}
               with:
                 script: |
-                github.rest.issues.createComment({
-                    issue_number: context.issue.number,
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    body: 'Prettier found no errors. :100:'
-                })
+                    github.rest.issues.createComment({
+                        issue_number: context.issue.number,
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        body: 'Prettier found no errors. :100:'
+                    })
 
