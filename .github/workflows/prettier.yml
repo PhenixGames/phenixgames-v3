@@ -29,7 +29,6 @@ jobs:
               uses: actions/github-script@v6
               if: ${{ failure() }}
               with:
-                github-token: ${{ secrets.GITHUB_TOKEN }}
                 script: |
                 github.rest.issues.createComment({
                     issue_number: context.issue.number,
@@ -42,7 +41,6 @@ jobs:
               uses: actions/github-script@v6
               if: ${{ success() }}
               with:
-                github-token: ${{ secrets.GITHUB_TOKEN }}
                 script: |
                 github.rest.issues.createComment({
                     issue_number: context.issue.number,
