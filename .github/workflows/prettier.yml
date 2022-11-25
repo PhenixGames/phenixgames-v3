@@ -27,9 +27,8 @@ jobs:
 
             - name: Send comment on failure
               runs-on: ubuntu-latest
-              uses: mshick/add-pr-comment@v2
-                  permissions:
-                  pull-requests: write
+              permissions:
+                pull-requests: write
               steps:
                 - uses: mshick/add-pr-comment@v2
                     with:
