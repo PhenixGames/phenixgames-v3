@@ -6,6 +6,7 @@ RUN apt-get update \
 RUN curl --silent --location https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y \
   nodejs
+RUN npm install -g npm@9.1.2 -y 
 RUN echo "Node: " && node -v
 RUN echo "NPM: " && npm -v
 
@@ -15,6 +16,8 @@ EXPOSE 22006
 WORKDIR /app
 
 COPY . .
+
+ENV NODE_ENV=development
 
 RUN ls -la
 RUN npm install
