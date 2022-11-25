@@ -14,23 +14,26 @@ class Api {
         });
     }
 
-    getItem({id, name}) {
+    getItem({ id, name }) {
         return new Promise(async (resolve, reject) => {
-            await pg_items.findOne({
-                $or: [
-                    {
-                        id: id,
-                    },
-                    {
-                        name: name,
-                    },
-                ],
-            }).then((item) => {
-                return (item) ? resolve(item) : resolve([]);
-            }).catch((err) => {
-                reject(err);
-            });
-        });   
+            await pg_items
+                .findOne({
+                    $or: [
+                        {
+                            id: id,
+                        },
+                        {
+                            name: name,
+                        },
+                    ],
+                })
+                .then((item) => {
+                    return item ? resolve(item) : resolve([]);
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+        });
     }
 
     async update(id, userInventory) {
@@ -46,11 +49,11 @@ class Api {
         );
     }
 
-    removeItem({itemId, playerId, amount = null, userInventory}) {
+    removeItem({ itemId, playerId, amount = null, userInventory }) {
         return new Promise(async (resolve) => {
             const item = userInventory.find((item) => item.id === itemId);
-            if(amount) {
-                if ((item.amount - amount) <= 0) {
+            if (amount) {
+                if (item.amount - amount <= 0) {
                     userInventory.splice(userInventory.indexOf(item), 1);
                 } else {
                     item.amount -= amount;

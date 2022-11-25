@@ -5,7 +5,7 @@
         "isStackable": true,
         "maxCount": 10,
         "isDropable": true,
-        "isSplitable":true,
+        "isSplitable": true,
         "isUsable": true,
         "isSellable": false,
         "weight": 10
@@ -16,7 +16,7 @@
         "isStackable": true,
         "maxCount": 10,
         "isDropable": true,
-        "isSplitable":true,
+        "isSplitable": true,
         "isUsable": true,
         "isSellable": false,
         "weight": 10
