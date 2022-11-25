@@ -36,15 +36,16 @@ jobs:
                         message: |
                             Prettier found some errors. Please run `npm run prettier` and commit the changes.
 
-            - name: Send comment on success
-                runs-on: ubuntu-latest
-                uses: mshick/add-pr-comment@v2
-                permissions:
-                    pull-requests: write
-                steps:
-                - uses: mshick/add-pr-comment@v2
-                    with:
-                        if: ${{ success() }}
-                        message: |
-                            Prettier found no errors. Good job!
+            name: Comment a pull_request
+            runs-on: ubuntu-latest
+            if: ${{ failure() }}
+            steps:
+                - name: Checkout
+                uses: actions/checkout@v2
+
+                - name: Comment a pull_request
+                uses: mb2dev/github-action-comment-pull-request@1.0.0
+                with:
+                    message: "Prettier found some errors. Please run `npm run format` and commit the changes."
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
