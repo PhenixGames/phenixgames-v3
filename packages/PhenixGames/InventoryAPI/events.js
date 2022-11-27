@@ -29,7 +29,6 @@ function useMedikit_Weste(player, type) {
 
         if (!item || item.length === 0) {
             log({
-                type: 'error',
                 message: `${type} Item not found`,
                 isFatal: true,
             });
