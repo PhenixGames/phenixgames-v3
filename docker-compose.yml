@@ -4,11 +4,39 @@ volumes:
     db_data:
     rage:
 
+networks:
+    default:
+        driver: bridge
+
 services:
+
+    mysql:
+        container_name: mysql
+        image: mysql:5.7
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: phenixgames_v3
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+            MYSQL_PORT: 3306
+            MYSQL_HOSTNAME: mysql
+        volumes:
+            - db_data:/var/lib/mysql
+        ports:
+            - 3307:3306
+        restart: unless-stopped
+        stdin_open: true
+        healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 5s
+            retries: 10
+        networks:
+            - default
+
     rage:
         depends_on:
-            mysql:
-                condition: service_healthy
+            - mysql
         build:
             context: .
             dockerfile: ./Dockerfile.rage
@@ -20,11 +48,13 @@ services:
         restart: unless-stopped
         env_file:
             - .env
-        tty: true
-        stdin_open: true
         links:
             - mysql:mysql
-
+        networks:
+            - default
+        privileged: true
+        tty: true
+        stdin_open: true
     vue:
         build:
             context: ./phenixgames-v3-vue
@@ -38,24 +68,3 @@ services:
             - rage
         stdin_open: true
 
-    mysql:
-        container_name: mysql
-        image: mysql:5.7
-        command: --default-authentication-plugin=mysql_native_password
-        environment:
-            MYSQL_ROOT_PASSWORD: "root"
-            MYSQL_DATABASE: "phenixgames_v3"
-            MYSQL_USER: "root"
-            MYSQL_PASSWORD: "root"
-        volumes:
-            - db_data:/var/lib/mysql
-        ports:
-            - "3307:3306"
-        restart: unless-stopped
-        depends_on:
-            - rage
-        stdin_open: true
-        healthcheck:
-            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-            timeout: 5s
-            retries: 10
