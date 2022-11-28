@@ -7,3 +7,4 @@ linux_x64.tar.gz
 core
 .git/
 .github/
+docker-compose.override.yml

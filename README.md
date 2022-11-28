@@ -42,6 +42,30 @@ git clone https://github.com/PhenixGames/phenixgames-v3-vue.git
 
 6. Start docker `docker compose up -d`
 
+<br>
+
+# Production
+
+1. Add File `docker-compose.override.yml`
+2. Insert code:
+```yml
+version: '3.9'
+
+
+services:
+    mysql:
+        environment:
+            MYSQL_ROOT_PASSWORD: ...
+            MYSQL_DATABASE: phenixgames_v3
+            MYSQL_USER: ...
+            MYSQL_PASSWORD: ...
+            MYSQL_PORT: 3306
+            MYSQL_HOSTNAME: mysql
+```
+
+<br>
+
+
 # **Important commands**
 
 ```cmd
