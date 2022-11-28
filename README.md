@@ -34,4 +34,18 @@ git clone https://github.com/PhenixGames/phenixgames-v3-vue.git
 
 <br>
 
-5. Start docker `npm run start`
+5. Create Docker network `docker network create rage_network`
+
+<br>
+
+6. Start docker `docker compose up -d`
+
+# **Important commands**
+
+```cmd
+docker compose up -d //start containers
+docker compose down //stop containers
+docker compose exec [container_name] bash //enter terminal of container
+docker logs --follow [container_name] //see logs & follow them
+docker rmi $(docker images -a -q) // delete all images on you machine
+```

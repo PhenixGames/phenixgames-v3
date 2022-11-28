@@ -2,16 +2,17 @@ version: '3.9'
 
 volumes:
     db_data:
-    rage:
 
 networks:
     default:
-        driver: bridge
+        external:
+            name: rage_network
 
 services:
 
     mysql:
         container_name: mysql
+        hostname: mysql
         image: mysql:5.7
         command: --default-authentication-plugin=mysql_native_password
         environment:
@@ -31,17 +32,15 @@ services:
             test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
             timeout: 5s
             retries: 10
-        networks:
-            - default
 
     rage:
+        container_name: rage
+        hostname: rage
         depends_on:
             - mysql
         build:
             context: .
             dockerfile: ./Dockerfile.rage
-        volumes:
-            - /opt/ragemp_server:/server
         ports:
             - '22005:22005/udp'
             - 22006:22006
@@ -50,11 +49,9 @@ services:
             - .env
         links:
             - mysql:mysql
-        networks:
-            - default
-        privileged: true
         tty: true
         stdin_open: true
+
     vue:
         build:
             context: ./phenixgames-v3-vue

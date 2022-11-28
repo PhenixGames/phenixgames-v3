@@ -1,4 +1,4 @@
-FROM jevico/ragemp-server
+FROM ubuntu:22.04
 
 RUN apt-get update \
     && apt-get install -y curl jq 
@@ -23,8 +23,4 @@ RUN ls -la
 RUN npm install
 RUN chmod +x ragemp-server
 
-RUN npm install -g pm2
-RUN pm2 list
-RUN pm2 start ragemp-server --name "rage-server"
-
-CMD ["pm2", "logs"]
+CMD ["./ragemp-server"]
