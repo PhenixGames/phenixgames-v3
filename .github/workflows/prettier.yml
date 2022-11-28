@@ -24,3 +24,28 @@ jobs:
                   prettier_options: '--check . --single-quote --bracket-same-line=true'
                   dry: true
                   only_changed: True
+
+            - name: Comment on failed prettier
+              uses: actions/github-script@v6
+              if: ${{ failure() }}
+              with:
+                script: |
+                    github.rest.issues.createComment({
+                        issue_number: context.issue.number,
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        body: ':warning: Prettier failed. Please run `npm run prettier` and commit the changes.'
+                    })
+
+            - name: Comment on success prettier
+              uses: actions/github-script@v6
+              if: ${{ success() }}
+              with:
+                script: |
+                    github.rest.issues.createComment({
+                        issue_number: context.issue.number,
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        body: 'Prettier found no errors. :100:'
+                    })
+
