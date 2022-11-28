@@ -30,6 +30,7 @@ jobs:
             - name: Comment on failed prettier
               uses: actions/github-script@v6
               if: ${{ failure() }}
+              if: ${{ github.event_name == 'pull_request' }}
               with:
                 script: |
                     github.rest.issues.createComment({
@@ -42,6 +43,7 @@ jobs:
             - name: Comment on success prettier
               uses: actions/github-script@v6
               if: ${{ success() }}
+              if: ${{ github.event_name == 'pull_request' }}
               with:
                 script: |
                     github.rest.issues.createComment({
