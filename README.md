@@ -3,7 +3,9 @@
 ## **Installation Guide**
 
 ### **Add vue server**
->Execute this inside the root directory
+
+> Execute this inside the root directory
+
 ```cmd
 git clone https://github.com/PhenixGames/phenixgames-v3-vue.git
 ```

@@ -4,9 +4,6 @@
     "description": "Another PhenixGames Server",
     "private": true,
     "scripts": {
-        "rage": "docker compose exec rage bash",
-        "mysql": "docker compose exec mysql bash",
-        "vue": "docker compose exec vue bash",
         "format": "prettier --write . --bracket-same-line=true",
         "check": "prettier --check . --bracket-same-line=true"
     },
