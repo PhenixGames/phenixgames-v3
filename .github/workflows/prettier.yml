@@ -34,7 +34,7 @@ jobs:
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
                         repo: context.repo.repo,
-                        body: ':warning: Prettier failed. Please run `npm run prettier` and commit the changes.'
+                        body: ':warning: Prettier failed. Please run `npm run format` and commit the changes.'
                     })
 
             - name: Comment on success prettier
