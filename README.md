@@ -48,9 +48,9 @@ git clone https://github.com/PhenixGames/phenixgames-v3-vue.git
 
 1. Add File `docker-compose.override.yml`
 2. Insert code:
+
 ```yml
 version: '3.9'
-
 
 services:
     mysql:
@@ -64,7 +64,6 @@ services:
 ```
 
 <br>
-
 
 # **Important commands**
 
