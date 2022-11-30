@@ -28,11 +28,13 @@
         "moment": "^2.29.4",
         "mysql": "^2.18.1",
         "mysql2": "^2.3.3",
-        "prettier": "^2.8.0",
         "sequelize": "^6.25.8",
         "simple-node-logger": "^21.8.12",
-        "sloc": "^0.2.1",
         "validator": "^13.7.0",
         "vue-router": "^4.1.6"
+    },
+    "devDependencies": {
+        "prettier": "^2.8.0",
+        "sloc": "^0.2.1",
     }
 }
