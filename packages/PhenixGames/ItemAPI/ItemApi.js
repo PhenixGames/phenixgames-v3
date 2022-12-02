@@ -7,11 +7,12 @@ class Api {
 
     init() {
         return new Promise(async (resolve, reject) => {
-            this.items = await pg_items.findAll().catch(err => {return []});
+            this.items = await pg_items.findAll().catch((err) => {
+                return [];
+            });
             resolve();
         });
     }
-
 
     get(id) {
         return new Promise(async (resolve) => {
