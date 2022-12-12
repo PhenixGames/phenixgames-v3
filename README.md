@@ -71,6 +71,12 @@ services:
 docker compose up -d //start containers
 docker compose down //stop containers
 docker compose exec [container_name] bash //enter terminal of container
-docker logs --follow [container_name] //see logs & follow them
+docker logs --follow [container_name/id] //see logs & follow them
 docker rmi $(docker images -a -q) // delete all images on you machine
+docker system prune -a //hardcore delete everything
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' name_or_id //get ip of container
+```
+
+```
+
 ```
