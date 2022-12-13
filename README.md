@@ -33,6 +33,14 @@ git clone https://github.com/PhenixGames/phenixgames-v3-vue.git
 
 <br>
 
+4. Clone this repository `git clone https://github.com/PhenixGames/phenixgames-v3.git `
+
+<br>
+
+5. Clone vue repository `git clone https://github.com/PhenixGames/phenixgames-v3-vue.git `
+
+<br>
+
 # Production
 
 1. Add File `docker-compose.override.yml`
@@ -50,6 +58,13 @@ services:
             MYSQL_PASSWORD: ...
             MYSQL_PORT: 3306
             MYSQL_HOSTNAME: mysql
+
+    ....
+
+    vue:
+        build:
+            context: ./phenixgames-v3-vue
+            dockerfile: ./Dockerfile.prod
 ```
 
 <br>
