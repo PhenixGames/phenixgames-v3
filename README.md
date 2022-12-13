@@ -64,7 +64,7 @@ services:
     vue:
         build:
             context: ./phenixgames-v3-vue
-            dockerfile: ./Dockerfile.prod
+            dockerfile: ./.docker/Dockerfile.prod
 ```
 
 <br>

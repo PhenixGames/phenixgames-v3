@@ -58,7 +58,7 @@ services:
     vue:
         build:
             context: ./phenixgames-v3-vue
-            dockerfile: ./Dockerfile
+            dockerfile: ./.docker/Dockerfile
         volumes:
             - .:/vue
         working_dir: /vue
