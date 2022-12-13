@@ -22,25 +22,14 @@ git clone https://github.com/PhenixGames/phenixgames-v3-vue.git
 ### Installation
 
 1. Install docker (<https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04>)
-   <br>
-
-2. Install curl `sudo apt install curl`
 
 <br>
 
-3. Install node `curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh`
+2. Install docker compose (<https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04>)
 
 <br>
 
-4. Install pm2 `npm i -g pm2`
-
-<br>
-
-5. Create Docker network `docker network create rage_network`
-
-<br>
-
-6. Start docker `docker compose up -d`
+3. Start docker `docker compose up -d`
 
 <br>
 
