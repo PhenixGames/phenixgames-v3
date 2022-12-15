@@ -48,9 +48,9 @@ services:
         volumes:
             - .:/vue
         ports:
-            - 3000:3000
+            - 8080:8080
         env_file:
             - .env
         restart: unless-stopped
-        # links:
-        #     - rage
+        links:
+            - rage
