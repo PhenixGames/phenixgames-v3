@@ -4,6 +4,9 @@
     "description": "Another PhenixGames Server",
     "private": true,
     "scripts": {
+        "start": "docker compose up -d && docker ps",
+        "stop": "docker compose down",
+        "restart": "npm run stop && npm run start",
         "format": "prettier --write . --bracket-same-line=true",
         "check": "prettier --check . --bracket-same-line=true"
     },
