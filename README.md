@@ -76,6 +76,6 @@ docker system prune -a //hardcore delete everything
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' name_or_id //get ip of container
 ```
 
-```
+# Pre Push events
 
-```
+Copy `pre-push` file to `.git/hooks/`
