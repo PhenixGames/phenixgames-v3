@@ -1,0 +1,26 @@
+FROM ubuntu:22.04
+
+RUN apt-get update \
+    && apt-get install -y curl jq 
+
+RUN curl --silent --location https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y \
+  nodejs
+RUN npm install -g npm@9.1.2 -y 
+RUN echo "Node: " && node -v
+RUN echo "NPM: " && npm -v
+
+EXPOSE 22005/udp
+EXPOSE 22006
+
+WORKDIR /app
+
+COPY . .
+
+ENV NODE_ENV=development
+
+RUN ls -la
+RUN npm install
+RUN chmod +x ragemp-server
+
+CMD ["./ragemp-server"]

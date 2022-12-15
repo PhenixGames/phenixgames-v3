@@ -17,3 +17,6 @@ _assets/functions/DatabaseBackup/last_backup.json
 .env
 ._*
 .vs_code/
+phenixgames-v3-vue
+Dockerfile.overwrite
+docker-compose.override.yml

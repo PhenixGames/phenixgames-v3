@@ -3,6 +3,8 @@ name: Code Check
 on:
     pull_request:
         branches: [dev, main]
+    push:
+        branches: [fix/*, feature/*, dev]
 
 jobs:
     prettier:
@@ -27,19 +29,19 @@ jobs:
 
             - name: Comment on failed prettier
               uses: actions/github-script@v6
-              if: ${{ failure() }}
+              if: ${{ failure() && github.event_name == 'pull_request'}}
               with:
                 script: |
                     github.rest.issues.createComment({
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
                         repo: context.repo.repo,
-                        body: ':warning: Prettier failed. Please run `npm run prettier` and commit the changes.'
+                        body: ':warning: Prettier failed. Please run `npm run format` and commit the changes.'
                     })
 
             - name: Comment on success prettier
               uses: actions/github-script@v6
-              if: ${{ success() }}
+              if: ${{ success() && github.event_name == 'pull_request' }}
               with:
                 script: |
                     github.rest.issues.createComment({
