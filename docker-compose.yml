@@ -41,15 +41,16 @@ services:
         tty: true
         stdin_open: true
 
-    # vue:
-    #     build:
-    #         context: ./phenixgames-v3-vue
-    #         dockerfile: ./.docker/Dockerfile
-    #     volumes:
-    #         - .:/vue
-    #     working_dir: /vue
-    #     ports:
-    #         - 3000:3000
-    #     links:
-    #         - rage
-    #     stdin_open: true
+    vue:
+        build:
+            context: ./phenixgames-v3-vue
+            dockerfile: ./Dockerfile
+        volumes:
+            - .:/vue
+        ports:
+            - 3000:3000
+        env_file:
+            - .env
+        restart: unless-stopped
+        # links:
+        #     - rage

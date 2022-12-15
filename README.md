@@ -47,19 +47,14 @@ git clone https://github.com/PhenixGames/phenixgames-v3-vue.git
 2. Insert code:
 
 ```yml
-version: '3.9'
-
 services:
     mysql:
         environment:
-            MYSQL_ROOT_PASSWORD: ...
-            MYSQL_DATABASE: phenixgames_v3
-            MYSQL_USER: ...
-            MYSQL_PASSWORD: ...
-            MYSQL_PORT: 3306
-            MYSQL_HOSTNAME: mysql
-
-    ....
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=phenixgames-v3
+            - MYSQL_USER=xxxx
+            - MYSQL_PASSWORD=xxxxxx
+            - MYSQL_PORT=3306
 
     vue:
         build:
