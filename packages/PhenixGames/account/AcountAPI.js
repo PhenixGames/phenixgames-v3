@@ -128,6 +128,7 @@ class Account {
 
     async getPos(player) {
         const user = await this.get(player.getVariable('playerId'));
+        if (!user) return [];
         const character = await user.getCharacter();
         return JSON.parse(character.last_pos);
     }
