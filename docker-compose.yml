@@ -33,6 +33,7 @@ services:
         networks:
             - pg_net
     rage:
+        container_name: rage
         build:
             context: .
             dockerfile: Dockerfile.rage
