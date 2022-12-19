@@ -10,7 +10,7 @@ Pg_user_inventory.init(
         },
         items: {
             type: DataTypes.JSON,
-            defaultValue: {},
+            defaultValue: [],
         },
     },
     {
