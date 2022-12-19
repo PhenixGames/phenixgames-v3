@@ -4,12 +4,10 @@ const weatherAPI = require('../weatherAPI');
 const { delay } = require('../../../_assets/functions/delay');
 const { log } = require('../../../_assets/functions/log/logs');
 const { spawn } = require('child_process');
-const { DatabaseBackup } = require('../../../_assets/functions/DatabaseBackup/DatabaseBackup');
 const { FAPI } = require('../Fuelstation/FuelStationApi');
 const IplsAPI = require('../ipls');
 const VehicleAPI = require('../vehicle/VehicleApi');
 const { SyncApi } = require('../SyncAPI/SyncApi');
-const database = require('../../_db/db');
 
 mp.events.delayInitialization = true;
 (async () => {
@@ -34,10 +32,6 @@ mp.events.add('packagesLoaded', async () => {
 
     SyncApi.sync();
     SyncApi.syncWeather();
-
-    if (debug.createBackup) {
-        new DatabaseBackup();
-    }
 });
 
 //! ERROR --
@@ -47,7 +41,7 @@ process.on('unhandledRejection', async (err) => {
         isFatal: true,
     });
     if (!debug.global && process.platform !== 'win32') {
-        await database.close();
+        await global.database.close();
         log({
             message: 'BOT RESTARTED...' + new Date(),
             isFatal: false,
@@ -66,7 +60,7 @@ process.on('uncaughtException', async (err) => {
         isFatal: true,
     });
     if (!debug.global && process.platform !== 'win32') {
-        await database.close();
+        await global.database.close();
         log({
             message: 'BOT RESTARTED...' + new Date(),
             isFatal: false,

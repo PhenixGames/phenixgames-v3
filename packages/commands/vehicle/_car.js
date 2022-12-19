@@ -1,7 +1,6 @@
 const vehicle = require('../../PhenixGames/vehicle/index');
 const Permissionsytem = require('../../PhenixGames/playerAPI/PermissionSystem');
 const generellAPI = require('../../PhenixGames/allgemein/');
-const database = require('../../_db/db');
 const VehicleAPI = require('../../PhenixGames/vehicle/VehicleApi');
 
 mp.events.addCommand('car', async (player, args) => {
@@ -103,7 +102,7 @@ async function clean(player) {
 }
 
 async function DeleteVehicleFromDatabase(veh_id) {
-    return await database
+    return await global.database
         .query('DELETE FROM pg_vehicles WHERE veh_id = ?', [veh_id])
         .then(() => {
             return true;

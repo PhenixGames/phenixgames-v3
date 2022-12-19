@@ -1,7 +1,4 @@
 const pg_garages = require('../../Models/tables/pg_garages');
-const database = require('../../_db/db');
-const MoneyApi = require('../moneyAPI/MoneyApi');
-const VehicleAPI = require('../vehicle/VehicleApi');
 const debug = require('../../../_assets/json/debug/debug.json').GarageAPI;
 
 class api {
@@ -94,7 +91,7 @@ class api {
     async SetGarageValue(Vehicle, Value) {
         //This Function Will Change the state of InGarage True Or False
         if (Value == true || Value == false) {
-            return await database
+            return await global.database
                 .query(`UPDATE pg_vehicles SET veh_state = ? WHERE veh_id = ?`, [
                     Value,
                     Vehicle.getVariable('veh_id'),

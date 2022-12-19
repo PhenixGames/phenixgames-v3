@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const database = require('../../_db/db');
 const pg_permission_list = require('./pg_permission_list');
 
 class Pg_permission_roles extends Model {}
@@ -15,7 +14,7 @@ Pg_permission_roles.init(
         },
     },
     {
-        sequelize: database,
+        sequelize: global.database,
         modelName: 'pg_permission_roles',
     }
 );

@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const database = require('../../_db/db');
 
 class Pg_punishments extends Model {}
 
@@ -38,7 +37,7 @@ Pg_punishments.init(
         },
     },
     {
-        sequelize: database,
+        sequelize: global.database,
         modelName: 'pg_punishments',
     }
 );

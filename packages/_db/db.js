@@ -67,4 +67,4 @@ database.afterDestroy((error) => {
     });
 });
 
-module.exports = database;
+global.database = database;

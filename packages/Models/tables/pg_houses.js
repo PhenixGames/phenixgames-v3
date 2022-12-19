@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const database = require('../../_db/db');
 
 class Pg_houses extends Model {}
 
@@ -18,7 +17,7 @@ Pg_houses.init(
         },
     },
     {
-        sequelize: database,
+        sequelize: global.database,
         modelName: 'pg_houses',
     }
 );

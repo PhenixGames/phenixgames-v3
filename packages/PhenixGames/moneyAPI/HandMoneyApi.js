@@ -1,4 +1,3 @@
-const database = require('../../_db/db');
 const AccountAPI = require('../account/AcountAPI');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
 const { Sequelize } = require('sequelize');

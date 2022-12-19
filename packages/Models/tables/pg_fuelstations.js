@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const database = require('../../_db/db');
 const pg_fuelstations_marker = require('./pg_fuelstations_marker');
 
 class Pg_fuelstations extends Model {}
@@ -43,7 +42,7 @@ Pg_fuelstations.init(
         },
     },
     {
-        sequelize: database,
+        sequelize: global.database,
         modelName: 'pg_fuelstations',
     }
 );

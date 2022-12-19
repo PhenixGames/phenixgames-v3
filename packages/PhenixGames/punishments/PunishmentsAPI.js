@@ -1,5 +1,3 @@
-const database = require('../../_db/db');
-const moment = require('moment');
 const pg_punishments = require('../../Models/tables/pg_punishments');
 
 class PunishmentsApi {

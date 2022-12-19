@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const database = require('../../_db/db');
 
 class Pg_vehicles extends Model {}
 
@@ -51,7 +50,7 @@ Pg_vehicles.init(
         },
     },
     {
-        sequelize: database,
+        sequelize: global.database,
         modelName: 'pg_vehicles',
     }
 );

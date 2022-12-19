@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const database = require('../../_db/db');
 const pg_characters = require('./pg_characters');
 const pg_money = require('./pg_money');
 const pg_user_inventory = require('./pg_user_inventory');
@@ -33,7 +32,7 @@ Pg_users.init(
         },
     },
     {
-        sequelize: database,
+        sequelize: global.database,
         modelName: 'pg_users',
     }
 );
