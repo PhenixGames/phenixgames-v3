@@ -1,11 +1,13 @@
 const pg_items = require('../../Models/tables/pg_items');
 const pg_user_inventory = require('../../Models/tables/pg_user_inventory');
 const AccountAPI = require('../account/AcountAPI');
+const path = require('path');
 
 class Api {
     constructor() {}
 
     defaultInventory = [];
+    defaultItemPath = 'phenixgames-v3-vue/src/assets/img/items/';
 
     get(id) {
         return new Promise(async (resolve, reject) => {
@@ -27,12 +29,24 @@ class Api {
                         },
                     ],
                 })
-                .then((item) => {
+                .then(async (item) => {
+                    item.img = await this.getItemImage({ id: item.id });
+                    console.log(item);
                     return item ? resolve(item) : resolve([]);
                 })
                 .catch((err) => {
                     reject(err);
                 });
+        });
+    }
+
+    getItemImage({ id }) {
+        return new Promise(async (resolve) => {
+            const image = path.resolve(this.defaultItemPath, id);
+
+            if (!image) return resolve(null);
+            console.log(image);
+            return resolve(image);
         });
     }
 
