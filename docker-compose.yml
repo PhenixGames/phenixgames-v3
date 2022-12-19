@@ -3,6 +3,10 @@ version: '3.9'
 volumes:
     mysql:
 
+networks:
+    pg_net:
+        driver: bridge
+
 services:
     mysql:
         image: mysql:5.7
@@ -26,20 +30,24 @@ services:
             test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
             timeout: 5s
             retries: 10
+        networks:
+            - pg_net
     rage:
-        links:
-            - mysql
         build:
             context: .
-            dockerfile: ./Dockerfile.rage
+            dockerfile: Dockerfile.rage
         ports:
             - 22005:22005/udp
             - 22006:22006
         restart: unless-stopped
+        links:
+            - mysql
         env_file:
             - .env
-        tty: true
-        stdin_open: true
+        volumes:
+            - .:/rage
+        networks:
+            - pg_net
 
     vue:
         build:
@@ -54,3 +62,5 @@ services:
         restart: unless-stopped
         links:
             - rage
+        networks:
+            - pg_net
