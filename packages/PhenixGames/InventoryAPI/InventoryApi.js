@@ -1,52 +1,21 @@
-const pg_items = require('../../Models/tables/pg_items');
 const pg_user_inventory = require('../../Models/tables/pg_user_inventory');
 const AccountAPI = require('../account/AcountAPI');
-const path = require('path');
+const { ItemApi } = require('../ItemAPI/ItemApi');
 
 class Api {
     constructor() {}
 
     defaultInventory = [];
-    defaultItemPath = 'phenixgames-v3-vue/src/assets/img/items/';
 
     get(id) {
-        return new Promise(async (resolve, reject) => {
-            const user = await AccountAPI.get(id);
-            return resolve(await user.getInventory());
-        });
-    }
-
-    getItem({ id, name }) {
-        return new Promise(async (resolve, reject) => {
-            await pg_items
-                .findOne({
-                    $or: [
-                        {
-                            id: id,
-                        },
-                        {
-                            name: name,
-                        },
-                    ],
-                })
-                .then(async (item) => {
-                    item.img = await this.getItemImage({ id: item.id });
-                    console.log(item);
-                    return item ? resolve(item) : resolve([]);
-                })
-                .catch((err) => {
-                    reject(err);
-                });
-        });
-    }
-
-    getItemImage({ id }) {
         return new Promise(async (resolve) => {
-            const image = path.resolve(this.defaultItemPath, id);
-
-            if (!image) return resolve(null);
-            console.log(image);
-            return resolve(image);
+            const user = await AccountAPI.get(id);
+            const inventory = await user.getInventory();
+            for (let i in inventory.items) {
+                const item = await ItemApi.get({ id: 1 });
+                inventory[i].img = item.img;
+            }
+            return resolve(inventory);
         });
     }
 
