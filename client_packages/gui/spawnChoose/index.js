@@ -3,7 +3,7 @@ const config = require('_config/config').config;
 var spawnChooseBrowser;
 
 mp.events.add('Player:Spawn:Options', (type) => {
-    mp.events.callRemote('Server:Player:interacteBrowser', true)
+    mp.events.callRemote('Server:Player:interacteBrowser', true);
     mp.players.local.freezePosition(true);
     mp.game.ui.displayRadar(false);
     mp.game.ui.displayHud(false);
@@ -20,22 +20,21 @@ mp.events.add('Player:Spawn', (type) => {
      * 1 = Last Pos
      * 2 = airport
      */
-    if(type === 0) {
+    if (type === 0) {
         mp.events.callRemote('Player:Spawn:house');
         mp.events.call('Player:Spawn:Succes:close:Windows');
-    }else if(type === 1) {
+    } else if (type === 1) {
         mp.events.callRemote('Player:Spawn:LastPos');
         mp.events.call('Player:Spawn:Succes:close:Windows');
-    }else {
+    } else {
         mp.events.callRemote('Player:Spawn:airport');
         mp.events.call('Player:Spawn:Succes:close:Windows');
     }
-
 });
 
 mp.events.add('Player:Spawn:Succes:close:Windows', () => {
-    mp.events.callRemote('Server:Player:interacteBrowser', false)
-    mp.events.remove(["Player:Spawn", "Player:Spawn:Options", "Player:Spawn:Succes:close:Windows"]);
+    mp.events.callRemote('Server:Player:interacteBrowser', false);
+    mp.events.remove(['Player:Spawn', 'Player:Spawn:Options', 'Player:Spawn:Succes:close:Windows']);
     spawnChooseBrowser.destroy();
     mp.gui.cursor.show(false, false);
     mp.players.local.freezePosition(false);

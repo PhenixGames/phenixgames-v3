@@ -1,5 +1,5 @@
-const AccountAPI = require("./AcountAPI");
+const AccountAPI = require('./AcountAPI');
 
-mp.events.add("playerQuit", (player) => {
+mp.events.add('playerQuit', (player) => {
     AccountAPI.updatePlayerOnline();
 });

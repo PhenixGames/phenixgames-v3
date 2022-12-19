@@ -1,36 +1,41 @@
 {
-  "name": "phenixgames-v3",
-  "version": "0.2.7",
-  "description": "Another PhenixGames Server",
-  "scripts": {
-    "start": "./start.sh start",
-    "restart": "./start.sh restart",
-    "kill": "./start.sh kill",
-    "pull": "./start.sh pull"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PhenixGames/phenixgames-v3.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/PhenixGames/phenixgames-v3/issues"
-  },
-  "moduleDirectories": [
-    "node_modules"
-  ],
-  "homepage": "https://phenixgames.de",
-  "dependencies": {
-    "axios": "^1.0.0",
-    "bcryptjs": "^2.4.3",
-    "better-console": "^1.0.1",
-    "dotenv": "^16.0.3",
-    "moment": "^2.29.4",
-    "mysql": "^2.18.1",
-    "simple-node-logger": "^21.8.12",
-    "sloc": "^0.2.1",
-    "validator": "^13.7.0",
-    "vue-router": "^4.1.5"
-  }
+    "name": "phenixgames-v3",
+    "version": "0.0.1",
+    "description": "Another PhenixGames Server",
+    "private": true,
+    "scripts": {
+        "start": "docker compose up -d && docker ps",
+        "stop": "docker compose down",
+        "restart": "npm run stop && npm run start",
+        "format": "prettier --write . --bracket-same-line=true",
+        "check": "prettier --check . --bracket-same-line=true"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PhenixGames/phenixgames-v3.git"
+    },
+    "author": "PhenixGames",
+    "license": "GLP-3.0",
+    "bugs": {
+        "url": "https://github.com/PhenixGames/phenixgames-v3/issues"
+    },
+    "moduleDirectories": [
+        "node_modules"
+    ],
+    "homepage": "https://phenixgames.de",
+    "dependencies": {
+        "axios": "^1.2.1",
+        "bcryptjs": "^2.4.3",
+        "dotenv": "^16.0.3",
+        "extends-classes": "^1.0.5",
+        "moment": "^2.29.4",
+        "mysql": "^2.18.1",
+        "mysql2": "^2.3.3",
+        "prettier": "^2.8.1",
+        "sequelize": "^6.27.0",
+        "simple-node-logger": "^21.8.12",
+        "sloc": "^0.2.1",
+        "validator": "^13.7.0",
+        "vue-router": "^4.1.6"
+    }
 }

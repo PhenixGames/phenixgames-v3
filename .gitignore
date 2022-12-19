@@ -12,6 +12,11 @@ ragemp-server
 _assets/json/debug/debug.json
 _logs/debug_log/*
 _logs/error_log/*
+_logs/database_log/*
 _assets/functions/DatabaseBackup/last_backup.json
 .env
 ._*
+.vs_code/
+phenixgames-v3-vue
+Dockerfile.overwrite
+docker-compose.override.yml

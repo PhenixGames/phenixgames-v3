@@ -13,5 +13,8 @@
     "playerdeath": false,
     "vehicle": false,
     "voice": false,
-    "weatherapi": false
+    "weatherapi": false,
+    "garage": false,
+    "sync": false,
+    "afk": false
 }

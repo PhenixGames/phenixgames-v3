@@ -4,23 +4,25 @@ var invBrowser;
 var isInvOpen = false;
 
 exports.interacteInventory = () => {
-    if(mp.players.local.getVariable('hasBrowserOpen') || mp.players.local.isTypingInTextChat) return;
+    if (mp.players.local.getVariable('hasBrowserOpen') || mp.players.local.isTypingInTextChat)
+        return;
 
-    if(isInvOpen) {
+    if (isInvOpen) {
         closeBrowser();
-    }else {
+    } else {
         openBrowser();
     }
-}
+};
 function closeBrowser() {
-    if(isInvOpen){
+    if (isInvOpen) {
+        invBrowser.execute('gui.inventory.saveInventory();');
         invBrowser.destroy();
-        mp.gui.cursor.show(false, false);    
+        mp.gui.cursor.show(false, false);
         isInvOpen = false;
     }
 }
-function openBrowser(){
-    if(!isInvOpen){
+function openBrowser() {
+    if (!isInvOpen) {
         isInvOpen = true;
         invBrowser = mp.browsers.new(`http://${config.domain}:8080/#/inventory`);
         mp.gui.cursor.show(true, true);
@@ -30,17 +32,36 @@ function openBrowser(){
     }
 }
 
-
 mp.events.add('uiInitInventory', () => {
-    mp.events.callRemote('Server:Init:Inventory');
-})
+    if (isInvOpen) {
+        mp.events.callRemote('Server:Init:Inventory');
+    }
+});
+
+mp.events.add('uiSaveInventory', (items) => {
+    if (isInvOpen) {
+        mp.events.callRemote('Server:Save:Inventory', items);
+    }
+});
 
 mp.events.add('Player:Browser:Inventory:close', () => {
     closeBrowser();
-})
+});
 
 mp.events.add('Player:Init:Inventory', (items) => {
-    invBrowser.execute(`gui.inventory.insertItemsIntoInv({
-        item: ${items}
-    );`);
+    if (isInvOpen) {
+        invBrowser.execute('gui.inventory.insertItemsIntoInv(' + items + ');');
+    }
+});
+
+mp.events.add('dropItem', (itemid) => {
+    mp.events.callRemote('Server:Item:Drop', itemid);
+});
+
+mp.events.add('useItem', (itemid) => {
+    mp.events.callRemote('Server:Item:Use', itemid);
+});
+
+mp.events.add('splitItem', (itemid, amount) => {
+    mp.events.callRemote('Server:Item:Split', itemid);
 });

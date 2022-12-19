@@ -1,0 +1,14 @@
+node_modules/
+phenixgames-backup
+*.min.js
+jquery.js
+._*
+LICENSE
+.github
+.git
+core
+_backup
+_logs
+
+Dockerfile.*
+docker-compose.override.yml

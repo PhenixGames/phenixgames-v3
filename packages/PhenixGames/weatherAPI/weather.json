@@ -1,11 +1,18 @@
 {
-    "EXTRASUNNY": ["Sunny"],
-    "CLEAR": ["Partly Cloudy"],
-    "CLOUDS": ["Partly Cloudy", "Cloudy"],
-    "FOGGY": ["Mist", "Fog", "Freezing fog"],
-    "OVERCAST": ["Overcast"],
-    "RAIN": ["Patchy rain nearby", "Patchy light drizzle", "Light drizzle", "Freezing drizzle", "Heavy freezing drizzle", "Patchy light rain", "Light rain", "Moderate rain", "Heavy rain", "Light freezing rain", "Moderate or heavy freezing rain", "Light sleet", "Moderate or heavy sleet", "Light rain shower", "Moderate or heavy rain shower", "Torrential rain shower", "Light sleet showers", "Moderate or heavy sleet showers"],
-    "THUNDER": ["Thundery outbreaks in nearby", "Patchy light rain in area with thunder", "Moderate or heavy rain in area with thunder", "Patchy light snow in area with thunder", "Moderate or heavy snow in area with thunder"],
-    "SNOW": ["Patchy snow nearby", "Blowing snow", "Patchy light snow", "Light snow", "Patchy moderate snow", "Moderate snow", "Patchy heavy snow", "Heavy snow", "Light snow showers", "Moderate or heavy snow showers", "Patchy light snow in area with thunder", "Patchy light snow in area with thunder"],
-    "BLIZZARD": ["Blizzard"]
+    "EXTRASUNNY": [1000],
+    "CLEAR": [1100, 1103],
+    "CLOUDS": [1102],
+    "FOGGY": [2100, 2000, 2101, 2103, 2106, 2107, 2108],
+    "OVERCAST": [1001],
+    "RAIN": [
+        4000, 4200, 4001, 4201, 4203, 4204, 4205, 4213, 4214, 4215, 4209, 4208, 4210, 4211, 4202,
+        4212
+    ],
+    "THUNDER": [8000],
+    "SNOW": [
+        5001, 5100, 5000, 5101, 5115, 5116, 5117, 5122, 5102, 5103, 5104, 5105, 5106, 5107, 5119,
+        5120, 5121, 5110, 5108, 5114, 5112, 6000, 6200, 6001, 6201, 6003, 6002, 6004, 6204, 6206,
+        6205, 7102, 7000, 7101
+    ],
+    "BLIZZARD": [8000]
 }
