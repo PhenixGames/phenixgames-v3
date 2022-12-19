@@ -1,18 +1,24 @@
 const pg_items = require('../../Models/tables/pg_items');
 
 class Api {
-    constructor() {}
+    constructor() {
+        this.init();
+    }
 
-    async get(id) {
-        return await pg_items
-            .findOne({
-                where: {
-                    id,
-                },
-            })
-            .catch((err) => {
+    init() {
+        return new Promise(async (resolve, reject) => {
+            this.items = await pg_items.findAll().catch((err) => {
                 return [];
             });
+            resolve();
+        });
+    }
+
+    get(id) {
+        return new Promise(async (resolve) => {
+            const item = this.items.find((item) => item.id == id);
+            return resolve(item);
+        });
     }
 
     async add({
@@ -35,6 +41,10 @@ class Api {
                 weight,
                 isUsable,
                 isSellable,
+            })
+            .then((res) => {
+                this.init();
+                return res;
             })
             .catch((err) => {
                 return false;
@@ -59,6 +69,7 @@ class Api {
                 }
             )
             .then((res) => {
+                this.init();
                 return res.affectedRows > 0;
             })
             .catch((err) => {
@@ -74,6 +85,7 @@ class Api {
                 },
             })
             .then((res) => {
+                this.init();
                 return res.affectedRows > 0;
             })
             .catch((err) => {

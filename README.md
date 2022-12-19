@@ -22,25 +22,22 @@ git clone https://github.com/PhenixGames/phenixgames-v3-vue.git
 ### Installation
 
 1. Install docker (<https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04>)
-   <br>
-
-2. Install curl `sudo apt install curl`
 
 <br>
 
-3. Install node `curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh`
+2. Install docker compose (<https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04>)
 
 <br>
 
-4. Install pm2 `npm i -g pm2`
+3. Start docker `docker compose up -d`
 
 <br>
 
-5. Create Docker network `docker network create rage_network`
+4. Clone this repository `git clone https://github.com/PhenixGames/phenixgames-v3.git `
 
 <br>
 
-6. Start docker `docker compose up -d`
+5. Clone vue repository `git clone https://github.com/PhenixGames/phenixgames-v3-vue.git `
 
 <br>
 
@@ -50,17 +47,19 @@ git clone https://github.com/PhenixGames/phenixgames-v3-vue.git
 2. Insert code:
 
 ```yml
-version: '3.9'
-
 services:
     mysql:
         environment:
-            MYSQL_ROOT_PASSWORD: ...
-            MYSQL_DATABASE: phenixgames_v3
-            MYSQL_USER: ...
-            MYSQL_PASSWORD: ...
-            MYSQL_PORT: 3306
-            MYSQL_HOSTNAME: mysql
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=phenixgames-v3
+            - MYSQL_USER=xxxx
+            - MYSQL_PASSWORD=xxxxxx
+            - MYSQL_PORT=3306
+
+    vue:
+        build:
+            context: ./phenixgames-v3-vue
+            dockerfile: ./.docker/Dockerfile.prod
 ```
 
 <br>
@@ -71,6 +70,12 @@ services:
 docker compose up -d //start containers
 docker compose down //stop containers
 docker compose exec [container_name] bash //enter terminal of container
-docker logs --follow [container_name] //see logs & follow them
+docker logs --follow [container_name/id] //see logs & follow them
 docker rmi $(docker images -a -q) // delete all images on you machine
+docker system prune -a //hardcore delete everything
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' name_or_id //get ip of container
 ```
+
+# Pre Push events
+
+Copy `pre-push` file to `.git/hooks/`
