@@ -51,6 +51,7 @@ services:
             - pg_net
 
     vue:
+        container_name: vue
         build:
             context: ./phenixgames-v3-vue
             dockerfile: ./Dockerfile
