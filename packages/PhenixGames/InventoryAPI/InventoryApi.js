@@ -26,7 +26,7 @@ class Api {
             },
             {
                 where: {
-                    user_id: id,
+                    player_id: id,
                 },
             }
         );
