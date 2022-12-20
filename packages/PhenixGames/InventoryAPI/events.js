@@ -1,4 +1,5 @@
 const { log } = require('../../../_assets/functions/log/logs');
+const { ItemApi } = require('../ItemAPI/ItemApi');
 const { InventoryApi } = require('./InventoryApi');
 
 mp.events.add('Server:Item:Drop', (itemid) => {});
@@ -25,7 +26,7 @@ mp.events.add('Server:Use:Weste', async (player) => {
 
 function useMedikit_Weste(player, type) {
     return new Promise(async (resolve, reject) => {
-        const item = InventoryApi.getItem({ name: type });
+        const item = ItemApi.getItem({ name: type });
 
         if (!item || item.length === 0) {
             log({

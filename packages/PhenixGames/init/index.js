@@ -10,8 +10,6 @@ const IplsAPI = require('../ipls');
 const VehicleAPI = require('../vehicle/VehicleApi');
 const { SyncApi } = require('../SyncAPI/SyncApi');
 const database = require('../../_db/db');
-const pg_permission_roles = require('../../Models/tables/pg_permission_roles');
-const pg_permission_list = require('../../Models/tables/pg_permission_list');
 
 mp.events.delayInitialization = true;
 (async () => {
