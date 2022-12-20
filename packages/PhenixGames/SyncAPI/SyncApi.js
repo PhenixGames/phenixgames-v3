@@ -1,5 +1,4 @@
 const debug = require('../../../_assets/json/debug/debug.json').sync;
-const { AfkApi } = require('../AfkAPI/AfkApi');
 const VehicleAPI = require('../vehicle/VehicleApi');
 const { setWeather } = require('../weatherAPI');
 
@@ -11,7 +10,7 @@ class SyncApi {
 
     sync() {
         setInterval(() => {
-            AfkApi.check();
+            global.AccountAPI.check();
 
             console.time('Vehicle Server wurde gesynct in: ');
             VehicleAPI.syncAll();

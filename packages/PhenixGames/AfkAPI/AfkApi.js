@@ -37,4 +37,4 @@ class AfkApi {
     }
 }
 
-module.exports.AfkApi = new AfkApi();
+global.AfkApi = new AfkApi();
