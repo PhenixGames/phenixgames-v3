@@ -1,3 +1,4 @@
+require('./anti_windowbreak');
 mp.events.add('Vehicle:Engine:state', (state) => {
     if (mp.players.local.vehicle) {
         mp.game.vehicle.defaultEngineBehaviour = false;
