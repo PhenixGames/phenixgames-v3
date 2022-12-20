@@ -4,9 +4,11 @@
     "description": "Another PhenixGames Server",
     "private": true,
     "scripts": {
-        "start": "docker compose up -d && docker ps",
+        "dockerStart": "./ragemp-server",
+        "start": "npm run rm_image && docker compose up -d --build && docker logs -f rage",
         "stop": "docker compose down",
-        "restart": "npm run stop && npm run start",
+        "restart": "npm run stop && npm run rm_image && npm run start",
+        "rm_image": "docker image rm -f phenixgames-v3_vue && docker image rm -f phenixgames-v3_rage",
         "format": "prettier --write . --bracket-same-line=true",
         "check": "prettier --check . --bracket-same-line=true"
     },
