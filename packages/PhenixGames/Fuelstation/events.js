@@ -1,10 +1,9 @@
-const { FAPI } = require('./FuelStationApi');
 const debug = require('../../../_assets/json/debug/debug.json').fuelstation;
 
 mp.events.add('playerEnterColshape', async (player, shape) => {
-    if (!FAPI.isFuelstation(shape)) return;
+    if (!global.FAPI.isFuelstation(shape)) return;
 
-    await FAPI.enter(player, shape);
+    await global.FAPI.enter(player, shape);
 
     if (debug) player.notify('Du betrittst das gelände einer Tankstelle');
 });
@@ -12,18 +11,18 @@ mp.events.add('playerEnterColshape', async (player, shape) => {
 mp.events.add('playerExitColshape', (player, shape) => {
     if (debug) console.log('Player Exit Colshape');
 
-    if (!FAPI.isFuelstation(shape)) return;
+    if (!global.FAPI.isFuelstation(shape)) return;
 
     if (debug) player.notify('~g~Du verlässt das gelände einer Tankstelle');
 
-    FAPI.removeMarkers(player);
+    global.FAPI.removeMarkers(player);
 
     player.setVariable('isnearFuelstation', false);
     player.setVariable('Fuelstation_id', null);
 });
 
 mp.events.add('Server:Request:Data:Fuelstation', async (player) => {
-    const fuelstation = await FAPI.getFuelStation({
+    const fuelstation = await global.FAPI.getFuelStation({
         stationid: player.getVariable('Fuelstation_id'),
     });
 
@@ -31,19 +30,19 @@ mp.events.add('Server:Request:Data:Fuelstation', async (player) => {
         return player.call('Player:Gasstation:NotFound', [fuelstation]);
     }
 
-    const dieselpreis = FAPI.calculatePrice({
+    const dieselpreis = global.FAPI.calculatePrice({
         fueltype: 'diesel',
         fuelstation,
     });
 
-    const benzinpreis = FAPI.calculatePrice({
+    const benzinpreis = global.FAPI.calculatePrice({
         fueltype: 'benzin',
         fuelstation,
     });
 
     const fuelsationname = fuelstation.name;
 
-    const cars = FAPI.getClosestVehicles({ player, range: 5, amount: 5 });
+    const cars = global.FAPI.getClosestVehicles({ player, range: 5, amount: 5 });
 
     const items = {
         name: fuelsationname,
@@ -57,5 +56,5 @@ mp.events.add('Server:Request:Data:Fuelstation', async (player) => {
 });
 
 mp.events.add('Server:Car:Refuel', async (player, carId, newfuel, price) => {
-    return await FAPI.fuel({ player, newfuel, id: carId, price });
+    return await global.FAPI.fuel({ player, newfuel, id: carId, price });
 });

@@ -4,7 +4,6 @@ const weatherAPI = require('../weatherAPI');
 const { delay } = require('../../../_assets/functions/delay');
 const { log } = require('../../../_assets/functions/log/logs');
 const { spawn } = require('child_process');
-const { FAPI } = require('../Fuelstation/FuelStationApi');
 const IplsAPI = require('../ipls');
 const VehicleAPI = require('../vehicle/VehicleApi');
 const { SyncApi } = require('../SyncAPI/SyncApi');
@@ -25,7 +24,7 @@ mp.events.delayInitialization = true;
 mp.events.add('packagesLoaded', async () => {
     await VehicleAPI.spawnAll();
     weatherAPI.setWeather();
-    await FAPI.load();
+    await global.FAPI.load();
     IplsAPI.load();
 
     await delay(15000);

@@ -190,4 +190,4 @@ class FuelStationApi {
     }
 }
 
-module.exports.FAPI = new FuelStationApi();
+global.FAPI = new FuelStationApi();
