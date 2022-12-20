@@ -2,14 +2,12 @@ const debug = require('../../../_assets/json/debug/debug.json').account;
 
 const generellAPI = require('../allgemein/');
 const PermissionSystem = require('../playerAPI/PermissionSystem');
-const MoneyAPI = require('../moneyAPI/MoneyApi');
-const AccountAPI = require('./AcountAPI');
 const { InventoryApi } = require('../InventoryAPI/InventoryApi');
 
 mp.events.add('RegisterAccount', async (player, password) => {
-    await AccountAPI.save(player.socialClub, password);
+    await globlal.AccountAPI.save(player.socialClub, password);
 
-    const user = await AccountAPI.getByUsername(player.socialClub);
+    const user = await globlal.AccountAPI.getByUsername(player.socialClub);
 
     await generellAPI.saveLocalVar(player, {
         playerId: user.id,
@@ -45,7 +43,7 @@ mp.events.add('RegisterAccount', async (player, password) => {
 });
 
 mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
-    const setInGameName = await AccountAPI.setInGameName(player.getVariable('playerId'), [
+    const setInGameName = await globlal.AccountAPI.setInGameName(player.getVariable('playerId'), [
         firstname,
         lastname,
     ]);
@@ -62,7 +60,7 @@ mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
     player.call('Login:Succes:close:Windows');
     player.call('Destroy:Login:Cam');
 
-    AccountAPI.spawnAirport(player);
+    globlal.AccountAPI.spawnAirport(player);
 
     generellAPI.saveLocalVar(player, {
         syncPlayer: true,

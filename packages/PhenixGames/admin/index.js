@@ -1,7 +1,6 @@
 const debug = require('../../../_assets/json/debug/debug.json').admin;
 
 const generellAPI = require('../allgemein/');
-const AccountAPI = require('../account/AcountAPI');
 const PermissionSystem = require('../playerAPI/PermissionSystem');
 
 mp.events.addCommand('aduty', async (player) => {
@@ -18,7 +17,7 @@ mp.events.addCommand('aduty', async (player) => {
         player.call('Set:God', [false]);
         player.call('Change:Admin:Duty:Value:On:Client', [false]);
 
-        const user = await AccountAPI.get(player.getVariable('playerId'));
+        const user = await globlal.AccountAPI.get(player.getVariable('playerId'));
         player.name = user.firstname + ' ' + user.lastname;
 
         player.alpha = 255;
@@ -39,7 +38,7 @@ mp.events.addCommand('aduty', async (player) => {
         player.call('Player:Admin:Duty:noclip');
     }
 
-    const userRole = await AccountAPI.getRole(player.getVariable('playerId'));
+    const userRole = await globlal.AccountAPI.getRole(player.getVariable('playerId'));
     const role = await PermissionSystem.getRole(userRole);
 
     player.notify(

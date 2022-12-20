@@ -1,11 +1,10 @@
 const debug = require('../../../_assets/json/debug/debug.json').account;
 
 const PermissionSystem = require('../playerAPI/PermissionSystem');
-const AccountAPI = require('./AcountAPI');
 const PunishmentsAPI = require('../punishments/PunishmentsAPI');
 
 mp.events.add('LoginAccount', async (player, password) => {
-    const user = await AccountAPI.getByUsername(player.socialClub);
+    const user = await globlal.AccountAPI.getByUsername(player.socialClub);
 
     if (!user) {
         return player.call('Open:Login:Browser', [false]);
@@ -24,7 +23,7 @@ mp.events.add('LoginAccount', async (player, password) => {
             return;
         }
     }
-    if (AccountAPI.checkPassword(password, user.password) === false) {
+    if (globlal.AccountAPI.checkPassword(password, user.password) === false) {
         return player.call('Wrong:Password');
     }
 

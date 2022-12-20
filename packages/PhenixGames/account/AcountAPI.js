@@ -247,4 +247,4 @@ class Account {
 }
 
 const AccountAPI = new Account();
-module.exports = AccountAPI;
+globlal.AccountAPI = AccountAPI;

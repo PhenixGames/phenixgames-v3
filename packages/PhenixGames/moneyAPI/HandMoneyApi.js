@@ -1,4 +1,3 @@
-const AccountAPI = require('../account/AcountAPI');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
 const { Sequelize } = require('sequelize');
 const pg_money = require('../../Models/tables/pg_money');
@@ -7,7 +6,7 @@ class HandMoneyApi {
     constructor() {}
 
     async getHand(playerId) {
-        const user = await AccountAPI.get(playerId);
+        const user = await global.AccountAPI.get(playerId);
 
         const { hand_money } = await user.getMoney();
         return hand_money;

@@ -1,5 +1,3 @@
-const AccountAPI = require('../account/AcountAPI');
-
 const debug = require('../../../_assets/json/debug/debug.json').afk;
 
 class AfkApi {
@@ -13,7 +11,7 @@ class AfkApi {
         mp.players.forEach(async (player) => {
             if (!player) return;
 
-            const playerPos = await AccountAPI.getPos(player);
+            const playerPos = await globlal.AccountAPI.getPos(player);
             const isAfk = player.getVariable('isAfk');
             if (!player.getVariable('isInEvent') && player.getVariable('syncPlayer')) {
                 const isPositionSame =

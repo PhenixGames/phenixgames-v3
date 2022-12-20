@@ -2,13 +2,12 @@ const debug = require('../../../_assets/json/debug/debug.json').account;
 
 const generellAPI = require('../allgemein/');
 const { log } = require('../../../_assets/functions/log/logs');
-const AccountAPI = require('./AcountAPI');
 const DiscordAPI = require('../discord/DiscordAPI');
 mp.events.add('playerJoin', async (player) => {
     player.call('Create:Login:Cam');
     player.position = new mp.Vector3(0, 0, -20);
 
-    const user = await AccountAPI.getByUsername(player.socialClub);
+    const user = await globlal.AccountAPI.getByUsername(player.socialClub);
     if (!user) {
         player.call('Open:Login:Browser', [false]);
         return log({
@@ -26,7 +25,7 @@ mp.events.add('playerJoin', async (player) => {
         isMedia: user.isMedia,
     });
 
-    AccountAPI.updatePlayerOnline();
+    globlal.AccountAPI.updatePlayerOnline();
 
     log({
         message: `[SERVER]: [Registered] ${player.socialClub} has joined the server!`,

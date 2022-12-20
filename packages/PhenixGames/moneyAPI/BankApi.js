@@ -1,12 +1,11 @@
 const { Sequelize } = require('sequelize');
-const AccountAPI = require('../account/AcountAPI');
 const debug = require('../../../_assets/json/debug/debug.json').moneyapi;
 
 class BankApi {
     constructor() {}
 
     async getBank(playerId) {
-        const user = AccountAPI.get(playerId);
+        const user = global.AccountAPI.get(playerId);
 
         const { bank_money } = await user.getMoney();
         return bank_money;

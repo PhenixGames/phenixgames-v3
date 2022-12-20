@@ -2,17 +2,16 @@ const debug = require('../../../_assets/json/debug/debug.json').account;
 
 const generellAPI = require('../allgemein/');
 const MoneyApi = require('../moneyAPI/MoneyApi');
-const AccountAPI = require('./AcountAPI');
 
 mp.events.add('Player:Spawn:airport', async (player) => {
-    AccountAPI.spawnAirport(player);
+    globlal.AccountAPI.spawnAirport(player);
     initPlayer(player);
 });
 
 mp.events.add('Player:Spawn:LastPos', async (player) => {
     const lastPos = await AccountAPI.getPos(player);
     initPlayer(player);
-    AccountAPI.changePos(player, lastPos);
+    globlal.AccountAPI.changePos(player, lastPos);
     return;
 });
 
@@ -20,9 +19,9 @@ async function initPlayer(player) {
     player.call('Destroy:Login:Cam');
 
     const id = player.getVariable('playerId');
-    AccountAPI.updateHealth(id, await AccountAPI.getHealth(id));
-    AccountAPI.updateArmour(id, await AccountAPI.getArmour(id));
-    AccountAPI.setHud(player);
+    globlal.AccountAPI.updateHealth(id, await globlal.AccountAPI.getHealth(id));
+    globlal.AccountAPI.updateArmour(id, await globlal.AccountAPI.getArmour(id));
+    globlal.AccountAPI.setHud(player);
 
     MoneyApi.updateHud(id);
 

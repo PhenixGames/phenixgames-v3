@@ -1,5 +1,4 @@
 const pg_user_inventory = require('../../Models/tables/pg_user_inventory');
-const AccountAPI = require('../account/AcountAPI');
 const { ItemApi } = require('../ItemAPI/ItemApi');
 
 class Api {
@@ -9,7 +8,7 @@ class Api {
 
     get(id) {
         return new Promise(async (resolve) => {
-            const user = await AccountAPI.get(id);
+            const user = await global.AccountAPI.get(id);
             const inventory = await user.getInventory();
             for (let i in inventory.items) {
                 const item = await ItemApi.get({ id: 1 });
