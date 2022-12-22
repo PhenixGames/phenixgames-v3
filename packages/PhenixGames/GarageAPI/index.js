@@ -3,6 +3,7 @@ const pg_garages = require('../../Models/tables/pg_garages');
 const database = require('../../_db/db');
 const PermissionSystem = require('../playerAPI/PermissionSystem');
 const debug = require('../../../_assets/json/debug/debug.json').GarageAPI;
+
 class api {
     constructor() {}
     npcs = [];
@@ -56,7 +57,7 @@ class api {
                         message: 'Fehler beim Erstellen der Garage: ' + error,
                         isFatal: true,
                     });
-                    resolve(false);
+                    reject(false);
                 }
             }
             return resolve(true);
@@ -95,10 +96,15 @@ class api {
             const hasPermissions = await PermissionSystem.hasPermissions(player, ['system']);
             if (!hasPermissions) return reject(false);
 
-            this.load().then(() => {
-                player.notify('~g~Garagen wurden erfolgreich geladen');
-                return resolve(true);
-            });
+            this.load()
+                .then(() => {
+                    player.notify('~g~Garagen wurden erfolgreich geladen');
+                    return resolve(true);
+                })
+                .catch(() => {
+                    player.notify('~r~Fehler beim laden der Garagen');
+                    return resolve(false);
+                });
         });
     }
 
