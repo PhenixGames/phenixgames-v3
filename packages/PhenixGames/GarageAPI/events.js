@@ -21,14 +21,10 @@ mp.events.add('playerExitColshape', (player, shape) => {
 });
 
 mp.events.add('Server:Request:Data:Garage', async (player) => {
-    const garage = await GarageAPI.get({
-        id: player.getVariable('garageId'),
-    });
+    const playerVehicles = GarageAPI.getVehFromGarage(player.getVariable('playerId'));
 
-    res = GarageAPI.GetVehiclesFromPlayerGarage(player.getVariable('playerId'));
-
-    player.call('Player:Init:Garage', [JSON.stringify(res)]);
-    if (debug) console.log(items);
+    player.call('Player:Init:Garage', [JSON.stringify(playerVehicles)]);
+    if (debug) console.log(playerVehicles);
 });
 
 mp.events.add('Server:Car:Refuel', async (player, carId, newfuel, price) => {
