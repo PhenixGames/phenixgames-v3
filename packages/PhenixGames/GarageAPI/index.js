@@ -91,22 +91,6 @@ class api {
             return resolve(garages);
         });
     }
-    update(player) {
-        return new Promise(async (resolve) => {
-            const hasPermissions = await PermissionSystem.hasPermissions(player, ['system']);
-            if (!hasPermissions) return reject(false);
-
-            this.load()
-                .then(() => {
-                    player.notify('~g~Garagen wurden erfolgreich geladen');
-                    return resolve(true);
-                })
-                .catch(() => {
-                    player.notify('~r~Fehler beim laden der Garagen');
-                    return resolve(false);
-                });
-        });
-    }
 
     spawncolshape(type, pos, id) {
         const col = mp.colshapes.newCircle(Number(pos.x), Number(pos.y), 20);
@@ -141,6 +125,10 @@ class api {
                     return resolve(res);
                 })
                 .catch((err) => {
+                    log({
+                        message: 'Fehler beim Laden der Ausparkpunkte' + err,
+                        isFatal: true,
+                    });
                     return resolve([]);
                 });
             //TODO Hier muss noch der Code zum Spawnen von Markern rein
@@ -158,7 +146,11 @@ class api {
                 .then((res) => {
                     return resolve(res);
                 })
-                .catch((err) => {
+                .catch(() => {
+                    log({
+                        message: 'Fehler beim Laden der Fahrzeuge' + err,
+                        isFatal: true,
+                    });
                     return resolve([]);
                 });
         });
@@ -178,7 +170,6 @@ class api {
     }
 
     setGarageValue(vehicle, inGarage) {
-        //This Function Will Change the state of InGarage True Or False
         return new Promise(async (resolve) => {
             if (typeof inGarage !== Boolean) return false;
 
@@ -213,6 +204,23 @@ class api {
             await this.setGarageValue(vehicle, true);
             vehicle.destroy();
             return resolve(true);
+        });
+    }
+
+    updateGarages(player) {
+        return new Promise(async (resolve) => {
+            const hasPermissions = await PermissionSystem.hasPermissions(player, ['system']);
+            if (!hasPermissions) return reject(false);
+
+            this.load()
+                .then(() => {
+                    player.notify('~g~Garagen wurden erfolgreich geladen');
+                    return resolve(true);
+                })
+                .catch(() => {
+                    player.notify('~r~Fehler beim laden der Garagen');
+                    return resolve(false);
+                });
         });
     }
 }
