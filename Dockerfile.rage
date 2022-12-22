@@ -1,0 +1,14 @@
+FROM node:18.8.0
+
+WORKDIR /ragemp
+
+COPY package.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 22005/udp
+EXPOSE 22006
+
+CMD ["npm", "run", "dockerStart"]

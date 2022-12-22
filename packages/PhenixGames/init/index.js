@@ -5,10 +5,11 @@ const { delay } = require('../../../_assets/functions/delay');
 const { log } = require('../../../_assets/functions/log/logs');
 const { spawn } = require('child_process');
 const { DatabaseBackup } = require('../../../_assets/functions/DatabaseBackup/DatabaseBackup');
-const AccountAPI = require('../account/AcountAPI');
 const { FAPI } = require('../Fuelstation/FuelStationApi');
 const IplsAPI = require('../ipls');
 const VehicleAPI = require('../vehicle/VehicleApi');
+const { SyncApi } = require('../SyncAPI/SyncApi');
+const database = require('../../_db/db');
 
 mp.events.delayInitialization = true;
 (async () => {
@@ -31,31 +32,22 @@ mp.events.add('packagesLoaded', async () => {
 
     await delay(15000);
 
-    setInterval(() => {
-        console.time('Vehicle Server wurde gesynct in: ');
-        VehicleAPI.syncAll();
-        console.timeEnd('Vehicle Server wurde gesynct in: ');
-        console.time('Player Server wurde gesynct in: ');
-        AccountAPI.syncAllPlayers();
-        console.timeEnd('Player Server wurde gesynct in: ');
-    }, 5000);
+    SyncApi.sync();
+    SyncApi.syncWeather();
 
     if (debug.createBackup) {
         new DatabaseBackup();
     }
-
-    setInterval(() => {
-        weatherAPI.setWeather();
-    }, 10800000); // 3h
 });
 
 //! ERROR --
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', async (err) => {
     log({
         message: err,
         isFatal: true,
     });
     if (!debug.global && process.platform !== 'win32') {
+        await database.close();
         log({
             message: 'BOT RESTARTED...' + new Date(),
             isFatal: false,
@@ -68,12 +60,13 @@ process.on('unhandledRejection', (err) => {
     }
 });
 
-process.on('uncaughtException', (err) => {
+process.on('uncaughtException', async (err) => {
     log({
         message: err,
         isFatal: true,
     });
     if (!debug.global && process.platform !== 'win32') {
+        await database.close();
         log({
             message: 'BOT RESTARTED...' + new Date(),
             isFatal: false,

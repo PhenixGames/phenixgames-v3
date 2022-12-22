@@ -1,5 +1,3 @@
-exports.config[
-    {
-        domain: '',
-    }
-];
+exports.config = {
+    domain: '',
+};

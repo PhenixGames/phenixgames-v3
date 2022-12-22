@@ -50,8 +50,8 @@ async function spawncar(player, args) {
         await VehicleAPI.save(setVeh, {
             veh_name: veh,
             veh_owner: player.socialClub,
-            veh_keys: JSON.stringify([player.getVariable('playerId')]),
-            veh_state: '1',
+            veh_keys: [player.getVariable('playerId')],
+            veh_state: true,
             veh_fuel: 100,
             veh_type: 'benzin',
             veh_maxfuel: 150,

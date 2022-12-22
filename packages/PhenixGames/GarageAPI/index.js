@@ -1,3 +1,4 @@
+const pg_garages = require('../../Models/tables/pg_garages');
 const database = require('../../_db/db');
 const MoneyApi = require('../moneyAPI/MoneyApi');
 const VehicleAPI = require('../vehicle/VehicleApi');
@@ -46,16 +47,23 @@ class api {
         return true;
     }
     async get(id = false) {
-        let query = `SELECT * FROM pg_garage ${id ? 'WHERE id = ?' : ''}`;
-
-        return await database
-            .query(query, [id])
-            .then((res) => {
-                return id ? res[0] : res;
-            })
-            .catch((err) => {
-                return false;
-            });
+        if (id) {
+            return await pg_garages
+                .findOne({
+                    where: {
+                        id: id,
+                    },
+                })
+                .then((garage) => {
+                    return garage;
+                })
+                .catch((err) => {
+                    return false;
+                });
+        }
+        return await pg_garages.findAll().catch((err) => {
+            return false;
+        });
     }
     spawncolshape(type, pos, id) {
         let col = mp.colshapes.newCircle(Number(pos.x), Number(pos.y), 20);

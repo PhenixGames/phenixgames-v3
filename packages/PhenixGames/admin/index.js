@@ -39,9 +39,8 @@ mp.events.addCommand('aduty', async (player) => {
         player.call('Player:Admin:Duty:noclip');
     }
 
-    const role = await PermissionSystem.getRole(
-        await AccountAPI.getRole(player.getVariable('playerId'))
-    );
+    const userRole = await AccountAPI.getRole(player.getVariable('playerId'));
+    const role = await PermissionSystem.getRole(userRole);
 
     player.notify(
         player.getVariable('Aduty')

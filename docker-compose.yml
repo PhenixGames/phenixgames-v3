@@ -1,0 +1,68 @@
+version: '3.9'
+
+volumes:
+    mysql:
+
+networks:
+    pg_net:
+        driver: bridge
+
+services:
+    mysql:
+        image: mysql:5.7
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=phenixgames-v3
+            - MYSQL_USER=phenixgames
+            - MYSQL_PASSWORD=root
+            - MYSQL_PORT=3306
+        volumes:
+            - mysql:/var/lib/mysql
+        env_file:
+            - .env
+        ports:
+            - '3307:3306'
+        restart: unless-stopped
+        stdin_open: true
+        command:
+            ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+            timeout: 5s
+            retries: 10
+        networks:
+            - pg_net
+    rage:
+        container_name: rage
+        build:
+            context: .
+            dockerfile: Dockerfile.rage
+        ports:
+            - 22005:22005/udp
+            - 22006:22006
+        restart: unless-stopped
+        links:
+            - mysql
+        env_file:
+            - .env
+        volumes:
+            - .:/rage
+        networks:
+            - pg_net
+
+    vue:
+        container_name: vue
+        build:
+            context: ./phenixgames-v3-vue
+            dockerfile: ./Dockerfile
+        volumes:
+            - .:/vue
+        ports:
+            - 8080:8080
+        env_file:
+            - .env
+        restart: unless-stopped
+        links:
+            - rage
+        networks:
+            - pg_net

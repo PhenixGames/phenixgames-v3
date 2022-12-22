@@ -3,3 +3,14 @@ phenixgames-backup
 *.min.js
 jquery.js
 ._*
+LICENSE
+dotnet
+maps
+bin
+.github
+.git
+core
+_backup
+_logs
+
+Dockerfile.*

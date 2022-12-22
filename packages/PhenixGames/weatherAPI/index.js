@@ -3,10 +3,14 @@ const axios = require('axios');
 const weatherData = require('./weather.json');
 
 module.exports.setWeather = async function () {
+    const url = `https://api.tomorrow.io/v4/timelines?location=33.881736797808436,-118.28735076847484&fields=weatherCode,temperature,cloudCover&timesteps=current&units=metric&apikey=${process.env.WEATHER_KEY}`;
+
     axios
-        .get(
-            'https://api.weatherapi.com/v1/current.json?key=2b1171e4b8514e86961162109222702&q=Los Angeles&aqi=no'
-        )
+        .get(url, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
         .then((res) => {
             /**
              * {
@@ -46,8 +50,13 @@ module.exports.setWeather = async function () {
                     currentDate.getSeconds()
                 );
 
+                const weatherRes = res.data.data.timelines[0].intervals[0].values;
+                const cloudCover = weatherRes.cloudCover;
+                const temperature = weatherRes.temperature;
+                const weatherCode = weatherRes.weatherCode;
+
                 for (const [index, [key, value]] of Object.entries(Object.entries(weatherData))) {
-                    if (res.data.current.condition.text.indexOf(value) !== -1) {
+                    if (weatherCode.indexOf(value) !== -1) {
                         //Wetter ist schon das gleiche
                         if (mp.world.weather === key) return;
 

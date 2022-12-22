@@ -30,7 +30,8 @@ mp.events.add('LoginAccount', async (player, password) => {
 
     PermissionSystem.setPerms(player, user.roleId);
 
-    const hasCharacter = user.firstname && user.lastname;
+    const character = await user.getCharacter();
+    const hasCharacter = character.firstname && character.lastname;
     if (!hasCharacter) return player.call('Player:InGameName:Choose');
 
     player.call('Login:Succes:close:Windows');

@@ -1,11 +1,10 @@
 const { log } = require('../../../_assets/functions/log/logs');
-const database = require('../../_db/db');
 const bcryptjs = require('bcryptjs');
 
-const generellAPI = require('../allgemein/');
 const validator = require('validator');
 const config = require('../../../_assets/json/config.json');
-const MoneyAPI = require('../moneyAPI/MoneyApi');
+const pg_users = require('../../Models/tables/pg_users');
+const pg_characters = require('../../Models/tables/pg_characters');
 
 class Account {
     playerOnline = 0;
@@ -13,13 +12,14 @@ class Account {
     constructor() {}
 
     async get(id) {
-        return await database
-            .query(`SELECT * FROM pg_users WHERE id = ?`, [id])
-            .then(async (res) => {
-                if (res.length > 0) {
-                    return res[0];
-                }
-                return false;
+        return await pg_users
+            .findOne({
+                where: {
+                    id,
+                },
+            })
+            .then((user) => {
+                return user;
             })
             .catch((err) => {
                 return false;
@@ -27,63 +27,57 @@ class Account {
     }
 
     async getByUsername(username) {
-        return await database
-            .query(`SELECT * FROM pg_users WHERE username = ? LIMIT 1`, [username])
-            .then(async (res) => {
-                if (res.length > 0) {
-                    return res[0];
-                }
-                return false;
-            })
-            .catch((err) => {
-                return false;
-            });
+        return await pg_users.findOne({
+            where: {
+                username,
+            },
+        });
     }
 
     async setInGameName(id, name) {
         const firstname = validator.trim(name[0]);
         const lastname = validator.trim(name[1]);
 
-        return await database
-            .query('UPDATE pg_users SET firstname = ?, lastname = ? WHERE id = ?', [
-                firstname,
-                lastname,
-                id,
-            ])
-            .then(() => {
-                return true;
-            })
-            .catch((err) => {
-                return false;
-            });
+        const user = this.get(id);
+
+        if (!user) {
+            return false;
+        }
+
+        return await pg_characters.update(
+            {
+                firstname: firstname,
+                lastname: lastname,
+            },
+            {
+                where: {
+                    player_id: id,
+                },
+            }
+        );
     }
 
     async save(username, password) {
-        password = this.hash(password);
-        return await database
-            .query('INSERT INTO pg_users (username, password) VALUES (?, ?)', [username, password])
-            .catch((err) => {
-                return false;
-            });
-    }
+        password = await this.hash(password);
 
-    async saveInventory(id, items) {
-        return await database
-            .query('INSERT INTO pg_user_inventory (id, items) VALUES (?, ?)', [
-                id,
-                JSON.stringify(items),
-            ])
-            .catch((err) => {
-                return false;
-            });
-    }
+        return await pg_users
+            .create({
+                username: username,
+                password: password,
+            })
+            .then(async (user) => {
+                await user.createCharacter({
+                    firstname: 'John',
+                    lastname: 'Doe',
+                });
 
-    async updateInventory(id, items) {
-        return await database
-            .query(`UPDATE pg_user_inventory SET items = ? WHERE id = ?`, [
-                JSON.stringify(items),
-                id,
-            ])
+                await user.createInventory();
+
+                await user.createMoney({
+                    bank_money: 0,
+                    hand_money: 1500,
+                });
+            })
             .catch((err) => {
                 return false;
             });
@@ -105,8 +99,17 @@ class Account {
     }
 
     async updatePos(id, pos) {
-        return await database
-            .query('UPDATE pg_users SET last_pos = ? WHERE id = ?', [pos, id])
+        return await pg_characters
+            .update(
+                {
+                    last_pos: pos,
+                },
+                {
+                    where: {
+                        player_id: id,
+                    },
+                }
+            )
             .catch((err) => {
                 return false;
             });
@@ -124,23 +127,10 @@ class Account {
     }
 
     async getPos(player) {
-        return await database
-            .query('SELECT last_pos FROM pg_users WHERE id = ?', [player.getVariable('playerId')])
-            .then((res) => {
-                try {
-                    return JSON.parse(res[0].last_pos);
-                } catch (err) {
-                    this.changePos(player, config.airport.pos, config.airport.rot);
-
-                    let newPos = config.airport.pos.split(', ');
-                    return JSON.parse(
-                        `{"x": "${newPos[0]}", "y": "${newPos[1]}", "z": "${newPos[2]}"}`
-                    );
-                }
-            })
-            .catch((err) => {
-                return false;
-            });
+        const user = await this.get(player.getVariable('playerId'));
+        if (!user) return [];
+        const character = await user.getCharacter();
+        return character.last_pos;
     }
 
     checkPassword(password, dbpassword) {
@@ -148,50 +138,79 @@ class Account {
     }
 
     hash(string) {
-        const salt = 12;
-        return bcryptjs.hashSync(string, salt);
+        return new Promise((resolve) => {
+            const salt = 12;
+            return resolve(bcryptjs.hashSync(string, salt));
+        });
     }
 
     setHud(player) {
         player.call('Player:ActivateHUD');
-        MoneyAPI.updateHud(player.getVariable('playerId'));
     }
 
     async updateHealth(id, health) {
-        return await database
-            .query('UPDATE pg_users SET health = ? WHERE id = ?', [health, id])
+        return await pg_characters
+            .update(
+                {
+                    health: health,
+                },
+                {
+                    where: {
+                        id: id,
+                    },
+                }
+            )
             .catch((err) => {
                 return false;
             });
     }
 
     async updateArmour(id, armour) {
-        return await database
-            .query('UPDATE pg_users SET armour = ? WHERE id = ?', [armour, id])
+        return await pg_characters
+            .update(
+                {
+                    armour: armour,
+                },
+                {
+                    where: {
+                        id: id,
+                    },
+                }
+            )
             .catch((err) => {
                 return false;
             });
     }
 
     async getHealth(id) {
-        return await database
-            .query('SELECT health FROM pg_users WHERE id = ?', [id])
+        return await pg_characters
+            .findOne({
+                where: {
+                    player_id: id,
+                },
+                attributes: ['health'],
+            })
             .then((res) => {
-                return res[0].health;
+                return res.health;
             })
             .catch((err) => {
-                return false;
+                return 100;
             });
     }
 
     async getArmour(id) {
-        return await database
-            .query('SELECT armour FROM pg_users WHERE id = ?', [id])
+        return await pg_characters
+            .findOne({
+                where: {
+                    player_id: id,
+                },
+                attributes: ['armour'],
+            })
             .then((res) => {
-                return res[0].armour;
+                return res.armour;
             })
             .catch((err) => {
-                return false;
+                return 0;
             });
     }
 
@@ -206,7 +225,7 @@ class Account {
     syncAllPlayers() {
         mp.players.forEach((player) => {
             if (!player.getVariable('isInEvent') && player.getVariable('syncPlayer')) {
-                this.updatePos(player.getVariable('playerId'), JSON.stringify(player.position));
+                this.updatePos(player.getVariable('playerId'), player.position);
                 this.updateHealth(player.getVariable('playerId'), player.health);
                 this.updateArmour(player.getVariable('playerId'), player.armour);
             }
@@ -214,13 +233,15 @@ class Account {
     }
 
     async getRole(id) {
-        return await database
-            .query('SELECT roleId FROM pg_users WHERE id = ?', [id])
-            .then((res) => {
-                return res[0].roleId;
+        return await pg_users
+            .findOne({
+                where: {
+                    id: id,
+                },
+                attributes: ['roleId'],
             })
-            .catch((err) => {
-                return false;
+            .then((res) => {
+                return res.roleId;
             });
     }
 }
