@@ -1,4 +1,5 @@
 const { GarageAPI } = require('./index.js');
+hasPermissions;
 const debug = require('../../../_assets/json/debug/debug.json').garage;
 
 mp.events.add('playerEnterColshape', async (player, shape) => {

@@ -81,6 +81,10 @@ Pg_permission_list.init(
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
+        system: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
     },
     {
         sequelize: database,

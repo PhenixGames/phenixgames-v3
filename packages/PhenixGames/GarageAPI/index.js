@@ -1,6 +1,7 @@
 const { log } = require('../../../_assets/functions/log/logs');
 const pg_garages = require('../../Models/tables/pg_garages');
 const database = require('../../_db/db');
+const PermissionSystem = require('../playerAPI/PermissionSystem');
 const debug = require('../../../_assets/json/debug/debug.json').GarageAPI;
 class api {
     constructor() {}
@@ -36,6 +37,7 @@ class api {
                 console.log('-- Create Garages -- ' + garages.length + ' --');
                 console.log(garages);
             }
+
             for (let i in garages) {
                 try {
                     this.spawncolshape(
@@ -60,7 +62,8 @@ class api {
             return resolve(true);
         });
     }
-    get(id = false) {
+
+    get(id = null) {
         return new Promise(async (resolve) => {
             if (id) {
                 const garage = await pg_garages
@@ -73,6 +76,10 @@ class api {
                         return garage;
                     })
                     .catch((err) => {
+                        log({
+                            message: 'Fehler beim Laden der Garage: ' + err,
+                            isFatal: true,
+                        });
                         return [];
                     });
                 return resolve(garage);
@@ -84,9 +91,15 @@ class api {
         });
     }
     update(player) {
-        //player Needs to be Player which run a command to update this
-        //TODO permissions need to be implemented
-        this.load();
+        return new Promise(async (resolve) => {
+            const hasPermissions = await PermissionSystem.hasPermissions(player, ['system']);
+            if (!hasPermissions) return reject(false);
+
+            this.load().then(() => {
+                player.notify('~g~Garagen wurden erfolgreich geladen');
+                return resolve(true);
+            });
+        });
     }
 
     spawncolshape(type, pos, id) {
