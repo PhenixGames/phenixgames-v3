@@ -10,6 +10,7 @@ const IplsAPI = require('../ipls');
 const VehicleAPI = require('../vehicle/VehicleApi');
 const { SyncApi } = require('../SyncAPI/SyncApi');
 const database = require('../../_db/db');
+const { GarageAPI } = require('../GarageAPI');
 
 mp.events.delayInitialization = true;
 (async () => {
@@ -34,6 +35,8 @@ mp.events.add('packagesLoaded', async () => {
 
     SyncApi.sync();
     SyncApi.syncWeather();
+
+    GarageAPI.load();
 
     if (debug.createBackup) {
         new DatabaseBackup();
