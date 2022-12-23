@@ -1,10 +1,11 @@
 const config = require('_config/config').config;
+require('./gui/HUD/_shotline.js');
 
-var hudBrowser;
+let hudBrowser;
 let active = false;
-var modded_Speed = 1;
-var Admin = false;
-var linearray = [];
+let modded_Speed = 1;
+let isAdmin = false;
+let linearray = [];
 
 mp.events.add('Player:ActivateHUD', () => {
     hudBrowser = mp.browsers.new(`http://${config.domain}:8080/#/hud`);
@@ -13,8 +14,8 @@ mp.events.add('Player:ActivateHUD', () => {
     active = true;
 });
 
-mp.events.add('Change:Admin:Duty:Value:On:Client', (state) => {
-    Admin = state;
+mp.events.add('Change:isAdmin:Duty:Value:On:Client', (state) => {
+    isAdmin = state;
 });
 
 mp.events.add('playerEnterVehicle', (player, vehicle, seat) => {
@@ -29,8 +30,8 @@ mp.events.add('playerLeaveVehicle', (player, vehicle) => {
 
 //Render For Car
 mp.events.add('render', () => {
-    if (Admin) {
-        //Ist Er im Admin Dienst
+    if (isAdmin) {
+        //Ist Er im isAdmin Dienst
         //Daten Vom Fahrzeug Rendern
         mp.vehicles.forEachInStreamRange((vehicle) => {
             if (mp.players.local.position.subtract(vehicle.position).length() < 10) {
@@ -195,7 +196,7 @@ mp.events.add('render', () => {
                 item[10]
             );
         });
-    } //Admin Dienst Abfrage Zu ende
+    } //isAdmin Dienst Abfrage Zu ende
     //Hier wird Das Speedometer Geupdated.
     if (mp.players.local.vehicle) {
         var player = mp.players.local;
@@ -269,39 +270,6 @@ mp.keys.bind(0x73, true, function () {
     } else {
         hudBrowser.execute(`gui.hud.manageVoice("${true}");`); //Aktiv
     }
-});
-//Hier wird die line vom schuss gemahlt
-mp.events.add('Admin:draw:shot:line', (player, targetpos, targetEntity) => {
-    let r = 0;
-    let g = 0;
-    let b = 0;
-    let a = 255;
-    if (targetEntity == null) {
-        b = 255;
-    } else {
-        if (targetEntity.getVariable('isMedia') || player.getVariable('isMedia')) {
-            r = 255;
-            b = 255;
-        } else {
-            r = 255;
-        }
-    }
-    var item = [
-        Number(player.position.x),
-        Number(player.position.y),
-        Number(player.position.z + 0.5),
-        Number(targetpos.x),
-        Number(targetpos.y),
-        Number(targetpos.z),
-        r,
-        g,
-        b,
-        a,
-    ];
-    linearray.push(item);
-    setTimeout(() => {
-        linearray = linearray.filter((i) => i !== item);
-    }, 10000);
 });
 
 setInterval(() => {

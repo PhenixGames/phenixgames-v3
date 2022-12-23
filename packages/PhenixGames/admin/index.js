@@ -57,6 +57,6 @@ mp.events.add('playerExitVehicle', (player, vehicle) => {
     }
 });
 
-mp.events.add('Get:Shot:Info:to:Admin', (player, admin, targetpos, targetEntity) => {
-    admin.call('Admin:draw:shot:line', [player, targetpos, targetEntity]);
+mp.events.add('Server:Admin:ShotInfo', (player, admin, targetpos, targetEntity) => {
+    admin.call('Player:Admin:DrawShotLine', [player, targetpos, targetEntity]);
 });
