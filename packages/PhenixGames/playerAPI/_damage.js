@@ -91,29 +91,23 @@ mp.events.add('Server:Handle:Damage', (player, target, weapon, boneIndex, damage
         customDamage /= 10;
     }
 
-    target.applyDamageTo(parseInt(customDamage), true);
-
-    const currentHealth = target.getHealth();
-    if (currentHealth > 0) {
-        return true;
-    }
-
-    //applyDamage(player, target, newdamage);
+    applyDamage(player, target, customDamage);
 });
 
-// function applyDamage(player, target, damage) {
-//     player.outputChatBox(`Du hast getroffen mit ${damage} Schaden`);
-//     target.outputChatBox(`Du wurdest getroffen mit ${damage} Schaden`);
-//     const health = target.health;
-//     const armour = target.armour;
+function applyDamage(player, target, damage) {
+    player.outputChatBox(`Du hast getroffen mit ${damage} Schaden`);
+    target.outputChatBox(`Du wurdest getroffen mit ${damage} Schaden`);
 
-//     if (damage >= armour) {
-//         damage = damage - armour;
+    const health = target.health;
+    const armour = target.armour;
 
-//         target.armour = 0;
+    if (damage >= armour) {
+        damage = damage - armour;
 
-//         target.health = health < damage ? (target.health = 0) : (target.health = health - damage);
-//     } else {
-//         target.armour = armour - damage;
-//     }
-// }
+        target.armour = 0;
+
+        target.health = health < damage ? (target.health = 0) : (target.health = health - damage);
+    } else {
+        target.armour = armour - damage;
+    }
+}
