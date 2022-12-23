@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+if [[ `grep 'main'` ]]; then 
+  echo "You really don't want to push this branch. Aborting."
+  exit 1
+fi
+
+if [[ `grep 'dev'` ]]; then 
+  echo "You really don't want to push this branch. Aborting."
+  exit 1
+fi
