@@ -25,13 +25,10 @@ mp.events.add('Set:Discord', (title, playing) => {
 
 //DAMAGESYSTEM
 mp.events.add(
-    'outgoingDamage',
+    'incomingDamage',
     (sourceEntity, targetEntity, sourcePlayer, weapon, boneIndex, damage) => {
         if (targetEntity.type === 'player') {
             mp.events.callRemote('Server:Handle:Damage', targetEntity, weapon, boneIndex, damage);
-            return true;
-        } else {
-            return false;
         }
     }
 );
