@@ -1,7 +1,8 @@
 name: Codecov
 on:
     pull_request:
-        branches: [dev, main]
+        branches: 
+            - "**"
 uses: codecov/codecov-action@v2
 with:
   token: ${{ secrets.CODECOV_TOKEN }}
