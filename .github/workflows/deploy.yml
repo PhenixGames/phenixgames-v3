@@ -1,0 +1,22 @@
+name: Deployment to Server
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Install SSH Key:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Install SSH Key
+          uses: shimataro/ssh-key-action@v2
+          with:
+            key: ${{ secrets.DEPLOY_KEY }} 
+            
+        - name: Add known hosts
+          run: |
+            mkdir -p ~/.ssh
+            echo "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
+            chmod 600 ~/.ssh/known_hosts
+
+        - name: Deploy with rsync
+          run: rsync -avz ./ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/home/rage/workfolder/phenixgames-v3/
