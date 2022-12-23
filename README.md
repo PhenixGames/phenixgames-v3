@@ -2,24 +2,14 @@
 
 ## **Installation Guide**
 
-### **Add vue server**
-
-> Execute this inside the root directory
-
-```cmd
-git clone https://github.com/PhenixGames/phenixgames-v3-vue.git
-```
-
 ### **Requirements:**
 
 ```txt
 - docker
-- curl
-- node
-- pm2
+- node / npm
 ```
 
-### Installation
+### Installation - (Linux)
 
 1. Install docker (<https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04>)
 
@@ -38,6 +28,30 @@ git clone https://github.com/PhenixGames/phenixgames-v3-vue.git
 <br>
 
 5. Clone vue repository `git clone https://github.com/PhenixGames/phenixgames-v3-vue.git `
+
+<br>
+
+6. Install dependencies `npm install`
+
+<br>
+
+7. Copy `.env.example` to `.env`
+
+<br>
+
+8. Insert data to `.env` file
+
+<br>
+
+9. Copy `client_packages/_config/config.example.js` to `client_packages/_config/config.js`
+
+<br>
+
+10. Insert data to `client_packages/_config/config.js`
+
+<br>
+
+11. Copy `_assets/json/debug/debug.example.json` to `_assets/json/debug/debug.json`
 
 <br>
 
