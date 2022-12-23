@@ -14,7 +14,7 @@ mp.events.add('Player:ActivateHUD', () => {
     active = true;
 });
 
-mp.events.add('Change:isAdmin:Duty:Value:On:Client', (state) => {
+mp.events.add('Change:Admin:Duty:Value:On:Client', (state) => {
     isAdmin = state;
 });
 
