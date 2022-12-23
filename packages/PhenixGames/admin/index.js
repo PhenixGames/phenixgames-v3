@@ -10,33 +10,26 @@ mp.events.addCommand('aduty', async (player) => {
 
     if (!isTeam || !godmode) return;
 
+    generellAPI.saveLocalVar(player, {
+        Aduty: !!player.getVariable('Aduty'),
+    });
+
+    player.call('Set:God', [!!player.getVariable('Aduty')]);
+    player.call('Player:Admin:ChangeDuty', [!!player.getVariable('Aduty')]);
+
     if (player.getVariable('Aduty')) {
-        generellAPI.saveLocalVar(player, {
-            Aduty: false,
-        });
-
-        player.call('Set:God', [false]);
-        player.call('Change:Admin:Duty:Value:On:Client', [false]);
-
         const user = await AccountAPI.get(player.getVariable('playerId'));
         player.name = user.firstname + ' ' + user.lastname;
 
         player.alpha = 255;
     } else {
-        generellAPI.saveLocalVar(player, {
-            Aduty: true,
-        });
-
-        player.call('Set:God', [true]);
-        player.call('Change:Admin:Duty:Value:On:Client', [true]);
-
         player.alpha = PermissionSystem.getAdminAlpha();
         player.name = player.name;
     }
 
     const noClip = await PermissionSystem.hasPermissions(player, ['no_clip']);
     if (noClip) {
-        player.call('Player:Admin:Duty:noclip');
+        player.call('Player:Admin:NoClip');
     }
 
     const userRole = await AccountAPI.getRole(player.getVariable('playerId'));
