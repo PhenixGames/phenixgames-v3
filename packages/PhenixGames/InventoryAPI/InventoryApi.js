@@ -32,6 +32,22 @@ class Api {
         );
     }
 
+    async addItem({ itemId, playerId, amount = null, userInventory }) {
+        return new Promise(async (resolve) => {
+            const item = userInventory.find((item) => item.id === itemId);
+            if (item && item.isStackable && item.amount + amount > max) {
+                item.amount += amount;
+            } else {
+                userInventory.push({
+                    id: itemId,
+                    amount: amount,
+                });
+            }
+            await this.update(playerId, userInventory);
+            return resolve(userInventory);
+        });
+    }
+
     removeItem({ itemId, playerId, amount = null, userInventory }) {
         return new Promise(async (resolve) => {
             const item = userInventory.find((item) => item.id === itemId);
@@ -44,6 +60,15 @@ class Api {
             }
             await this.update(playerId, userInventory);
             return resolve(userInventory);
+        });
+    }
+
+    getKeyLength(player_id) {
+        return new Promise(async (resolve) => {
+            const inventory = await this.get(player_id);
+            if (!inventory) return resolve(999);
+            const keys = inventory.items.filter((item) => item.type === 'veh_key');
+            return resolve(keys.length);
         });
     }
 }

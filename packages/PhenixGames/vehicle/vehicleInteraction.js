@@ -1,20 +1,30 @@
+const { log } = require('../../../_assets/functions/log/logs');
+const VehicleAPI = require('./VehicleApi');
+
 const debug = require('../../../_assets/json/debug/debug.json').vehicle;
 
 mp.events.add('keypress:STRG', (player) => {
     try {
-        var veh = player.vehicle;
-        let fuel = veh.getVariable('veh_fuel');
-        if (!fuel == 0) {
-            var speed = veh.getVariable('veh_speed');
-            if (speed >= 5) {
-            } else {
-                veh.engine = !veh.engine;
-                veh.setVariable('veh_engine', veh.engine);
-            }
-        } else {
-            return player.notify('Der Tank des Fahzeuges ist leer');
+        const veh = player.vehicle;
+
+        const db_veh = VehicleAPI.get(veh.getVariable('veh_id'));
+        if (!db_veh) return;
+        if (!db_veh.isOwner(player.id, db_veh.veh_owner)) return;
+        if (!db_veh.isKeyOwner(player.id, db_veh.veh_keys)) return;
+
+        const fuel = veh.getVariable('veh_fuel');
+        if (fuel <= 0) return player.notify('Der Tank des Fahzeuges ist leer');
+
+        const speed = veh.getVariable('veh_speed');
+        if (speed <= 5) {
+            veh.engine = !veh.engine;
+            veh.setVariable('veh_engine', veh.engine);
         }
     } catch (err) {
+        log({
+            message: err,
+            isFatal: true,
+        });
         return;
     }
 });
