@@ -1,20 +1,20 @@
 const config = require('_config/config').config;
 
-let Deathbrowser = null;
+let browser = null;
 
-mp.events.add('Open:Death:Browser', () => {
-    mp.events.callRemote('Server:Player:interacteBrowser', true);
-    Deathbrowser = mp.browsers.new(`http://${config.domain}:8080/#/deathscreen`);
+mp.events.add('Client:DeathBrowser:Open', () => {
+    mp.events.callRemote('Server:Browser:PlayerInteracte', true);
+    browser = mp.browsers.new(`http://${config.domain}:8080/#/deathscreen`);
     mp.gui.cursor.visible = true;
 });
-mp.events.add('close:Death:Browser', () => {
-    if (Deathbrowser == null) return;
-    mp.events.callRemote('Server:Player:interacteBrowser', false);
-    Deathbrowser.destroy();
-    Deathbrowser = null;
+mp.events.add('Client:DeathBrowser:Close', () => {
+    if (!browser) return;
+    mp.events.callRemote('Server:Browser:PlayerInteracte', false);
+    browser.destroy();
+    browser = null;
     mp.gui.cursor.visible = false;
 });
 
-mp.events.add('HTML:Call:Respawn', () => {
-    mp.events.callRemote('Respawn:At:Hospital');
+mp.events.add('Client:Respawn', () => {
+    mp.events.callRemote('Client:Respawn:Hospital');
 });

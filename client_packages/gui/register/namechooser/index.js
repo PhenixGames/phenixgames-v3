@@ -7,7 +7,7 @@ mp.gui.chat.show(false);
 
 var browser;
 mp.events.add('Player:InGameName:Choose', () => {
-    mp.events.callRemote('Server:Player:interacteBrowser', true);
+    mp.events.callRemote('Server:Browser:PlayerInteracte', true);
     browser = mp.browsers.new(`http://${config.domain}:8080/#/namechooser`);
     setTimeout(() => {
         mp.gui.cursor.show(true, true);
@@ -19,7 +19,7 @@ mp.events.add('uiNameChooser_accept', (firstname, lastname) => {
 });
 
 mp.events.add('Player:InGameName:Choose:Succes:close:Windows', () => {
-    mp.events.callRemote('Server:Player:interacteBrowser', false);
+    mp.events.callRemote('Server:Browser:PlayerInteracte', false);
     mp.events.remove([
         'Player:InGameName:Choose:Succes:close:Windows',
         'Player:InGameName:Choose',
