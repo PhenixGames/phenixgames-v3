@@ -106,11 +106,11 @@ class FuelStationApi {
     }
 
     spawnMarker({ player, pos, size, id }) {
-        player.call('Fuelstation:Spawn:Marker', [pos, size, id]);
+        player.call('Client:Fuelstation:Marker:SpawnOne', [pos, size, id]);
     }
 
     removeMarkers(player) {
-        player.call('Fuelstation:Destroy:Markers');
+        player.call('Client:Fuelstation:Marker:DestroyAll');
     }
 
     isFuelstation(shape) {
@@ -151,7 +151,7 @@ class FuelStationApi {
                 console.log('Fehler beim Erstellen des Markers: ' + error);
             }
         }
-        player.setVariable('isnearFuelstation', true);
+        player.setVariable('isNearFuelstation', true);
         player.setVariable('Fuelstation_id', shape.getVariable('id'));
     }
 

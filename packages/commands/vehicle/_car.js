@@ -1,69 +1,18 @@
-const vehicle = require('../../PhenixGames/vehicle/index');
-const Permissionsytem = require('../../PhenixGames/playerAPI/PermissionSystem');
-const generellAPI = require('../../PhenixGames/allgemein/');
-const database = require('../../_db/db');
-const VehicleAPI = require('../../PhenixGames/vehicle/VehicleApi');
+const VehicleApi = require('../../PhenixGames/vehicle/VehicleApi');
 
-mp.events.addCommand('car', async (player, args) => {
-    spawncar(player, args);
+mp.events.addCommand('car', (player, args) => {
+    VehicleApi.spawnCar(player, args);
 });
 
-mp.events.addCommand('veh', async (player, args) => {
-    spawncar(player, args);
+mp.events.addCommand('veh', (player, args) => {
+    VehicleApi.spawnCar(player, args);
 });
 
-async function spawncar(player, args) {
-    if (await Permissionsytem.hasPermissions(player, ['car_spawn'])) {
-        try {
-            args = args.split(' ');
-        } catch (err) {
-            return;
-        }
-
-        let veh = args[0];
-
-        let prim = args[1] || 0;
-        let sec = args[2] || 0;
-
-        try {
-            if (veh === 'repair') {
-                return player.vehicle.repair();
-            }
-        } catch (err) {
-            return player.notify('~r~Du bist in keinem Auto!');
-        }
-
-        var setVeh = mp.vehicles.new(mp.joaat(veh), player.position, {
-            numberPlate: player.name,
-            color: [prim, sec],
-            heading: player.heading,
-            engine: false,
-        });
-        generellAPI.saveLocalVar(player, {
-            'Player.Tmp.Admin.Veh': setVeh,
-        });
-
-        player.putIntoVehicle(setVeh, 0);
-
-        player.call('Vehicle:Engine:state', [false]);
-
-        await VehicleAPI.save(setVeh, {
-            veh_name: veh,
-            veh_owner: player.socialClub,
-            veh_keys: [player.getVariable('playerId')],
-            veh_state: true,
-            veh_fuel: 100,
-            veh_type: 'benzin',
-            veh_maxfuel: 150,
-        });
-    }
-}
-
-mp.events.addCommand('clean', async (player) => {
+mp.events.addCommand('clean', (player) => {
     if (!player.vehicle) return;
-    clean(player);
+    VehicleApi.removeDirt(player);
 });
-mp.events.addCommand('dv', async (player, args) => {
+mp.events.addCommand('delVeh', async (player, args) => {
     try {
         args = args.split(' ');
     } catch (err) {
@@ -71,44 +20,64 @@ mp.events.addCommand('dv', async (player, args) => {
     }
 
     let veh_id = args[0];
-    var veh_spawned = false;
-    if ((vid = null)) {
+    let veh_spawned = false;
+
+    if (!veh_id) {
         if (!player.vehicle) return player.notify('~r~Du bist in keinem Auto!');
-        vid = player.vehicle.getVariable('veh_id');
+        veh_id = player.vehicle.getVariable('veh_id');
     }
 
-    mp.vehicles.forEach((vehicle) => {
-        if (vehicle.getVariable('veh_id') == veh_id) {
-            vehicle.destroy();
-            veh_spawned = true;
-        }
-    });
-    await DeleteVehicleFromDatabase(Number(veh_id));
-    if (veh_spawned) {
-        player.notify(
-            '~r~Das Fahrzeug mit der ID ' +
-                veh_id +
-                ' wurde aus Der Welt und der Datenbank entfernt!'
-        );
-    } else {
-        player.notify('~r~Das Fahrzeug mit der ID ' + veh_id + ' wurde aus der Datenbank entfernt');
+    await VehicleApi.delete(veh_id)
+        .then(() => {
+            mp.vehicles.forEach((vehicle) => {
+                if (vehicle.getVariable('veh_id') == veh_id) {
+                    vehicle.destroy();
+                    veh_spawned = true;
+                }
+            });
+
+            player.notify(
+                `~r~Das Fahrzeug mit der ID ${veh_id} wurde aus der${
+                    veh_spawned ? ' Welt und ' : ' '
+                }Datenbank entfernt!`
+            );
+        })
+        .catch((err) => {
+            player.notify(`~r~Es ist ein Fehler aufgetreten.`);
+        });
+});
+
+mp.events.addCommand('color', (player, color = null) => {
+    if (player.getVariable('isTeam')) {
+        if (!color) return player.notify('~r~Geb ne farbe an du Depp!');
+
+        color = color.split(' ');
+        player.vehicle.setColor(Number(color[0]), Number(color[1]));
     }
 });
 
-async function clean(player) {
-    mp.players.forEach((tg) => {
-        let veh = player.vehicle;
-        tg.call('Vehicle:Remove:Dirt:Level', [veh]);
-    });
-}
+mp.events.addCommand('speed', (player, speed = 1) => {
+    if (player.getVariable('isTeam')) {
+        player.call('Set:ModdedSpeed', [speed]);
+    }
+});
 
-async function DeleteVehicleFromDatabase(veh_id) {
-    return await database
-        .query('DELETE FROM pg_vehicles WHERE veh_id = ?', [veh_id])
-        .then(() => {
-            return true;
-        })
-        .catch((err) => {
-            return false;
-        });
-}
+mp.events.addCommand('fuel', (player) => {
+    const fuel = 150;
+    const closest = mp.vehicles.getClosest(
+        [player.position.x, player.position.y, player.position.z],
+        1
+    )[0];
+
+    if (player.getVariable('Aduty')) {
+        closest.setVariable('veh_fuel', fuel);
+        return player.notify('~g~Du hast mithilfe deines Adminmodus das Fahrzeug getankt!');
+    }
+
+    if (player.getVariable('isNearFuelstation')) {
+        closest.setVariable('veh_fuel', fuel);
+        player.notify('~g~Du hast dein Fahrzeug erfolgreich aufgefüllt!');
+    } else {
+        player.notify('~r~Du bist nicht bei einer Tankstelle');
+    }
+});

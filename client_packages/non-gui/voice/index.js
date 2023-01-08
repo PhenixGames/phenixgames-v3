@@ -1,9 +1,8 @@
-const Use3d = true;
-const UseAutoVolume = false;
+let use3dVoice = true;
+let useAutoVolume = false;
+let maxRange = 50.0;
 
-const MaxRange = 50.0;
-
-let g_voiceMgr = {
+const g_voiceMgr = {
     listeners: [],
 
     add: function (player) {
@@ -12,19 +11,19 @@ let g_voiceMgr = {
         player.isListening = true;
         mp.events.callRemote('add_voice_listener', player);
 
-        if (UseAutoVolume) {
+        if (useAutoVolume) {
             player.voiceAutoVolume = true;
         } else {
             player.voiceVolume = 1.0;
         }
 
-        if (Use3d) {
+        if (use3dVoice) {
             player.voice3d = true;
         }
     },
 
     remove: function (player, notify) {
-        let idx = this.listeners.indexOf(player);
+        const idx = this.listeners.indexOf(player);
 
         if (idx !== -1) this.listeners.splice(idx, 1);
 
@@ -42,19 +41,19 @@ mp.events.add('playerQuit', (player) => {
     }
 });
 
-mp.events.add('Player:set:Rage:Voice', (range) => {
-    MaxRange = range;
+mp.events.add('Client:Voice:SetRange', (range) => {
+    maxRange = range;
 });
 
 setInterval(() => {
-    let localPlayer = mp.players.local;
-    let localPos = localPlayer.position;
+    const localPlayer = mp.players.local;
+    const localPos = localPlayer.position;
 
     mp.players.forEachInStreamRange((player) => {
         if (player != localPlayer) {
             if (!player.isListening) {
                 const playerPos = player.position;
-                let dist = mp.game.system.vdist(
+                const dist = mp.game.system.vdist(
                     playerPos.x,
                     playerPos.y,
                     playerPos.z,
@@ -63,7 +62,7 @@ setInterval(() => {
                     localPos.z
                 );
 
-                if (dist <= MaxRange) {
+                if (dist <= maxRange) {
                     g_voiceMgr.add(player);
                 }
             }
@@ -73,7 +72,7 @@ setInterval(() => {
     g_voiceMgr.listeners.forEach((player) => {
         if (player.handle !== 0) {
             const playerPos = player.position;
-            let dist = mp.game.system.vdist(
+            const dist = mp.game.system.vdist(
                 playerPos.x,
                 playerPos.y,
                 playerPos.z,
@@ -82,10 +81,10 @@ setInterval(() => {
                 localPos.z
             );
 
-            if (dist > MaxRange) {
+            if (dist > maxRange) {
                 g_voiceMgr.remove(player, true);
-            } else if (!UseAutoVolume) {
-                player.voiceVolume = 1 - dist / MaxRange;
+            } else if (!useAutoVolume) {
+                player.voiceVolume = 1 - dist / maxRange;
             }
         } else {
             g_voiceMgr.remove(player, true);

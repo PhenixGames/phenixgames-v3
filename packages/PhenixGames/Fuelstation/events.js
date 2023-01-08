@@ -18,7 +18,7 @@ mp.events.add('playerExitColshape', (player, shape) => {
 
     FAPI.removeMarkers(player);
 
-    player.setVariable('isnearFuelstation', false);
+    player.setVariable('isNearFuelstation', false);
     player.setVariable('Fuelstation_id', null);
 });
 

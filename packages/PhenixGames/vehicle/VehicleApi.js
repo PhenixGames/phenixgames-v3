@@ -4,8 +4,9 @@ const { log } = require('../../../_assets/functions/log/logs');
 const pg_vehicles = require('../../Models/tables/pg_vehicles');
 const generellAPI = require('../allgemein/index');
 const { InventoryApi } = require('../InventoryAPI/InventoryApi');
+const PermissionSystem = require('../playerAPI/PermissionSystem');
 
-class VehicleApi {
+module.exports = class VehicleApi {
     defaultFuel = 150;
 
     constructor() {}
@@ -31,47 +32,50 @@ class VehicleApi {
         });
     }
 
-    async save(veh, veh_data) {
-        return await pg_vehicles
-            .create({
-                veh_name: veh_data.veh_name,
-                veh_owner: veh_data.veh_owner,
-                veh_keys: veh_data.veh_keys,
-                veh_state: veh_data.veh_state,
-                veh_pos: veh.position,
-                veh_rot: veh.heading,
-                veh_prim: veh.getColor(0),
-                veh_sec: veh.getColor(1),
-                veh_fuel: veh_data.veh_fuel,
-                veh_max: veh_data.veh_max,
-                veh_type: veh_data.veh_type,
-            })
-            .then((res) => {
-                generellAPI.saveLocalVar(veh, {
-                    veh_id: res.veh_id,
+    save(veh, veh_data) {
+        return new Promise(async (resolve) => {
+            await pg_vehicles
+                .create({
                     veh_name: veh_data.veh_name,
                     veh_owner: veh_data.veh_owner,
                     veh_keys: veh_data.veh_keys,
                     veh_state: veh_data.veh_state,
                     veh_pos: veh.position,
                     veh_rot: veh.heading,
-                    veh_prim_color: veh.getColor(0),
-                    veh_sec_color: veh.getColor(1),
+                    veh_prim: veh.getColor(0),
+                    veh_sec: veh.getColor(1),
                     veh_fuel: veh_data.veh_fuel,
                     veh_max: veh_data.veh_max,
                     veh_type: veh_data.veh_type,
+                })
+                .then((res) => {
+                    generellAPI.saveLocalVar(veh, {
+                        veh_id: res.veh_id,
+                        veh_name: veh_data.veh_name,
+                        veh_owner: veh_data.veh_owner,
+                        veh_keys: veh_data.veh_keys,
+                        veh_state: veh_data.veh_state,
+                        veh_pos: veh.position,
+                        veh_rot: veh.heading,
+                        veh_prim_color: veh.getColor(0),
+                        veh_sec_color: veh.getColor(1),
+                        veh_fuel: veh_data.veh_fuel,
+                        veh_max: veh_data.veh_max,
+                        veh_type: veh_data.veh_type,
+                    });
+                    return resolve(true);
+                })
+                .catch((err) => {
+                    log({
+                        message: err,
+                        isFatal: true,
+                    });
+                    return reject(false);
                 });
-            })
-            .catch((err) => {
-                log({
-                    message: err,
-                    isFatal: true,
-                });
-                return false;
-            });
+        });
     }
 
-    async update(
+    update(
         veh,
         {
             veh_id = veh.getVariable('veh_id'),
@@ -88,132 +92,148 @@ class VehicleApi {
             veh_type = veh.getVariable('veh_type'),
         }
     ) {
-        generellAPI.saveLocalVar(veh, {
-            veh_id: veh_id,
-            veh_name: veh_name,
-            veh_owner: veh_owner,
-            veh_keys: veh_keys,
-            veh_state: veh_state,
-            veh_pos: veh_pos,
-            veh_rot: veh_rot,
-            veh_fuel: veh_fuel,
-            veh_prim_color: veh_prim,
-            veh_sec_color: veh_sec,
-            veh_max: veh_max,
-            veh_type: veh_type,
-        });
-        return await pg_vehicles
-            .update(
-                {
-                    veh_id: veh_id,
-                    veh_name: veh_name,
-                    veh_owner: veh_owner,
-                    veh_keys: veh_keys,
-                    veh_state: veh_state,
-                    veh_pos: JSON.parse(veh_pos),
-                    veh_rot: veh_rot,
-                    veh_fuel: veh_fuel,
-                    veh_prim_color: veh_prim,
-                    veh_sec_color: veh_sec,
-                    veh_max: veh_max,
-                    veh_type: veh_type,
-                },
-                {
-                    where: {
-                        veh_id,
+        return new Promise(async (resolve, reject) => {
+            generellAPI.saveLocalVar(veh, {
+                veh_id: veh_id,
+                veh_name: veh_name,
+                veh_owner: veh_owner,
+                veh_keys: veh_keys,
+                veh_state: veh_state,
+                veh_pos: veh_pos,
+                veh_rot: veh_rot,
+                veh_fuel: veh_fuel,
+                veh_prim_color: veh_prim,
+                veh_sec_color: veh_sec,
+                veh_max: veh_max,
+                veh_type: veh_type,
+            });
+            return await pg_vehicles
+                .update(
+                    {
+                        veh_id: veh_id,
+                        veh_name: veh_name,
+                        veh_owner: veh_owner,
+                        veh_keys: veh_keys,
+                        veh_state: veh_state,
+                        veh_pos: JSON.parse(veh_pos),
+                        veh_rot: veh_rot,
+                        veh_fuel: veh_fuel,
+                        veh_prim_color: veh_prim,
+                        veh_sec_color: veh_sec,
+                        veh_max: veh_max,
+                        veh_type: veh_type,
                     },
-                }
-            )
-            .then((res) => {
-                log({
-                    message: err,
-                    isFatal: true,
-                });
-                return true;
-            })
-            .catch((err) => {
-                return false;
-            });
-    }
-
-    async spawnAll() {
-        await pg_vehicles
-            .findAll()
-            .then((res) => {
-                if (res.length > 0) {
-                    for (let i in res) {
-                        const newVeh = mp.vehicles.new(
-                            mp.joaat(res[i].veh_name),
-                            JSON.parse(res[i].veh_pos),
-                            {
-                                heading: res[i].veh_rot,
-                                numberPlate: res[i].veh_owner,
-                                color: [res[i].veh_prim, res[i].veh_sec],
-                            }
-                        );
-                        this.update(newVeh, {
-                            veh_id: res[i].veh_id,
-                            veh_name: res[i].veh_name,
-                            veh_owner: res[i].veh_owner,
-                            veh_keys: JSON.parse(res[i].veh_keys),
-                            veh_state: res[i].veh_state,
-                            veh_pos: res[i].veh_pos,
-                            veh_rot: res[i].veh_rot,
-                            veh_prim: res[i].veh_prim,
-                            veh_sec: res[i].veh_sec,
-                            veh_fuel: res[i].veh_fuel,
-                            veh_max: res[i].veh_max,
-                            veh_type: res[i].veh_type,
-                        });
+                    {
+                        where: {
+                            veh_id,
+                        },
                     }
-                }
-            })
-            .catch((err) => {
-                log({
-                    message: err,
-                    isFatal: true,
+                )
+                .then((res) => {
+                    log({
+                        message: err,
+                        isFatal: true,
+                    });
+                    return resolve(true);
+                })
+                .catch((err) => {
+                    return reject(false);
                 });
-            });
-    }
-
-    async syncAll() {
-        mp.vehicles.forEach((vehicle) => {
-            this.update(vehicle, {});
         });
     }
 
-    async delete(id) {
-        return await pg_vehicles
-            .destroy({
-                where: {
-                    veh_id: id,
-                },
-            })
-            .catch((err) => {
-                log({
-                    message: err,
-                    isFatal: true,
+    spawnAll() {
+        return new Promise(async (resolve, reject) => {
+            await pg_vehicles
+                .findAll()
+                .then((res) => {
+                    if (res.length > 0) {
+                        for (let i in res) {
+                            const newVeh = mp.vehicles.new(
+                                mp.joaat(res[i].veh_name),
+                                JSON.parse(res[i].veh_pos),
+                                {
+                                    heading: res[i].veh_rot,
+                                    numberPlate: res[i].veh_owner,
+                                    color: [res[i].veh_prim, res[i].veh_sec],
+                                }
+                            );
+                            this.update(newVeh, {
+                                veh_id: res[i].veh_id,
+                                veh_name: res[i].veh_name,
+                                veh_owner: res[i].veh_owner,
+                                veh_keys: JSON.parse(res[i].veh_keys),
+                                veh_state: res[i].veh_state,
+                                veh_pos: res[i].veh_pos,
+                                veh_rot: res[i].veh_rot,
+                                veh_prim: res[i].veh_prim,
+                                veh_sec: res[i].veh_sec,
+                                veh_fuel: res[i].veh_fuel,
+                                veh_max: res[i].veh_max,
+                                veh_type: res[i].veh_type,
+                            });
+                        }
+                    }
+                    return resolve(true);
+                })
+                .catch((err) => {
+                    log({
+                        message: err,
+                        isFatal: true,
+                    });
+                    return reject(false);
                 });
-                return false;
-            });
+        });
     }
 
-    async isVehicleOwner(player_id, owner) {
+    syncAll() {
+        return new Promise(async (resolve, reject) => {
+            mp.vehicles.forEach((vehicle) => {
+                this.update(vehicle, {});
+            });
+            return resolve(true);
+        });
+    }
+
+    delete(id) {
+        return new Promise(async (resolve, reject) => {
+            await pg_vehicles
+                .destroy({
+                    where: {
+                        veh_id: id,
+                    },
+                })
+                .then(() => {
+                    return resolve(true);
+                })
+                .catch((err) => {
+                    log({
+                        message: err,
+                        isFatal: true,
+                    });
+                    return reject(false);
+                });
+        });
+    }
+
+    isVehicleOwner(player_id, owner) {
         return player_id === owner;
     }
 
-    async isKeyOwner(player_id, keys) {
+    isKeyOwner(player_id, keys) {
         return keys.indexOf(player_id) !== -1;
     }
 
     getNearVehicles({ pos, range, id }) {
-        let returnVehicle = {};
-        mp.vehicles.forEachInRange(pos, range, (vehicle) => {
-            if (vehicle.getVariable('veh_id') == id) {
-                return (returnVehicle = vehicle);
-            }
+        return new Promise(async (resolve) => {
+            let returnVehicle = {};
+            mp.vehicles.forEachInRange(pos, range, (vehicle) => {
+                if (vehicle.getVariable('veh_id') == id) {
+                    return (returnVehicle = vehicle);
+                }
+            });
+            return resolve(returnVehicle);
         });
-        return returnVehicle;
     }
 
     addToKeys(player_id, veh_id) {
@@ -273,7 +293,59 @@ class VehicleApi {
                 });
         });
     }
-}
 
-const VehicleAPI = new VehicleApi();
-module.exports = VehicleAPI;
+    spawnCar(player, args) {
+        return new Promise(async (resolve, reject) => {
+            const hasPermissions = await PermissionSystem.hasPermissions(player, ['car_spawn']);
+            if (!hasPermissions) return reject(false);
+
+            try {
+                args = args.split(' ');
+            } catch (err) {
+                return;
+            }
+
+            const veh = args[0];
+
+            const prim = args[1] || 0;
+            const sec = args[2] || 0;
+
+            try {
+                if (veh === 'repair') {
+                    return resolve(player.vehicle.repair());
+                }
+            } catch (err) {
+                player.notify('~r~Du bist in keinem Auto!');
+                return resolve(true);
+            }
+
+            const newVeh = mp.vehicles.new(mp.joaat(veh), player.position, {
+                numberPlate: player.name,
+                color: [prim, sec],
+                heading: player.heading,
+                engine: false,
+            });
+            generellAPI.saveLocalVar(player, {
+                'Player.Tmp.Admin.Veh': newVeh,
+            });
+
+            player.putIntoVehicle(newVeh, 0);
+
+            player.call('Client:Vehicle:SetEngine', [false]);
+
+            await this.save(newVeh, {
+                veh_name: veh,
+                veh_owner: player.socialClub,
+                veh_keys: [player.getVariable('playerId')],
+                veh_state: true,
+                veh_fuel: 100,
+                veh_type: 'benzin',
+                veh_maxfuel: 150,
+            });
+        });
+    }
+
+    removeDirt(player) {
+        player.call('Client:Vehicle:RemoveDirtLevel', [player.vehicle]);
+    }
+};

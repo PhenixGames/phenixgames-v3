@@ -14,9 +14,9 @@ function Remove_all_marker_of_fuelstation() {
     Loadedmarker = [];
 }
 
-mp.events.add('Fuelstation:Spawn:Marker', (pos, size, id) => {
+mp.events.add('Client:Fuelstation:Marker:SpawnOne', (pos, size, id) => {
     Spawn_Marker_Of_Fuelstation(pos, size, id);
 });
-mp.events.add('Fuelstation:Destroy:Markers', () => {
+mp.events.add('Client:Fuelstation:Marker:DestroyAll', () => {
     Remove_all_marker_of_fuelstation();
 });

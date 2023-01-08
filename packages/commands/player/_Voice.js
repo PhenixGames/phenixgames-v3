@@ -1,3 +1,3 @@
 mp.events.addCommand('vrange', async (player, range) => {
-    player.call('Player:set:Rage:Voice', range);
+    player.call('Client:Voice:SetRange', range);
 });
