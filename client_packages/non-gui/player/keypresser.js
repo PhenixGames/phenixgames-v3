@@ -57,29 +57,3 @@ mp.keys.bind(0x7b, true, function () {
     mp.gui.chat.activate(Chatbool);
     mp.gui.chat.show(Chatbool);
 });
-
-var isPlayerHealing = false;
-
-//, Medikit
-mp.keys.bind(0xbc, true, function () {
-    if (isPlayerHealing) return;
-    else {
-        isPlayerHealing = true;
-        setTimeout(() => {
-            mp.events.callRemote('Server:Activate:Medikit');
-            isPlayerHealing = false;
-        }, 2000);
-    }
-});
-
-//. Weste
-mp.keys.bind(0xbe, true, function () {
-    if (isPlayerHealing) return;
-    else {
-        isPlayerHealing = true;
-        setTimeout(() => {
-            mp.events.callRemote('Server:Activate:Weste');
-            isPlayerHealing = false;
-        }, 2000);
-    }
-});
