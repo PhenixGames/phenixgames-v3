@@ -15,8 +15,8 @@ mp.events.addCommand('aduty', async (player) => {
             Aduty: false,
         });
 
-        player.call('Set:God', [false]);
-        player.call('Change:Admin:Duty:Value:On:Client', [false]);
+        player.call('Client:Admin:setGod', [false]);
+        player.call('Client:Admin:changeDuty', [false]);
 
         const user = await AccountAPI.get(player.getVariable('playerId'));
         player.name = user.firstname + ' ' + user.lastname;
@@ -27,8 +27,8 @@ mp.events.addCommand('aduty', async (player) => {
             Aduty: true,
         });
 
-        player.call('Set:God', [true]);
-        player.call('Change:Admin:Duty:Value:On:Client', [true]);
+        player.call('Client:Admin:setGod', [true]);
+        player.call('Client:Admin:changeDuty', [true]);
 
         player.alpha = PermissionSystem.getAdminAlpha();
         player.name = player.name;
@@ -36,7 +36,7 @@ mp.events.addCommand('aduty', async (player) => {
 
     const noClip = await PermissionSystem.hasPermissions(player, ['no_clip']);
     if (noClip) {
-        player.call('Player:Admin:Duty:noclip');
+        player.call('Client:Admin:noClip');
     }
 
     const userRole = await AccountAPI.getRole(player.getVariable('playerId'));
@@ -57,6 +57,6 @@ mp.events.add('playerExitVehicle', (player, vehicle) => {
     }
 });
 
-mp.events.add('Get:Shot:Info:to:Admin', (player, admin, targetpos, targetEntity) => {
-    admin.call('Admin:draw:shot:line', [player, targetpos, targetEntity]);
+mp.events.add('Server:Admin:drawShotLine', (player, admin, targetpos, targetEntity) => {
+    admin.call('Client:Admin:drawShotLine', [player, targetpos, targetEntity]);
 });

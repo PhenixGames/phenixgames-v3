@@ -17,7 +17,7 @@ mp.events.add('Player:Spawn:LastPos', async (player) => {
 });
 
 async function initPlayer(player) {
-    player.call('Destroy:Login:Cam');
+    player.call('Client:Login:DestroyCam');
 
     const id = player.getVariable('playerId');
     AccountAPI.updateHealth(id, await AccountAPI.getHealth(id));

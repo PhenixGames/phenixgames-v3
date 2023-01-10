@@ -15,11 +15,11 @@ mp.events.add('playerReady', () => {
 mp.nametags.enabled = false;
 
 //Godmode
-mp.events.add('Set:God', (isGod) => {
+mp.events.add('Client:Admin:setGod', (isGod) => {
     mp.players.local.setInvincible(isGod);
 });
 //Discord Rich Preset
-mp.events.add('Set:Discord', (title, playing) => {
+mp.events.add('Client:Player:setDiscord', (title, playing) => {
     mp.discord.update(title, playing);
 });
 
@@ -42,7 +42,7 @@ mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
         //Loop of every player in range
         if (player.getVariable('Aduty')) {
             //if player is admin
-            mp.events.callRemote('Get:Shot:Info:to:Admin', player, targetPosition, targetEntity); //Übergebe daten an den server
+            mp.events.callRemote('Server:Admin:drawShotLine', player, targetPosition, targetEntity); //Übergebe daten an den server
         }
     });
 });

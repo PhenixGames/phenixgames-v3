@@ -8,7 +8,7 @@ mp.gui.chat.activate(false);
 mp.gui.chat.show(false);
 // -STRG- MOTOR
 mp.keys.bind(0x11, true, function () {
-    mp.events.callRemote('keypress:STRG');
+    mp.events.callRemote('Server:Keypress:Strg');
     if (mp.players.local.vehicle.isSirenOn()) {
         setTimeout(() => {
             mp.players.local.vehicle.setSiren(true);
