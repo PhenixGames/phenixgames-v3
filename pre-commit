@@ -2,11 +2,11 @@
 FILES=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g')
 [ -z "$FILES" ] && exit 0
 
-PRETTY_CHANGES=$(echo "$FILES" | xargs ./node_modules/.bin/prettier --ignore-unknown --list-different)
+PRETTIER_CHANGES=$(echo "$FILES" | xargs ./node_modules/.bin/prettier --ignore-unknown --list-different)
 
-if [ -n "$PRETTY_CHANGES" ]; then
+if [ -n "$PRETTIER_CHANGES" ]; then
   echo "Prettier found Prettier changes in the following files:"
-  echo "$PRETTY_CHANGES"
+  echo "$PRETTIER_CHANGES"
   echo "I have fixed them for you. Please review and commit again."
   exit 1
 fi
