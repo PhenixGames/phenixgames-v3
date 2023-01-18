@@ -2,10 +2,13 @@
 FILES=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g')
 [ -z "$FILES" ] && exit 0
 
-# Prettify all selected files
-echo "$FILES" | xargs ./node_modules/.bin/prettier --ignore-unknown --write
+PRETTY_CHANGES=$(echo "$FILES" | xargs ./node_modules/.bin/prettier --ignore-unknown --list-different)
 
-# Add back the modified/prettified files to staging
-echo "$FILES" | xargs git add
+if [ -n "$PRETTY_CHANGES" ]; then
+  echo "Prettier found Prettier changes in the following files:"
+  echo "$PRETTY_CHANGES"
+  echo "I have fixed them for you. Please review and commit again."
+  exit 1
+fi
 
 exit 0
