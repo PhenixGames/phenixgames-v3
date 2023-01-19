@@ -7,6 +7,7 @@ require('./gui/inventory/');
 require('./gui/HUD/');
 require('./gui/gasstation/');
 require('./gui/punishmentscreen/');
+requier('./gui/admin/');
 
 require('./non-gui/vehicle/');
 require('./non-gui/noclip/');
