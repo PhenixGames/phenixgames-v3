@@ -2,11 +2,10 @@ const debug = require('../../../_assets/json/debug/debug.json').account;
 
 const generellAPI = require('../allgemein/');
 const PermissionSystem = require('../playerAPI/PermissionSystem');
-const MoneyAPI = require('../moneyAPI/MoneyApi');
 const AccountAPI = require('./AcountAPI');
 const { InventoryApi } = require('../InventoryAPI/InventoryApi');
 
-mp.events.add('RegisterAccount', async (player, password) => {
+mp.events.add('Server:Login:Register', async (player, password) => {
     await AccountAPI.save(player.socialClub, password);
 
     const user = await AccountAPI.getByUsername(player.socialClub);
@@ -58,9 +57,9 @@ mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
 
     player.notify(`Erfolgreich registriert!`);
 
-    player.call('Player:InGameName:Choose:Succes:close:Windows');
-    player.call('Login:Succes:close:Windows');
-    player.call('Destroy:Login:Cam');
+    player.call('Client:Namechooser:Close');
+    player.call('Client:Login:Close');
+    player.call('Client:Login:DestroyCam');
 
     AccountAPI.spawnAirport(player);
 

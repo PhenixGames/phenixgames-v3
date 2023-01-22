@@ -14,10 +14,10 @@ const database = require('../../_db/db');
 mp.events.delayInitialization = true;
 (async () => {
     if (debug.init) {
-        await delay(1);
-        console.log('[PhenixGames] Initializing... no delay');
-    } else {
         await delay(5000);
+        console.log('[PhenixGames] Initializing... 5 seconds delay');
+    } else {
+        await delay(15000);
         console.log('[PhenixGames] Initializing... 15 seconds delay');
     }
 

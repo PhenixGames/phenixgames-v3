@@ -3,9 +3,8 @@
 mp.events.addCommand('cloth', (player, id) => {
     if (player.getVariable('isTeam')) {
         if (id == undefined) {
-            var i = 0;
+            let i = 0;
             setInterval(() => {
-                //8
                 player.setClothes(11, i, 0, 0);
                 console.log(player.getClothes(11));
                 console.log('^ ' + i);

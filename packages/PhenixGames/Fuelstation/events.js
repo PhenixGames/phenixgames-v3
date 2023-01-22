@@ -18,11 +18,11 @@ mp.events.add('playerExitColshape', (player, shape) => {
 
     FAPI.removeMarkers(player);
 
-    player.setVariable('isnearFuelstation', false);
+    player.setVariable('isNearFuelstation', false);
     player.setVariable('Fuelstation_id', null);
 });
 
-mp.events.add('Server:Request:Data:Fuelstation', async (player) => {
+mp.events.add('Server:Fuelstation:RequestData', async (player) => {
     const fuelstation = await FAPI.getFuelStation({
         stationid: player.getVariable('Fuelstation_id'),
     });
@@ -52,10 +52,10 @@ mp.events.add('Server:Request:Data:Fuelstation', async (player) => {
         cars: cars,
     };
 
-    player.call('Player:Init:Gasstation', [JSON.stringify(items)]);
+    player.call('Player:Gasstation:Init', [JSON.stringify(items)]);
     if (debug) console.log(items);
 });
 
-mp.events.add('Server:Car:Refuel', async (player, carId, newfuel, price) => {
+mp.events.add('Server:Fuelstation:CarRefuel', async (player, carId, newfuel, price) => {
     return await FAPI.fuel({ player, newfuel, id: carId, price });
 });

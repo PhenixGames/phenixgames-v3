@@ -1,10 +1,10 @@
 const config = require('_config/config').config;
 
-var hudBrowser;
+let hudBrowser;
 let active = false;
-var modded_Speed = 1;
-var Admin = false;
-var linearray = [];
+let modded_Speed = 1;
+let isAdmin = false;
+let linearray = [];
 
 mp.events.add('Player:ActivateHUD', () => {
     hudBrowser = mp.browsers.new(`http://${config.domain}:8080/#/hud`);
@@ -13,8 +13,8 @@ mp.events.add('Player:ActivateHUD', () => {
     active = true;
 });
 
-mp.events.add('Change:Admin:Duty:Value:On:Client', (state) => {
-    Admin = state;
+mp.events.add('Client:Admin:changeDuty', (state) => {
+    isAdmin = state;
 });
 
 mp.events.add('playerEnterVehicle', (player, vehicle, seat) => {
@@ -29,7 +29,7 @@ mp.events.add('playerLeaveVehicle', (player, vehicle) => {
 
 //Render For Car
 mp.events.add('render', () => {
-    if (Admin) {
+    if (isAdmin) {
         //Ist Er im Admin Dienst
         //Daten Vom Fahrzeug Rendern
         mp.vehicles.forEachInStreamRange((vehicle) => {
@@ -271,7 +271,7 @@ mp.keys.bind(0x73, true, function () {
     }
 });
 //Hier wird die line vom schuss gemahlt
-mp.events.add('Admin:draw:shot:line', (player, targetpos, targetEntity) => {
+mp.events.add('Client:Admin:drawShotLine', (player, targetpos, targetEntity) => {
     let r = 0;
     let g = 0;
     let b = 0;
@@ -286,7 +286,7 @@ mp.events.add('Admin:draw:shot:line', (player, targetpos, targetEntity) => {
             r = 255;
         }
     }
-    var item = [
+    const item = [
         Number(player.position.x),
         Number(player.position.y),
         Number(player.position.z + 0.5),
@@ -306,14 +306,14 @@ mp.events.add('Admin:draw:shot:line', (player, targetpos, targetEntity) => {
 
 setInterval(() => {
     if (mp.players.local.vehicle) {
-        var vehicle = mp.players.local.vehicle;
+        const vehicle = mp.players.local.vehicle;
 
-        var speed = vehicle.getSpeed();
+        let speed = vehicle.getSpeed();
         speed = speed * 3.6;
-        mp.events.callRemote('Set:Variable:Of:ent', speed);
+        mp.events.callRemote('Client:Vehicle:setVariable', speed);
     }
 }, 500);
 
-mp.events.add('Player:HUD:Update:Money', (money) => {
+mp.events.add('Client:Money:Update', (money) => {
     hudBrowser.execute("gui.hud.setMoney('" + money + "');");
 });
