@@ -1,18 +1,15 @@
 const config = require('_config/config').config;
 
-var gasBrowser;
-var isBrowserOpen = false;
+let gasBrowser;
+let isBrowserOpen = false;
 
 exports.interacteGasstation = () => {
-    if (mp.players.local.getVariable('hasBrowserOpen') || mp.players.local.isTypingInTextChat)
+    if (mp.players.local.getVariable('hasBrowserOpen') || mp.players.local.isTypingInTextChat) {
         return;
-
-    if (isBrowserOpen) {
-        closeBrowser();
-    } else {
-        openBrowser();
     }
+    return isBrowserOpen ? closeBrowser() : openBrowser();
 };
+
 function closeBrowser() {
     if (isBrowserOpen) {
         gasBrowser.destroy();
@@ -31,8 +28,8 @@ function openBrowser() {
     }
 }
 
-mp.events.add('uiInitGasStation', () => {
-    mp.events.callRemote('Server:Request:Data:Fuelstation');
+mp.events.add('Ui:Fuelstation:Init', () => {
+    mp.events.callRemote('Server:Fuelstation:RequestData');
 });
 
 /**
@@ -43,7 +40,7 @@ mp.events.add('uiInitGasStation', () => {
     max: ''
  }, {}, ...]
 */
-mp.events.add('Player:Init:Gasstation', (items) => {
+mp.events.add('Player:Gasstation:Init', (items) => {
     gasBrowser.execute("gui.gasstation.initGasStation('" + items + "');");
 });
 
@@ -51,14 +48,14 @@ mp.events.add('Player:Gasstation:NotFound', (items) => {
     gasBrowser.execute('gui.gasstation.notFound();');
 });
 
-mp.events.add('Player:Browser:Fuelstation:close', () => {
+mp.events.add('Player:Fuelstation:BrowserClose', () => {
     closeBrowser();
 });
 
-mp.events.add('carRefuel', (carId, carFuel, price) => {
+mp.events.add('Client::CarRefuel', (carId, carFuel, price) => {
     if (isBrowserOpen) {
         closeBrowser();
-        mp.events.callRemote('Server:Car:Refuel', carId, carFuel, price);
+        mp.events.callRemote('Server:Fuelstation:CarRefuel', carId, carFuel, price);
         return true;
     }
 });

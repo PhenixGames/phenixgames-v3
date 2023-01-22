@@ -1,7 +1,7 @@
 const config = require('_config/config').config;
 
-var invBrowser;
-var isInvOpen = false;
+let invBrowser;
+let isInvOpen = false;
 
 exports.interacteInventory = () => {
     if (mp.players.local.getVariable('hasBrowserOpen') || mp.players.local.isTypingInTextChat)

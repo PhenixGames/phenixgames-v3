@@ -8,7 +8,7 @@ mp.gui.chat.activate(false);
 mp.gui.chat.show(false);
 // -STRG- MOTOR
 mp.keys.bind(0x11, true, function () {
-    mp.events.callRemote('keypress:STRG');
+    mp.events.callRemote('Server:Keypress:Strg');
     if (mp.players.local.vehicle.isSirenOn()) {
         setTimeout(() => {
             mp.players.local.vehicle.setSiren(true);
@@ -25,7 +25,7 @@ mp.keys.bind(0x58, true, function () {
 
 // -E-
 mp.keys.bind(0x45, true, function () {
-    if (mp.players.local.getVariable('isnearFuelstation') && !mp.players.local.vehicle) {
+    if (mp.players.local.getVariable('isNearFuelstation') && !mp.players.local.vehicle) {
         return interacteGasstation();
     }
 });
