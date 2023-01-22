@@ -6,8 +6,8 @@ PRETTIER_CHANGES=$(echo "$FILES" | xargs ./node_modules/.bin/prettier --ignore-u
 
 if [ -n "$PRETTIER_CHANGES" ]; then
   echo "Prettier found Prettier changes in the following files:"
-  echo "$PRETTIER_CHANGES"
-  echo "I have fixed them for you. Please review and commit again."
+  echo "$PRETTIER_CHANGES" | sed 's|\\ | |g'
+  echo "Please run prettier on your changes before committing." >&2
   exit 1
 fi
 
