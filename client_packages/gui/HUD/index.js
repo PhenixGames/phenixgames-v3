@@ -266,7 +266,7 @@ mp.events.add('Set:ModdedSpeed', (speed) => {
 //F4
 mp.keys.bind(0x73, true, function () {
     mp.voiceChat.muted = !mp.voiceChat.muted;
-    
+
     hudBrowser.execute(`gui.hud.voicerange.manageVoice("${mp.voiceChat.muted ? false : true}");`); //inaktiv
 });
 
