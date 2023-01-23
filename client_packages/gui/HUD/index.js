@@ -1,3 +1,5 @@
+require('./idCard');
+
 const config = require('_config/config').config;
 
 let hudBrowser;
@@ -261,15 +263,13 @@ mp.events.add('Set:ModdedSpeed', (speed) => {
     modded_Speed = Number(speed);
 });
 
+//F4
 mp.keys.bind(0x73, true, function () {
-    //F4
     mp.voiceChat.muted = !mp.voiceChat.muted;
-    if (!mp.voiceChat.muted) {
-        hudBrowser.execute(`gui.hud.manageVoice("${false}");`); //inaktiv
-    } else {
-        hudBrowser.execute(`gui.hud.manageVoice("${true}");`); //Aktiv
-    }
+    
+    hudBrowser.execute(`gui.hud.voicerange.manageVoice("${mp.voiceChat.muted ? false : true}");`); //inaktiv
 });
+
 //Hier wird die line vom schuss gemahlt
 mp.events.add('Client:Admin:drawShotLine', (player, targetpos, targetEntity) => {
     let r = 0;
