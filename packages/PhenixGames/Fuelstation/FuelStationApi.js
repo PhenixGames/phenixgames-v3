@@ -165,7 +165,7 @@ class FuelStationApi {
                     fuel: vehicle.getVariable('veh_fuel'),
                     type: vehicle.getVariable('veh_type'),
                     enigne: vehicle.engine,
-                    max: vehicle.getVariable('veh_max') || VehicleAPI.defaultFuel,
+                    max: vehicle.getVariable('veh_max') || new VehicleAPI().defaultFuel,
                 });
             }
         });
@@ -176,7 +176,7 @@ class FuelStationApi {
         const hasMoney = MoneyApi.hasHand(player.getVariable('playerId'), price);
         if (!hasMoney) return player.notify('~r~Du hast nicht genug Geld dabei!');
 
-        const vehicle = VehicleAPI.getNearVehicles({
+        const vehicle = new VehicleAPI().getNearVehicles({
             pos: player.position,
             range: 10,
             id,

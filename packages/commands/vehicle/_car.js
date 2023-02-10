@@ -1,16 +1,16 @@
 const VehicleApi = require('../../PhenixGames/vehicle/VehicleApi');
 
 mp.events.addCommand('car', (player, args) => {
-    VehicleApi.spawnCar(player, args);
+    new VehicleApi().spawnCar(player, args);
 });
 
 mp.events.addCommand('veh', (player, args) => {
-    VehicleApi.spawnCar(player, args);
+    new VehicleApi().spawnCar(player, args);
 });
 
 mp.events.addCommand('clean', (player) => {
     if (!player.vehicle) return;
-    VehicleApi.removeDirt(player);
+    new VehicleApi().removeDirt(player);
 });
 mp.events.addCommand('delVeh', async (player, args) => {
     try {
@@ -27,7 +27,7 @@ mp.events.addCommand('delVeh', async (player, args) => {
         veh_id = player.vehicle.getVariable('veh_id');
     }
 
-    await VehicleApi.delete(veh_id)
+    await new VehicleApi().delete(veh_id)
         .then(() => {
             mp.vehicles.forEach((vehicle) => {
                 if (vehicle.getVariable('veh_id') == veh_id) {

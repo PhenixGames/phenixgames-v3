@@ -7,7 +7,7 @@ mp.events.add('Server:Keypress:Strg', (player) => {
     try {
         const veh = player.vehicle;
 
-        const db_veh = VehicleAPI.get(veh.getVariable('veh_id'));
+        const db_veh = new VehicleAPI().get(veh.getVariable('veh_id'));
         if (!db_veh) return;
         if (!db_veh.isOwner(player.id, db_veh.veh_owner)) return;
         if (!db_veh.isKeyOwner(player.id, db_veh.veh_keys)) return;
