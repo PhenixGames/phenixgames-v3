@@ -27,7 +27,8 @@ mp.events.addCommand('delVeh', async (player, args) => {
         veh_id = player.vehicle.getVariable('veh_id');
     }
 
-    await new VehicleApi().delete(veh_id)
+    await new VehicleApi()
+        .delete(veh_id)
         .then(() => {
             mp.vehicles.forEach((vehicle) => {
                 if (vehicle.getVariable('veh_id') == veh_id) {
