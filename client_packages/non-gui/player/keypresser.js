@@ -57,3 +57,14 @@ mp.keys.bind(0x7b, true, function () {
     mp.gui.chat.activate(Chatbool);
     mp.gui.chat.show(Chatbool);
 });
+
+// F3 - Admin(Show/hide entity boxes)
+let showEntityBoxes = false;
+mp.keys.bind(0x72, true, function () {
+    showEntityBoxes = !showEntityBoxes;
+    if (showEntityBoxes) {
+        mp.events.call('Client:Admin:ShowEntityBoxFromPlayers');
+    } else {
+        mp.events.call('Client:Admin:HideEntityBoxFromPlayers');
+    }
+});
