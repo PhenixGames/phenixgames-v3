@@ -5,7 +5,7 @@
     "private": true,
     "scripts": {
         "dockerStart": "./ragemp-server",
-        "start": "docker compose up -d --build && docker logs -f rage",
+        "start": "docker compose up -d && docker logs -f rage",
         "stop": "docker compose down",
         "restart": "npm run stop && npm run start",
         "format": "docker run --rm -v $(pwd):/app -w /app node:18.8 sh -c \"npm install -g prettier && prettier --write .\"",
