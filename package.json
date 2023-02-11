@@ -5,9 +5,12 @@
     "private": true,
     "scripts": {
         "dockerStart": "./ragemp-server",
-        "start": "docker compose up -d && docker logs -f rage",
-        "stop": "docker compose down",
+        "start": "docker compose up -d && npm run vueStart && docker logs -f rage",
+        "stop": "docker compose down && npm run vueStop",
         "restart": "npm run stop && npm run start",
+        "vueStart": "cd phenixgames-v3-vue && docker compose up -d",
+        "vueStop": "cd phenixgames-v3-vue && docker compose down",
+        "vueRestart": "npm run vueStop && npm run vueStart",
         "format": "docker run --rm -v %cd%:/app -w /app node:18.8 sh -c \"npm install -g prettier && prettier --write .\"",
         "check": "docker run --rm -v %cd%:/app -w /app node:18.8 sh -c \"npm install -g prettier && prettier --check .\""
     },
