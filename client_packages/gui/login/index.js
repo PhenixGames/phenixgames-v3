@@ -4,7 +4,7 @@ mp.game.ui.displayHud(false);
 mp.gui.chat.show(false);
 
 let mainBrowser;
-mp.events.add('Client:Login:Open', (isLogin) => {
+mp.events.add('Player:Login:Open', (isLogin) => {
     mp.events.callRemote('Server:Browser:PlayerInteracte', true);
     const config = require('_config/config').config;
     mainBrowser = mp.browsers.new(`http://${config.domain}:8080/#/login?isLogin=${isLogin}`);
@@ -14,7 +14,7 @@ mp.events.add('Client:Login:Open', (isLogin) => {
 });
 
 let loginCam;
-mp.events.add('Client:Login:CreateCam', () => {
+mp.events.add('Player:Login:CreateCam', () => {
     loginCam = mp.cameras.new(
         'default',
         new mp.Vector3(-100, -966, 296),
@@ -27,13 +27,13 @@ mp.events.add('Client:Login:CreateCam', () => {
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 });
 
-mp.events.add('Client:Login:DestroyCam', () => {
+mp.events.add('Player:Login:DestroyCam', () => {
     loginCam.setActive(false);
     mp.game.cam.renderScriptCams(false, false, 0, false, false);
     loginCam.destroy();
 });
 
-mp.events.add('Client:Login:WrongPassword', () => {
+mp.events.add('Player:Login:WrongPassword', () => {
     mainBrowser.execute('gui.login.wrongPassword();');
 });
 
@@ -45,16 +45,16 @@ mp.events.add('Ui:Login:Register', (password) => {
     mp.events.callRemote('Server:Login:Register', password);
 });
 
-mp.events.add('Client:Login:Close', () => {
+mp.events.add('Player:Login:Close', () => {
     mp.events.callRemote('Server:Browser:PlayerInteracte', false);
 
     mp.events.remove([
-        'Client:Login:Close',
+        'Player:Login:Close',
         'Ui:Login:Login',
         'Ui:Login:Register',
-        'Client:Login:WrongPassword',
-        'Client:Login:CreateCam',
-        'Client:Login:Open',
+        'Player:Login:WrongPassword',
+        'Player:Login:CreateCam',
+        'Player:Login:Open',
     ]);
     mainBrowser.destroy();
     mp.gui.cursor.show(false, false);

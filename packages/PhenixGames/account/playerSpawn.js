@@ -13,13 +13,13 @@ mp.events.add('Player:Spawn:LastPos', async (player) => {
     const lastPos = await AccountAPI.getPos(player);
     initPlayer(player);
 
-    if(!lastPos) AccountAPI.spawnAirport(player);
+    if (!lastPos) AccountAPI.spawnAirport(player);
     else AccountAPI.changePos(player, lastPos);
     return;
 });
 
 async function initPlayer(player) {
-    player.call('Client:Login:DestroyCam');
+    player.call('Player:Login:DestroyCam');
 
     const id = player.getVariable('playerId');
     AccountAPI.updateHealth(id, await AccountAPI.getHealth(id));
