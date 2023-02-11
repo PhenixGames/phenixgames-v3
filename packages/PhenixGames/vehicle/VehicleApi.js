@@ -115,7 +115,7 @@ module.exports = class VehicleApi {
                         veh_owner: veh_owner,
                         veh_keys: veh_keys,
                         veh_state: veh_state,
-                        veh_pos: JSON.parse(veh_pos),
+                        veh_pos: veh_pos,
                         veh_rot: veh_rot,
                         veh_fuel: veh_fuel,
                         veh_prim_color: veh_prim,
@@ -130,13 +130,13 @@ module.exports = class VehicleApi {
                     }
                 )
                 .then((res) => {
+                    return resolve(true);
+                })
+                .catch((err) => {
                     log({
                         message: err,
                         isFatal: true,
                     });
-                    return resolve(true);
-                })
-                .catch((err) => {
                     return reject(false);
                 });
         });
@@ -151,7 +151,7 @@ module.exports = class VehicleApi {
                         for (let i in res) {
                             const newVeh = mp.vehicles.new(
                                 mp.joaat(res[i].veh_name),
-                                JSON.parse(res[i].veh_pos),
+                                res[i].veh_pos,
                                 {
                                     heading: res[i].veh_rot,
                                     numberPlate: res[i].veh_owner,
@@ -162,7 +162,7 @@ module.exports = class VehicleApi {
                                 veh_id: res[i].veh_id,
                                 veh_name: res[i].veh_name,
                                 veh_owner: res[i].veh_owner,
-                                veh_keys: JSON.parse(res[i].veh_keys),
+                                veh_keys: res[i].veh_keys,
                                 veh_state: res[i].veh_state,
                                 veh_pos: res[i].veh_pos,
                                 veh_rot: res[i].veh_rot,

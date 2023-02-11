@@ -14,11 +14,11 @@ const VehicleApi = require('../vehicle/VehicleApi');
 mp.events.delayInitialization = true;
 (async () => {
     if (debug.init) {
-        await delay(5000);
         console.log('[PhenixGames] Initializing... 5 seconds delay');
+        await delay(5000);
     } else {
-        await delay(15000);
         console.log('[PhenixGames] Initializing... 15 seconds delay');
+        await delay(15000);
     }
 
     mp.events.delayInitialization = false;
