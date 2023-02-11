@@ -1,8 +1,10 @@
-mp.events.add('Client:Admin:ShowEntityBoxFromPlayers', (player) => {
+mp.events.add('Player:Admin:ShowEntityBoxFromPlayers', (player) => {
+    new EntityDimension(mp.players.local.vehicle);
+
     mp.events.add('render', drawBoundingBoxes);
 });
 
-mp.events.add('Client:Admin:HideEntityBoxFromPlayers', (player) => {
+mp.events.add('Player:Admin:HideEntityBoxFromPlayers', (player) => {
     mp.events.remove(['render']);
 });
 

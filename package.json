@@ -5,12 +5,11 @@
     "private": true,
     "scripts": {
         "dockerStart": "./ragemp-server",
-        "start": "npm run rm_image && docker compose up -d --build && docker logs -f rage",
+        "start": "docker compose up -d && docker logs -f rage",
         "stop": "docker compose down",
-        "restart": "npm run stop && npm run rm_image && npm run start",
-        "rm_image": "docker image rm -f phenixgames-v3_vue && docker image rm -f phenixgames-v3_rage && docker image rm -f phenixgames-v3-rage && docker image rm -f phenixgames-v3-vue",
-        "format": "prettier --write . --bracket-same-line=true",
-        "check": "prettier --check . --bracket-same-line=true"
+        "restart": "npm run stop && npm run start",
+        "format": "docker run --rm -v $(pwd):/app -w /app node:18.8 sh -c \"npm install -g prettier && prettier --write .\"",
+        "check": "docker run --rm -v $(pwd):/app -w /app node:18.8 sh -c \"npm install -g prettier && prettier --check .\""
     },
     "repository": {
         "type": "git",
