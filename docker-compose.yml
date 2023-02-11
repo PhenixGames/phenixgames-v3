@@ -50,23 +50,6 @@ services:
         networks:
             - pg_net
 
-    vue:
-        container_name: vue
-        build:
-            context: ./phenixgames-v3-vue
-            dockerfile: ./Dockerfile
-        volumes:
-            - .:/vue
-        ports:
-            - 8080:8080
-        env_file:
-            - .env
-        restart: unless-stopped
-        links:
-            - rage
-        networks:
-            - pg_net
-
     mysql-backup:
         image: fradelg/mysql-cron-backup
         depends_on:
