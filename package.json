@@ -8,8 +8,8 @@
         "start": "docker compose up -d && docker logs -f rage",
         "stop": "docker compose down",
         "restart": "npm run stop && npm run start",
-        "format": "docker run --rm -v $(pwd):/app -w /app node:18.8 sh -c \"npm install -g prettier && prettier --write .\"",
-        "check": "docker run --rm -v $(pwd):/app -w /app node:18.8 sh -c \"npm install -g prettier && prettier --check .\""
+        "format": "docker run --rm -v %cd%:/app -w /app node:18.8 sh -c \"npm install -g prettier && prettier --write .\"",
+        "check": "docker run --rm -v %cd%:/app -w /app node:18.8 sh -c \"npm install -g prettier && prettier --check .\""
     },
     "repository": {
         "type": "git",

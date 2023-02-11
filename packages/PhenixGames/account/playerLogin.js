@@ -8,7 +8,7 @@ mp.events.add('Server:Login:Login', async (player, password) => {
     const user = await AccountAPI.getByUsername(player.socialClub);
 
     if (!user) {
-        return player.call('Client:Login:Open', [false]);
+        return player.call('Player:Login:Open', [false]);
     }
 
     const punishments = await PunishmentsAPI.getPunishment(user.id);
@@ -25,7 +25,7 @@ mp.events.add('Server:Login:Login', async (player, password) => {
         }
     }
     if (AccountAPI.checkPassword(password, user.password) === false) {
-        return player.call('Client:Login:WrongPassword');
+        return player.call('Player:Login:WrongPassword');
     }
 
     PermissionSystem.setPerms(player, user.roleId);
@@ -34,6 +34,6 @@ mp.events.add('Server:Login:Login', async (player, password) => {
     const hasCharacter = character.firstname && character.lastname;
     if (!hasCharacter) return player.call('Client:Namechooser:CreateBrowser');
 
-    player.call('Client:Login:Close');
+    player.call('Player:Login:Close');
     player.call('Player:Spawn:Options');
 });
