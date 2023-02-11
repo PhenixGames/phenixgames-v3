@@ -130,7 +130,7 @@ class Account {
         const user = await this.get(player.getVariable('playerId'));
         if (!user) return [];
         const character = await user.getCharacter();
-        return character.last_pos;
+        return character.last_pos ? character.last_pos : null;
     }
 
     checkPassword(password, dbpassword) {
