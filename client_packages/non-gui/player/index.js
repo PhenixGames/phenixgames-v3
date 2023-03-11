@@ -4,7 +4,7 @@ require('./non-gui/player/weste');
 require('./non-gui/player/_damage');
 
 const colour = { r: 255, g: 0, b: 0 };
-const serverName = process.env.SERVER_NAME;
+const serverName = `PhenixGames`;
 
 mp.events.add('playerReady', () => {
     mp.game.invoke('0xF314CF4F0211894E', 143, colour.r, colour.g, colour.b, 255); // Replace Michael colour
