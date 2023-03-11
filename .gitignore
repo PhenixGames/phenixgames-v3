@@ -20,3 +20,4 @@ _assets/functions/DatabaseBackup/last_backup.json
 phenixgames-v3-vue
 Dockerfile.overwrite
 docker-compose.override.yml
+backups/
