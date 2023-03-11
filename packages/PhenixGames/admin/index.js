@@ -10,33 +10,26 @@ mp.events.addCommand('aduty', async (player) => {
 
     if (!isTeam || !godmode) return;
 
-    if (player.getVariable('Aduty')) {
-        generellAPI.saveLocalVar(player, {
-            Aduty: false,
-        });
+    generellAPI.saveLocalVar(player, {
+        Aduty: !!player.getVariable('Aduty'),
+    });
 
         player.call('Client:Admin:setGod', [false]);
         player.call('Client:Admin:changeDuty', [false]);
 
+    if (player.getVariable('Aduty')) {
         const user = await AccountAPI.get(player.getVariable('playerId'));
         player.name = user.firstname + ' ' + user.lastname;
 
         player.alpha = 255;
     } else {
-        generellAPI.saveLocalVar(player, {
-            Aduty: true,
-        });
-
-        player.call('Client:Admin:setGod', [true]);
-        player.call('Client:Admin:changeDuty', [true]);
-
         player.alpha = PermissionSystem.getAdminAlpha();
         player.name = player.name;
     }
 
     const noClip = await PermissionSystem.hasPermissions(player, ['no_clip']);
     if (noClip) {
-        player.call('Client:Admin:noClip');
+        player.call('Player:Admin:NoClip');
     }
 
     const userRole = await AccountAPI.getRole(player.getVariable('playerId'));
@@ -57,6 +50,6 @@ mp.events.add('playerExitVehicle', (player, vehicle) => {
     }
 });
 
-mp.events.add('Server:Admin:drawShotLine', (player, admin, targetpos, targetEntity) => {
-    admin.call('Client:Admin:drawShotLine', [player, targetpos, targetEntity]);
+mp.events.add('Server:Admin:ShotInfo', (player, admin, targetpos, targetEntity) => {
+    admin.call('Player:Admin:DrawShotLine', [player, targetpos, targetEntity]);
 });

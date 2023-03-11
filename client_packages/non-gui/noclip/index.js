@@ -39,7 +39,7 @@ mp.keys.bind(bindVirtualKeys.F2, true, function () {
     }
 });
 
-mp.events.add('Client:Admin:noClip', () => {
+mp.events.add('Player:Admin:NoClip', () => {
     //Um den Wert Adminduty zu verändern
     Adminduty = !Adminduty;
 });
