@@ -1,20 +1,32 @@
+const { log } = require('../../../_assets/functions/log/logs');
+const VehicleAPI = require('./VehicleApi');
+
 const debug = require('../../../_assets/json/debug/debug.json').vehicle;
 
-mp.events.add('keypress:STRG', (player) => {
+mp.events.add('Server:Keypress:Strg', (player) => {
     try {
-        var veh = player.vehicle;
-        let fuel = veh.getVariable('veh_fuel');
-        if (!fuel == 0) {
-            var speed = veh.getVariable('veh_speed');
-            if (speed >= 5) {
-            } else {
-                veh.engine = !veh.engine;
-                veh.setVariable('veh_engine', veh.engine);
-            }
-        } else {
-            return player.notify('Der Tank des Fahzeuges ist leer');
+        const veh = player.vehicle;
+
+        if (!veh) return;
+
+        const db_veh = new VehicleAPI().get(veh.getVariable('veh_id'));
+        if (!db_veh) return;
+        if (!db_veh.isOwner(player.id, db_veh.veh_owner)) return;
+        if (!db_veh.isKeyOwner(player.id, db_veh.veh_keys)) return;
+
+        const fuel = veh.getVariable('veh_fuel');
+        if (fuel <= 0) return player.notify('Der Tank des Fahzeuges ist leer');
+
+        const speed = veh.getVariable('veh_speed');
+        if (speed <= 5) {
+            veh.engine = !veh.engine;
+            veh.setVariable('veh_engine', veh.engine);
         }
     } catch (err) {
+        log({
+            message: err,
+            isFatal: true,
+        });
         return;
     }
 });
@@ -31,9 +43,9 @@ mp.events.add('playerExitVehicle', (player, vehicle) => {
 
 setInterval(() => {
     mp.vehicles.forEach((veh) => {
-        var speed = veh.getVariable('veh_speed');
-        var engine = veh.getVariable('veh_engine');
-        let fuel = veh.getVariable('veh_fuel');
+        const speed = veh.getVariable('veh_speed');
+        const engine = veh.getVariable('veh_engine');
+        const fuel = veh.getVariable('veh_fuel');
         let amount = 0;
         if (!engine) return;
         if (!speed == 0) {
@@ -41,10 +53,11 @@ setInterval(() => {
         } else {
             amount = 0.01;
         }
-        RemovefuelfromVehicle(veh, amount, fuel);
+        removeFuelFromVehicle(veh, amount, fuel);
     });
 }, 1000);
-function RemovefuelfromVehicle(veh, amount, fuel) {
+
+function removeFuelFromVehicle(veh, amount, fuel) {
     if (fuel <= amount) {
         veh.engine = false;
         veh.setVariable('veh_engine', veh.engine);
@@ -54,8 +67,8 @@ function RemovefuelfromVehicle(veh, amount, fuel) {
     }
     veh.setVariable('veh_fuel', fuel);
 }
-mp.events.add('Set:Variable:Of:ent', (player, speed) => {
-    var veh = player.vehicle;
+mp.events.add('Client:Vehicle:setVariable', (player, speed) => {
+    const veh = player.vehicle;
     if (veh) {
         veh.setVariable('veh_speed', speed);
     }

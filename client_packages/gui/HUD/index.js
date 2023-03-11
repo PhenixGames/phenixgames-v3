@@ -100,11 +100,11 @@ mp.keys.bind(0x73, true, function () {
 
 setInterval(() => {
     if (mp.players.local.vehicle) {
-        var vehicle = mp.players.local.vehicle;
+        const vehicle = mp.players.local.vehicle;
 
-        var speed = vehicle.getSpeed();
+        let speed = vehicle.getSpeed();
         speed = speed * 3.6;
-        mp.events.callRemote('Set:Variable:Of:ent', speed);
+        mp.events.callRemote('Client:Vehicle:setVariable', speed);
     }
 }, 500);
 

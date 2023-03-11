@@ -1,6 +1,6 @@
 FROM node:18.8.0
 
-WORKDIR /ragemp
+WORKDIR /rage
 
 COPY package.json ./
 

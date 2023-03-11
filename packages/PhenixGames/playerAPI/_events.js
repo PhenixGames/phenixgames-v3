@@ -22,6 +22,6 @@ mp.events.add('Server:Activate:Weste', (player) => {
     player.armour = 100;
 });
 
-mp.events.add('Server:Player:interacteBrowser', (player, hasOpen) => {
+mp.events.add('Server:Browser:PlayerInteracte', (player, hasOpen) => {
     player.setVariable('hasBrowserOpen', hasOpen);
 });

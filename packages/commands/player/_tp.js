@@ -37,66 +37,81 @@ mp.events.addCommand('bringveh', async (player, target) => {
     bringveh(player, target);
 });
 
-async function checkTpPermission(player) {
-    const hasPermissions = await PermissionSystem.hasPermissions(player, ['tp_to']);
-    if (!hasPermissions || !player.getVariable('Aduty')) return false;
+function checkTpPermission(player) {
+    return new Promise(async (resolve) => {
+        const hasPermissions = await PermissionSystem.hasPermissions(player, ['tp_to']);
+        if (!hasPermissions || !player.getVariable('Aduty')) return resolve(false);
+        return resolve(true);
+    });
 }
 
-async function tpto(player, target) {
-    var found = false;
-    if (!isNaN(target)) {
-        mp.players.forEach((tg) => {
-            if (tg.getVariable('playerId') == target) {
-                AccountAPI.changePos(player, tg.position, null, JSON.stringify(tg.dimension));
-                return (found = true);
-            }
-        });
-    }
-    if (!found) {
-        return player.notify(`Der Spieler mit der ID ${target} wurde nicht gefunden`);
-    }
+function tpto(player, target) {
+    return new Promise(async (resolve) => {
+        let found = false;
+        if (!isNaN(target)) {
+            mp.players.forEach((tg) => {
+                if (tg.getVariable('playerId') == target) {
+                    AccountAPI.changePos(player, tg.position, null, JSON.stringify(tg.dimension));
+                    return (found = true);
+                }
+            });
+        }
+        if (!found) {
+            player.notify(`Der Spieler mit der ID ${target} wurde nicht gefunden`);
+        }
+        return resolve(true);
+    });
 }
-async function bring(player, target) {
-    var found = false;
-    if (!isNaN(target)) {
-        mp.players.forEach((tg) => {
-            if (tg.getVariable('playerId') == target) {
-                AccountAPI.changePos(tg, player.position, null, player.dimension);
-                return (found = true);
-            }
-        });
-    }
-    if (!found) {
-        return player.notify(`Der Spieler mit der ID ${target} wurde nicht gefunden`);
-    }
-}
-
-async function tptoveh(player, target) {
-    var found = false;
-    if (!isNaN(target)) {
-        mp.vehicles.forEach((tg) => {
-            if (tg.getVariable('veh_id') == target) {
-                AccountAPI.changePos(player, tg.position, null, tg.dimension);
-                return (found = true);
-            }
-        });
-    }
-    if (!found) {
-        return player.notify(`Das Fahrzeug mit der ID ${target} wurde nicht gefunden`);
-    }
+function bring(player, target) {
+    return new Promise(async (resolve) => {
+        let found = false;
+        if (!isNaN(target)) {
+            mp.players.forEach((tg) => {
+                if (tg.getVariable('playerId') == target) {
+                    AccountAPI.changePos(tg, player.position, null, player.dimension);
+                    return (found = true);
+                }
+            });
+        }
+        if (!found) {
+            player.notify(`Der Spieler mit der ID ${target} wurde nicht gefunden`);
+        }
+        return resolve(true);
+    });
 }
 
-async function bringveh(player, target) {
-    var found = false;
-    if (!isNaN(target)) {
-        mp.vehicles.forEach((tg) => {
-            if (tg.getVariable('veh_id') == target) {
-                AccountAPI.changePos(tg, player.position, null, player.dimension);
-                return (found = true);
-            }
-        });
-    }
-    if (!found) {
-        return player.notify(`Das Fahrzeug mit der ID ${target} wurde nicht gefunden`);
-    }
+function tptoveh(player, target) {
+    return new Promise(async (resolve) => {
+        let found = false;
+        if (!isNaN(target)) {
+            mp.vehicles.forEach((tg) => {
+                if (tg.getVariable('veh_id') == target) {
+                    AccountAPI.changePos(player, tg.position, null, tg.dimension);
+                    return (found = true);
+                }
+            });
+        }
+        if (!found) {
+            player.notify(`Das Fahrzeug mit der ID ${target} wurde nicht gefunden`);
+        }
+        return resolve(true);
+    });
+}
+
+function bringveh(player, target) {
+    return new Promise(async (resolve) => {
+        let found = false;
+        if (!isNaN(target)) {
+            mp.vehicles.forEach((tg) => {
+                if (tg.getVariable('veh_id') == target) {
+                    AccountAPI.changePos(tg, player.position, null, player.dimension);
+                    return (found = true);
+                }
+            });
+        }
+        if (!found) {
+            player.notify(`Das Fahrzeug mit der ID ${target} wurde nicht gefunden`);
+        }
+        return resolve(true);
+    });
 }

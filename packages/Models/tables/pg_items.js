@@ -9,6 +9,10 @@ Pg_items.init(
             type: DataTypes.STRING,
             unique: 'name',
         },
+        type: {
+            type: DataTypes.STRING,
+            defaultValue: 'item',
+        },
         isStackable: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,

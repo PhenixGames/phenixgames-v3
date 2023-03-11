@@ -14,8 +14,8 @@ mp.events.addCommand('aduty', async (player) => {
         Aduty: !!player.getVariable('Aduty'),
     });
 
-    player.call('Set:God', [!!player.getVariable('Aduty')]);
-    player.call('Player:Admin:ChangeDuty', [!!player.getVariable('Aduty')]);
+        player.call('Client:Admin:setGod', [false]);
+        player.call('Client:Admin:changeDuty', [false]);
 
     if (player.getVariable('Aduty')) {
         const user = await AccountAPI.get(player.getVariable('playerId'));

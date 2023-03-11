@@ -106,11 +106,11 @@ class FuelStationApi {
     }
 
     spawnMarker({ player, pos, size, id }) {
-        player.call('Fuelstation:Spawn:Marker', [pos, size, id]);
+        player.call('Client:Fuelstation:Marker:SpawnOne', [pos, size, id]);
     }
 
     removeMarkers(player) {
-        player.call('Fuelstation:Destroy:Markers');
+        player.call('Client:Fuelstation:Marker:DestroyAll');
     }
 
     isFuelstation(shape) {
@@ -151,7 +151,7 @@ class FuelStationApi {
                 console.log('Fehler beim Erstellen des Markers: ' + error);
             }
         }
-        player.setVariable('isnearFuelstation', true);
+        player.setVariable('isNearFuelstation', true);
         player.setVariable('Fuelstation_id', shape.getVariable('id'));
     }
 
@@ -165,7 +165,7 @@ class FuelStationApi {
                     fuel: vehicle.getVariable('veh_fuel'),
                     type: vehicle.getVariable('veh_type'),
                     enigne: vehicle.engine,
-                    max: vehicle.getVariable('veh_max') || VehicleAPI.defaultFuel,
+                    max: vehicle.getVariable('veh_max') || new VehicleAPI().defaultFuel,
                 });
             }
         });
@@ -176,7 +176,7 @@ class FuelStationApi {
         const hasMoney = MoneyApi.hasHand(player.getVariable('playerId'), price);
         if (!hasMoney) return player.notify('~r~Du hast nicht genug Geld dabei!');
 
-        const vehicle = VehicleAPI.getNearVehicles({
+        const vehicle = new VehicleAPI().getNearVehicles({
             pos: player.position,
             range: 10,
             id,

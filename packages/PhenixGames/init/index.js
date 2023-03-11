@@ -7,17 +7,17 @@ const { spawn } = require('child_process');
 const { DatabaseBackup } = require('../../../_assets/functions/DatabaseBackup/DatabaseBackup');
 const { FAPI } = require('../Fuelstation/FuelStationApi');
 const IplsAPI = require('../ipls');
-const VehicleAPI = require('../vehicle/VehicleApi');
 const { SyncApi } = require('../SyncAPI/SyncApi');
 const database = require('../../_db/db');
+const VehicleApi = require('../vehicle/VehicleApi');
 
 mp.events.delayInitialization = true;
 (async () => {
     if (debug.init) {
-        await delay(1);
-        console.log('[PhenixGames] Initializing... no delay');
-    } else {
         await delay(5000);
+        console.log('[PhenixGames] Initializing... 5 seconds delay');
+    } else {
+        await delay(15000);
         console.log('[PhenixGames] Initializing... 15 seconds delay');
     }
 
@@ -25,7 +25,7 @@ mp.events.delayInitialization = true;
 })();
 
 mp.events.add('packagesLoaded', async () => {
-    await VehicleAPI.spawnAll();
+    await new VehicleApi().spawnAll();
     weatherAPI.setWeather();
     await FAPI.load();
     IplsAPI.load();
