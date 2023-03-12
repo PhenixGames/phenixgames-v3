@@ -1,4 +1,6 @@
 const debug = require('../../json/debug/debug.json').global;
+const callerId = require('caller-id');
+const caller = callerId.getData();
 
 const error_opts = {
     errorEventName: 'error',
@@ -32,15 +34,16 @@ const database_log = require('simple-node-logger').createRollingFileLogger(datab
  * @returns {undefined}
  */
 module.exports.log = ({ message, isFatal, type }) => {
-    if (debug) return console.log(message);
+    const caller = callerId.getData();
+    if (debug) return console.log(message, `|||||| ${caller.filePath} |||||| ${caller.lineNumber}`);
 
     if (type === 'db') {
-        return database_log.error(message);
+        return database_log.error(message, `|||||| ${caller.filePath} |||||| ${caller.lineNumber}`);
     }
 
     if (isFatal) {
-        return log.error(`${message} |||||| ${new Date()}`);
+        return log.error(`${message} |||||| ${new Date()} |||||| ${caller.filePath} |||||| ${caller.lineNumber}`);
     }
 
-    debug_log.info(`${message} |||||| ${new Date()}`);
+    debug_log.info(`${message} |||||| ${new Date()} |||||| ${caller.filePath} |||||| ${caller.lineNumber}`);
 };
