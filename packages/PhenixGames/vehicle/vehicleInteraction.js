@@ -10,7 +10,12 @@ mp.events.add('Server:Keypress:Strg', async (player) => {
         
         const vehApi = new VehicleAPI();
         const db_veh = await vehApi.get(veh.getVariable('veh_id'));
-        if (!db_veh) return;
+        if (!db_veh) {
+            return log({
+                message: `Vehicle not found in database`,
+                isFatal: false,
+            })
+        }
         if (!vehApi.isVehicleOwner(player.id, db_veh.veh_owner)) return;
         if (!vehApi.isKeyOwner(player.id, db_veh.veh_keys)) return;
 
