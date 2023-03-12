@@ -1,15 +1,16 @@
 //Player:Quit:Lable
 let leftarray = [];
 const drawtext = 'Spieler hat den Server Verlassen';
+let item;
 mp.events.add('Player:Quit:Lable', (drawpos) => {
-    let item = [Number(drawpos.x), Number(drawpos.y), Number(drawpos.z)];
+    item = [Number(drawpos.x), Number(drawpos.y), Number(drawpos.z)];
     leftarray.push(item);
     setTimeout(() => {
         leftarray = leftarray.filter((i) => i !== item);
     }, 10000); //10 Sekunden
 });
 mp.events.add('render', () => {
-    linearray.map((item) => {
+    leftarray.map((item) => {
         mp.game.graphics.drawText(drawtext, new mp.Vector3(item[0], item[1], item[2]), {
             font: 0,
             color: [255, 255, 255, 185],
