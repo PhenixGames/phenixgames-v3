@@ -5,6 +5,5 @@ mp.events.add('playerQuit', (player) => {
 
     mp.players.forEachInRange(player.position, 200, (target) => {
         target.call('Player:Quit:Lable', [player.position]);
-        console.log(player.position)
     });
 });

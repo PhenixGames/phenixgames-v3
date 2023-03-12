@@ -7,6 +7,8 @@ mp.events.add('Player:Quit:Lable', (drawpos) => {
     setTimeout(() => {
         leftarray = leftarray.filter((i) => i !== item);
     }, 10000); //10 Sekunden
+    mp.console.logInfo("Drawpos: " + drawpos, true, true);
+    mp.console.logInfo("item: " + item, true, true);
 });
 mp.events.add('render', () => {
     leftarray.map((item) => {
