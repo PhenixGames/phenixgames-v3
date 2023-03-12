@@ -35,9 +35,11 @@ mp.events.add('Server:Login:Login', async (player, password) => {
     if (!hasCharacter) return player.call('Client:Namechooser:CreateBrowser');
 
     player.call('Player:Login:Close');
-    player.call('Player:Spawn:Options', [{
-        house: false,
-        lastPos: true,
-        airport: true,
-    }]);
+    player.call('Player:Spawn:Options', [
+        {
+            house: false,
+            lastPos: true,
+            airport: true,
+        },
+    ]);
 });

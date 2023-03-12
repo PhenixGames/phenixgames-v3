@@ -9,14 +9,12 @@ mp.events.add('Player:Spawn:Options', (type) => {
     mp.game.ui.displayHud(false);
     mp.gui.chat.show(false);
     spawnChooseBrowser = mp.browsers.new(`http://${config.domain}:8080/#/spawnchooser`);
-    
+
     setSpawn(type);
-    
-    
+
     setTimeout(() => {
         mp.gui.cursor.show(true, true);
     }, 500);
-
 });
 
 mp.events.add('Player:Spawn', (type) => {
@@ -48,7 +46,6 @@ mp.events.add('Player:Spawn:Succes:close:Windows', () => {
     mp.game.ui.displayHud(true);
 });
 
-
 function setSpawn(type) {
-    spawnChooseBrowser.execute('gui.spawnchooser.setSpawn('+JSON.stringify(type)+');')
+    spawnChooseBrowser.execute('gui.spawnchooser.setSpawn(' + JSON.stringify(type) + ');');
 }
