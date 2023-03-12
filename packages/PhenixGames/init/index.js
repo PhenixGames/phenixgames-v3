@@ -25,18 +25,26 @@ mp.events.delayInitialization = true;
 })();
 
 mp.events.add('packagesLoaded', async () => {
-    await new VehicleApi().spawnAll();
-    weatherAPI.setWeather();
-    await FAPI.load();
-    IplsAPI.load();
 
-    await delay(15000);
+    try {
+        await new VehicleApi().spawnAll();
+        weatherAPI.setWeather();
+        await FAPI.load();
+        IplsAPI.load();
 
-    SyncApi.sync();
-    SyncApi.syncWeather();
+        await delay(15000);
 
-    if (debug.createBackup) {
-        new DatabaseBackup();
+        SyncApi.sync();
+        SyncApi.syncWeather();
+
+        if (debug.createBackup) {
+            new DatabaseBackup();
+        }
+    } catch (err) {
+        log({
+            message: err,
+            isFatal: true,
+        });
     }
 });
 
