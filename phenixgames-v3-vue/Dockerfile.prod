@@ -1,0 +1,11 @@
+FROM node:18.8.0-alpine AS build 
+WORKDIR /vue 
+COPY . .
+RUN npm install -g npm@9.1.2 -y 
+RUN npm install
+CMD [ "npm", "run", "build"]
+
+FROM nginx:1.23.2-alpine AS prod-stage 
+COPY --from=build /vue/dist /usr/share/nginx/html 
+EXPOSE 8080 
+CMD ["nginx", "-g", "daemon off;"]
