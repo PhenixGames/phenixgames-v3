@@ -41,8 +41,11 @@ mp.events.add('playerQuit', (player) => {
     }
 });
 
-mp.events.add('Client:Voice:SetRange', (range) => {
-    maxRange = range;
+mp.events.add('Client:Voice:SetRange', () => {
+    maxRange += 30;
+    if (maxRange > 50) {
+        maxRange = 10;
+    }
 });
 
 setInterval(() => {

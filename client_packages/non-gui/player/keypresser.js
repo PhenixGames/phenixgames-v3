@@ -57,3 +57,8 @@ mp.keys.bind(0x7b, true, function () {
     mp.gui.chat.activate(Chatbool);
     mp.gui.chat.show(Chatbool);
 });
+
+// < - Voice Range
+mp.keys.bind(0xbd, true, function () {
+    mp.events.callRemote('Client:Voice:SetRange');
+});
