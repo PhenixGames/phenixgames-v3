@@ -1,6 +1,6 @@
-name: '💡 Feature Request'
-description: Create a new ticket for a new feature request
-title: '💡 [REQUEST] - <title>'
+name: '💡 Feature'
+description: Create a new ticket for a new feature
+title: '💡 [FEATURE] - <title>'
 body:
     - type: input
       id: start_date
@@ -21,9 +21,9 @@ body:
     - type: textarea
       id: reference_issues
       attributes:
-          label: 'Reference Issues'
+          label: 'Reference Issues / Discussions'
           description: Common issues
-          placeholder: '#Issues IDs'
+          placeholder: '#Issues IDs or #Discussions IDs'
       validations:
           required: false
     - type: textarea

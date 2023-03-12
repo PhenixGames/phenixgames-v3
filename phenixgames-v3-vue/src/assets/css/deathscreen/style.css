@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+    outline: none;
+    user-select: none;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+body {
+    background: #141212;
+}
+
+.logo img {
+    width: 200px;
+    margin: 20px 0 0 50px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    font-size: 1.8em;
+    transform: translateX(-110px) translateY(100px);
+}
+
+.quotes {
+    margin: 300px 0 0 0;
+}
+
+hr {
+    transform: translateY(20px);
+    width: 500px;
+}
+
+.loading {
+    width: 80%;
+    height: 40px;
+    background: white;
+    margin: 300px auto 0 auto;
+    transition: 0.5s ease-in-out;
+}
+
+.loading::before {
+    content: '';
+    display: block;
+    z-index: -1;
+    width: 100%;
+    height: 40px;
+    background: red;
+    animation: deathscreenloading 300s linear;
+}
+
+@keyframes deathscreenloading {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.revivebutton {
+    display: flex;
+    justify-content: center;
+    margin: -130px 0 0 0;
+}
+
+.revivebutton button {
+    padding: 18px 29px;
+    border: 0;
+    border-radius: 10px;
+    font-size: 1.3em;
+    transition: 0.5s ease-in-out;
+    opacity: 0;
+    display: none;
+    cursor: pointer;
+}
+
+.revivebutton button:hover {
+    box-shadow: 0px 0px 20px #000000;
+}
+
+@media screen and (min-width: 1440px) {
+    .header {
+        font-size: 2em;
+    }
+    .quotes {
+        font-size: 2em;
+    }
+}

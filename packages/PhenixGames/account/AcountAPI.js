@@ -27,11 +27,18 @@ class Account {
     }
 
     async getByUsername(username) {
-        return await pg_users.findOne({
-            where: {
-                username,
-            },
-        });
+        return await pg_users
+            .findOne({
+                where: {
+                    username,
+                },
+            })
+            .catch((err) => {
+                log({
+                    message: err,
+                    isFatal: true,
+                });
+            });
     }
 
     async setInGameName(id, name) {
@@ -130,7 +137,7 @@ class Account {
         const user = await this.get(player.getVariable('playerId'));
         if (!user) return [];
         const character = await user.getCharacter();
-        return character.last_pos;
+        return character.last_pos ? character.last_pos : null;
     }
 
     checkPassword(password, dbpassword) {

@@ -50,39 +50,22 @@ services:
         networks:
             - pg_net
 
-    vue:
-        container_name: vue
-        build:
-            context: ./phenixgames-v3-vue
-            dockerfile: ./Dockerfile
-        volumes:
-            - .:/vue
-        ports:
-            - 8080:8080
-        env_file:
-            - .env
-        restart: unless-stopped
-        links:
-            - rage
-        networks:
-            - pg_net
-
-    mysql-backup:
-        image: fradelg/mysql-cron-backup
-        depends_on:
-            - mysql
-        restart: always
-        volumes:
-            - ./backups:/backup
-        environment:
-            - MYSQL_USER=phenixgames
-            - MYSQL_PASS=root
-            - MYSQL_DB=phenixgames-v3
-            - CRON_TIME=0 0 * * *
-            - MYSQL_HOST=mysql
-            - MYSQL_PORT=3306
-            - TIMEOUT=10s
-            - INIT_BACKUP=1
-            - MAX_BACKUPS=7
-        networks:
-            - pg_net
+    # mysql-backup:
+    #     image: fradelg/mysql-cron-backup
+    #     depends_on:
+    #         - mysql
+    #     restart: always
+    #     volumes:
+    #         - ./backups:/backup
+    #     environment:
+    #         - MYSQL_USER=phenixgames
+    #         - MYSQL_PASS=root
+    #         - MYSQL_DB=phenixgames-v3
+    #         - CRON_TIME=0 0 * * *
+    #         - MYSQL_HOST=mysql
+    #         - MYSQL_PORT=3306
+    #         - TIMEOUT=10s
+    #         - INIT_BACKUP=1
+    #         - MAX_BACKUPS=7
+    #     networks:
+    #         - pg_net

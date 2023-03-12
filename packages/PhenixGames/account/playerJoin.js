@@ -6,18 +6,19 @@ const AccountAPI = require('./AcountAPI');
 const DiscordAPI = require('../discord/DiscordAPI');
 
 mp.events.add('playerJoin', async (player) => {
-    player.call('Client:Login:CreateCam');
+    player.call('Player:Login:CreateCam');
     player.position = new mp.Vector3(0, 0, -20);
 
     const user = await AccountAPI.getByUsername(player.socialClub);
+    console.log('user', user);
     if (!user) {
-        player.call('Client:Login:Open', [false]);
+        player.call('Player:Login:Open', [false]);
         return log({
             message: `[SERVER]: [Not-Registered] ${player.socialClub} has joined the server!`,
             isFatal: false,
         });
     }
-    player.call('Client:Login:Open', [true]);
+    player.call('Player:Login:Open', [true]);
 
     generellAPI.saveLocalVar(player, {
         playerId: user.id,

@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+    vue:
+        container_name: vue
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - .:/vue
+        ports:
+            - 8080:8080
+        env_file:
+            - .env
+        restart: unless-stopped

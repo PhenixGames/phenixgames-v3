@@ -39,7 +39,7 @@ mp.events.add('Server:Login:Register', async (player, password) => {
 
     await InventoryApi.update(user.id, items);
 
-    player.call('Player:InGameName:Choose');
+    player.call('Player:Namechooser:CreateBrowser');
     return;
 });
 
@@ -57,9 +57,9 @@ mp.events.add('Player:Set:InGameName', async (player, firstname, lastname) => {
 
     player.notify(`Erfolgreich registriert!`);
 
-    player.call('Client:Namechooser:Close');
-    player.call('Client:Login:Close');
-    player.call('Client:Login:DestroyCam');
+    player.call('Player:Namechooser:Close');
+    player.call('Player:Login:Close');
+    player.call('Player:Login:DestroyCam');
 
     AccountAPI.spawnAirport(player);
 
