@@ -42,8 +42,12 @@ module.exports.log = ({ message, isFatal, type }) => {
     }
 
     if (isFatal) {
-        return log.error(`${message} |||||| ${new Date()} |||||| ${caller.filePath} |||||| ${caller.lineNumber}`);
+        return log.error(
+            `${message} |||||| ${new Date()} |||||| ${caller.filePath} |||||| ${caller.lineNumber}`
+        );
     }
 
-    debug_log.info(`${message} |||||| ${new Date()} |||||| ${caller.filePath} |||||| ${caller.lineNumber}`);
+    debug_log.info(
+        `${message} |||||| ${new Date()} |||||| ${caller.filePath} |||||| ${caller.lineNumber}`
+    );
 };

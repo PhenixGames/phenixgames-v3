@@ -9,7 +9,7 @@ mp.events.add('Server:Keypress:Strg', async (player) => {
         if (!veh) {
             return player.notify('Du bist in keinem Fahrzeug');
         }
-        
+
         const vehApi = new VehicleAPI();
         const db_veh = await vehApi.get(veh.getVariable('veh_id'));
         if (!db_veh) {
@@ -27,7 +27,7 @@ mp.events.add('Server:Keypress:Strg', async (player) => {
             veh.setVariable('veh_engine', veh.engine);
         }
 
-        console.log(JSON.stringify(db_veh), fuel, veh.engine, speed)
+        console.log(JSON.stringify(db_veh), fuel, veh.engine, speed);
     } catch (err) {
         log({
             message: err,

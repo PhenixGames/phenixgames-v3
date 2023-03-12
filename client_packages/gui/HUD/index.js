@@ -1,4 +1,5 @@
 require('./gui/HUD/idCard');
+require('./gui/HUD/PlayerLeft.js');
 
 const config = require('_config/config').config;
 require('./gui/HUD/_admin.js');

@@ -217,11 +217,11 @@ module.exports = class VehicleApi {
     }
 
     isVehicleOwner(player, owner) {
-        return (player.getVariable('Aduty')) ? true : player === owner;
+        return player.getVariable('Aduty') ? true : player === owner;
     }
 
     isKeyOwner(player, keys) {
-        return (player.getVariable('Aduty')) ? true : keys.indexOf(player_id) !== -1;
+        return player.getVariable('Aduty') ? true : keys.indexOf(player_id) !== -1;
     }
 
     getNearVehicles({ pos, range, id }) {
