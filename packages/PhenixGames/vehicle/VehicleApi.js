@@ -130,13 +130,13 @@ module.exports = class VehicleApi {
                     }
                 )
                 .then((res) => {
+                    return resolve(true);
+                })
+                .catch((err) => {
                     log({
                         message: err,
                         isFatal: true,
                     });
-                    return resolve(true);
-                })
-                .catch((err) => {
                     return reject(false);
                 });
         });
@@ -181,7 +181,7 @@ module.exports = class VehicleApi {
                         message: err,
                         isFatal: true,
                     });
-                    return reject(false);
+                    return reject(err);
                 });
         });
     }
