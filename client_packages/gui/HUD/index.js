@@ -95,6 +95,7 @@ mp.keys.bind(0x73, true, function () {
     mp.voiceChat.muted = !mp.voiceChat.muted;
 
     hudBrowser.execute(`gui.hud.voicerange.manageVoice("${mp.voiceChat.muted ? false : true}");`); //inaktiv
+});
 
 setInterval(() => {
     if (mp.players.local.vehicle) {
