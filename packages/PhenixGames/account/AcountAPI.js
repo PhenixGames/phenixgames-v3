@@ -22,6 +22,10 @@ class Account {
                 return user;
             })
             .catch((err) => {
+                log({
+                    message: err,
+                    isFatal: true,
+                })
                 return false;
             });
     }
@@ -61,7 +65,13 @@ class Account {
                     player_id: id,
                 },
             }
-        );
+        ).catch((err) => {
+            log({
+                message: err,
+                isFatal: true,
+            })
+            return false;
+        });
     }
 
     async save(username, password) {
@@ -86,6 +96,10 @@ class Account {
                 });
             })
             .catch((err) => {
+                log({
+                    message: err,
+                    isFatal: true,
+                })
                 return false;
             });
     }
@@ -118,6 +132,10 @@ class Account {
                 }
             )
             .catch((err) => {
+                log({
+                    message: err,
+                    isFatal: true,
+                })
                 return false;
             });
     }
@@ -168,6 +186,10 @@ class Account {
                 }
             )
             .catch((err) => {
+                log({
+                    message: err,
+                    isFatal: true,
+                })
                 return false;
             });
     }
@@ -185,6 +207,10 @@ class Account {
                 }
             )
             .catch((err) => {
+                log({
+                    message: err,
+                    isFatal: true,
+                })
                 return false;
             });
     }
@@ -201,6 +227,10 @@ class Account {
                 return res.health;
             })
             .catch((err) => {
+                log({
+                    message: err,
+                    isFatal: true,
+                })
                 return 100;
             });
     }
@@ -217,6 +247,10 @@ class Account {
                 return res.armour;
             })
             .catch((err) => {
+                log({
+                    message: err,
+                    isFatal: true,
+                })
                 return 0;
             });
     }
@@ -249,6 +283,13 @@ class Account {
             })
             .then((res) => {
                 return res.roleId;
+            })
+            .catch((err) => {
+                log({
+                    message: err,
+                    isFatal: true,
+                })
+                return false;
             });
     }
 }
