@@ -4,10 +4,17 @@ const generellAPI = require('../allgemein/');
 const { log } = require('../../../_assets/functions/log/logs');
 const AccountAPI = require('./AcountAPI');
 const DiscordAPI = require('../discord/DiscordAPI');
+const ServerApi = require('../Server/ServerApi');
 
 mp.events.add('playerJoin', async (player) => {
     player.call('Player:Login:CreateCam');
     player.position = new mp.Vector3(0, 0, -20);
+
+    const isServerInWartung = await new ServerApi().isWartung();
+    if (isServerInWartung.is) {
+        player.call('Player:Wartung:Show', [isServerInWartung.reason]);
+        return;
+    }
 
     const user = await AccountAPI.getByUsername(player.socialClub);
     if (!user) {
