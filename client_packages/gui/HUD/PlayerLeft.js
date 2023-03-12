@@ -1,8 +1,8 @@
 //Player:Quit:Lable
-var leftarray = [];
+let leftarray = [];
 const drawtext = 'Spieler hat den Server Verlassen';
 mp.events.add('Player:Quit:Lable', (drawpos) => {
-    var item = [Number(drawpos.x), Number(drawpos.y), Number(drawpos.z)];
+    let item = [Number(drawpos.x), Number(drawpos.y), Number(drawpos.z)];
     leftarray.push(item);
     setTimeout(() => {
         leftarray = leftarray.filter((i) => i !== item);
