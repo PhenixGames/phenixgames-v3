@@ -37,10 +37,6 @@ mp.events.add('Player:Login:WrongPassword', () => {
     mainBrowser.execute('gui.login.wrongPassword();');
 });
 
-mp.events.add('Player:Login:Wartung', (reason) => {
-    mainBrowser.execute(`gui.login.wartung('${reason}');`);
-});
-
 mp.events.add('Ui:Login:Login', (password) => {
     mp.events.callRemote('Server:Login:Login', password);
 });
