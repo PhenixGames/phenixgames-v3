@@ -74,8 +74,8 @@ mp.events.add(
     (sourceEntity, targetEntity, sourcePlayer, weapon, boneIndex, damage) => {
         if (targetEntity.type !== 'player' || sourcePlayer.getVariable('Aduty')) return;
 
-        const max = defaultPercent.max;
-        const min = defaultPercent.max;
+        let max = defaultPercent.max;
+        let min = defaultPercent.max;
 
         const weaponGroupHash = mp.game.weapon.getWeapontypeGroup(weapon);
         if (weapon in weaponDamage.damageWeapons) {
