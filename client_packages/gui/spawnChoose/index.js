@@ -1,6 +1,6 @@
 const config = require('_config/config').config;
 
-var spawnChooseBrowser;
+let spawnChooseBrowser;
 
 mp.events.add('Player:Spawn:Options', (type) => {
     mp.events.callRemote('Server:Browser:PlayerInteracte', true);
@@ -12,6 +12,8 @@ mp.events.add('Player:Spawn:Options', (type) => {
     setTimeout(() => {
         mp.gui.cursor.show(true, true);
     }, 500);
+
+    setSpam(type);
 });
 
 mp.events.add('Player:Spawn', (type) => {
@@ -42,3 +44,8 @@ mp.events.add('Player:Spawn:Succes:close:Windows', () => {
     mp.game.ui.displayRadar(true);
     mp.game.ui.displayHud(true);
 });
+
+
+function setSpam(type) {
+    spawnChooseBrowser.execute('gui.spawnchooser.setSpam('+JSON.stringify(type)+');')
+}
