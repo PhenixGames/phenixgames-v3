@@ -12,10 +12,11 @@ mp.events.add('Player:Quit:Lable', (drawpos) => {
 });
 mp.events.add('render', () => {
     leftarray.map((item) => {
-        mp.game.graphics.drawText(drawtext, new mp.Vector3(item[0], item[1], item[2]), {
+        const pos = new mp.Vector3(item[0], item[1], item[2])
+        mp.game.graphics.drawText(drawtext, pos, {
             font: 0,
             color: [255, 255, 255, 185],
-            scale: [1,1],
+            scale: [0.5,0.5],
             outline: false,
             centre: true,
         });
