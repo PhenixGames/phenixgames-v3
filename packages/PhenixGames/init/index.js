@@ -25,7 +25,6 @@ mp.events.delayInitialization = true;
 })();
 
 mp.events.add('packagesLoaded', async () => {
-
     try {
         await new VehicleApi().spawnAll();
         weatherAPI.setWeather();

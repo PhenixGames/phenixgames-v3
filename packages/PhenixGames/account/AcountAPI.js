@@ -25,7 +25,7 @@ class Account {
                 log({
                     message: err,
                     isFatal: true,
-                })
+                });
                 return false;
             });
     }
@@ -55,23 +55,25 @@ class Account {
             return false;
         }
 
-        return await pg_characters.update(
-            {
-                firstname: firstname,
-                lastname: lastname,
-            },
-            {
-                where: {
-                    player_id: id,
+        return await pg_characters
+            .update(
+                {
+                    firstname: firstname,
+                    lastname: lastname,
                 },
-            }
-        ).catch((err) => {
-            log({
-                message: err,
-                isFatal: true,
-            })
-            return false;
-        });
+                {
+                    where: {
+                        player_id: id,
+                    },
+                }
+            )
+            .catch((err) => {
+                log({
+                    message: err,
+                    isFatal: true,
+                });
+                return false;
+            });
     }
 
     async save(username, password) {
@@ -99,7 +101,7 @@ class Account {
                 log({
                     message: err,
                     isFatal: true,
-                })
+                });
                 return false;
             });
     }
@@ -135,7 +137,7 @@ class Account {
                 log({
                     message: err,
                     isFatal: true,
-                })
+                });
                 return false;
             });
     }
@@ -189,7 +191,7 @@ class Account {
                 log({
                     message: err,
                     isFatal: true,
-                })
+                });
                 return false;
             });
     }
@@ -210,7 +212,7 @@ class Account {
                 log({
                     message: err,
                     isFatal: true,
-                })
+                });
                 return false;
             });
     }
@@ -230,7 +232,7 @@ class Account {
                 log({
                     message: err,
                     isFatal: true,
-                })
+                });
                 return 100;
             });
     }
@@ -250,7 +252,7 @@ class Account {
                 log({
                     message: err,
                     isFatal: true,
-                })
+                });
                 return 0;
             });
     }
@@ -288,7 +290,7 @@ class Account {
                 log({
                     message: err,
                     isFatal: true,
-                })
+                });
                 return false;
             });
     }
