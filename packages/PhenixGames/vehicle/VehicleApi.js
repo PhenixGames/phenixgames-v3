@@ -115,7 +115,7 @@ module.exports = class VehicleApi {
                         veh_owner: veh_owner,
                         veh_keys: veh_keys,
                         veh_state: veh_state,
-                        veh_pos: JSON.parse(veh_pos),
+                        veh_pos: veh_pos,
                         veh_rot: veh_rot,
                         veh_fuel: veh_fuel,
                         veh_prim_color: veh_prim,
