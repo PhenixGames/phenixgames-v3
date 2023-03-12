@@ -15,8 +15,8 @@ mp.events.add('Server:Keypress:Strg', async (player) => {
         if (!db_veh) {
             return player.notify('Dieses Fahrzeug existiert nicht');
         }
-        if (!vehApi.isVehicleOwner(player.id, db_veh.veh_owner)) return;
-        if (!vehApi.isKeyOwner(player.id, db_veh.veh_keys)) return;
+        if (!vehApi.isVehicleOwner(player, db_veh.veh_owner)) return;
+        if (!vehApi.isKeyOwner(player, db_veh.veh_keys)) return;
 
         const fuel = veh.getVariable('veh_fuel');
         if (fuel <= 0) return player.notify('Der Tank des Fahzeuges ist leer');

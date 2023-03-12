@@ -151,7 +151,7 @@ module.exports = class VehicleApi {
                         for (let i in res) {
                             const newVeh = mp.vehicles.new(
                                 mp.joaat(res[i].veh_name),
-                                JSON.parse(res[i].veh_pos),
+                                res[i].veh_pos,
                                 {
                                     heading: res[i].veh_rot,
                                     numberPlate: res[i].veh_owner,
@@ -216,12 +216,12 @@ module.exports = class VehicleApi {
         });
     }
 
-    isVehicleOwner(player_id, owner) {
-        return player_id === owner;
+    isVehicleOwner(player, owner) {
+        return (player.getVariable('Aduty')) ? true : player === owner;
     }
 
-    isKeyOwner(player_id, keys) {
-        return keys.indexOf(player_id) !== -1;
+    isKeyOwner(player, keys) {
+        return (player.getVariable('Aduty')) ? true : keys.indexOf(player_id) !== -1;
     }
 
     getNearVehicles({ pos, range, id }) {
