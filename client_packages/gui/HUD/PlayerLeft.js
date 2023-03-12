@@ -1,4 +1,3 @@
-//Player:Quit:Lable
 let leftarray = [];
 const drawtext = 'Spieler hat den Server Verlassen';
 let item;
