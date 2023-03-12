@@ -27,16 +27,18 @@ class Account {
     }
 
     async getByUsername(username) {
-        return await pg_users.findOne({
-            where: {
-                username,
-            },
-        }).catch(err => {
-            log({
-                message: err,
-                isFatal: true,
+        return await pg_users
+            .findOne({
+                where: {
+                    username,
+                },
+            })
+            .catch((err) => {
+                log({
+                    message: err,
+                    isFatal: true,
+                });
             });
-        })
     }
 
     async setInGameName(id, name) {
