@@ -6,11 +6,13 @@ const debug = require('../../../_assets/json/debug/debug.json').vehicle;
 mp.events.add('Server:Keypress:Strg', (player) => {
     try {
         const veh = player.vehicle;
-
-        const db_veh = VehicleAPI.get(veh.getVariable('veh_id'));
+        if (!veh) return;
+        
+        const vehApi = new VehicleAPI();
+        const db_veh = vehApi.get(veh.getVariable('veh_id'));
         if (!db_veh) return;
-        if (!db_veh.isOwner(player.id, db_veh.veh_owner)) return;
-        if (!db_veh.isKeyOwner(player.id, db_veh.veh_keys)) return;
+        if (!vehApi.isVehicleOwner(player.id, db_veh.veh_owner)) return;
+        if (!vehApi.isKeyOwner(player.id, db_veh.veh_keys)) return;
 
         const fuel = veh.getVariable('veh_fuel');
         if (fuel <= 0) return player.notify('Der Tank des Fahzeuges ist leer');

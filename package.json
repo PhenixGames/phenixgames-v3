@@ -5,12 +5,14 @@
     "private": true,
     "scripts": {
         "dockerStart": "./ragemp-server",
-        "start": "npm run rm_image && docker compose up -d --build && docker logs -f rage",
-        "stop": "docker compose down",
-        "restart": "npm run stop && npm run rm_image && npm run start",
-        "rm_image": "docker image rm -f phenixgames-v3_vue && docker image rm -f phenixgames-v3_rage && docker image rm -f phenixgames-v3-rage && docker image rm -f phenixgames-v3-vue",
-        "format": "prettier --write . --bracket-same-line=true",
-        "check": "prettier --check . --bracket-same-line=true"
+        "start": "docker compose up -d && npm run vueStart && docker logs -f rage",
+        "stop": "docker compose down && npm run vueStop",
+        "restart": "npm run stop && npm run start",
+        "vueStart": "cd phenixgames-v3-vue && docker compose up -d",
+        "vueStop": "cd phenixgames-v3-vue && docker compose down",
+        "vueRestart": "npm run vueStop && npm run vueStart",
+        "format": "docker run --rm -v %cd%:/app -w /app node:18.8 sh -c \"npm install -g prettier && prettier --write .\"",
+        "check": "docker run --rm -v %cd%:/app -w /app node:18.8 sh -c \"npm install -g prettier && prettier --check .\""
     },
     "repository": {
         "type": "git",
@@ -26,19 +28,19 @@
     ],
     "homepage": "https://phenixgames.de",
     "dependencies": {
-        "axios": "^1.2.3",
+        "axios": "^1.3.4",
         "bcryptjs": "^2.4.3",
         "dotenv": "^16.0.3",
         "extends-classes": "^1.0.5",
         "moment": "^2.29.4",
-        "mysql2": "^3.0.1",
-        "sequelize": "^6.28.0",
+        "mysql2": "^3.2.0",
+        "sequelize": "^6.29.2",
         "simple-node-logger": "^21.8.12",
-        "validator": "^13.7.0",
+        "validator": "^13.9.0",
         "vue-router": "^4.1.6"
     },
     "devDependencies": {
-        "prettier": "^2.8.3",
+        "prettier": "^2.8.4",
         "sloc": "^0.2.1"
     }
 }

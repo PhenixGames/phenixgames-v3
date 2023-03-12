@@ -7,9 +7,9 @@ const { spawn } = require('child_process');
 const { DatabaseBackup } = require('../../../_assets/functions/DatabaseBackup/DatabaseBackup');
 const { FAPI } = require('../Fuelstation/FuelStationApi');
 const IplsAPI = require('../ipls');
-const VehicleAPI = require('../vehicle/VehicleApi');
 const { SyncApi } = require('../SyncAPI/SyncApi');
 const database = require('../../_db/db');
+const VehicleApi = require('../vehicle/VehicleApi');
 
 mp.events.delayInitialization = true;
 (async () => {
@@ -25,7 +25,7 @@ mp.events.delayInitialization = true;
 })();
 
 mp.events.add('packagesLoaded', async () => {
-    await VehicleAPI.spawnAll();
+    await new VehicleApi().spawnAll();
     weatherAPI.setWeather();
     await FAPI.load();
     IplsAPI.load();
