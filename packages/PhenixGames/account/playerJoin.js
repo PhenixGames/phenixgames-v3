@@ -10,7 +10,6 @@ mp.events.add('playerJoin', async (player) => {
     player.position = new mp.Vector3(0, 0, -20);
 
     const user = await AccountAPI.getByUsername(player.socialClub);
-    console.log('user', user);
     if (!user) {
         player.call('Player:Login:Open', [false]);
         return log({

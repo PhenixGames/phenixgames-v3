@@ -26,6 +26,8 @@ mp.events.add('Server:Keypress:Strg', async (player) => {
             veh.engine = !veh.engine;
             veh.setVariable('veh_engine', veh.engine);
         }
+
+        mp.console.logInfo(JSON.stringify(db_veh), fuel, veh.engine, speed);
     } catch (err) {
         log({
             message: err,
