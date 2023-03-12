@@ -1,4 +1,4 @@
-require('./idCard');
+require('./gui/HUD/idCard');
 
 const config = require('_config/config').config;
 require('./gui/HUD/_admin.js');
