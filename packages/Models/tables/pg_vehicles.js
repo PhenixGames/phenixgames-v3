@@ -18,7 +18,7 @@ Pg_vehicles.init(
             defaultValue: 'Staat',
         },
         veh_keys: {
-            type: DataTypes.JSON(DataTypes.INTEGER),
+            type: DataTypes.JSON,
             defaultValue: [],
         },
         veh_state: {
