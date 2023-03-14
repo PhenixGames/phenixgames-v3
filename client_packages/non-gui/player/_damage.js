@@ -1,7 +1,7 @@
 mp.events.add(
     'incomingDamage',
     (sourceEntity, targetEntity, sourcePlayer, weapon, boneIndex, damage) => {
-        if (targetEntity.type !== 'player' || targetEntity.getVariable('Aduty')) return;
+        if (targetEntity.type !== 'player') return false;
 
         const weaponGroupHash = mp.game.weapon.getWeapontypeGroup(weapon);
         mp.events.callRemote(
@@ -14,5 +14,6 @@ mp.events.add(
             damage,
             weaponGroupHash
         );
+        return false;
     }
 );

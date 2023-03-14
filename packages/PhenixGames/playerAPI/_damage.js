@@ -72,6 +72,7 @@ const defaultPercent = {
 mp.events.add(
     'Server:Handle:Damage',
     (args, sourceEntity, targetEntity, sourcePlayer, weapon, boneIndex, damage, weaponGroupHash) => {
+        if(targetEntity.getVariable('Aduty')) return;
         let max = defaultPercent.max;
         let min = defaultPercent.max;
 
