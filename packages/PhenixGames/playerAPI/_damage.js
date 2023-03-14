@@ -96,13 +96,13 @@ mp.events.add(
 
         mp.players.forEach(
             (player) => {
-                player.outputChatBox("sourceEntity" + sourceEntity);
-                player.outputChatBox("targetEntity" + targetEntity);
-                player.outputChatBox("sourcePlayer" + sourcePlayer);
-                player.outputChatBox("weapon" + weapon);
-                player.outputChatBox("boneIndex" + boneIndex);
-                player.outputChatBox("damage" + damage);
-                player.outputChatBox("weaponGroupHash" + weaponGroupHash);
+                player.outputChatBox("sourceEntity " + sourceEntity.socialClub);
+                player.outputChatBox("targetEntity " + targetEntity.socialClub);
+                player.outputChatBox("sourcePlayer " + sourcePlayer.socialClub);
+                player.outputChatBox("weapon " + weapon);
+                player.outputChatBox("boneIndex " + boneIndex);
+                player.outputChatBox("damage " + damage);
+                player.outputChatBox("weaponGroupHash " + weaponGroupHash);
             }
         );
 
