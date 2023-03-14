@@ -87,6 +87,10 @@ mp.events.add(
         const percent = Math.random() * (max - min) + min / 100;
         let customDamage = damage - damage * percent;
 
+        sourceEntity.notify('SourceNetitiy')
+        targetEntity.notify('target')
+        sourcePlayer.notify('sourcePlayer')
+
         if (boneIndex === 20) {
             customDamage /= 10;
         }
