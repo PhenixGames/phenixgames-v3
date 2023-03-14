@@ -5,6 +5,10 @@ class Pg_permission_list extends Model {}
 
 Pg_permission_list.init(
     {
+        role_id: {
+            type: DataTypes.INTEGER,
+            unique: 'role_id',
+        },
         root: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
@@ -81,12 +85,15 @@ Pg_permission_list.init(
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
+        serverConfigChange: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
     },
     {
         sequelize: database,
         modelName: 'pg_permission_list',
     }
 );
-
 const pg_permission_list = Pg_permission_list;
 module.exports = pg_permission_list;
