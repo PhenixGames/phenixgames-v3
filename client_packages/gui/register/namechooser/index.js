@@ -5,7 +5,7 @@ mp.game.ui.displayRadar(false);
 mp.game.ui.displayHud(false);
 mp.gui.chat.show(false);
 
-var browser;
+let browser;
 mp.events.add('Player:Namechooser:CreateBrowser', () => {
     mp.events.callRemote('Server:Browser:PlayerInteracte', true);
     browser = mp.browsers.new(`http://${config.domain}:8080/#/namechooser`);
