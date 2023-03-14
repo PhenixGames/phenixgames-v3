@@ -4,6 +4,7 @@
     "description": "Another PhenixGames Server",
     "private": true,
     "scripts": {
+        "init": "python3 _scripts/init.py",
         "dockerStart": "./ragemp-server",
         "start": "docker compose up -d && npm run vueStart && docker logs -f rage",
         "stop": "docker compose down && npm run vueStop",

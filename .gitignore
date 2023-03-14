@@ -20,3 +20,4 @@ _assets/functions/DatabaseBackup/last_backup.json
 Dockerfile.overwrite
 docker-compose.override.yml
 backups/*
+__pycache__
