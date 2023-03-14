@@ -7,6 +7,10 @@ const DiscordAPI = require('../discord/DiscordAPI');
 const ServerApi = require('../Server/ServerApi');
 
 mp.events.add('playerJoin', async (player) => {
+    await this.playerJoin(player);
+});
+
+module.exports.playerJoin = async (player) => {
     player.call('Player:Login:CreateCam');
     player.position = new mp.Vector3(0, 0, -20);
 
@@ -45,4 +49,4 @@ mp.events.add('playerJoin', async (player) => {
         player.name = character.firstname + ' ' + character.lastname;
         DiscordAPI.set(player);
     }
-});
+};

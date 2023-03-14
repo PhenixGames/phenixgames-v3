@@ -21,4 +21,12 @@ Pg_server.init(
 );
 
 const pg_server = Pg_server;
+
+// default entry
+pg_server
+    .create({
+        id: 1,
+    })
+    .catch((err) => {});
+
 module.exports = pg_server;

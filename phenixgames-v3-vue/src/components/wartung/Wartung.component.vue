@@ -7,12 +7,14 @@
 export default {
     name: 'pg_spawnchooser',
     data() {
-        reason: '',
+        return {
+            reason: '',
+        };
     },
     methods: {
         init(reason) {
             this.reason = reason;
-        }
+        },
     },
 
     mounted() {

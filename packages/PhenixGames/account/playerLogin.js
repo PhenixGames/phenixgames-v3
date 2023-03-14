@@ -12,7 +12,6 @@ mp.events.add('Server:Login:Login', async (player, password) => {
     }
 
     const punishments = await PunishmentsAPI.getPunishment(user.id);
-
     if (punishments) {
         const isMuted = punishments.find((pushment) => pushment.muted === '1' && active === '1');
         const isBanned = punishments.find((pushment) => pushment.banned === '1' && active === '1');
@@ -42,7 +41,7 @@ mp.events.add('Server:Login:Login', async (player, password) => {
 
     player.call('Player:Login:Close');
 
-    if (user.lastPos) {
+    if (character.last_pos) {
         spawnOptions.lastPos = true;
     }
 

@@ -162,7 +162,7 @@ module.exports = class VehicleApi {
                                 veh_id: res[i].veh_id,
                                 veh_name: res[i].veh_name,
                                 veh_owner: res[i].veh_owner,
-                                veh_keys: JSON.parse(res[i].veh_keys),
+                                veh_keys: res[i].veh_keys,
                                 veh_state: res[i].veh_state,
                                 veh_pos: res[i].veh_pos,
                                 veh_rot: res[i].veh_rot,
@@ -217,11 +217,11 @@ module.exports = class VehicleApi {
     }
 
     isVehicleOwner(player, owner) {
-        return player.getVariable('Aduty') ? true : player === owner;
+        return player.getVariable('Aduty') ? true : player.socialClub === owner;
     }
 
     isKeyOwner(player, keys) {
-        return player.getVariable('Aduty') ? true : keys.indexOf(player_id) !== -1;
+        return player.getVariable('Aduty') ? true : keys.indexOf(player.getVariable('playerId')) !== -1;
     }
 
     getNearVehicles({ pos, range, id }) {

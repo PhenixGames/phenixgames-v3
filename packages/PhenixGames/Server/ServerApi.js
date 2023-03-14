@@ -64,4 +64,23 @@ module.exports = class ServerApi {
                 });
         });
     }
+
+    setWartung(status, reason = null) {
+        return new Promise((resolve, reject) => {
+            this.update({
+                wartung: status,
+                wartung_reason: reason,
+            })
+                .then(() => {
+                    resolve();
+                })
+                .catch((err) => {
+                    log({
+                        message: err,
+                        isFatal: true,
+                    });
+                    return reject(err);
+                });
+        });
+    }
 };
