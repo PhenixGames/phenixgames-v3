@@ -18,7 +18,7 @@ mp.events.add('render', () => {
             //Zeichne Den text in die Welt
             font: 0,
             color: [255, 255, 255, 185],
-            scale: [0.5, 0.5],
+            scale: [0.2, 0.2],
             outline: false,
             centre: true,
         });
