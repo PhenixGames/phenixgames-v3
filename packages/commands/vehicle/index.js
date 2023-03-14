@@ -18,21 +18,12 @@ mp.events.addCommand('speed', (player, speed = 1) => {
 });
 
 mp.events.addCommand('fuel', (player) => {
+    if(!player.getVariable('Aduty')) return;
     var fuel = 150; //150 ist aktuell der Maximale Tankstand
     let closest = mp.vehicles.getClosest(
         [player.position.x, player.position.y, player.position.z],
         1
     )[0];
-
-    if (player.getVariable('Aduty')) {
-        closest.setVariable('veh_fuel', fuel);
-        player.notify('~g~Du hast mithilfe deines Adminmodus das Fahrzeug getankt!');
-    } else {
-        if (player.getVariable('isnearFuelstation') == true) {
-            closest.setVariable('veh_fuel', fuel);
-            player.notify('~g~Du hast dein Fahrzeug erfolgreich aufgefüllt!');
-        } else {
-            player.notify('~r~Du bist nicht bei einer Tankstelle');
-        }
-    }
+    closest.setVariable('veh_fuel', fuel);
+    player.notify('~g~Du hast mithilfe deines Adminmodus das Fahrzeug getankt!');
 });
