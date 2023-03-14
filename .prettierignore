@@ -14,3 +14,4 @@ _backup
 _logs
 
 Dockerfile.*
+*.vue

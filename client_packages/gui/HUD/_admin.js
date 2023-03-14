@@ -185,7 +185,7 @@ mp.events.add('Player:Admin:DrawShotLine', (player, targetpos, targetEntity) => 
             r = 255;
         }
     }
-    var item = [
+    let item = [
         Number(player.position.x),
         Number(player.position.y),
         Number(player.position.z + 0.5),

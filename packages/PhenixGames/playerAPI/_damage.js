@@ -72,15 +72,15 @@ const defaultPercent = {
 mp.events.add(
     'Server:Handle:Damage',
     (sourceEntity, targetEntity, sourcePlayer, weapon, boneIndex, damage, weaponGroupHash) => {
-        const max = defaultPercent.max;
-        const min = defaultPercent.max;
+        let max = defaultPercent.max;
+        let min = defaultPercent.max;
 
-        if (weapon in damageWeapons.damageWeapons) {
-            max = damageWeapons.damageWeapons[weapon].max;
-            min = damageWeapons.damageWeapons[weapon].min;
-        } else if (weaponGroupHash in damageWeapons.damageWeaponGroups) {
-            max = damageWeapons.damageWeaponGroups[weaponGroupHash].max;
-            min =damageWeapons. damageWeaponGroups[weaponGroupHash].min;
+        if (weapon in weaponDamage.damageWeapons) {
+            max = weaponDamage.damageWeapons[weapon].max;
+            min = weaponDamage.damageWeapons[weapon].min;
+        } else if (weaponGroupHash in weaponDamage.damageWeaponGroups) {
+            max = weaponDamage.damageWeaponGroups[weaponGroupHash].max;
+            min = weaponDamage.damageWeaponGroups[weaponGroupHash].min;
         }
 
         const percent = Math.random() * (max - min) + min / 100;

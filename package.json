@@ -4,6 +4,7 @@
     "description": "Another PhenixGames Server",
     "private": true,
     "scripts": {
+        "init": "python3 _scripts/init.py",
         "dockerStart": "./ragemp-server",
         "start": "docker compose up -d && npm run vueStart && docker logs -f rage",
         "stop": "docker compose down && npm run vueStop",
@@ -35,7 +36,7 @@
         "extends-classes": "^1.0.5",
         "moment": "^2.29.4",
         "mysql2": "^3.2.0",
-        "sequelize": "^6.29.2",
+        "sequelize": "^6.29.3",
         "simple-node-logger": "^21.8.12",
         "validator": "^13.9.0",
         "vue-router": "^4.1.6"

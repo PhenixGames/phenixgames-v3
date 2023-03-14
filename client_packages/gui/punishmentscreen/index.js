@@ -1,7 +1,7 @@
 const config = require('_config/config').config;
 
-var psBrowser;
-var isBrowserOpen = false;
+let psBrowser;
+let isBrowserOpen = false;
 
 function openBrowser() {
     isBrowserOpen = true;
