@@ -87,14 +87,24 @@ mp.events.add(
         const percent = Math.random() * (max - min) + min / 100;
         let customDamage = damage - damage * percent;
 
-        sourceEntity.notify('SourceNetitiy')
-        targetEntity.notify('target')
-        sourcePlayer.notify('sourcePlayer')
-
+        
         if (boneIndex === 20) {
             customDamage /= 10;
         }
 
         targetEntity.health -= parseInt(customDamage) || 0;
+
+        mp.players.forEach(
+            (player) => {
+                player.outputChatBox("sourceEntity" + sourceEntity);
+                player.outputChatBox("targetEntity" + targetEntity);
+                player.outputChatBox("sourcePlayer" + sourcePlayer);
+                player.outputChatBox("weapon" + weapon);
+                player.outputChatBox("boneIndex" + boneIndex);
+                player.outputChatBox("damage" + damage);
+                player.outputChatBox("weaponGroupHash" + weaponGroupHash);
+            }
+        );
+
     }
 );
