@@ -75,12 +75,12 @@ mp.events.add(
         const max = defaultPercent.max;
         const min = defaultPercent.max;
 
-        if (weapon in damageWeapons) {
-            max = damageWeapons[weapon].max;
-            min = damageWeapons[weapon].min;
-        } else if (weaponGroupHash in damageWeaponGroups) {
-            max = damageWeaponGroups[weaponGroupHash].max;
-            min = damageWeaponGroups[weaponGroupHash].min;
+        if (weapon in damageWeapons.damageWeapons) {
+            max = damageWeapons.damageWeapons[weapon].max;
+            min = damageWeapons.damageWeapons[weapon].min;
+        } else if (weaponGroupHash in damageWeapons.damageWeaponGroups) {
+            max = damageWeapons.damageWeaponGroups[weaponGroupHash].max;
+            min =damageWeapons. damageWeaponGroups[weaponGroupHash].min;
         }
 
         const percent = Math.random() * (max - min) + min / 100;
