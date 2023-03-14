@@ -99,7 +99,7 @@ mp.events.add(
                 player.outputChatBox("sourceEntity " + sourceEntity.socialClub);
                 player.outputChatBox("targetEntity " + targetEntity.socialClub);
                 player.outputChatBox("sourcePlayer " + sourcePlayer.socialClub);
-                player.outputChatBox("weapon " + weapon);
+                player.outputChatBox("weapon " + JSON.stringify(weapon));
                 player.outputChatBox("boneIndex " + boneIndex);
                 player.outputChatBox("damage " + damage);
                 player.outputChatBox("weaponGroupHash " + weaponGroupHash);
