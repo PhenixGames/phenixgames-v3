@@ -14,12 +14,6 @@ module.exports.playerJoin = async (player) => {
     player.call('Player:Login:CreateCam');
     player.position = new mp.Vector3(0, 0, -20);
 
-    const isServerInWartung = await new ServerApi().isWartung();
-    if (isServerInWartung.is) {
-        player.call('Player:Wartung:Show', [isServerInWartung.reason]);
-        return;
-    }
-
     const user = await AccountAPI.getByUsername(player.socialClub);
     if (!user) {
         player.call('Player:Login:Open', [false]);
@@ -28,6 +22,13 @@ module.exports.playerJoin = async (player) => {
             isFatal: false,
         });
     }
+
+    const isServerInWartung = await new ServerApi().isWartung();
+    if (isServerInWartung.is && user.isTeam) {
+        player.call('Player:Wartung:Show', [isServerInWartung.reason]);
+        return true;
+    }
+
     player.call('Player:Login:Open', [true]);
 
     generellAPI.saveLocalVar(player, {

@@ -21,7 +21,7 @@ mp.events.addCommand('wartung', async (player, args) => {
         await playerJoin(player);
         return;
     } else {
-        const reason = args[0];
+        const reason = args;
         await serverapi
             .setWartung(true, reason)
             .then(() => {
@@ -30,6 +30,10 @@ mp.events.addCommand('wartung', async (player, args) => {
             .catch((err) => {
                 player.notify('Es ist ein Fehler aufgetreten, bei dem Beginnen der Wartung!');
             });
+
+        mp.players.forEach((player) => {
+            player.call('Player:Wartung:Show', [reason])
+        });
     }
 
     return true;

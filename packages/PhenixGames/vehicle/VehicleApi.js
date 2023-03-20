@@ -34,34 +34,27 @@ module.exports = class VehicleApi {
 
     save(veh, veh_data) {
         return new Promise(async (resolve) => {
+
+            const obj = {
+                veh_name: veh_data.veh_name,
+                veh_owner: veh_data.veh_owner,
+                veh_keys: veh_data.veh_keys,
+                veh_state: veh_data.veh_state,
+                veh_pos: veh.position,
+                veh_rot: veh.heading,
+                veh_prim: veh.getColor(0),
+                veh_sec: veh.getColor(1),
+                veh_fuel: veh_data.veh_fuel,
+                veh_max: veh_data.veh_max,
+                veh_type: veh_data.veh_type,
+            }
+
             await pg_vehicles
-                .create({
-                    veh_name: veh_data.veh_name,
-                    veh_owner: veh_data.veh_owner,
-                    veh_keys: veh_data.veh_keys,
-                    veh_state: veh_data.veh_state,
-                    veh_pos: veh.position,
-                    veh_rot: veh.heading,
-                    veh_prim: veh.getColor(0),
-                    veh_sec: veh.getColor(1),
-                    veh_fuel: veh_data.veh_fuel,
-                    veh_max: veh_data.veh_max,
-                    veh_type: veh_data.veh_type,
-                })
+                .create(obj)
                 .then((res) => {
                     generellAPI.saveLocalVar(veh, {
                         veh_id: res.veh_id,
-                        veh_name: veh_data.veh_name,
-                        veh_owner: veh_data.veh_owner,
-                        veh_keys: veh_data.veh_keys,
-                        veh_state: veh_data.veh_state,
-                        veh_pos: veh.position,
-                        veh_rot: veh.heading,
-                        veh_prim_color: veh.getColor(0),
-                        veh_sec_color: veh.getColor(1),
-                        veh_fuel: veh_data.veh_fuel,
-                        veh_max: veh_data.veh_max,
-                        veh_type: veh_data.veh_type,
+                        ...obj
                     });
                     return resolve(true);
                 })
@@ -93,7 +86,8 @@ module.exports = class VehicleApi {
         }
     ) {
         return new Promise(async (resolve, reject) => {
-            generellAPI.saveLocalVar(veh, {
+
+            const obj = {
                 veh_id: veh_id,
                 veh_name: veh_name,
                 veh_owner: veh_owner,
@@ -106,23 +100,12 @@ module.exports = class VehicleApi {
                 veh_sec_color: veh_sec,
                 veh_max: veh_max,
                 veh_type: veh_type,
-            });
+            }
+
+            generellAPI.saveLocalVar(veh, obj);
             return await pg_vehicles
                 .update(
-                    {
-                        veh_id: veh_id,
-                        veh_name: veh_name,
-                        veh_owner: veh_owner,
-                        veh_keys: veh_keys,
-                        veh_state: veh_state,
-                        veh_pos: veh_pos,
-                        veh_rot: veh_rot,
-                        veh_fuel: veh_fuel,
-                        veh_prim_color: veh_prim,
-                        veh_sec_color: veh_sec,
-                        veh_max: veh_max,
-                        veh_type: veh_type,
-                    },
+                    obj,
                     {
                         where: {
                             veh_id,
