@@ -12,7 +12,6 @@ mp.events.add('Server:Login:Login', async (player, password) => {
     }
 
     const punishments = await PunishmentsAPI.getPunishment(user.id);
-
     if (punishments) {
         const isMuted = punishments.find((pushment) => pushment.muted === '1' && active === '1');
         const isBanned = punishments.find((pushment) => pushment.banned === '1' && active === '1');
@@ -34,12 +33,17 @@ mp.events.add('Server:Login:Login', async (player, password) => {
     const hasCharacter = character.firstname && character.lastname;
     if (!hasCharacter) return player.call('Client:Namechooser:CreateBrowser');
 
+    let spawnOptions = {
+        house: false,
+        lastPos: false,
+        airport: true,
+    };
+
     player.call('Player:Login:Close');
-    player.call('Player:Spawn:Options', [
-        {
-            house: false,
-            lastPos: true,
-            airport: true,
-        },
-    ]);
+
+    if (character.last_pos) {
+        spawnOptions.lastPos = true;
+    }
+
+    player.call('Player:Spawn:Options', [spawnOptions]);
 });

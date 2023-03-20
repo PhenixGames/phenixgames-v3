@@ -51,6 +51,11 @@ const routes = [
         name: 'Jailtime',
         component: () => import('../views/jail/Jailtime.vue'),
     },
+    {
+        path: '/wartung',
+        name: 'Wartung',
+        component: () => import('../views/wartung/Wartung.vue'),
+    },
 ];
 
 const router = createRouter({

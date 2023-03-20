@@ -5,18 +5,23 @@ const debug = require('../../../_assets/json/debug/debug.json').vehicle;
 
 mp.events.add('Server:Keypress:Strg', async (player) => {
     try {
+        console.log('Strg')
         const veh = player.vehicle;
         if (!veh) {
             return player.notify('Du bist in keinem Fahrzeug');
         }
-
+        console.log('Strg2')
         const vehApi = new VehicleAPI();
         const db_veh = await vehApi.get(veh.getVariable('veh_id'));
+        console.log('Strg3')
         if (!db_veh) {
             return player.notify('Dieses Fahrzeug existiert nicht');
         }
+        console.log('Str4', db_veh.veh_owner, player.getVariable('Aduty'), db_veh.veh_keys)
         if (!vehApi.isVehicleOwner(player, db_veh.veh_owner)) return;
+        console.log('Str5')
         if (!vehApi.isKeyOwner(player, db_veh.veh_keys)) return;
+        console.log('Strg6')
 
         const fuel = veh.getVariable('veh_fuel');
         if (fuel <= 0) return player.notify('Der Tank des Fahzeuges ist leer');
@@ -24,6 +29,7 @@ mp.events.add('Server:Keypress:Strg', async (player) => {
         const speed = veh.getVariable('veh_speed');
         if (speed <= 5) {
             veh.engine = !veh.engine;
+            console.log('Strg7')
             veh.setVariable('veh_engine', veh.engine);
         }
 

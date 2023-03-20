@@ -1,6 +1,5 @@
 [
     {
-        "role_id": 9,
         "root": false,
         "manage_rang": false,
         "manage_team": false,
@@ -13,36 +12,24 @@
         "kick_member": false,
         "spawn_weapon": false,
         "tp_to": false,
-        "car_spawn": true,
+        "car_spawn": false,
         "no_clip": false,
         "own_prefix": false,
         "isTeam": false,
         "tp": false,
+        "heal": false,
+        "revive": false,
+        "fuelmarker": false,
+        "serverConfigChange": false
+    },
+    {
+        "role_id": 9,
         "heal": true,
         "revive": true,
         "fuelmarker": true
     },
     {
         "role_id": 10,
-        "root": false,
-        "manage_rang": true,
-        "manage_team": true,
-        "manager_member_ext": true,
-        "ban_member": true,
-        "admin_menu": true,
-        "manage_member": true,
-        "godmode": true,
-        "mute_member": true,
-        "kick_member": true,
-        "spawn_weapon": true,
-        "tp_to": true,
-        "car_spawn": true,
-        "no_clip": true,
-        "own_prefix": true,
-        "isTeam": true,
-        "tp": true,
-        "heal": true,
-        "revive": true,
-        "fuelmarker": true
+        "root": true
     }
 ]

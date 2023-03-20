@@ -4,8 +4,13 @@ const generellAPI = require('../allgemein/');
 const { log } = require('../../../_assets/functions/log/logs');
 const AccountAPI = require('./AcountAPI');
 const DiscordAPI = require('../discord/DiscordAPI');
+const ServerApi = require('../Server/ServerApi');
 
 mp.events.add('playerJoin', async (player) => {
+    await this.playerJoin(player);
+});
+
+module.exports.playerJoin = async (player) => {
     player.call('Player:Login:CreateCam');
     player.position = new mp.Vector3(0, 0, -20);
 
@@ -17,6 +22,13 @@ mp.events.add('playerJoin', async (player) => {
             isFatal: false,
         });
     }
+
+    const isServerInWartung = await new ServerApi().isWartung();
+    if (isServerInWartung.is && user.isTeam) {
+        player.call('Player:Wartung:Show', [isServerInWartung.reason]);
+        return true;
+    }
+
     player.call('Player:Login:Open', [true]);
 
     generellAPI.saveLocalVar(player, {
@@ -38,4 +50,4 @@ mp.events.add('playerJoin', async (player) => {
         player.name = character.firstname + ' ' + character.lastname;
         DiscordAPI.set(player);
     }
-});
+};

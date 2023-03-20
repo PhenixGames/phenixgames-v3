@@ -10,9 +10,8 @@ mp.events.addCommand('aduty', async (player) => {
 
     if (!isTeam || !godmode) return;
 
-    generellAPI.saveLocalVar(player, {
-        Aduty: !!player.getVariable('Aduty'),
-    });
+    const isAdmin = player.getVariable('Aduty') ? true : false;
+    player.setVariable('Aduty', !isAdmin);
 
     player.call('Client:Admin:setGod', [false]);
     player.call('Client:Admin:changeDuty', [false]);
